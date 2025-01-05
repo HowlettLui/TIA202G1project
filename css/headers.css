@@ -80,6 +80,11 @@
   height: 500px;
 } */
 
+footer{
+    /* 不准其他元素出現在其左右 */
+    clear: both;
+}
+
 /* 給 headers 用 */
 .form-control-dark {
   border-color: var(--bs-gray);
