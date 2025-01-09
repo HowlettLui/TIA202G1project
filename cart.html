@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cart</title>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
+
+  <link rel="stylesheet" href="./css/bootstrap.min.css">
+  <link rel="stylesheet" href="./css/headers.css">
+  <style>
+    #progressbar {
+      overflow: hidden;
+      color: lightgrey
+    }
+
+    #progressbar .active {
+      color: #6c757d
+    }
+
+    #progressbar li {
+      list-style-type: none;
+      font-size: .75rem;
+      width: 33%;
+      float: left;
+      position: relative;
+    }
+
+    #progressbar #step1:before {
+      content: "1"
+    }
+
+    #progressbar #step2:before {
+      content: "2"
+    }
+
+    #progressbar #step3:before {
+      content: "3"
+    }
+
+    #progressbar li:before {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: block;
+      font-size: .75rem;
+      color: #ffffff;
+      background: lightgray;
+      margin: 0 auto 5px auto;
+      align-items: center;
+    }
+
+    #progressbar li.active:before {
+      background: #6c757d
+    }
+
+    .progress-bar {
+      background-color: #6c757d
+    }
+  </style>
+</head>
+
+<body>
+  <!-- 導入共用 header -->
+  <div class="headerPage"></div>
+
+  <!-- 開發畫面 -->
+  <main>
+    <div class="bg-body-tertiary">
+      <div class="container py-5">
+
+        <!-- progress bar -->
+        <div class="row">
+          <div class="col-12 col-md-5 col-lg-4 col-xl-3">
+            <h1 class="mb-3 mb-lg-0 me-lg-auto link-body-emphasis">
+              購物車</h1>
+          </div>
+          <div class="col-12 col-md-6 col-lg-6 col-xl-7 text-center p-0 mx-0">
+            <ul id="progressbar" class="p-0 mb-1">
+              <li class="active" id="step1"><strong>訂單明細確認</strong></li>
+              <li id="step2"><strong>填寫付款資料</strong></li>
+              <li id="step3"><strong>購買完成</strong></li>
+            </ul>
+            <div class="progress" role="progressbar" aria-label="Example 1px high" aria-valuenow="calc(100/6)"
+              aria-valuemin="0" aria-valuemax="100" style="height: 1px">
+              <div class="progress-bar" style="width: calc(100%/6)"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- cart -->
+        <div class="row mt-5">
+
+          <!-- products in cart -->
+          <div class="col-lg-8">
+            <!-- items in cart -->
+            <ul class="list-group mb-3 bg-body-tertiary">
+
+              <!-- 全選用checkbox -->
+              <li class="list-group-item d-flex justify-content-between lh-sm px-0">
+                <div class="col-1">
+                  <div class="d-flex justify-content-center">
+                    <input class="form-check-input" type="checkbox" id="checkboxNoLabel" value="" aria-label="...">
+                  </div>
+                </div>
+              </li>
+
+              <!-- items 1-->
+              <li class="list-group-item d-flex justify-content-between lh-sm px-0">
+                <div class="col-1">
+                  <div class="d-flex justify-content-center">
+                    <input class="form-check-input" type="checkbox" id="checkboxOnItem1" value="" aria-label="...">
+                  </div>
+                </div>
+                <div class="col-auto d-block">
+                  <svg class="bd-placeholder-img pt-1" width="100" height="100" xmlns="http://www.w3.org/2000/svg"
+                    role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice"
+                    focusable="false">
+                    <title>Placeholder</title>
+                    <rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%" fill="#eceeef"
+                      dy=".3em">Thumbnail</text>
+                  </svg>
+                </div>
+                <div class="col px-4 d-flex flex-column position-static">
+                  <div class="position-relative">
+                    <h4 class="mb-0">超保暖防風吸濕涼感排汗衫（短袖）</h4>
+                    <div class="my-1 text-body-secondary" style="display: inline-block;">樂色</div>
+                    <p class="my-1 text-body-secondary" style="display: inline-block;">, </p>
+                    <div class="my-1 text-body-secondary" style="display: inline-block;">XXXXL</div>
+                    <p class="card-text my-1">99999元</p>
+                    <a href="#" class="icon-link gap-1 icon-link-hover stretched-link"></a>
+                  </div>
+                  <div class="row my-1 justify-content-between">
+                    <!-- 數量按鈕 -->
+                    <div class="col-auto list-group list-group-horizontal my-1">
+                      <a href="#" class="list-group-item list-group-item-action list-group-item-light w-auto"><i
+                          class="fa-solid fa-minus"></i></a>
+                      <input type="text" class="list-group-item list-group-item-light text-center" size="1" value="10"
+                        disabled>
+                      <a href="#" class="list-group-item list-group-item-action list-group-item-light w-auto"><i
+                          class="fa-solid fa-plus"></i></a>
+                    </div>
+
+                    <!-- 收藏、刪除按鈕 -->
+                    <div class="col-auto row my-1">
+                      <div class="col-6 p-0 px-1">
+                        <button type="button" class="btn btn-outline-secondary w-100 border-0">收藏</button>
+                      </div>
+                      <div class="col-6 p-0 px-1">
+                        <button type="button" class="btn btn-outline-secondary w-100 border-0">刪除</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </li>
+
+              <!-- items 2-->
+              <li class="list-group-item d-flex justify-content-between lh-sm px-0">
+                <div class="col-1">
+                  <div class="d-flex justify-content-center">
+                    <input class="form-check-input" type="checkbox" id="checkboxOnItem1" value="" aria-label="...">
+                  </div>
+                </div>
+                <div class="col-auto d-block">
+                  <svg class="bd-placeholder-img pt-1" width="100" height="100" xmlns="http://www.w3.org/2000/svg"
+                    role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice"
+                    focusable="false">
+                    <title>Placeholder</title>
+                    <rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%" fill="#eceeef"
+                      dy=".3em">Thumbnail</text>
+                  </svg>
+                </div>
+                <div class="col px-4 d-flex flex-column position-static">
+                  <div class="position-relative">
+                    <h4 class="mb-0">超保暖防風吸濕涼感排汗衫（短袖）</h4>
+                    <div class="my-1 text-body-secondary" style="display: inline-block;">樂色</div>
+                    <p class="my-1 text-body-secondary" style="display: inline-block;">, </p>
+                    <div class="my-1 text-body-secondary" style="display: inline-block;">XXXXL</div>
+                    <p class="card-text my-1">99999元</p>
+                    <a href="#" class="icon-link gap-1 icon-link-hover stretched-link"></a>
+                  </div>
+                  <div class="row my-1 justify-content-between">
+                    <!-- 數量按鈕 -->
+                    <div class="col-auto list-group list-group-horizontal my-1">
+                      <a href="#" class="list-group-item list-group-item-action list-group-item-light w-auto"><i
+                          class="fa-solid fa-minus"></i></a>
+                      <input type="text" class="list-group-item list-group-item-light text-center" size="1" value="10"
+                        disabled>
+                      <a href="#" class="list-group-item list-group-item-action list-group-item-light w-auto"><i
+                          class="fa-solid fa-plus"></i></a>
+                    </div>
+
+                    <!-- 收藏、刪除按鈕 -->
+                    <div class="col-auto row my-1">
+                      <div class="col-6 p-0 px-1">
+                        <button type="button" class="btn btn-outline-secondary w-100 border-0">收藏</button>
+                      </div>
+                      <div class="col-6 p-0 px-1">
+                        <button type="button" class="btn btn-outline-secondary w-100 border-0">刪除</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </li>
+
+              <!-- items 3-->
+              <li class="list-group-item d-flex justify-content-between lh-sm px-0">
+                <div class="col-1">
+                  <div class="d-flex justify-content-center">
+                    <input class="form-check-input" type="checkbox" id="checkboxOnItem1" value="" aria-label="...">
+                  </div>
+                </div>
+                <div class="col-auto d-block">
+                  <svg class="bd-placeholder-img pt-1" width="100" height="100" xmlns="http://www.w3.org/2000/svg"
+                    role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice"
+                    focusable="false">
+                    <title>Placeholder</title>
+                    <rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%" fill="#eceeef"
+                      dy=".3em">Thumbnail</text>
+                  </svg>
+                </div>
+                <div class="col px-4 d-flex flex-column position-static">
+                  <div class="position-relative">
+                    <h4 class="mb-0">超保暖防風吸濕涼感排汗衫（短袖）</h4>
+                    <div class="my-1 text-body-secondary" style="display: inline-block;">樂色</div>
+                    <p class="my-1 text-body-secondary" style="display: inline-block;">, </p>
+                    <div class="my-1 text-body-secondary" style="display: inline-block;">XXXXL</div>
+                    <p class="card-text my-1">99999元</p>
+                    <a href="#" class="icon-link gap-1 icon-link-hover stretched-link"></a>
+                  </div>
+                  <div class="row my-1 justify-content-between">
+                    <!-- 數量按鈕 -->
+                    <div class="col-auto list-group list-group-horizontal my-1">
+                      <a href="#" class="list-group-item list-group-item-action list-group-item-light w-auto"><i
+                          class="fa-solid fa-minus"></i></a>
+                      <input type="text" class="list-group-item list-group-item-light text-center" size="1" value="10"
+                        disabled>
+                      <a href="#" class="list-group-item list-group-item-action list-group-item-light w-auto"><i
+                          class="fa-solid fa-plus"></i></a>
+                    </div>
+
+                    <!-- 收藏、刪除按鈕 -->
+                    <div class="col-auto row my-1">
+                      <div class="col-6 p-0 px-1">
+                        <button type="button" class="btn btn-outline-secondary w-100 border-0">收藏</button>
+                      </div>
+                      <div class="col-6 p-0 px-1">
+                        <button type="button" class="btn btn-outline-secondary w-100 border-0">刪除</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <!-- cart details -->
+          <div class="col-lg-4">
+            <h4 class="d-flex justify-content-between align-items-center mb-3">
+              <span class="text-secondary">Your cart</span>
+              <span class="badge bg-secondary rounded-pill">3</span>
+            </h4>
+            <ul class="list-group mb-3">
+              <li class="list-group-item d-flex justify-content-between lh-sm">
+                <div>
+                  <h6 class="my-0">Product name</h6>
+                  <small class="text-body-secondary">Brief description</small>
+                </div>
+                <span class="text-body-secondary">$12</span>
+              </li>
+              <li class="list-group-item d-flex justify-content-between lh-sm">
+                <div>
+                  <h6 class="my-0">Second product</h6>
+                  <small class="text-body-secondary">Brief description</small>
+                </div>
+                <span class="text-body-secondary">$8</span>
+              </li>
+              <li class="list-group-item d-flex justify-content-between lh-sm">
+                <div>
+                  <h6 class="my-0">Third item</h6>
+                  <small class="text-body-secondary">Brief description</small>
+                </div>
+                <span class="text-body-secondary">$5</span>
+              </li>
+              <li class="list-group-item d-flex justify-content-between">
+                <span>Total (NTD)</span>
+                <strong>$25</strong>
+              </li>
+            </ul>
+
+            <button class="w-100 btn btn-secondary btn-lg" type="submit">Continue to checkout</button>
+          </div>
+        </div>
+      </div>
+  </main>
+
+  <!-- 導入共用 footer -->
+  <div class="footerPage"></div>
+  <script src="./jquery/jquery-3.7.1.min.js"></script>
+  <script>
+    $(".headerPage").load("./layout/header.html");
+    $(".footerPage").load("./layout/footer.html");
+  </script>
+
+
+  <script src="./js/bootstrap.bundle.min.js"></script>
+  <script src="https://kit.fontawesome.com/799bf36dfe.js" crossorigin="anonymous"></script>
+</body>
+
+</html>
