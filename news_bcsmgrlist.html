@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>客服表單_編輯</title>
+    <link
+      rel="canonical"
+      href="https://getbootstrap.com/docs/5.3/examples/headers/"
+    />
+    <link
+      rel="canonical"
+      href="https://getbootstrap.com/docs/5.3/examples/footers/"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@docsearch/css@3"
+    />
+
+    <link rel="stylesheet" href="./css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./css/headers.css" />
+
+    <style>
+      /* S Start */
+      div.newsbcsmgrlistcontainer {
+        border: 1px solid gray;
+        width: 85.3%;
+        margin: 20px auto;
+        padding: 5px;
+        border-radius: 5px;
+      }
+      div.csmgrbt {
+        margin: 10px 0 10px 0;
+      }
+      div.newsbcsmgrlisttitle {
+        display: flex;
+        margin: 5px 0 5px 0;
+      }
+      div.newsbcsmgrlistcontainer2 {
+        display: flex;
+      }
+      div div.statuscircle {
+        width: 150px;
+      }
+      div div.statuscircle img {
+        position: relative;
+        left: 18px;
+      }
+      @media screen and (max-width: 768px) {
+        div div.statuscircle img {
+          position: relative;
+          left: 0px;
+        }
+      }
+      div div.num {
+        width: 150px;
+      }
+      div div.email {
+        width: 300px;
+      }
+      div div.msg {
+        width: 350px;
+      }
+      div div.reply {
+        width: 350px;
+      }
+      div div.status {
+        width: 180px;
+      }
+
+      /* S end */
+    </style>
+  </head>
+
+  <body>
+    <!-- 導入共用 header -->
+    <div class="headerPage"></div>
+
+    <!-- 開發畫面 -->
+    <main>
+      <!-- <p>客服內容編輯</p> -->
+      <div class="newsbcsmgrlistcontainer">
+        <div>
+          <div class="csmgrbt">
+            <button>新增</button>
+            <button>編輯</button>
+            <button>匯出</button>
+          </div>
+        </div>
+
+        <div class="newsbcsmgrlisttitle">
+          <div class="statuscircle">客服狀態</div>
+          <div class="num">單號</div>
+          <div class="email">email</div>
+          <div class="msg">客服留言</div>
+          <div class="reply">客服留言回覆</div>
+          <div class="status">客服進度</div>
+        </div>
+        <hr />
+        <div class="newsbcsmgrlistcontainer2">
+          <div class="statuscircle">
+            <img src="./img/redcircle.png" alt="" />
+          </div>
+          <div class="num">1234</div>
+          <div class="email">abc@ghjkl.com</div>
+          <div class="msg">留言留言留言留言留言留言</div>
+          <div class="reply">回覆回覆回覆回覆</div>
+          <div class="status">進線中</div>
+        </div>
+        <hr />
+        <div class="newsbcsmgrlistcontainer2">
+          <div class="statuscircle">
+            <img src="./img/yellowcircle.png" alt="" />
+          </div>
+          <div class="num">1234</div>
+          <div class="email">abc@ghjkl.com</div>
+          <div class="msg">留言留言留言</div>
+          <div class="reply">回覆回覆回覆回覆</div>
+          <div class="status">未完成</div>
+        </div>
+        <hr />
+        <div class="newsbcsmgrlistcontainer2">
+          <div class="statuscircle">
+            <img src="./img/greencircle.png" alt="" />
+          </div>
+          <div class="num">1235</div>
+          <div class="email">abc@ghjkl.com</div>
+          <div class="msg">留言留言留言</div>
+          <div class="reply">回覆回覆回覆回覆</div>
+          <div class="status">已結案</div>
+        </div>
+        <hr />
+        <div class="newsbcsmgrlistcontainer2">
+          <div class="statuscircle">
+            <img src="./img/greencircle.png" alt="" />
+          </div>
+          <div class="num">1236</div>
+          <div class="email">abc@ghjkl.com</div>
+          <div class="msg">留言留言留言</div>
+          <div class="reply">回覆回覆回覆回覆</div>
+          <div class="status">已結案</div>
+        </div>
+      </div>
+    </main>
+
+    <!-- 導入共用 footer -->
+    <div class="footerPage"></div>
+    <script src="./jquery/jquery-3.7.1.min.js"></script>
+    <script>
+      $(".headerPage").load("./layout/header.html");
+      $(".footerPage").load("./layout/footer.html");
+    </script>
+
+    <script src="./js/bootstrap.bundle.min.js"></script>
+    <script
+      src="https://kit.fontawesome.com/799bf36dfe.js"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
