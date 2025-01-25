@@ -1,0 +1,68 @@
+<div class="container">
+    <div class="row g-5 p-3">
+        <div class="col-md-7 col-lg-11">
+            <div id="viewMode">
+                <h4 class="mb-3">個人資料(顯示畫面)</h4>
+                <p><strong>姓名：</strong><span id="viewName"></span></p>
+                <p><strong>會員編號：</strong><span id="viewUserid"></span></p>
+                <p><strong>會員帳號：</strong><span id="viewAccout"></span></p>
+                <p><strong>Email：</strong><span id="viewEmail"></span></p>
+                <p><strong>連絡電話：</strong><span id="viewPhone"></span></p>
+                <button id="editBtn" class="btn btn-primary">編輯</button>
+            </div>
+            <div id="editMode" class="d-none">
+                <h4 class="mb-3">個人資料(編輯畫面)</h4>
+                <form class="needs-validation" novalidate>
+                    <div class="row g-3">
+                        <div class="col-12">
+                            <label for="name" class="form-label">姓名</label>
+                            <input type="text" class="form-control" id="name" placeholder="" value="" required>
+                            <div class="invalid-feedback">
+                                Valid first name is required.
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <label for="userid" class="form-label">會員編號(僅顯示無法更改)</label>
+                            <div class="input-group has-validation">
+                                <input type="text" class="form-control" id="userid" placeholder="" required readonly>
+                                <div class="invalid-feedback">
+                                    Your userid is required.
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-12">
+                            <label for="accout" class="form-label">會員帳號</label>
+                            <div class="input-group has-validation">
+                                <input type="text" class="form-control" id="accout" placeholder="" required>
+                                <div class="invalid-feedback">
+                                    Your accout is required.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" placeholder="you@example.com">
+                            <div class="invalid-feedback">
+                                Please enter a valid email address for shipping updates.
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <label for="phone" class="form-label">連絡電話</label>
+                            <input type="text" class="form-control" id="phone" placeholder="0987654321" required>
+                            <div class="invalid-feedback">
+                                Please enter your phone number.
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-end">
+                            <button type="button" id="cancelBtn" class="btn btn-secondary me-2">取消</button>
+                            <button type="button" id="saveBtn" class="btn btn-primary">儲存</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="./js/member_info.js"></script>
