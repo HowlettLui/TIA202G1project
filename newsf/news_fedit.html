@@ -18,12 +18,12 @@
       href="https://cdn.jsdelivr.net/npm/@docsearch/css@3"
     />
 
-    <link rel="stylesheet" href="./css/bootstrap.min.css" />
-    <link rel="stylesheet" href="./css/headers.css" />
+    <link rel="stylesheet" href="../css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../css/headers.css" />
 
     <!-- Datepicker -->
     <!-- jQuery -->
-    <script src="./jquery/jquery-3.7.1.min.js"></script>
+    <script src="../jquery/jquery-3.7.1.min.js"></script>
     <!-- jQuery UI -->
     <link
       rel="stylesheet"
@@ -47,8 +47,8 @@
     ></script> -->
 
     <!-- include summernote css/js-->
-    <link href="./css/summernote-bs5.css" rel="stylesheet" />
-    <script src="./css/summernote-bs5.js"></script>
+    <link href="../css/summernote-bs5.css" rel="stylesheet" />
+    <script src="../css/summernote-bs5.js"></script>
     <!-- ------------------------------------------ -->
     <style>
       div.newsfedcontainer {
@@ -113,13 +113,39 @@
 
           <div class="publishing">
             <button>取消</button>
-            <button>儲存</button>
+            <button type="button" id="btnst">儲存</button>
             <button>預覽</button>
-            <button>送出</button>
+            <button type="button" id="btnse">送出</button>
           </div>
         </div>
       </div>
     </main>
+    <section>
+      <script>
+        var fedit_btnst = document.getElementById("btnst");
+        fedit_btnst.addEventListener("click", function () {
+          var is_confirm = confirm("是否確定要儲存？");
+          //console.log(is_confirm);
+
+          if (is_confirm) {
+            alert("儲存成功");
+          } else {
+            alert("取消");
+          }
+        });
+        var fedit_btnse = document.getElementById("btnse");
+        fedit_btnse.addEventListener("click", function () {
+          var is_confirm = confirm("是否確定要送出？");
+          //console.log(is_confirm);
+
+          if (is_confirm) {
+            alert("送出成功");
+          } else {
+            alert("取消");
+          }
+        });
+      </script>
+    </section>
 
     <script>
       $("#releasedate").datepicker({
@@ -150,13 +176,13 @@
 
     <!-- 導入共用 footer -->
     <div class="footerPage"></div>
-    <script src="./jquery/jquery-3.7.1.min.js"></script>
+    <script src="../jquery/jquery-3.7.1.min.js"></script>
     <script>
-      $(".headerPage").load("./layout/header.html");
-      $(".footerPage").load("./layout/footer.html");
+      $(".headerPage").load("../layout/header.html");
+      $(".footerPage").load("../layout/footer.html");
     </script>
 
-    <script src="./js/bootstrap.bundle.min.js"></script>
+    <script src="../js/bootstrap.bundle.min.js"></script>
     <script
       src="https://kit.fontawesome.com/799bf36dfe.js"
       crossorigin="anonymous"
