@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout Failed</title>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
+
+  <link rel="stylesheet" href="../css/bootstrap.min.css">
+  <link rel="stylesheet" href="../css/headers.css">
+  <style>
+    #progressbar {
+      overflow: hidden;
+      color: lightgrey
+    }
+
+    #progressbar .active {
+      color: #6c757d
+    }
+
+    #progressbar li {
+      list-style-type: none;
+      font-size: .75rem;
+      width: 33%;
+      float: left;
+      position: relative;
+    }
+
+    #progressbar #step1:before {
+      content: "1"
+    }
+
+    #progressbar #step2:before {
+      content: "2"
+    }
+
+    #progressbar #step3:before {
+      content: "3"
+    }
+
+    #progressbar li:before {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: block;
+      font-size: .75rem;
+      color: #ffffff;
+      background: lightgray;
+      margin: 0 auto 5px auto;
+      align-items: center;
+    }
+
+    #progressbar li.active:before {
+      background: #6c757d
+    }
+
+    .progress-bar {
+      background-color: #6c757d
+    }
+  </style>
+</head>
+
+<body>
+  <!-- 導入共用 header -->
+  <div class="headerPage"></div>
+
+  <!-- 開發畫面 -->
+  <main>
+    <div class="bg-body-tertiary">
+      <div class="container py-5">
+
+        <!-- progress bar -->
+        <div class="row">
+          <div class="col-12 col-md-5 col-lg-4 col-xl-3">
+            <h1 class="mb-3 mb-lg-0 me-lg-auto link-body-emphasis">
+              結帳未完成</h1>
+          </div>
+          <div class="col-12 col-md-6 col-lg-6 col-xl-7 text-center p-0 mx-0">
+            <ul id="progressbar" class="p-0 mb-1">
+              <li class="active" id="step1"><strong>訂單明細確認</strong></li>
+              <li class="active" id="step2"><strong>填寫付款資料</strong></li>
+              <li class="active" id="step3"><strong>付款未完成</strong></li>
+            </ul>
+            <div class="progress" role="progressbar" aria-label="Example 1px high" aria-valuenow="100" aria-valuemin="0"
+              aria-valuemax="100" style="height: 1px">
+              <div class="progress-bar" style="width: 100%"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 訂單結果 -->
+        <div class="card">
+
+        </div>
+      </div>
+  </main>
+
+  <!-- 導入共用 footer -->
+  <div class="footerPage"></div>
+  <script src="../jquery/jquery-3.7.1.min.js"></script>
+  <script>
+    $(".headerPage").load("../layout/header.html");
+    $(".footerPage").load("../layout/footer.html");
+  </script>
+
+
+  <script src="../js/bootstrap.bundle.min.js"></script>
+  <script src="https://kit.fontawesome.com/799bf36dfe.js" crossorigin="anonymous"></script>
+</body>
+
+</html>
