@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>文章/新聞_內容</title>
+    <title>文章/新聞_審核</title>
     <link
       rel="canonical"
       href="https://getbootstrap.com/docs/5.3/examples/headers/"
@@ -18,20 +18,26 @@
       href="https://cdn.jsdelivr.net/npm/@docsearch/css@3"
     />
 
-    <link rel="stylesheet" href="./css/bootstrap.min.css" />
-    <link rel="stylesheet" href="./css/headers.css" />
+    <link rel="stylesheet" href="../css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../css/headers.css" />
 
     <style>
       /* S Start */
-      div.newsfbodycontainer {
+
+      div.review {
+        width: 85.3%;
+      }
+      div.newscontent {
         width: 85.3%;
         margin: 20px auto;
       }
-      div.newsfbodymessage {
-        background-color: lightgoldenrodyellow;
+      div .texetarea-inherit {
+        width: 117.2%;
+        height: 100px;
+        border-radius: 5px;
       }
-      input#newsmsg {
-        width: 90%;
+      div button {
+        margin: 0 2px 0 0;
       }
 
       /* S end */
@@ -44,7 +50,7 @@
 
     <!-- 開發畫面 -->
     <main>
-      <div class="newsfbodycontainer">
+      <div class="newscontent">
         <span class="title" style="font-size: 30px">#Title</span>
         <hr />
         <span class="date">#Date</span>
@@ -108,22 +114,12 @@
               <small class="text-body-secondary">Last updated 3 mins ago</small>
             </p>
           </div>
-
-          <div class="card-body newsfbodymessage">
-            <form action="" method="get">
-              <p class="newsmessage-text">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed,
-                voluptatibus.
-              </p>
-
-              <input
-                id="newsmsg"
-                type="text"
-                name="newsmsg"
-                placeholder="輸入留言訊息..."
-              />
-              <button type="submit">留言</button>
-            </form>
+        </div>
+        <div class="review">
+          <span>審核意見</span>
+          <textarea class="texetarea-inherit" name="newsbody"> </textarea>
+          <div>
+            <button>核准</button><button>退回</button><button>取消</button>
           </div>
         </div>
       </div>
@@ -131,13 +127,13 @@
 
     <!-- 導入共用 footer -->
     <div class="footerPage"></div>
-    <script src="./jquery/jquery-3.7.1.min.js"></script>
+    <script src="../jquery/jquery-3.7.1.min.js"></script>
     <script>
-      $(".headerPage").load("./layout/header.html");
-      $(".footerPage").load("./layout/footer.html");
+      $(".headerPage").load("../layout/header.html");
+      $(".footerPage").load("../layout/footer.html");
     </script>
 
-    <script src="./js/bootstrap.bundle.min.js"></script>
+    <script src="../js/bootstrap.bundle.min.js"></script>
     <script
       src="https://kit.fontawesome.com/799bf36dfe.js"
       crossorigin="anonymous"
