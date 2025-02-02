@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home Page</title>
+  <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/headers/">
+  <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/footers/">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
+
+  <link rel="stylesheet" href="./css/bootstrap.min.css">
+  <link rel="stylesheet" href="./css/headers.css">
+  <!-- Custom styles for this template -->
+  <link href="./css/headers.css" rel="stylesheet">
+  <link rel="stylesheet" href="./vendors/slick/slick.css">
+  <link rel="stylesheet" href="./vendors/slick/slick-theme.css">
+
+  <style>
+    main {
+      height: 100%;
+    }
+
+    div.switch_btn_el.-on {
+      background-color: lightgrey;
+    }
+
+    a {
+      text-decoration: none;
+      color: #000;
+    }
+
+    /* ================ slide ============== */
+
+    * {
+      box-sizing: border-box;
+    }
+
+    div.my_slide_class {
+      margin-bottom: 60px !important;
+    }
+
+    div.my_slide_img>img {
+      max-width: 100%;
+    }
+
+    div.slick-slide.img {
+      width: 100%;
+    }
+
+    button.slick-prev {
+      left: 10px;
+      z-index: 3;
+    }
+
+    button.slick-next {
+      right: 10px;
+      z-index: 3;
+    }
+
+    /* ======================== 即時賽況 ======================== */
+    div.my_live_game {
+      height: 100%;
+    }
+
+    div.live_game {
+      text-align: center;
+      vertical-align: middle;
+    }
+
+    div.ateam_goal {
+      height: 10%;
+      position: relative;
+      top: 30%;
+    }
+
+    div.bteam_goal {
+      height: 10%;
+      position: relative;
+      top: 30%;
+    }
+
+    div.game_versus {
+      height: 10%;
+      position: relative;
+      top: 30%;
+    }
+
+    div.game_match_icon {
+      display: flex;
+      justify-content: space-around;
+    }
+
+    /* ======================== 文章/新聞 ======================== */
+    div.my_news_container {
+      margin-bottom: 30px;
+    }
+
+    /* ======================== 商城 ======================== */
+    div.my_shop_container {
+      margin-bottom: 30px;
+    }
+
+    /* ======================== 客服 ======================== */
+    div.cs_container {
+      background-color: lightgrey;
+      position: fixed;
+      bottom: 150px;
+      right: 50px;
+      border-radius: 100%;
+    }
+  </style>
+
+</head>
+
+<body>
+  <!-- 導入共用 header -->
+  <div class="headerPage"></div>
+
+  <!-- 開發畫面 -->
+  <main class="container">
+    <div class="my_main_container">
+      <!-- =================================== slide 區塊 ============================================= -->
+
+      <div class="my_slide_class">
+        <div class="my_slide_img"><img src="https://picsum.photos/id/238/1400/600"></div>
+        <div class="my_slide_img"><img src="https://picsum.photos/id/239/1400/600"></div>
+        <div class="my_slide_img"><img src="https://picsum.photos/id/240/1400/600"></div>
+        <div class="my_slide_img"><img src="https://picsum.photos/id/241/1400/600"></div>
+        <div class="my_slide_img"><img src="https://picsum.photos/id/242/1400/600"></div>
+        <div class="my_slide_img"><img src="https://picsum.photos/id/243/1400/600"></div>
+        <div class="my_slide_img"><img src="https://picsum.photos/id/244/1400/600"></div>
+      </div>
+
+      <!-- =================================== 即時賽況 ============================================= -->
+      <div class="switch_btn row container">
+        <div class="row row-cols-2 row-cols-lg-4">
+          <div class="col text-center">
+            <div class="switch_btn_el -on">
+              <h3>AAALeague</h3>
+            </div>
+          </div>
+          <div class="col text-center">
+            <div class="switch_btn_el">
+              <h3>BBBLeague</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="live_game container row">
+        <div class="live_game_date feature col-lg-2">
+          <h4 class="game_date fs-2">00/00 (一)</h4>
+          <h4 class="game_time fs-2">00：00</h4>
+          <h4 class="game_loc fs-2">XXX球場</h4>
+        </div>
+        <div class="row col-lg-10">
+          <div class="team_match_container feature col">
+            <div
+              class="team_icon_a d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 mb-3">
+              <svg class="team_icon_a_el" width="5em" height="5em">
+                <!-- 球隊icon -->
+              </svg>
+            </div>
+            <h3 class="fs-2 text-body-emphasis">A球隊名稱</h3>
+            <p>ATeam Eng name</p>
+          </div>
+
+          <div class="col">
+            <div class="game_match_icon py-5">
+              <div class="ateam_goal">
+                <h3 class="ateam_goal_el">000</h3>
+              </div>
+              <div class="game_versus">
+                <h3 class="game_versus_el">VS</h3>
+              </div>
+              <div class="bteam_goal">
+                <h3 class="bteam_goal_el">000</h3>
+              </div>
+            </div>
+  
+            <div class="row py-3">
+              <div class="btn_more col">
+                <a href="">看更多</a>
+              </div>
+              <div class="btn_add_stash col">
+                <a href="">加入收藏</a>
+              </div>
+
+            </div>
+          </div>
+
+  
+          <div class="team_match_container feature col">
+            <div
+              class="team_icon_b d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 mb-3">
+              <svg class="team_icon_b_el" width="5em" height="5em">
+                <!-- 球隊icon -->
+              </svg>
+            </div>
+            <h3 class="fs-2 text-body-emphasis">B球隊名稱</h3>
+            <p>BTeam Eng name</p>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+    <!-- =================================== 文章/新聞區塊 ============================================= -->
+
+    <div class="my_news_container container px-4 py-5">
+      <div class="my_news_title row pb-3 border-top">
+        <h3>文章/新聞</h3>
+      </div>
+      <div class="album py-5 bg-body-tertiary">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+          <div class="col">
+            <div class="card shadow-sm">
+              <svg class="bd-placeholder-img card-img-top" width="100%" height=225px xmlns="http://www.w3.org/2000/svg"
+                role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+                <title>Placeholder</title>
+                <rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%" fill="#eceeef"
+                  dy=".3em">Thumbnail</text>
+              </svg>
+              <div class="card-body">
+                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
+                  additional content. This content is a little bit longer.</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                  </div>
+                  <small class="text-body-secondary">9 mins</small>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card shadow-sm">
+              <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg"
+                role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+                <title>Placeholder</title>
+                <rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%" fill="#eceeef"
+                  dy=".3em">Thumbnail</text>
+              </svg>
+              <div class="card-body">
+                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
+                  additional content. This content is a little bit longer.</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                  </div>
+                  <small class="text-body-secondary">9 mins</small>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card shadow-sm">
+              <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg"
+                role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+                <title>Placeholder</title>
+                <rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%" fill="#eceeef"
+                  dy=".3em">Thumbnail</text>
+              </svg>
+              <div class="card-body">
+                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
+                  additional content. This content is a little bit longer.</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                  </div>
+                  <small class="text-body-secondary">9 mins</small>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col">
+            <div class="card shadow-sm">
+              <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg"
+                role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+                <title>Placeholder</title>
+                <rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%" fill="#eceeef"
+                  dy=".3em">Thumbnail</text>
+              </svg>
+              <div class="card-body">
+                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
+                  additional content. This content is a little bit longer.</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                  </div>
+                  <small class="text-body-secondary">9 mins</small>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card shadow-sm">
+              <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg"
+                role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+                <title>Placeholder</title>
+                <rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%" fill="#eceeef"
+                  dy=".3em">Thumbnail</text>
+              </svg>
+              <div class="card-body">
+                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
+                  additional content. This content is a little bit longer.</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                  </div>
+                  <small class="text-body-secondary">9 mins</small>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card shadow-sm">
+              <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg"
+                role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+                <title>Placeholder</title>
+                <rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%" fill="#eceeef"
+                  dy=".3em">Thumbnail</text>
+              </svg>
+              <div class="card-body">
+                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
+                  additional content. This content is a little bit longer.</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                  </div>
+                  <small class="text-body-secondary">9 mins</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- =================================== 商城區塊 ============================================= -->
+
+    <div class="my_shop_container container px-4 py-5">
+      <div class="my_news_title row pb-3 border-top">
+        <h3>商城</h3>
+      </div>
+      <div class="album py-5 bg-body-tertiary">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+          <div class="col">
+            <div class="card shadow-sm">
+              <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg"
+                role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+                <title>Placeholder</title>
+                <rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%" fill="#eceeef"
+                  dy=".3em">Thumbnail</text>
+              </svg>
+              <div class="card-body">
+                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
+                  additional content. This content is a little bit longer.</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                  </div>
+                  <small class="text-body-secondary">9 mins</small>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card shadow-sm">
+              <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg"
+                role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+                <title>Placeholder</title>
+                <rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%" fill="#eceeef"
+                  dy=".3em">Thumbnail</text>
+              </svg>
+              <div class="card-body">
+                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
+                  additional content. This content is a little bit longer.</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                  </div>
+                  <small class="text-body-secondary">9 mins</small>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card shadow-sm">
+              <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg"
+                role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+                <title>Placeholder</title>
+                <rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%" fill="#eceeef"
+                  dy=".3em">Thumbnail</text>
+              </svg>
+              <div class="card-body">
+                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
+                  additional content. This content is a little bit longer.</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                  </div>
+                  <small class="text-body-secondary">9 mins</small>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col">
+            <div class="card shadow-sm">
+              <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg"
+                role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+                <title>Placeholder</title>
+                <rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%" fill="#eceeef"
+                  dy=".3em">Thumbnail</text>
+              </svg>
+              <div class="card-body">
+                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
+                  additional content. This content is a little bit longer.</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                  </div>
+                  <small class="text-body-secondary">9 mins</small>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card shadow-sm">
+              <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg"
+                role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+                <title>Placeholder</title>
+                <rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%" fill="#eceeef"
+                  dy=".3em">Thumbnail</text>
+              </svg>
+              <div class="card-body">
+                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
+                  additional content. This content is a little bit longer.</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                  </div>
+                  <small class="text-body-secondary">9 mins</small>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card shadow-sm">
+              <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg"
+                role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+                <title>Placeholder</title>
+                <rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%" fill="#eceeef"
+                  dy=".3em">Thumbnail</text>
+              </svg>
+              <div class="card-body">
+                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
+                  additional content. This content is a little bit longer.</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                  </div>
+                  <small class="text-body-secondary">9 mins</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- =================================== 客服區塊 ============================================= -->
+    <div class="cs_container">
+      <svg class="cs_container_el" width=70px height=70px></svg>
+    </div>
+    </div>
+  </main>
+
+  <!-- 導入共用 footer -->
+  <div class="footerPage"></div>
+
+  <script src="./jquery/jquery-3.7.1.min.js"></script>
+  <script src="./js/bootstrap.bundle.min.js"></script>
+  <script src="https://kit.fontawesome.com/799bf36dfe.js" crossorigin="anonymous"></script>
+  <script>
+    $(".headerPage").load("./layout/header.html");
+    $(".footerPage").load("./layout/footer.html");
+  </script>
+
+  <!-- slide -->
+  <script src="./vendors/slick/slick.min.js"></script>
+  <script>
+    $('.my_slide_class').slick({
+      arrows: true,
+      dots: true,
+      centerMode: true,
+      centerPadding: '60px',
+      slidesToShow: 1,
+      responsive: [
+        {
+          breakpoint: 768,  // 若螢幕寬度 <= 768px，則套用以下設定：
+          settings: {
+            arrows: false,
+            centerPadding: '0',
+            slidesToShow: 1
+          }
+        }
+      ]
+    });
+  </script>
+
+</body>
+
+</html>
