@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>上班不要看球賽管理系統</title>
+
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="./vendors/fontawesome-free/css/all.min.css">
+  <!-- overlayScrollbars -->
+  <link rel="stylesheet" href="./css/adminlte/OverlayScrollbars.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="./css/adminlte/adminlte.min.css">
+  <!-- Bootstrap 5 -->
+  <link rel="stylesheet" href="./css/bootstrap.min.css">
+
+  <!-- for ethan's part -->
+  <!-- summernote -->
+  <!-- <link rel="stylesheet" href="./vendors/summernote-0.9.0-dist/summernote-bs5.css"> -->
+  <link rel="stylesheet" href="./vendors/summernote-0.9.0-dist/summernote-lite.css">
+
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script src="https://unpkg.com/vue-router@4"></script>
+
+</head>
+
+<body class="hold-transition sidebar-mini">
+
+  <!-- Site wrapper -->
+  <div class="wrapper">
+
+    <!-- 導入共用 Navbar -->
+    <div class="Navbar"></div>
+
+
+
+    <section id="app">
+      <!-- 記得隨時跟sidebar.html同步更新 -->
+      <!-- 導入共用 Sidebar -->
+      <aside class="main-sidebar main-sidebar-custom sidebar-dark-primary elevation-4">
+        <div class="sidebar">
+
+          <!-- Brand Logo -->
+          <a href="#" class="brand-link" style="text-decoration: none;">
+            <i class="fas fa-basketball-ball fa-lg mx-2"></i>
+            <span class="brand-text font-weight-light">
+              <h4 class="mb-0" style="display: inline-block; vertical-align: bottom;">NGFW管理系統</h4>
+            </span>
+          </a>
+
+          <!-- Sidebar Menu -->
+          <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+              <!-- Add icons to the links using the .nav-icon class
+              with font-awesome or any other icon font library -->
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="nav-icon fas fa-users"></i>
+                  <p class="pl-1">
+                    使用者資料管理
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>使用者角色管理</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>工作人員角色管理</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="nav-icon fas fa-sitemap"></i>
+                  <p class="pl-1">
+                    球隊資料管理
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>球隊名單</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>球員名單</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>啦啦隊名單</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="nav-icon far fa-calendar-alt"></i>
+                  <p class="pl-1">
+                    賽事資料管理
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>賽程日期</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>賽事資訊</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="nav-icon far fa-newspaper"></i>
+                  <p class="pl-1">
+                    文章/新聞管理
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="nav-icon far fa-file-alt"></i>
+                  <p class="pl-1">
+                    訂單管理
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>訂單總覽</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="nav-icon fas fa-tag"></i>
+                  <p class="pl-1">
+                    商品管理
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <router-link to="/estoreadmin/all" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>平台商品</p>
+                    </router-link>
+                  </li>
+                  <li class="nav-item">
+                    <router-link to="/estoreadmin/add" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>新增商品</p>
+                    </router-link>
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="nav-icon fas fa-headphones"></i>
+                  <p class="pl-1">
+                    客服
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>即時客服</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>客服列表</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </aside>
+
+      <!-- 開發畫面區塊start -->
+      <section class="content-wrapper">
+        <router-view></router-view>
+      </section>
+      <!-- 開發畫面區塊end -->
+    </section>
+  </div>
+  <!-- ./wrapper -->
+
+  <!-- jQuery -->
+  <script src="./jquery/adminlte/jquery.min.js"></script>
+  <!-- Bootstrap 5 -->
+  <script src="./js/bootstrap.bundle.min.js"></script>
+  <!-- overlayScrollbars -->
+  <script src="./jquery/adminlte/jquery.overlayScrollbars.min.js"></script>
+  <!-- AdminLTE App -->
+  <script src="./js/adminlte/adminlte.min.js"></script>
+
+  <!-- for ethan's part -->
+  <!-- summernote -->
+  <!-- <script src="./vendors/summernote-0.9.0-dist/summernote-bs5.js"></script> -->
+  <script src="./vendors/summernote-0.9.0-dist/summernote-lite.js"></script>
+
+  <script>
+    $(".Navbar").load("./layout/navbar.html");
+
+    $('#summernote').summernote({
+      placeholder: 'Hello stand alone ui',
+      tabsize: 2,
+      height: 120
+    });
+
+    const { createApp, ref, reactive } = Vue;
+    const { createRouter, createWebHistory } = VueRouter;
+
+    const AllItems = {
+      setup() {
+        const title = ref(' All Items ');
+        return { title };
+      },
+      template: `
+        <h1>{{ title }}</h1>
+      `
+    }
+
+    const AddItem = {
+      setup() {
+        const title = ref('Add Item');
+        return { title };
+      },
+      template: `
+        <!-- 改完再移到vue的component template中 -->
+        <!-- content-header -->
+        <section class="content-header">
+          <div class="container-fluid">
+            <div class="row mb-2">
+              <div class="col-sm-6">
+                <h1>新增商品</h1>
+              </div>
+              <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                  <li class="breadcrumb-item"><a href="#">商品管理</a></li>
+                  <li class="breadcrumb-item active">新增商品</li>
+                </ol>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- content-header end -->
+        <section class="content">
+          <div class="card">
+            <div class="card-body">
+              <form>
+                <div class="row">
+                  <div class="col-sm-6">
+                    <!-- text input -->
+                    <div class="form-group">
+                      <label>商品名稱</label>
+                      <input type="text" class="form-control" placeholder="Enter ...">
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <!-- text input -->
+                    <div class="form-group">
+                      <label>商品簡介</label>
+                      <input type="text" class="form-control" placeholder="Enter ...">
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <!-- text input -->
+                    <div class="form-group">
+                      <label>商品類型</label>
+                      <input type="text" class="form-control" placeholder="Enter ...">
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <!-- text input -->
+                    <div class="form-group">
+                      <label>商品型號</label>
+                      <input type="text" class="form-control" placeholder="Enter ...">
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <!-- text input -->
+                    <div class="form-group">
+                      <label>商品價格</label>
+                      <input type="text" class="form-control" placeholder="Enter ...">
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <!-- text input -->
+                    <div class="form-group">
+                      <label>商品大小</label>
+                      <input type="text" class="form-control" placeholder="Enter ...">
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <!-- text input -->
+                    <div class="form-group">
+                      <label>商品顏色</label>
+                      <input type="text" class="form-control" placeholder="Enter ...">
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <!-- text input -->
+                    <div class="form-group">
+                      <label>商品數量</label>
+                      <input type="text" class="form-control" placeholder="Enter ...">
+                    </div>
+                  </div>
+                </div>
+
+                <!-- summernote -->
+                <!-- <label>商品詳細內容</label>
+                <div id="summernote"></div> -->
+                <!-- summnernote暫時不能用，先用<textarea>代替 -->
+                <div class="row">
+                <div class="col">
+                  <div class="form-group">
+                    <label>商品詳細內容 (之後再改用summernote)</label>
+                    <textarea class="form-control" rows="3" placeholder="Enter ..."></textarea>
+                  </div>
+                </div>
+              </div>
+
+                <!-- photos upload -->
+                <label>商品照片上傳</label>
+                <div class="mt-2">
+                  <div id="actions" class="row">
+                    <div class="col-lg-6">
+                      <div class="btn-group w-100">
+                        <span class="btn btn-success col fileinput-button">
+                          <i class="fas fa-plus"></i>
+                          <span>Add files</span>
+                        </span>
+                        <button type="submit" class="btn btn-primary col start">
+                          <i class="fas fa-upload"></i>
+                          <span>Start upload</span>
+                        </button>
+                        <button type="reset" class="btn btn-warning col cancel">
+                          <i class="fas fa-times-circle"></i>
+                          <span>Cancel upload</span>
+                        </button>
+                      </div>
+                    </div>
+                    <div class="col-lg-6 d-flex align-items-center">
+                      <div class="fileupload-process w-100">
+                        <div id="total-progress" class="progress progress-striped active" role="progressbar"
+                          aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+                          <div class="progress-bar progress-bar-success" style="width:0%;" data-dz-uploadprogress>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="table table-striped files" id="previews">
+                    <div id="template" class="row mt-2">
+                      <div class="col-auto">
+                        <span class="preview"><img src="data:," alt="" data-dz-thumbnail /></span>
+                      </div>
+                      <div class="col d-flex align-items-center">
+                        <p class="mb-0">
+                          <span class="lead" data-dz-name></span>
+                          (<span data-dz-size></span>)
+                        </p>
+                        <strong class="error text-danger" data-dz-errormessage></strong>
+                      </div>
+                      <div class="col-4 d-flex align-items-center">
+                        <div class="progress progress-striped active w-100" role="progressbar" aria-valuemin="0"
+                          aria-valuemax="100" aria-valuenow="0">
+                          <div class="progress-bar progress-bar-success" style="width:0%;" data-dz-uploadprogress>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-auto d-flex align-items-center">
+                        <div class="btn-group">
+                          <button class="btn btn-primary start">
+                            <i class="fas fa-upload"></i>
+                            <span>Start</span>
+                          </button>
+                          <button data-dz-remove class="btn btn-warning cancel">
+                            <i class="fas fa-times-circle"></i>
+                            <span>Cancel</span>
+                          </button>
+                          <button data-dz-remove class="btn btn-danger delete">
+                            <i class="fas fa-trash"></i>
+                            <span>Delete</span>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- /.photos upload -->
+                <button class="btn btn-success" type="submit"> 儲存商品 </button>
+                <button class="btn btn-primary" type=""> 商品上架 </button>
+                <button class="btn btn-warning" type=""> 取消 </button>
+              </form>
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+        </section>
+      `
+    };
+
+    const routes = [
+      { path: '/estoreadmin/all', component: AllItems },
+      { path: '/estoreadmin/add', component: AddItem }
+    ];
+
+    const router = createRouter({
+      history: createWebHistory(),
+      routes
+    });
+
+    createApp({}).use(router).mount('#app');
+
+  </script>
+</body>
+
+</html>
