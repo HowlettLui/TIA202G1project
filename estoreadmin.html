@@ -17,14 +17,13 @@
   <link rel="stylesheet" href="./css/adminlte/adminlte.min.css">
   <!-- Bootstrap 5 -->
   <link rel="stylesheet" href="./css/bootstrap.min.css">
+  <!-- dropzonejs -->
+  <link rel="stylesheet" href="./vendors/dropzone/min/dropzone.min.css">
 
   <!-- for ethan's part -->
   <!-- summernote -->
   <!-- <link rel="stylesheet" href="./vendors/summernote-0.9.0-dist/summernote-bs5.css"> -->
-  <link rel="stylesheet" href="./vendors/summernote-0.9.0-dist/summernote-lite.css">
-
-  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-  <script src="https://unpkg.com/vue-router@4"></script>
+  <!-- <link rel="stylesheet" href="./vendors/summernote-0.9.0-dist/summernote-lite.css"> -->
 
 </head>
 
@@ -35,327 +34,44 @@
 
     <!-- 導入共用 Navbar -->
     <div class="Navbar"></div>
+    <!-- 導入共用 Sidebar -->
+    <div class="Sidebar"></div>
 
-
-
-    <section id="app">
-      <!-- 記得隨時跟sidebar.html同步更新 -->
-      <!-- 導入共用 Sidebar -->
-      <aside class="main-sidebar main-sidebar-custom sidebar-dark-primary elevation-4">
-        <div class="sidebar">
-
-          <!-- Brand Logo -->
-          <a href="#" class="brand-link" style="text-decoration: none;">
-            <i class="fas fa-basketball-ball fa-lg mx-2"></i>
-            <span class="brand-text font-weight-light">
-              <h4 class="mb-0" style="display: inline-block; vertical-align: bottom;">NGFW管理系統</h4>
-            </span>
-          </a>
-
-          <!-- Sidebar Menu -->
-          <nav class="mt-2">
-            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-              <!-- Add icons to the links using the .nav-icon class
-              with font-awesome or any other icon font library -->
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="nav-icon fas fa-users"></i>
-                  <p class="pl-1">
-                    使用者資料管理
-                    <i class="right fas fa-angle-left"></i>
-                  </p>
-                </a>
-                <ul class="nav nav-treeview">
-                  <li class="nav-item">
-                    <a href="#" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>使用者角色管理</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="#" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>工作人員角色管理</p>
-                    </a>
-                  </li>
-                </ul>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="nav-icon fas fa-sitemap"></i>
-                  <p class="pl-1">
-                    球隊資料管理
-                    <i class="right fas fa-angle-left"></i>
-                  </p>
-                </a>
-                <ul class="nav nav-treeview">
-                  <li class="nav-item">
-                    <a href="#" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>球隊名單</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="#" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>球員名單</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="#" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>啦啦隊名單</p>
-                    </a>
-                  </li>
-                </ul>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="nav-icon far fa-calendar-alt"></i>
-                  <p class="pl-1">
-                    賽事資料管理
-                    <i class="right fas fa-angle-left"></i>
-                  </p>
-                </a>
-                <ul class="nav nav-treeview">
-                  <li class="nav-item">
-                    <a href="#" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>賽程日期</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="#" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>賽事資訊</p>
-                    </a>
-                  </li>
-                </ul>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="nav-icon far fa-newspaper"></i>
-                  <p class="pl-1">
-                    文章/新聞管理
-                  </p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="nav-icon far fa-file-alt"></i>
-                  <p class="pl-1">
-                    訂單管理
-                    <i class="right fas fa-angle-left"></i>
-                  </p>
-                </a>
-                <ul class="nav nav-treeview">
-                  <li class="nav-item">
-                    <a href="#" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>訂單總覽</p>
-                    </a>
-                  </li>
-                </ul>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="nav-icon fas fa-tag"></i>
-                  <p class="pl-1">
-                    商品管理
-                    <i class="right fas fa-angle-left"></i>
-                  </p>
-                </a>
-                <ul class="nav nav-treeview">
-                  <li class="nav-item">
-                    <router-link to="/estoreadmin/all" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>平台商品</p>
-                    </router-link>
-                  </li>
-                  <li class="nav-item">
-                    <router-link to="/estoreadmin/add" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>新增商品</p>
-                    </router-link>
-                  </li>
-                </ul>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="nav-icon fas fa-headphones"></i>
-                  <p class="pl-1">
-                    客服
-                    <i class="right fas fa-angle-left"></i>
-                  </p>
-                </a>
-                <ul class="nav nav-treeview">
-                  <li class="nav-item">
-                    <a href="#" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>即時客服</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="#" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>客服列表</p>
-                    </a>
-                  </li>
-                </ul>
-              </li>
-            </ul>
-          </nav>
-        </div>
-      </aside>
-
-      <!-- 開發畫面區塊start -->
-      <section class="content-wrapper">
-        <router-view></router-view>
-      </section>
-      <!-- 開發畫面區塊end -->
-    </section>
-  </div>
-  <!-- ./wrapper -->
-
-  <!-- jQuery -->
-  <script src="./jquery/adminlte/jquery.min.js"></script>
-  <!-- Bootstrap 5 -->
-  <script src="./js/bootstrap.bundle.min.js"></script>
-  <!-- overlayScrollbars -->
-  <script src="./jquery/adminlte/jquery.overlayScrollbars.min.js"></script>
-  <!-- AdminLTE App -->
-  <script src="./js/adminlte/adminlte.min.js"></script>
-
-  <!-- for ethan's part -->
-  <!-- summernote -->
-  <!-- <script src="./vendors/summernote-0.9.0-dist/summernote-bs5.js"></script> -->
-  <script src="./vendors/summernote-0.9.0-dist/summernote-lite.js"></script>
-
-  <script>
-    $(".Navbar").load("./layout/navbar.html");
-
-    $('#summernote').summernote({
-      placeholder: 'Hello stand alone ui',
-      tabsize: 2,
-      height: 120
-    });
-
-    const { createApp, ref, reactive } = Vue;
-    const { createRouter, createWebHistory } = VueRouter;
-
-    const AllItems = {
-      setup() {
-        const title = ref(' All Items ');
-        return { title };
-      },
-      template: `
-        <h1>{{ title }}</h1>
-      `
-    }
-
-    const AddItem = {
-      setup() {
-        const title = ref('Add Item');
-        return { title };
-      },
-      template: `
-        <!-- 改完再移到vue的component template中 -->
-        <!-- content-header -->
-        <section class="content-header">
-          <div class="container-fluid">
-            <div class="row mb-2">
-              <div class="col-sm-6">
-                <h1>新增商品</h1>
-              </div>
-              <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
-                  <li class="breadcrumb-item"><a href="#">商品管理</a></li>
-                  <li class="breadcrumb-item active">新增商品</li>
-                </ol>
-              </div>
+    <!-- 開發畫面區塊start -->
+    <section id="mainBlock" class="content-wrapper">
+      <!-- content-header -->
+      <section class="content-header">
+        <div class="container-fluid">
+          <div class="row mb-2">
+            <div class="col-sm-6">
+              <h1>新增商品</h1>
+            </div>
+            <div class="col-sm-6">
+              <ol class="breadcrumb float-sm-right">
+                <li class="breadcrumb-item"><a href="#">商品管理</a></li>
+                <li class="breadcrumb-item active">新增商品</li>
+              </ol>
             </div>
           </div>
-        </section>
-        <!-- content-header end -->
-        <section class="content">
-          <div class="card">
-            <div class="card-body">
-              <form>
-                <div class="row">
-                  <div class="col-sm-6">
-                    <!-- text input -->
-                    <div class="form-group">
-                      <label>商品名稱</label>
-                      <input type="text" class="form-control" placeholder="Enter ...">
-                    </div>
-                  </div>
-                  <div class="col-sm-6">
-                    <!-- text input -->
-                    <div class="form-group">
-                      <label>商品簡介</label>
-                      <input type="text" class="form-control" placeholder="Enter ...">
-                    </div>
-                  </div>
-                  <div class="col-sm-6">
-                    <!-- text input -->
-                    <div class="form-group">
-                      <label>商品類型</label>
-                      <input type="text" class="form-control" placeholder="Enter ...">
-                    </div>
-                  </div>
-                  <div class="col-sm-6">
-                    <!-- text input -->
-                    <div class="form-group">
-                      <label>商品型號</label>
-                      <input type="text" class="form-control" placeholder="Enter ...">
-                    </div>
-                  </div>
-                  <div class="col-sm-6">
-                    <!-- text input -->
-                    <div class="form-group">
-                      <label>商品價格</label>
-                      <input type="text" class="form-control" placeholder="Enter ...">
-                    </div>
-                  </div>
-                  <div class="col-sm-6">
-                    <!-- text input -->
-                    <div class="form-group">
-                      <label>商品大小</label>
-                      <input type="text" class="form-control" placeholder="Enter ...">
-                    </div>
-                  </div>
-                  <div class="col-sm-6">
-                    <!-- text input -->
-                    <div class="form-group">
-                      <label>商品顏色</label>
-                      <input type="text" class="form-control" placeholder="Enter ...">
-                    </div>
-                  </div>
-                  <div class="col-sm-6">
-                    <!-- text input -->
-                    <div class="form-group">
-                      <label>商品數量</label>
-                      <input type="text" class="form-control" placeholder="Enter ...">
-                    </div>
-                  </div>
-                </div>
+        </div>
+      </section>
+      <!-- content-header end -->
 
-                <!-- summernote -->
-                <!-- <label>商品詳細內容</label>
-                <div id="summernote"></div> -->
-                <!-- summnernote暫時不能用，先用<textarea>代替 -->
-                <div class="row">
-                <div class="col">
-                  <div class="form-group">
-                    <label>商品詳細內容 (之後再改用summernote)</label>
-                    <textarea class="form-control" rows="3" placeholder="Enter ..."></textarea>
-                  </div>
+      <!-- content，實際頁面內容 -->
+      <section class="content">
+        <div class="card">
+          <div class="card-body">
+            <div class="row">
+
+              <!-- 先暫時不用Dropzone，用一般upload file的方式 -->
+              <div class="col-sm-12">
+                <div class="form-group">
+                  <input id="item_photo" type="file" name="file" />
                 </div>
               </div>
-
-                <!-- photos upload -->
-                <label>商品照片上傳</label>
-                <div class="mt-2">
+              <!-- photos upload with Dropzone -->
+              <!-- <div class="col-sm-12 mt-2">
+                  <label>商品照片上傳</label>
                   <div id="actions" class="row">
                     <div class="col-lg-6">
                       <div class="btn-group w-100">
@@ -420,32 +136,230 @@
                       </div>
                     </div>
                   </div>
+                </div> -->
+              <!-- photos upload with Dropzone end -->
+
+              <div class="col-sm-6">
+                <!-- text input -->
+                <div class="form-group">
+                  <label>商品型號</label>
+                  <input id="item_model" type="text" class="form-control" placeholder="Enter ...">
                 </div>
-                <!-- /.photos upload -->
-                <button class="btn btn-success" type="submit"> 儲存商品 </button>
-                <button class="btn btn-primary" type=""> 商品上架 </button>
-                <button class="btn btn-warning" type=""> 取消 </button>
-              </form>
+              </div>
+              <div class="col-sm-6">
+                <!-- text input -->
+                <div class="form-group">
+                  <label>商品名稱</label>
+                  <input id="item_name" type="text" class="form-control" placeholder="Enter ...">
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <!-- text input -->
+                <div class="form-group">
+                  <label>商品簡介</label>
+                  <input id="item_content" type="text" class="form-control" placeholder="Enter ...">
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <!-- text input -->
+                <div class="form-group">
+                  <label>商品類型</label>
+                  <input id="item_type" type="text" class="form-control" placeholder="Enter ...">
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <!-- text input -->
+                <div class="form-group">
+                  <label>商品價格</label>
+                  <input id="item_price" type="text" class="form-control" placeholder="Enter ...">
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <!-- text input -->
+                <div class="form-group">
+                  <label>商品大小</label>
+                  <input id="item_size" type="text" class="form-control" placeholder="Enter ...">
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <!-- text input -->
+                <div class="form-group">
+                  <label>商品顏色</label>
+                  <input id="item_color" type="text" class="form-control" placeholder="Enter ...">
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <!-- text input -->
+                <div class="form-group">
+                  <label>商品數量</label>
+                  <input id="item_stock" type="text" class="form-control" placeholder="Enter ...">
+                </div>
+              </div>
+
+              <!-- summernote -->
+              <!-- <label>商品詳細內容</label>
+              <div id="summernote"></div> -->
+              <!-- summnernote暫時不能用，先用<textarea>代替 -->
+              <div class="col-sm-12">
+                <div class="form-group">
+                  <label>商品詳細內容 (之後再改用summernote)</label>
+                  <textarea id="item_details" class="form-control" rows="3" placeholder="Enter ..."></textarea>
+                </div>
+              </div>
+
             </div>
-            <!-- /.card-body -->
+
+            <button id="save_item" class="btn btn-success" type="submit"> 儲存商品</button>
+            <button class="btn btn-primary" type=""> 商品上架</button>
+            <button class="btn btn-warning" type=""> 取消</button>
           </div>
-          <!-- /.card -->
-        </section>
-      `
-    };
+          <!-- card-body end -->
+        </div>
+        <!-- card end -->
+      </section>
+      <!-- content end -->
+    </section>
+    <!-- 開發畫面區塊end -->
 
-    const routes = [
-      { path: '/estoreadmin/all', component: AllItems },
-      { path: '/estoreadmin/add', component: AddItem }
-    ];
+  </div>
+  <!-- wrapper end -->
 
-    const router = createRouter({
-      history: createWebHistory(),
-      routes
+  <!-- jQuery -->
+  <script src="./jquery/adminlte/jquery.min.js"></script>
+  <!-- Bootstrap 5 -->
+  <script src="./js/bootstrap.bundle.min.js"></script>
+  <!-- overlayScrollbars -->
+  <script src="./jquery/adminlte/jquery.overlayScrollbars.min.js"></script>
+  <!-- AdminLTE App -->
+  <script src="./js/adminlte/adminlte.min.js"></script>
+  <!-- dropzonejs -->
+  <script src="./vendors/dropzone/min/dropzone.min.js"></script>
+
+  <!-- for ethan's part -->
+  <!-- summernote -->
+  <!-- <script src="./vendors/summernote-0.9.0-dist/summernote-bs5.js"></script> -->
+  <!-- <script src="./vendors/summernote-0.9.0-dist/summernote-lite.js"></script> -->
+
+  <script>
+    $(".Navbar").load("./layout/navbar.html");
+    $(".Sidebar").load("./layout/sidebar.html");
+
+    $('#save_item').on('click', function () {
+      const itemModel = {
+        itemModel: $('#item_model').val()
+      }
+      const item = {
+        itemName: $('#item_name').val(),
+        itemContent: $('#item_content').val(),
+        itemType: $('#item_type').val(),
+        itemPrice: $('#item_price').val(),
+        itemDetails: $('#item_details').val()
+        // itemPhoto: $('#item_photo').val()
+      }
+      const itemInfo = {
+        itemSize: $('#item_size').val(),
+        itemColor: $('#item_color').val(),
+        itemStock: $('#item_stock').val()
+      }
+      fetch('estoreadmin/add', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          itemModel,
+          item,
+          itemInfo
+        })
+      })
+        .then(resp => resp.text())
+        .then(data => {
+          console.log(data);
+          alert(data);
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+        });
     });
+  </script>
 
-    createApp({}).use(router).mount('#app');
+  <script>
 
+    // 動態載入內容
+    // $(document).ready(function () {
+    //     // 使用事件代理確保所有 <a> 都正確綁定事件
+    //     $('li.item_management').on('click', 'a.item_management', function (event) {
+    //       event.stopPropagation(); // 阻止事件冒泡
+    //       event.preventDefault(); // 阻止預設行為
+    //       const url = $(this).attr('href'); // 取得 href 的值
+    //       $('#mainBlock').load(url, function (response, status, xhr) {
+    //           if (status === "error") {
+    //               $('#mainBlock').html("<h1>錯誤</h1><p>無法載入頁面內容。</p>");
+    //           }
+    //       });
+    //     });
+    // });
+
+    // 先暫時不用Dropzone，用一般upload file的方式
+    // // DropzoneJS Demo Code Start
+    // Dropzone.autoDiscover = false
+
+    // // Get the template HTML and remove it from the doumenthe template HTML and remove it from the doument
+    // var previewNode = document.querySelector("#template")
+    // previewNode.id = ""
+    // var previewTemplate = previewNode.parentNode.innerHTML
+    // previewNode.parentNode.removeChild(previewNode)
+
+    // var myDropzone = new Dropzone(document.body, { // Make the whole body a dropzone
+    //   url: "/target-url", // Set the url
+    //   thumbnailWidth: 80,
+    //   thumbnailHeight: 80,
+    //   parallelUploads: 20,
+    //   previewTemplate: previewTemplate,
+    //   autoQueue: false, // Make sure the files aren't queued until manually added
+    //   previewsContainer: "#previews", // Define the container to display the previews
+    //   clickable: ".fileinput-button" // Define the element that should be used as click trigger to select files.
+    // })
+
+    // myDropzone.on("addedfile", function(file) {
+    //   // Hookup the start button
+    //   file.previewElement.querySelector(".start").onclick = function() { myDropzone.enqueueFile(file) }
+    // })
+
+    // // Update the total progress bar
+    // myDropzone.on("totaluploadprogress", function(progress) {
+    //   document.querySelector("#total-progress .progress-bar").style.width = progress + "%"
+    // })
+
+    // myDropzone.on("sending", function(file) {
+    //   // Show the total progress bar when upload starts
+    //   document.querySelector("#total-progress").style.opacity = "1"
+    //   // And disable the start button
+    //   file.previewElement.querySelector(".start").setAttribute("disabled", "disabled")
+    // })
+
+    // // Hide the total progress bar when nothing's uploading anymore
+    // myDropzone.on("queuecomplete", function(progress) {
+    //   document.querySelector("#total-progress").style.opacity = "0"
+    // })
+
+    // // Setup the buttons for all transfers
+    // // The "add files" button doesn't need to be setup because the config
+    // // `clickable` has already been specified.
+    // document.querySelector("#actions .start").onclick = function() {
+    //   myDropzone.enqueueFiles(myDropzone.getFilesWithStatus(Dropzone.ADDED))
+    // }
+    // document.querySelector("#actions .cancel").onclick = function() {
+    //   myDropzone.removeAllFiles(true)
+    // }
+    // // DropzoneJS Demo Code End
+
+    // 先暫時不用summernote
+    // $('#summernote').summernote({
+    //   placeholder: 'Hello stand alone ui',
+    //   tabsize: 2,
+    //   height: 120
+    // });
   </script>
 </body>
 

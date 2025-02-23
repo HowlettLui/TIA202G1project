@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Insert title here</title>
+  <style>
+    .nickname-display {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 16px;
+      color: #333;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="nickname-display">
+    <span id="loggedInNickname">xxx</span>
+    <button id="logoutBtn">登出</button>
+  </div>
+  <label for="username">使用者名稱: </label>
+  <input type="text" name="username" id="username" disabled>
+  <br>
+  <label for="password">密碼: </label>
+  <input type="password" name="password" id="password">
+  <br>
+  <label for="cPassword">確認密碼: </label>
+  <input type="password" name="cPassword" id="cPassword">
+  <br>
+  <label for="nickname">暱稱: </label>
+  <input type="text" name="nickname" id="nickname">
+  <br>
+  <button id="editBtn">儲存修改</button>
+  <button id="editMemberBtn">會員管理頁面</button>
+  <div id="msg"></div>
+</body>
+
+<script>
+
+  let nicknameDisplay = document.querySelector('#loggedInNickname');
+  let username = document.querySelector('#username');
+  let password = document.querySelector('#password');
+  let cPassword = document.querySelector('#cPassword');
+  let nickname = document.querySelector('#nickname');
+  let display = document.querySelector("#msg");
+
+  fetch('http://localhost:8080/javaweb-exercise-05/member/find', {
+    mode: 'cors',
+    credentials: 'include'
+  })
+    .then(resp => resp.json())
+    .then(member => {
+      // todo 將資料顯示在畫面上
+      username.value = member.username;
+      nickname.value = member.nickname;
+      nicknameDisplay.textContent = member.nickname;
+    })
+
+  document.querySelector("#logoutBtn").addEventListener("click", () => {
+    if (confirm('是否登出')) {
+      fetch("logout")
+        .then(resp => resp.json())
+        .then(body => {
+          if (body.successful) {
+            // location.href = 'login.html';
+            location.replace = 'login.html';
+          }
+        })
+    }
+  })
+
+  document.querySelector('#editBtn').addEventListener('click', () => {
+
+    let len = password.value.length
+    if (len !== 0 && (len < 6 || len > 12)) {
+      alert("密碼長度需介於6 ~ 12");
+      return;
+    }
+
+    if (len !== 0 && (password.value !== cPassword.value)) {
+      alert("密碼與確認密碼不符");
+      return;
+    }
+
+    if (nickname.value.length < 1 || nickname.value.length > 20) {
+      alert("暱稱長度需介於1 ~ 20");
+      return;
+    }
+
+    fetch("http://localhost:8080/javaweb-exercise-05/member/edit", {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        username: username.value,
+        password: password.value,
+        cPassword: cPassword.value,
+        nickname: nickname.value
+      })
+    })
+      .then(resp => {
+        return resp.json();
+      })
+      .then(body => {
+        display.textContent = '';
+        let { successful, errMsg } = body;
+        if (successful) {
+          display.textContent = `
+                        ${body.username}
+                        ${body.nickname}
+                    `;
+        } else {
+          display.textContent = "修改失敗";
+        }
+      })
+
+  })
+
+  document.querySelector('#editMemberBtn').addEventListener('click', () => {
+
+    location.href = 'manage.html';
+
+    //        fetch("manage")
+    //        	.then(resp => {
+    //                return resp.json();
+    //            })
+    //            .then(body => {
+    //            })
+
+  })
+
+</script>
+
+</html>

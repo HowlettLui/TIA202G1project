@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+</head>
+
+<body>
+	<table border="">
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>Username</th>
+				<th>Nickname</th>
+				<th>Pass</th>
+				<th>Role ID</th>
+				<th>Creator</th>
+				<th>Created Date</th>
+				<th>Updater</th>
+				<th>Last Updated Date</th>
+			</tr>
+		</thead>
+		<tbody>
+		</tbody>
+	</table>
+</body>
+<script>
+	let tbody = document.querySelector('tbody');
+
+	fetch('findAll')
+		.then(resp => resp.json())
+		.then(members => {
+			
+				for (let member of members) {
+					tbody.innerHTML += `
+						<tr>
+							<td>${member.id}</td>
+							<td>${member.username}</td>
+							<td>${member.nickname}</td>
+							<td>${member.pass}</td>
+							<td>${member.roleId}</td>
+							<td>${member.creator}</td>
+							<td>${member.createdDate}</td>
+							<td>${member.updater}</td>
+							<td>${member.lastUpdatedDate}</td>
+							<td>
+								<button onclick="removeMemberById(${member.id})">Remove</button>
+							</td>
+						</tr>
+					`
+				}
+			
+		});
+
+	function removeMemberById(id) {
+		if (confirm('確定刪除？')) {
+			fetch(`remove?id=${id}`)
+				.then(resp => resp.json())
+				.then(body => {
+					location.reload();
+				});
+		}
+	}
+</script>
+
+</html>
