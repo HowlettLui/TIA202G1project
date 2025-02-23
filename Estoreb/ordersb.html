@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Order Manage</title>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
+
+  <link rel="stylesheet" href="../css/bootstrap.min.css">
+  <link rel="stylesheet" href="../css/headers.css">
+
+  <link href="../css/breadcrumbs.css" rel="stylesheet">
+
+</head>
+
+<body>
+  <!-- 導入共用 header -->
+  <div class="headerPage"></div>
+
+  <!-- 開發畫面 -->
+  <main>
+    <div class="bg-body-tertiary">
+      <div class="container py-5">
+        <!-- header of main -->
+        <div class="d-flex flex-wrap justify-content-center">
+          <div class="container my-5">
+            <nav aria-label="breadcrumb">
+              <ol class="breadcrumb breadcrumb-chevron p-3 bg-body-tertiary rounded-3">
+                <li class="breadcrumb-item">
+                  <a class="link-body-emphasis fw-semibold text-decoration-none" href="#">訂單管理</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">
+                  訂單總覽
+                </li>
+              </ol>
+              <div class="container px-4 text-center">
+                <div class="row gx-5">
+                  <div class="col-4">
+                    <form class="p-2 mb-2 bg-body-tertiary border-bottom">
+                      <input type="search" class="form-control" autocomplete="false" placeholder="訂單狀態">
+                    </form>
+                    <ul class="list-unstyled mb-0" style="display: none">
+                      <li><a class="dropdown-item d-flex align-items-center gap-2 py-2" href="#">
+                        <span class="d-inline-block bg-success rounded-circle p-1"></span>
+                        Action
+                      </a></li>
+                      <li><a class="dropdown-item d-flex align-items-center gap-2 py-2" href="#">
+                        <span class="d-inline-block bg-primary rounded-circle p-1"></span>
+                        Another action
+                      </a></li>
+                      <li><a class="dropdown-item d-flex align-items-center gap-2 py-2" href="#">
+                        <span class="d-inline-block bg-danger rounded-circle p-1"></span>
+                        Something else here
+                      </a></li>
+                      <li><a class="dropdown-item d-flex align-items-center gap-2 py-2" href="#">
+                        <span class="d-inline-block bg-info rounded-circle p-1"></span>
+                        Separated link
+                      </a></li>
+                    </ul>
+                  </div>
+                  <div class="col-4">
+                    <form class="p-2 mb-2 bg-body-tertiary border-bottom">
+                      <input type="search" class="form-control" autocomplete="false" placeholder="交易狀態">
+                    </form>
+                    <ul class="list-unstyled mb-0" style="display: none">
+                      <li><a class="dropdown-item d-flex align-items-center gap-2 py-2" href="#">
+                        <span class="d-inline-block bg-success rounded-circle p-1"></span>
+                        Action
+                      </a></li>
+                      <li><a class="dropdown-item d-flex align-items-center gap-2 py-2" href="#">
+                        <span class="d-inline-block bg-primary rounded-circle p-1"></span>
+                        Another action
+                      </a></li>
+                      <li><a class="dropdown-item d-flex align-items-center gap-2 py-2" href="#">
+                        <span class="d-inline-block bg-danger rounded-circle p-1"></span>
+                        Something else here
+                      </a></li>
+                      <li><a class="dropdown-item d-flex align-items-center gap-2 py-2" href="#">
+                        <span class="d-inline-block bg-info rounded-circle p-1"></span>
+                        Separated link
+                      </a></li>
+                    </ul>
+                  </div>
+                  <div class="col-4">
+                    <form class="col-12 col-lg-auto mb-3 mb-lg-0" role="search">
+                      <input type="search" class="form-control" placeholder="關鍵字搜尋" aria-label="Search">
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </nav>
+          </div>
+        </div>
+
+
+        <!-- orders -->
+        <table class="table table-striped table-hover">
+          <thead class="table-light">
+            <tr>
+              <th>
+                <input class="checkbox_all_el" type="checkbox" value="" id="flexCheckDefault">
+              </th>
+              <th>
+                <button class="btn d-inline-flex align-items-center btn_order_detail" style="display: none">詳情</button>
+              </th>
+              <th>訂單編號</th>
+              <th>訂單日期</th>
+              <th>訂單狀態</th>
+              <th>交易狀態</th>
+              <th>訂購帳號</th>
+              <th>合計</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr data-bs-toggle="collapse" data-bs-target="#demo1" class="accordion-toggle">
+              <th>
+                <input class="checkbox_el" type="checkbox" value="" id="flexCheckDefault">
+              </th>
+              <th>
+                <button class="btn d-inline-flex align-items-center btn_order_detail">詳情</button>
+              </th>
+              <td>訂單id</td>
+              <td>0000/00/00</td>
+              <td>未完成</td>
+              <td>未付款</td>
+              <td>test111@gmail.com</td>
+              <th>1234</th>
+            </tr>
+            <tr>
+              <td colspan="12" class="hiddenRow" style="--bs-table-hover-bg: var(--bs-body-bg)">
+                <div class="accordian-body collapse" id="demo1">
+                  <table class="table table-striped table-hover">
+                    <thead>
+                      <tr class="info">
+                        <th>a</th>
+                        <th>b</th>
+                        <th>c</th>
+                        <th>d</th>
+                        <th>e</th>
+                        <th>f</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>ex1</td>
+                        <td>ex1</td>
+                        <td>ex1</td>
+                        <td>ex1</td>
+                        <td>ex1</td>
+                        <td>
+                          <a href="#">詳細資料1</a>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>ex2</td>
+                        <td>ex2</td>
+                        <td>ex2</td>
+                        <td>ex2</td>
+                        <td>ex2</td>
+                        <td>
+                          <a href="#">詳細資料2</a>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>ex3</td>
+                        <td>ex3</td>
+                        <td>ex3</td>
+                        <td>ex3</td>
+                        <td>ex3</td>
+                        <td>
+                          <a href="#">詳細資料3</a>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>ex4</td>
+                        <td>ex4</td>
+                        <td>ex4</td>
+                        <td>ex4</td>
+                        <td>ex4</td>
+                        <td>
+                          <a href="#">詳細資料4</a>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </td>
+            </tr>
+            <tr data-bs-toggle="collapse" data-bs-target="#demo1" class="accordion-toggle">
+              <th>
+                <input class="checkbox_el" type="checkbox" value="" id="flexCheckDefault">
+              </th>
+              <th>
+                <button class="btn d-inline-flex align-items-center btn_order_detail">詳情</button>
+              </th>
+              <td>訂單id</td>
+              <td>0000/00/00</td>
+              <td>未完成</td>
+              <td>未付款</td>
+              <td>test222@hotmail.com</td>
+              <th>1234</th>
+            </tr>
+            <tr>
+              <td colspan="6" class="hiddenRow" style="--bs-table-hover-bg: var(--bs-body-bg)">
+                <div id="demo2" class="accordian-body collapse">
+                  Demo2
+                  <!-- 放table -->
+                </div>
+              </td>
+            </tr>
+            <tr data-bs-toggle="collapse" data-bs-target="#demo1" class="accordion-toggle">
+              <th>
+                <input class="checkbox_el" type="checkbox" value="" id="flexCheckDefault">
+              </th>
+              <th>
+                <button class="btn d-inline-flex align-items-center btn_order_detail">詳情</button>
+              </th>
+              <td>訂單id</td>
+              <td>0000/00/00</td>
+              <td>已送達門市</td>
+              <td>已付款</td>
+              <td>test333@gmail.com</td>
+              <th>1234</th>
+            </tr>
+            <tr data-bs-toggle="collapse" data-bs-target="#demo1" class="accordion-toggle">
+              <th>
+                <input class="checkbox_el" type="checkbox" value="" id="flexCheckDefault">
+              </th>
+              <th>
+                <button class="btn d-inline-flex align-items-center btn_order_detail">詳情</button>
+              </th>
+              <td>訂單id</td>
+              <td>0000/00/00</td>
+              <td>已付款</td>
+              <td>已付款</td>
+              <td>test444@gmail.com</td>
+              <th>1234</th>
+            </tr>
+          </tbody>
+        </table>
+
+
+
+        <!-- page navigation -->
+        <div class="d-flex justify-content-center">
+          <nav aria-label="Page navigation example">
+            <ul class="pagination mt-4">
+              <li class="page-item">
+                <a class="page-link" href="#" aria-label="Previous">
+                  <span aria-hidden="true" style="color: var(--bs-secondary-color);">&laquo;</span>
+                </a>
+              </li>
+              <li class="page-item"><a class="page-link" href="#" style="color: var(--bs-secondary-color);">1</a></li>
+              <li class="page-item"><a class="page-link" href="#" style="color: var(--bs-secondary-color);">2</a></li>
+              <li class="page-item"><a class="page-link" href="#" style="color: var(--bs-secondary-color);">3</a></li>
+              <li class="page-item">
+                <a class="page-link" href="#" aria-label="Next">
+                  <span aria-hidden="true" style="color: var(--bs-secondary-color);">&raquo;</span>
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- 導入共用 footer -->
+  <div class="footerPage"></div>
+  <script src="../jquery/jquery-3.7.1.min.js"></script>
+  <script>
+    $(".headerPage").load("../layout/header.html");
+    $(".footerPage").load("../layout/footer.html");
+  </script>
+
+
+  <script src="../js/bootstrap.bundle.min.js"></script>
+  <script src="https://kit.fontawesome.com/799bf36dfe.js" crossorigin="anonymous"></script>
+</body>
+
+</html>

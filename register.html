@@ -162,6 +162,7 @@
         // console.log(register_data); // 看能不能抓到資料 -- > 可以抓到
 
         const account_length = account.value.length;
+        const password_length = password.value.length;
         if (account_length == null) {
           alert('需輸入使用者名稱');
           return;
@@ -172,7 +173,6 @@
           return;
         }
 
-        const password_length = password.value.length;
         if (password_length < 6 || password_length > 12) {
           alert('密碼長度須介於 6~12 之間');
           return;
