@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Insert title here</title>
+</head>
+
+<body>
+  <label for="username">使用者名稱: </label>
+  <input type="text" name="username" id="username">
+  <br>
+  <label for="password">密碼: </label>
+  <input type="password" name="password" id="password">
+  <br>
+  <button>登入</button>
+  <div id="msg"></div>
+</body>
+
+<script>
+
+  let username = document.querySelector('#username');
+  let password = document.querySelector('#password');
+  let display = document.querySelector("#msg");
+
+  document.querySelector('button').addEventListener('click', () => {
+
+    if (!username.value) {
+      alert("必須輸入使用者名稱");
+      return;
+    }
+
+    if (!password.value) {
+      alert("必須輸入密碼");
+      return;
+    }
+
+    fetch("http://localhost:8080/javaweb-exercise-05/member/login", {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        username: username.value,
+        password: password.value
+      }),
+      mode: 'cors',
+      credentials: 'include'
+    })
+      .then(resp => {
+        return resp.json();
+      })
+      .then(body => {
+        display.textContent = '';
+        let { successful, errMsg } = body;
+        if (successful) {
+          window.open('edit.html', '_self');
+          // location.href = 'edit.html';
+        } else {
+          display.textContent = "使用者名稱或密碼錯誤";
+        }
+      })
+
+  })
+
+</script>
+
+</html>
