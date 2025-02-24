@@ -122,7 +122,6 @@
   <main class="container">
     <div class="my_main_container">
       <!-- =================================== slide 區塊 ============================================= -->
-
       <div class="my_slide_class">
         <div class="my_slide_img"><img src="https://picsum.photos/id/238/1400/600"></div>
         <div class="my_slide_img"><img src="https://picsum.photos/id/239/1400/600"></div>
@@ -136,24 +135,22 @@
       <!-- =================================== 即時賽況 ============================================= -->
       <div class="switch_btn row container">
         <div class="row row-cols-2 row-cols-lg-4">
-          <div class="col text-center">
-            <div class="switch_btn_el -on">
-              <h3>AAALeague</h3>
-            </div>
+          <div class="switch_btn_el col text-center p-3 -on">
+            <h3>AAALeague</h3>
           </div>
-          <div class="col text-center">
-            <div class="switch_btn_el">
-              <h3>BBBLeague</h3>
-            </div>
+          <div class="switch_btn_el col text-center p-3">
+            <h3>BBBLeague</h3>
           </div>
         </div>
       </div>
 
-      <div class="live_game container row">
-        <div class="live_game_date feature col-lg-2">
-          <h4 class="game_date fs-2">00/00 (一)</h4>
-          <h4 class="game_time fs-2">00：00</h4>
-          <h4 class="game_loc fs-2">XXX球場</h4>
+      <div class="live_game container row mx-5 my-3">
+        <div class="live_game_date col-lg-2">
+          <div class="d-flex align-items-middle flex-column mb-3">
+            <div class="fs-2 ">00/00 (一)</div>
+            <div class="fs-2">00：00</div>
+            <div class="fs-2">XXX球場</div>
+          </div>
         </div>
         <div class="row col-lg-10">
           <div class="team_match_container feature col">
@@ -179,19 +176,16 @@
                 <h3 class="bteam_goal_el">000</h3>
               </div>
             </div>
-  
             <div class="row py-3">
-              <div class="btn_more col">
-                <a href="">看更多</a>
+              <div class="btn_more col mx-5 py-2" style="background-color: #ccc">
+                <a href="#">看更多</a>
               </div>
-              <div class="btn_add_stash col">
-                <a href="">加入收藏</a>
+              <div class="btn_add_stash col mx-5 py-2" style="background-color: #ccc; display: none">
+                <a href="#">加入收藏</a>
               </div>
-
             </div>
           </div>
 
-  
           <div class="team_match_container feature col">
             <div
               class="team_icon_b d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 mb-3">
@@ -202,9 +196,7 @@
             <h3 class="fs-2 text-body-emphasis">B球隊名稱</h3>
             <p>BTeam Eng name</p>
           </div>
-
         </div>
-
       </div>
     </div>
 
@@ -523,6 +515,23 @@
           }
         }
       ]
+    });
+
+    $(document).ready(function(){
+      // 綁定跳轉登入註冊按鈕
+      $('.login').click(function(){
+        window.location.href = './login.html';
+      });
+      $('.register').click(function(){
+        window.location.href = './register.html';
+      });
+
+      $('.switch_btn_el').click(function(){
+        $('.switch_btn_el').removeClass('-on');
+        $(this).addClass('-on');
+      });
+      // todo: 這裡要加入切換即時賽況的資料呈現
+
     });
   </script>
 
