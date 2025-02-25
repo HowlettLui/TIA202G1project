@@ -33,9 +33,9 @@
 
 
                         <div class="col-12">
-                            <label for="accout" class="form-label">會員帳號</label>
+                            <label for="accout" class="form-label">會員帳號(僅顯示無法更改)</label>
                             <div class="input-group has-validation">
-                                <input type="text" class="form-control" id="accout" placeholder="" required>
+                                <input type="text" class="form-control" id="accout" placeholder="" required readonly>
                                 <div class="invalid-feedback">
                                     Your accout is required.
                                 </div>
@@ -43,9 +43,9 @@
                         </div>
                         <div class="col-12">
                             <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="email" placeholder="you@example.com">
+                            <input type="email" class="form-control" id="email" placeholder="you@example.com" required>
                             <div class="invalid-feedback">
-                                Please enter a valid email address for shipping updates.
+                                Please enter a valid email address.
                             </div>
                         </div>
                         <div class="col-12">
@@ -65,4 +65,68 @@
         </div>
     </div>
 </div>
-<script src="./js/member_info.js"></script>
+
+<script>
+    $(document).ready(function () {
+        // 編輯模式
+        $('#editBtn').click(function () {
+            $('#viewMode').addClass('d-none');
+            $('#editMode').removeClass('d-none');
+        });
+
+        // 顯示模式
+        $('#cancelBtn').click(function () {
+            $('#editMode').addClass('d-none');
+            $('#viewMode').removeClass('d-none');
+        });
+
+        // 儲存資料並切換回顯示模式
+        $('#saveBtn').click(function (e) {
+            var form = document.querySelector('.needs-validation');
+
+            // 檢查表單是否通過驗證
+            if (!form.checkValidity()) {
+                e.preventDefault();
+                e.stopPropagation();
+                form.classList.add('was-validated');
+                return; // 若驗證失敗，不執行儲存與切換動作
+            }
+
+            // 獲取輸入框中的值
+            const name = $('#name').val();
+            const userid = $('#userid').val();
+            const accout = $('#accout').val();
+            const email = $('#email').val();
+            const phone = $('#phone').val();
+
+            // 更新顯示模式中的內容
+            $('#viewName').text(name);
+            $('#viewUserid').text(userid);
+            $('#viewAccout').text(accout);
+            $('#viewEmail').text(email);
+            $('#viewPhone').text(phone);
+
+            // 切換回顯示模式
+            $('#editMode').addClass('d-none');
+            $('#viewMode').removeClass('d-none');
+        });
+
+        // 啟用 Bootstrap 表單驗證
+        // (function () {
+        //     'use strict'
+
+        //     var forms = document.querySelectorAll('.needs-validation');
+
+        //     Array.prototype.slice.call(forms).forEach(function (form) {
+        //         form.addEventListener('submit', function (event) {
+        //             if (!form.checkValidity()) {
+        //                 event.preventDefault();
+        //                 event.stopPropagation();
+        //             }
+
+        //             form.classList.add('was-validated');
+        //         }, false);
+        //     });
+        // })();
+    });
+</script>
