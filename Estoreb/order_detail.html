@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>上班不要看球賽管理系統</title>
+
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="../../vendors/fontawesome-free/css/all.min.css">
+  <!-- overlayScrollbars -->
+  <link rel="stylesheet" href="../../css/adminlte/OverlayScrollbars.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="../../css/adminlte/adminlte.min.css">
+  <!-- Bootstrap 5 -->
+  <link rel="stylesheet" href="../../css/bootstrap.min.css">
+
+  <!-- DataTables -->
+  <link rel="stylesheet" href="../../vendors/estoreb-orders/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" href="../../vendors/estoreb-orders/responsive.bootstrap4.min.css">
+  <link rel="stylesheet" href="../../vendors/estoreb-orders/buttons.bootstrap4.min.css">
+
+
+
+  <style>
+    #progressbar {
+      overflow: hidden;
+      color: lightgrey
+    }
+
+    #progressbar .active {
+      color: #6c757d
+    }
+
+    #progressbar li {
+      list-style-type: none;
+      font-size: .75rem;
+      width: 20%;
+      float: left;
+      position: relative;
+    }
+
+    #progressbar #step1:before {
+      content: "1"
+    }
+
+    #progressbar #step2:before {
+      content: "2"
+    }
+
+    #progressbar #step3:before {
+      content: "3"
+    }
+
+    #progressbar #step4:before {
+      content: "4"
+    }
+
+    #progressbar #step5:before {
+      content: "5"
+    }
+
+    #progressbar li:before {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: block;
+      font-size: .75rem;
+      color: #ffffff;
+      background: lightgray;
+      margin: 0 auto 5px auto;
+      align-items: center;
+    }
+
+    #progressbar li.active:before {
+      background: #6c757d
+    }
+
+    .progress-bar {
+      background-color: #6c757d
+    }
+  </style>
+</head>
+
+<body class="hold-transition sidebar-mini">
+
+  <!-- Site wrapper -->
+  <div class="wrapper">
+    <!-- 導入共用 Navbar -->
+    <div class="Navbar"></div>
+    <!-- 導入共用 Sidebar -->
+    <div class="Sidebar"></div>
+
+    <!-- 開發畫面區塊start -->
+    <section class="content-wrapper">
+
+      <!-- content-header，包括頁面名稱、麵包屑 -->
+      <section class="content-header">
+        <div>
+          <nav aria-label="breadcrumb">
+        </div>
+        <ol class="breadcrumb breadcrumb-chevron p-3 bg-body-tertiary rounded-3">
+          <li class="breadcrumb-item">
+            <a class="link-body-emphasis fw-semibold text-decoration-none fs-3 order_manage" href="#">訂單管理</a>
+          </li>
+          <li class="breadcrumb-item active fs-3" aria-current="page">
+            <a class="link-body-emphasis fw-semibold text-decoration-none fs-3 order_list" href="#">訂單總覽</a>     
+          </li>
+          <li class="breadcrumb-item active fs-3 order_detail" aria-current="page">
+            訂單詳情
+          </li>
+        </ol>
+        </nav>
+      </section>
+      <!-- content-header end -->
+
+      <!-- content，實際頁面內容 -->
+      <!-- progress bar -->
+      <div class="row">
+        <div class="col-12 col-md-5 col-lg-4 col-xl-3">
+          <span class="mb-3 mb-lg-0 me-lg-auto link-body-emphasis"></span>
+        </div>
+        <div class="col-12 col-md-6 col-lg-6 col-xl-7 text-center p-0 mx-0">
+          <ul id="progressbar" class="p-0 mb-1 item_status">
+            <li class="active phase_get_pay" id="step1"><strong>待付款</strong></li>
+            <li class="active phase_boarding" id="step2"><strong>出貨中</strong></li>
+            <li class="active phase_en_route" id="step3"><strong>運送中</strong></li>
+            <li class="active phase_arrived" id="step4"><strong>送達門市</strong></li>
+            <li class="active phase_accomplished" id="step5"><strong>已完成</strong></li>
+          </ul>
+          <div class="progress" role="progressbar" aria-label="Example 1px high" aria-valuenow="100" aria-valuemin="0"
+            aria-valuemax="100" style="height: 1px">
+            <div class="progress-bar" style="width: 100%"></div>
+          </div>
+        </div>
+        <span style="height: 10px;"></span>
+      </div>
+
+      <section class="content">
+        <div class="card">
+          
+          <div class="card-header">
+            <div class="row">
+              <div class="col-12">
+                <span class="col-md-8 spacing_block"></span>
+                <button type="button" class="col-md-2 btn btn-lg btn-warning edit_btn_el">編輯</button>
+              </div>
+            </div>
+          </div>
+          <!-- 訂單資訊框start -->
+          <div class="card-body">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-12" row>
+                  <div class="form-group col-md-10" style="display: inline-flex;">
+                    <div class="col-md-2 fs-4">
+                      <label class="fs-4 order_id">訂單編號：</label>
+                    </div>
+                    <div class="col-md-9">
+                      <!-- 訂單資訊內容 -->
+                      <div>
+                        <p class="fs fs-4">1234567890</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group col-md-10" style="display: inline-flex;">
+                    <div class="col-md-2 fs-4">
+                      <label class="fs-4 user_name">訂購人：</label>
+                    </div>
+                    <div class="col-md-9">
+                      <!-- 訂單資訊內容 -->
+                      <p class="fs fs-4">塊陶鴨</p>
+                    </div>
+                  </div>
+                  <div class="form-group col-md-10" style="display: inline-flex;">
+                    <div class="col-md-2 fs-4">
+                      <label class="fs-4 order_create_date">訂單日期：</label>
+                    </div>
+                    <div class="col-md-9">
+                      <!-- 訂單資訊內容 -->
+                      <p class="fs fs-4">2025/02/25</p>
+                    </div>
+                  </div>
+                  <div class="form-group col-md-10" style="display: inline-flex;">
+                    <div class="col-md-2 fs-4">
+                      <label class="fs-4 item_spec">訂單商品詳情：</label>
+                    </div>
+                    <div class="col-md-9">
+                      <!-- 訂單資訊內容 -->
+                      <p class="fs fs-4"> (待輸入訂單商品內容) </p>
+                    </div>
+                  </div>
+                  <div class="form-group col-md-10" style="display: inline-flex;">
+                    <div class="col-md-2 fs-4">
+                      <label class="fs-4 order_totalprice">總價：</label>
+                    </div>
+                    <div class="col-md-9">
+                      <!-- 訂單資訊內容 -->
+                      <p class="fs fs-4"> 2,500 元</p>
+                    </div>
+                  </div>
+                  <div class="form-group col-md-10" style="display: inline-flex;">
+                    <div class="col-md-2 fs-4">
+                      <label class="fs-4 user_phone">訂購電話：</label>
+                    </div>
+                    <div class="col-md-9">
+                      <!-- 訂單資訊內容 -->
+                      <p class="fs fs-4"> 0987587987 </p>
+                    </div>
+                  </div>
+                  <div class="form-group col-md-10" style="display: inline-flex;">
+                    <div class="col-md-2 col-sm-3">
+                      <label class="fs-4 order_status">訂單狀態：</label>
+                    </div>
+                    <div class="col-md-9 col-sm-9">
+                      <!-- 訂單資訊內容 -->
+                      <p class="fs fs-4"> 運送中 </p>
+                    </div>
+                  </div>
+                  <div class="form-group col-md-10" style="display: inline-flex;">
+                    <div class="col-md-2 col-sm-3">
+                      <label class="fs-4 payment_status">付款狀態：</label>
+                    </div>
+                    <div class="col-md-9 col-sm-9">
+                      <!-- 訂單資訊內容 -->
+                      <p class="fs fs-4"> 已付款 </p>
+                    </div>
+                  </div>
+                  <div class="form-group col-md-10" style="display: inline-flex;">
+                    <div class="col-md-2 col-sm-3">
+                      <label class="fs-4 shippment">配送方式：</label>
+                    </div>
+                    <div class="col-md-9 col-sm-9">
+                      <!-- 訂單資訊內容 -->
+                      <p class="fs fs-4"> 郵局掛號 </p>
+                    </div>
+                  </div>
+                  <div class="form-group col-md-10" style="display: inline-flex;">
+                    <div class="col-md-2 col-sm-3">
+                      <label class="fs-4 order_address">配送地址：</label>
+                    </div>
+                    <div class="col-md-9 col-sm-9">
+                      <!-- 訂單資訊內容 -->
+                      <p class="fs fs-4"> 臺北市信義區市府路1號 </p>
+                    </div>
+                  </div>
+                  <div class="form-group col-md-10" style="display: inline-flex;">
+                    <div class="col-md-2 col-sm-3">
+                      <label class="fs-4 order_other_detail">其他：</label>
+                    </div>
+                    <div class="col-md-9 col-sm-9">
+                      <!-- 訂單資訊內容 -->
+                      <p class="fs fs-4"> 送達請電：0987587987 </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card-footer">
+          </div>
+          <!-- 訂單資訊框end -->
+        </div>
+      </section>
+      <!-- content end -->
+    </section>
+    <!-- 開發畫面區塊end -->
+  </div>
+  <!-- wrapper end -->
+
+  <!-- jQuery -->
+  <script src="../../jquery/adminlte/jquery.min.js"></script>
+  <!-- Bootstrap 5 -->
+  <script src="../../js/bootstrap.bundle.min.js"></script>
+  <!-- overlayScrollbars -->
+  <script src="../../jquery/adminlte/jquery.overlayScrollbars.min.js"></script>
+  <!-- AdminLTE App -->
+  <script src="../../js/adminlte/adminlte.min.js"></script>
+
+  <!-- DataTables  & Plugins -->
+  <script src="../../vendors/estoreb-orders/jquery.dataTables.min.js"></script>
+  <script src="../../vendors/estoreb-orders/dataTables.bootstrap4.min.js"></script>
+  <script src="../../vendors/estoreb-orders/dataTables.responsive.min.js"></script>
+  <script src="../../vendors/estoreb-orders/responsive.bootstrap4.min.js"></script>
+  <script src="../../vendors/estoreb-orders/dataTables.buttons.min.js"></script>
+  <script src="../../vendors/estoreb-orders/buttons.bootstrap4.min.js"></script>
+  <script src="../../vendors/estoreb-orders/jszip.min.js"></script>
+  <script src="../../vendors/estoreb-orders/pdfmake.min.js"></script>
+  <script src="../../vendors/estoreb-orders/vfs_fonts.js"></script>
+  <script src="../../vendors/estoreb-orders/buttons.html5.min.js"></script>
+  <script src="../../vendors/estoreb-orders/buttons.print.min.js"></script>
+  <script src="../../vendors/estoreb-orders/buttons.colVis.min.js"></script>
+
+  <script>
+    $(".Navbar").load("../../layout/navbar.html");
+    $(".Sidebar").load("../../layout/sidebar.html");
+    $(".order_list").attr('href', '../estoreb/order_list.html');
+    $(".edit_btn_el").click(function () {
+      alert("確定編輯此筆訂單?");
+      // 加入後端修改的功能
+      window.location.href = "order_detail_edit.html";
+    });
+  </script>
+</body>
+
+</html>
