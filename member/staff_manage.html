@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='UTF-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <title>上班不要看球賽管理系統</title>
+
+  <!-- Google Font: Source Sans Pro -->
+  <link rel='stylesheet'
+    href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback'>
+  <!-- Font Awesome -->
+  <link rel='stylesheet' href='../vendors/fontawesome-free/css/all.min.css'>
+  <!-- overlayScrollbars -->
+  <link rel='stylesheet' href='../css/adminlte/OverlayScrollbars.min.css'>
+  <!-- Theme style -->
+  <link rel='stylesheet' href='../css/adminlte/adminlte.min.css'>
+  <!-- Bootstrap 5 -->
+  <link rel='stylesheet' href='../css/bootstrap.min.css'>
+
+  <style>
+    input[disabled] {
+      background: #efefef !important;
+      cursor: not-allowed;
+    }
+
+    div.left_block {
+      /* border: 1px solid green; */
+      flex-basis: 150px;
+      flex-shrink: 0;
+    }
+
+    div.right_block {
+      /* border: 1px solid red; */
+      flex-grow: 1;
+    }
+
+    #preview {
+      border: 1px dashed black;
+      display: inline-block;
+      width: 100%;
+      height: 120px;
+      position: relative;
+      cursor: pointer;
+      text-align: center;
+    }
+
+    #preview span.text {
+      position: absolute;
+      display: inline-block;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      z-index: -1;
+      color: white;
+    }
+
+    #preview img.preview_img {
+      max-width: 100%;
+      max-height: 100%;
+      position: relative;
+      z-index: -1;
+    }
+
+    #preview.-on {
+      box-shadow: 5px 5px 15px white inset, -5px -5px 15px white inset;
+    }
+  </style>
+</head>
+
+<body class='hold-transition sidebar-mini'>
+
+  <!-- ====================!!此為管理者賦予工作人員角色權限及編輯資料頁面!!======================== -->
+
+  <!-- Site wrapper -->
+  <div class='wrapper'>
+
+    <!-- 導入共用 Navbar -->
+    <div class='Navbar'></div>
+    <!-- 導入共用 Sidebar -->
+    <div class='Sidebar'></div>
+
+    <!-- 開發畫面區塊start -->
+    <section class='content-wrapper'>
+
+      <!-- content-header，包括頁面名稱、麵包屑 -->
+      <section class='content-header'>
+        <div>
+          <nav aria-label='breadcrumb'>
+        </div>
+        <ol class='breadcrumb breadcrumb-chevron p-3 bg-body-tertiary rounded-3'>
+          <li class='breadcrumb-item'>
+            <a class='link-body-emphasis fw-semibold text-decoration-none fs-3' href='#'>使用者資料管理</a>
+          </li>
+          <li class='breadcrumb-item active fs-3' aria-current='page'>
+            工作人員資料管理
+          </li>
+        </ol>
+        </nav>
+      </section>
+      <!-- content-header end -->
+
+      <!-- content，實際頁面內容 -->
+      <section class='content'>
+        <div class='card'>
+          <!-- card-header -->
+          <div class='card-header box-profile row'>
+            <div class='col-4 left_block'>
+              <div class='text-center'>
+                <img class='profile-user-img img-fluid img-circle'
+                     src='../img/user4-128x128.jpg'
+                     alt='User profile picture'>
+              </div>
+            </div>
+            <div class='col-8 right_block'>
+              <span class='spacing_block'>
+              </span>
+            </div>
+          </div>
+          <!-- /.card-header -->
+          <!-- card-body -->
+          <div class='card-body'>
+            <div class='row g-5 p-3'>
+              <div class='col-md-7 col-lg-11'>
+                <!-- 檢視畫面 -->
+                <div id='viewMode'>
+                  <h4 class='mb-3'>工作人員資料</h4>
+                  <p><strong>姓名：</strong><span id='viewName'></span></p>
+                  <p><strong>工作人員編號：</strong><span id='viewUserid'></span></p>
+                  <p><strong>工作人員帳號：</strong><span id='viewAccout'></span></p>
+                  <p><strong>部門：</strong><span id='viewDept'></span></p>
+                  <p><strong>權限：</strong><span id='viewPermission'></span></p>
+                  <p><strong>Email：</strong><span id='viewEmail'></span></p>
+                  <p><strong>連絡電話：</strong><span id='viewPhone'></span></p>
+                  <button id='editBtn' class='btn btn-primary'>編輯</button>
+                </div>
+                <!-- /.檢視畫面 -->
+                <!-- 編輯畫面 -->
+                <div id='editMode' class='d-none'>
+                  <h4 class='mb-3'>工作人員資料(編輯畫面)</h4>
+                  <form class='needs-validation' novalidate>
+                    <div class='row g-3'>
+                      <div class='col-12'>
+                        <label for='name' class='form-label'>姓名</label>
+                        <input type='text' class='form-control' id='staff_name' placeholder='' value='' required>
+                        <div class='invalid-feedback'>
+                          Valid first name is required.
+                        </div>
+                      </div>
+                      <div class='col-12'>
+                        <label for='userid' class='form-label'>工作人員編號(僅顯示無法更改)</label>
+                        <div class='input-group has-validation'>
+                          <input type='text' class='form-control' id='staff_id' placeholder='' required readonly>
+                          <div class='invalid-feedback'>
+                            Your userid is required.
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class='col-12'>
+                        <label for='accout' class='form-label'>工作人員帳號(僅顯示無法更改)</label>
+                        <div class='input-group has-validation'>
+                          <input type='text' class='form-control' id='staff_accout' placeholder='' required>
+                          <div class='invalid-feedback'>
+                            Your accout is required.
+                          </div>
+                        </div>
+                      </div>
+                      <div class='col-12'>
+                        <label for='dept' class='form-label'>部門</label>
+                        <div class='input-group has-validation'>
+                          <input type='text' class='form-control' id='staff_dept' placeholder='' required>
+                          <div class='invalid-feedback'>
+                            Your accout is required.
+                          </div>
+                        </div>
+                      </div>
+                      <div class='col-12'>
+                        <label for='permission' class='form-label'>權限</label>
+                        <div class='input-group has-validation'>
+                          <input type='text' class='form-control' id='staff_permission' placeholder='' required>
+                          <div class='invalid-feedback'>
+                            Your accout is required.
+                          </div>
+                        </div>
+                      </div>
+                      <div class='col-12'>
+                        <label for='email' class='form-label'>Email</label>
+                        <input type='email' class='form-control' id='staff_email' placeholder='you@example.com' required>
+                        <div class='invalid-feedback'>
+                          Please enter a valid email address.
+                        </div>
+                      </div>
+                      <div class='col-12'>
+                        <label for='phone' class='form-label'>連絡電話</label>
+                        <input type='text' class='form-control' id='staff_phone' placeholder='0987654321' required>
+                        <div class='invalid-feedback'>
+                          Please enter your phone number.
+                        </div>
+                      </div>
+                      <div class='d-flex justify-content-end'>
+                        <button type='button' id='cancelBtn' class='btn btn-secondary me-2'>取消</button>
+                        <button type='button' id='saveBtn' class='btn btn-primary'>儲存</button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+                <!-- /.編輯畫面 -->
+              </div>
+            </div>
+          </div>
+          <!-- /.card-body -->
+        </div>
+      </section>
+      <!-- content end -->
+
+    </section>
+    <!-- 開發畫面區塊end -->
+
+  </div>
+  <!-- wrapper end -->
+
+  <!-- jQuery -->
+  <script src='../jquery/adminlte/jquery.min.js'></script>
+  <!-- Bootstrap 5 -->
+  <script src='../js/bootstrap.bundle.min.js'></script>
+  <!-- overlayScrollbars -->
+  <script src='../jquery/adminlte/jquery.overlayScrollbars.min.js'></script>
+  <!-- AdminLTE App -->
+  <script src='../js/adminlte/adminlte.min.js'></script>
+
+  <script>
+    $('.Navbar').load('../layout/navbar.html');
+    $('.Sidebar').load('../layout/sidebar.html');
+
+    $(document).ready(function () {
+      // 編輯模式
+      $('#editBtn').click(function () {
+        console.log('修改按鍵觸發');
+        $('#viewMode').addClass('d-none');
+        $('#editMode').removeClass('d-none');
+      });
+
+      // 顯示模式
+      $('#cancelBtn').click(function () {
+        $('#editMode').addClass('d-none');
+        $('#viewMode').removeClass('d-none');
+      });
+
+      // 儲存資料並切換回顯示模式
+      $('#saveBtn').click(function (e) {
+        var form = document.querySelector('.needs-validation');
+
+        // 檢查表單是否通過驗證
+        if (!form.checkValidity()) {
+          e.preventDefault();
+          e.stopPropagation();
+          form.classList.add('was-validated');
+          return; // 若驗證失敗，不執行儲存與切換動作
+        }
+
+        // 獲取輸入框中的值
+        const staff_name = $('#staff_name').val();
+        const staff_id = $('#staff_id').val();
+        const staff_accout = $('#staff_accout').val();
+        const staff_dept = $('#staff_dept').val();
+        const staff_permission = $('#staff_permission').val();
+        const staff_email = $('#staff_email').val();
+        const staff_phone = $('#staff_phone').val();
+
+        // 更新顯示模式中的內容
+        $('#viewName').text(staff_name);
+        $('#viewUserid').text(staff_id);
+        $('#viewAccout').text(staff_accout);
+        $('#viewDept').text(staff_dept);
+        $('#viewPermission').text(staff_permission);
+        $('#viewEmail').text(staff_email);
+        $('#viewPhone').text(staff_phone);
+
+        // 切換回顯示模式
+        $('#editMode').addClass('d-none');
+        $('#viewMode').removeClass('d-none');
+      });
+    });
+
+  </script>
+</body>
+
+</html>
