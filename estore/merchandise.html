@@ -50,7 +50,7 @@
           </div>
           <div class="col-md-7 pt-4">
             <h2 id="itemName" class="display-5 fw-normal lh-1 pt-3"></h2>
-            <h3 class="my-1 text-body-emphasis">樂色</h3>
+            <h3 class="my-1 text-body-emphasis clickable">樂色</h3>
             <h3 class="my-1 text-body">$999</h3>
             <p id="itemContent" class="mt-2 lead"></p>
 
@@ -186,7 +186,7 @@
   $(".footerPage").load("../layout/footer.html");
 
   $(function () {
-    fetch("./item/1")
+    fetch(`./item/${sessionStorage.getItem("itemId")}`)
       .then(response => response.json())
       .then(item => {
         $("#title").text(item.itemName);
