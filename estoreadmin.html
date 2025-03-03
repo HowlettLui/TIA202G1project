@@ -8,7 +8,7 @@
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet"
-    href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="./vendors/fontawesome-free/css/all.min.css">
   <!-- overlayScrollbars -->
@@ -18,249 +18,252 @@
   <!-- Bootstrap 5 -->
   <link rel="stylesheet" href="./css/bootstrap.min.css">
   <!-- dropzonejs -->
-  <link rel="stylesheet" href="./vendors/dropzone/min/dropzone.min.css">
+  <!-- <link rel="stylesheet" href="./vendors/dropzone/min/dropzone.min.css"> -->
 
   <!-- for ethan's part -->
   <!-- summernote -->
-  <!-- <link rel="stylesheet" href="./vendors/summernote-0.9.0-dist/summernote-bs5.css"> -->
-  <!-- <link rel="stylesheet" href="./vendors/summernote-0.9.0-dist/summernote-lite.css"> -->
+  <link rel="stylesheet" href="./vendors/summernote-0.9.0-dist/summernote-bs5.min.css">
+  <!-- filepond -->
+  <link href="https://unpkg.com/filepond@^4/dist/filepond.css" rel="stylesheet"/>
+  <link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet"/>
+  <link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css"
+        rel="stylesheet"/>
+  <link href="https://unpkg.com/filepond-plugin-image-edit/dist/filepond-plugin-image-edit.css" rel="stylesheet"/>
 
 </head>
 
 <body class="hold-transition sidebar-mini">
 
-  <!-- Site wrapper -->
-  <div class="wrapper">
+<!-- Site wrapper -->
+<div class="wrapper">
 
-    <!-- 導入共用 Navbar -->
-    <div class="Navbar"></div>
-    <!-- 導入共用 Sidebar -->
-    <div class="Sidebar"></div>
+  <!-- 導入共用 Navbar -->
+  <div class="Navbar"></div>
+  <!-- 導入共用 Sidebar -->
+  <div class="Sidebar"></div>
 
-    <!-- 開發畫面區塊start -->
-    <section id="mainBlock" class="content-wrapper">
-      <!-- content-header -->
-      <section class="content-header">
-        <div class="container-fluid">
-          <div class="row mb-2">
-            <div class="col-sm-6">
-              <h1>新增商品</h1>
-            </div>
-            <div class="col-sm-6">
-              <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="#">商品管理</a></li>
-                <li class="breadcrumb-item active">新增商品</li>
-              </ol>
-            </div>
+  <!-- 開發畫面區塊start -->
+  <section id="mainBlock" class="content-wrapper">
+    <!-- content-header -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>新增商品</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">商品管理</a></li>
+              <li class="breadcrumb-item active">新增商品</li>
+            </ol>
           </div>
         </div>
-      </section>
-      <!-- content-header end -->
-
-      <!-- content，實際頁面內容 -->
-      <section class="content">
-        <div class="card">
-          <div class="card-body">
-            <div class="row">
-
-              <!-- 先暫時不用Dropzone，用一般upload file的方式 -->
-              <div class="col-sm-12">
-                <div class="form-group">
-                  <input id="item_photo" type="file" name="file" />
-                </div>
-              </div>
-              <!-- photos upload with Dropzone -->
-              <!-- <div class="col-sm-12 mt-2">
-                  <label>商品照片上傳</label>
-                  <div id="actions" class="row">
-                    <div class="col-lg-6">
-                      <div class="btn-group w-100">
-                        <span class="btn btn-success col fileinput-button">
-                          <i class="fas fa-plus"></i>
-                          <span>Add files</span>
-                        </span>
-                        <button type="submit" class="btn btn-primary col start">
-                          <i class="fas fa-upload"></i>
-                          <span>Start upload</span>
-                        </button>
-                        <button type="reset" class="btn btn-warning col cancel">
-                          <i class="fas fa-times-circle"></i>
-                          <span>Cancel upload</span>
-                        </button>
-                      </div>
-                    </div>
-                    <div class="col-lg-6 d-flex align-items-center">
-                      <div class="fileupload-process w-100">
-                        <div id="total-progress" class="progress progress-striped active" role="progressbar"
-                          aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
-                          <div class="progress-bar progress-bar-success" style="width:0%;" data-dz-uploadprogress>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="table table-striped files" id="previews">
-                    <div id="template" class="row mt-2">
-                      <div class="col-auto">
-                        <span class="preview"><img src="data:," alt="" data-dz-thumbnail /></span>
-                      </div>
-                      <div class="col d-flex align-items-center">
-                        <p class="mb-0">
-                          <span class="lead" data-dz-name></span>
-                          (<span data-dz-size></span>)
-                        </p>
-                        <strong class="error text-danger" data-dz-errormessage></strong>
-                      </div>
-                      <div class="col-4 d-flex align-items-center">
-                        <div class="progress progress-striped active w-100" role="progressbar" aria-valuemin="0"
-                          aria-valuemax="100" aria-valuenow="0">
-                          <div class="progress-bar progress-bar-success" style="width:0%;" data-dz-uploadprogress>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-auto d-flex align-items-center">
-                        <div class="btn-group">
-                          <button class="btn btn-primary start">
-                            <i class="fas fa-upload"></i>
-                            <span>Start</span>
-                          </button>
-                          <button data-dz-remove class="btn btn-warning cancel">
-                            <i class="fas fa-times-circle"></i>
-                            <span>Cancel</span>
-                          </button>
-                          <button data-dz-remove class="btn btn-danger delete">
-                            <i class="fas fa-trash"></i>
-                            <span>Delete</span>
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div> -->
-              <!-- photos upload with Dropzone end -->
-
-              <div class="col-sm-6">
-                <!-- text input -->
-                <div class="form-group">
-                  <label>商品型號</label>
-                  <input id="item_model" type="text" class="form-control" placeholder="Enter ...">
-                </div>
-              </div>
-              <div class="col-sm-6">
-                <!-- text input -->
-                <div class="form-group">
-                  <label>商品名稱</label>
-                  <input id="item_name" type="text" class="form-control" placeholder="Enter ...">
-                </div>
-              </div>
-              <div class="col-sm-6">
-                <!-- text input -->
-                <div class="form-group">
-                  <label>商品簡介</label>
-                  <input id="item_content" type="text" class="form-control" placeholder="Enter ...">
-                </div>
-              </div>
-              <div class="col-sm-6">
-                <!-- text input -->
-                <div class="form-group">
-                  <label>商品類型</label>
-                  <input id="item_type" type="text" class="form-control" placeholder="Enter ...">
-                </div>
-              </div>
-              <div class="col-sm-6">
-                <!-- text input -->
-                <div class="form-group">
-                  <label>商品價格</label>
-                  <input id="item_price" type="text" class="form-control" placeholder="Enter ...">
-                </div>
-              </div>
-              <div class="col-sm-6">
-                <!-- text input -->
-                <div class="form-group">
-                  <label>商品大小</label>
-                  <input id="item_size" type="text" class="form-control" placeholder="Enter ...">
-                </div>
-              </div>
-              <div class="col-sm-6">
-                <!-- text input -->
-                <div class="form-group">
-                  <label>商品顏色</label>
-                  <input id="item_color" type="text" class="form-control" placeholder="Enter ...">
-                </div>
-              </div>
-              <div class="col-sm-6">
-                <!-- text input -->
-                <div class="form-group">
-                  <label>商品數量</label>
-                  <input id="item_stock" type="text" class="form-control" placeholder="Enter ...">
-                </div>
-              </div>
-
-              <!-- summernote -->
-              <!-- <label>商品詳細內容</label>
-              <div id="summernote"></div> -->
-              <!-- summnernote暫時不能用，先用<textarea>代替 -->
-              <div class="col-sm-12">
-                <div class="form-group">
-                  <label>商品詳細內容 (之後再改用summernote)</label>
-                  <textarea id="item_details" class="form-control" rows="3" placeholder="Enter ..."></textarea>
-                </div>
-              </div>
-
-            </div>
-
-            <button id="save_item" class="btn btn-success" type="submit"> 儲存商品</button>
-            <button class="btn btn-primary" type=""> 商品上架</button>
-            <button class="btn btn-warning" type=""> 取消</button>
-          </div>
-          <!-- card-body end -->
-        </div>
-        <!-- card end -->
-      </section>
-      <!-- content end -->
+      </div>
     </section>
-    <!-- 開發畫面區塊end -->
+    <!-- content-header end -->
 
-  </div>
-  <!-- wrapper end -->
+    <!-- content，實際頁面內容 -->
+    <section class="content">
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
 
-  <!-- jQuery -->
-  <script src="./jquery/adminlte/jquery.min.js"></script>
-  <!-- Bootstrap 5 -->
-  <script src="./js/bootstrap.bundle.min.js"></script>
-  <!-- overlayScrollbars -->
-  <script src="./jquery/adminlte/jquery.overlayScrollbars.min.js"></script>
-  <!-- AdminLTE App -->
-  <script src="./js/adminlte/adminlte.min.js"></script>
-  <!-- dropzonejs -->
-  <script src="./vendors/dropzone/min/dropzone.min.js"></script>
+            <!-- photos upload with filepond -->
+            <!-- <input type="file" class="filepond" name="filepond" accept="image/png, image/jpeg, image/gif"> -->
+            <!-- <input type="file" class="filepond" name="filepond" multiple data-max-file-size="3MB" data-max-files="10"
+            accept="image/png, image/jpeg, image/gif"> -->
+            <!-- photos upload with filepond end -->
+            <!-- photos upload with input -->
+            <div class="col-12">
+              <label for="item_photo">商品照片</label>
+              <button id="save_item_photo" class="btn btn-sm btn-light mb-2" type="submit">照片上傳</button>
+              <input id="item_photo" name="item_photo" type="file" class="form-control mb-3" multiple>
+            </div>
+            <!-- photos upload with input end -->
 
-  <!-- for ethan's part -->
-  <!-- summernote -->
-  <!-- <script src="./vendors/summernote-0.9.0-dist/summernote-bs5.js"></script> -->
-  <!-- <script src="./vendors/summernote-0.9.0-dist/summernote-lite.js"></script> -->
+            <div class="col-sm-6">
+              <!-- text input -->
+              <div class="form-group">
+                <label for="item_model">商品型號</label>
+                <input id="item_model" name="item_model" type="text" class="form-control item_related"
+                       placeholder="Enter ...">
+                <div class="invalid-feedback">請輸入型號！</div>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <!-- text input -->
+              <div class="form-group">
+                <label for="item_name">商品名稱</label>
+                <input id="item_name" name="item_name" type="text" class="form-control item_related"
+                       placeholder="Enter ...">
+                <div class="invalid-feedback">請輸入名稱！</div>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <!-- text input -->
+              <div class="form-group">
+                <label for="item_color">商品顏色</label>
+                <input id="item_color" name="item_color" type="text" class="form-control item_related"
+                       placeholder="Enter ...">
+                <div class="invalid-feedback">請輸入顏色！</div>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <!-- text input -->
+              <div class="form-group">
+                <label for="item_size">商品大小</label>
+                <input id="item_size" name="item_size" type="text" class="form-control item_related"
+                       placeholder="Enter ...">
+                <div class="invalid-feedback">請輸入大小！</div>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <!-- text input -->
+              <div class="form-group">
+                <label for="item_type">商品類型</label>
+                <input id="item_type" name="item_type" type="text" class="form-control item_related"
+                       placeholder="Enter ...">
+                <div class="invalid-feedback">請輸入類型！</div>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <!-- text input -->
+              <div class="form-group">
+                <label for="item_content">商品簡介</label>
+                <input id="item_content" name="item_content" type="text" class="form-control item_related"
+                       placeholder="Enter ...">
+                <div class="invalid-feedback">請輸入簡介！</div>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <!-- text input -->
+              <div class="form-group">
+                <label for="item_price">商品價格</label>
+                <input id="item_price" name="item_price" type="text" class="form-control should_be_a_number"
+                       placeholder="Enter ...">
+                <div class="invalid-feedback">請輸入價格！</div>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <!-- text input -->
+              <div class="form-group">
+                <label for="item_stock">商品數量</label>
+                <input id="item_stock" name="item_stock" type="text" class="form-control should_be_a_number"
+                       placeholder="Enter ...">
+                <div class="invalid-feedback">請輸入數量！</div>
+              </div>
+            </div>
 
-  <script>
-    $(".Navbar").load("./layout/navbar.html");
-    $(".Sidebar").load("./layout/sidebar.html");
+            <!-- summernote -->
+            <div class="col-12">
+              <label for="summernote">商品詳細內容</label>
+              <div id="summernote">請輸入商品詳細內容</div>
+            </div>
 
-    $('#save_item').on('click', function () {
+          </div>
+          <div class="mt-4">
+            <button id="save_item" class="btn btn-success" type="submit">儲存商品</button>
+            <button id="publish_item" class="btn btn-primary" type="submit">商品上架</button>
+            <button id="cancle" class="btn btn-warning" type="submit">取消</button>
+          </div>
+        </div>
+        <!-- card-body end -->
+      </div>
+      <!-- card end -->
+    </section>
+    <!-- content end -->
+  </section>
+  <!-- 開發畫面區塊end -->
+
+</div>
+<!-- wrapper end -->
+
+<!-- jQuery -->
+<script src="./jquery/adminlte/jquery.min.js"></script>
+<!-- Bootstrap 5 -->
+<script src="./js/bootstrap.bundle.min.js"></script>
+<!-- overlayScrollbars -->
+<script src="./jquery/adminlte/jquery.overlayScrollbars.min.js"></script>
+<!-- AdminLTE App -->
+<script src="./js/adminlte/adminlte.min.js"></script>
+<!-- dropzonejs -->
+<!-- <script src="./vendors/dropzone/min/dropzone.min.js"></script> -->
+
+<!-- for ethan's part -->
+<!-- summernote -->
+<script src="./vendors/summernote-0.9.0-dist/summernote-bs5.js"></script>
+<!-- sweetalert2 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<!-- filepond -->
+<!-- <script src="https://unpkg.com/filepond@^4/dist/filepond.js"></script> -->
+<!-- <script
+src="https://unpkg.com/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.js"></script>
+<script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script> -->
+<!-- <script src="https://unpkg.com/filepond-plugin-image-edit/dist/filepond-plugin-image-edit.js"></script> -->
+
+<script>
+  $(function () {
+    // Summernote
+    $('#summernote').summernote()
+  })
+
+  $(".Navbar").load("./layout/navbar.html");
+  $(".Sidebar").load("./layout/sidebar.html");
+
+  $(document).on('blur', 'input.item_related', function () {
+    validateFields($(this));
+  })
+
+  $(document).on('blur', 'input.should_be_a_number', function () {
+    validateFields($(this), true);
+  })
+
+  let itemPhotosPath;
+
+  $('#save_item').on('click', function () {
+    let isValid = validateFields($('input.item_related'));
+    let numValid = validateFields($('input.should_be_a_number'), true);
+    let summernoteValid = ($('#summernote').summernote('code') !== "請輸入商品詳細內容") && ($('#summernote').summernote('code').trim() !== "");
+
+    if (!isValid || !numValid) {
+      Swal.fire({
+        icon: "warning",
+        title: "請再確認",
+        text: "請輸入完整資料！"
+      });
+    } else if (itemPhotosPath === "") {
+      Swal.fire({
+        icon: "warning",
+        title: "請再確認",
+        text: "請先點選照片上傳按鈕"
+      });
+    } else if (!summernoteValid) {
+      Swal.fire({
+        icon: "warning",
+        title: "請再確認",
+        text: "請輸入商品詳細內容！"
+      });
+    } else {
       const itemModel = {
-        itemModel: $('#item_model').val()
+        itemModel: $('#item_model').val(),
+        // staffId: ???
       }
       const item = {
         itemName: $('#item_name').val(),
         itemContent: $('#item_content').val(),
         itemType: $('#item_type').val(),
         itemPrice: $('#item_price').val(),
-        itemDetails: $('#item_details').val()
-        // itemPhoto: $('#item_photo').val()
+        itemDetails: $('#summernote').summernote('code'),
+        itemPhoto: itemPhotosPath.toString(),
+        // staffId: ???
       }
       const itemInfo = {
         itemSize: $('#item_size').val(),
         itemColor: $('#item_color').val(),
-        itemStock: $('#item_stock').val()
+        itemStock: $('#item_stock').val(),
+        // staffId: ???
       }
+
       fetch('estoreadmin/add', {
         method: 'POST',
         headers: {
@@ -272,95 +275,144 @@
           itemInfo
         })
       })
-        .then(resp => resp.text())
+        .then(resp => resp.json())
         .then(data => {
-          console.log(data);
-          alert(data);
+          if (data.result) {
+            Swal.fire({
+              icon: "success",
+              title: "新增成功",
+              text: data.message,
+            });
+          } else {
+            Swal.fire({
+              icon: "error",
+              title: "新增失敗",
+              text: data.message,
+            });
+          }
         })
         .catch((error) => {
           console.error('Error:', error);
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Something went wrong!"
+          });
         });
+    }
+  });
+
+  function validateFields(items, checkNumber = false) {
+    let allValid = true;
+    items.each(function () {
+      let value = $(this).val().trim();
+      let isValid = value !== "";
+
+      if (checkNumber) {
+        isValid = isValid && !isNaN(value);
+      }
+
+      if (isValid) {
+        $(this).addClass("is-valid").removeClass("is-invalid");
+      } else {
+        $(this).addClass("is-invalid").removeClass("is-valid");
+        allValid = false;
+      }
     });
-  </script>
+    return allValid;
+  }
 
-  <script>
+  $('#save_item_photo').on('click', function () {
 
-    // 動態載入內容
-    // $(document).ready(function () {
-    //     // 使用事件代理確保所有 <a> 都正確綁定事件
-    //     $('li.item_management').on('click', 'a.item_management', function (event) {
-    //       event.stopPropagation(); // 阻止事件冒泡
-    //       event.preventDefault(); // 阻止預設行為
-    //       const url = $(this).attr('href'); // 取得 href 的值
-    //       $('#mainBlock').load(url, function (response, status, xhr) {
-    //           if (status === "error") {
-    //               $('#mainBlock').html("<h1>錯誤</h1><p>無法載入頁面內容。</p>");
-    //           }
-    //       });
-    //     });
-    // });
+    const formData = new FormData();
+    const input = document.querySelector('#item_photo');
 
-    // 先暫時不用Dropzone，用一般upload file的方式
-    // // DropzoneJS Demo Code Start
-    // Dropzone.autoDiscover = false
+    for (let file of input.files) {
+      formData.append('item_photo', file, file.name);
+    }
 
-    // // Get the template HTML and remove it from the doumenthe template HTML and remove it from the doument
-    // var previewNode = document.querySelector("#template")
-    // previewNode.id = ""
-    // var previewTemplate = previewNode.parentNode.innerHTML
-    // previewNode.parentNode.removeChild(previewNode)
+    fetch('estoreadmin/upload', {
+      method: 'POST',
+      body: formData,
+    })
+      .then(resp => resp.json())
+      .then(data => {
+        itemPhotosPath = JSON.stringify(data);
+        Swal.fire({
+          icon: "success",
+          title: "新增成功",
+          text: "新增商品照片成功！",
+        });
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "圖片上傳失誤，請重新上傳"
+        });
+      });
 
-    // var myDropzone = new Dropzone(document.body, { // Make the whole body a dropzone
-    //   url: "/target-url", // Set the url
-    //   thumbnailWidth: 80,
-    //   thumbnailHeight: 80,
-    //   parallelUploads: 20,
-    //   previewTemplate: previewTemplate,
-    //   autoQueue: false, // Make sure the files aren't queued until manually added
-    //   previewsContainer: "#previews", // Define the container to display the previews
-    //   clickable: ".fileinput-button" // Define the element that should be used as click trigger to select files.
-    // })
+  });
 
-    // myDropzone.on("addedfile", function(file) {
-    //   // Hookup the start button
-    //   file.previewElement.querySelector(".start").onclick = function() { myDropzone.enqueueFile(file) }
-    // })
+</script>
 
-    // // Update the total progress bar
-    // myDropzone.on("totaluploadprogress", function(progress) {
-    //   document.querySelector("#total-progress .progress-bar").style.width = progress + "%"
-    // })
+<script>
 
-    // myDropzone.on("sending", function(file) {
-    //   // Show the total progress bar when upload starts
-    //   document.querySelector("#total-progress").style.opacity = "1"
-    //   // And disable the start button
-    //   file.previewElement.querySelector(".start").setAttribute("disabled", "disabled")
-    // })
+  // 動態載入內容
+  // $(document).ready(function () {
+  //     // 使用事件代理確保所有 <a> 都正確綁定事件
+  //     $('li.item_management').on('click', 'a.item_management', function (event) {
+  //       event.stopPropagation(); // 阻止事件冒泡
+  //       event.preventDefault(); // 阻止預設行為
+  //       const url = $(this).attr('href'); // 取得 href 的值
+  //       $('#mainBlock').load(url, function (response, status, xhr) {
+  //           if (status === "error") {
+  //               $('#mainBlock').html("<h1>錯誤</h1><p>無法載入頁面內容。</p>");
+  //           }
+  //       });
+  //     });
+  // });
 
-    // // Hide the total progress bar when nothing's uploading anymore
-    // myDropzone.on("queuecomplete", function(progress) {
-    //   document.querySelector("#total-progress").style.opacity = "0"
-    // })
+  // filepond
+  // const filepondPlugins = FilePond.registerPlugin(
+  //   FilePondPluginImagePreview,
+  //   FilePondPluginFileValidateType,
+  //   // FilePondPluginImageEdit
+  // );
 
-    // // Setup the buttons for all transfers
-    // // The "add files" button doesn't need to be setup because the config
-    // // `clickable` has already been specified.
-    // document.querySelector("#actions .start").onclick = function() {
-    //   myDropzone.enqueueFiles(myDropzone.getFilesWithStatus(Dropzone.ADDED))
-    // }
-    // document.querySelector("#actions .cancel").onclick = function() {
-    //   myDropzone.removeAllFiles(true)
-    // }
-    // // DropzoneJS Demo Code End
+  // // Get a reference to the file input element
+  // const inputElement = document.querySelector('input[type="file"]');
 
-    // 先暫時不用summernote
-    // $('#summernote').summernote({
-    //   placeholder: 'Hello stand alone ui',
-    //   tabsize: 2,
-    //   height: 120
-    // });
-  </script>
+  // // Create a FilePond instance
+  // const pond = FilePond.create(inputElement,
+  //   {
+  //     labelIdle: '拖曳或點擊上傳商品照片',
+  //     imagePreviewHeight: 200,
+  //   }
+  // );
+
+  // const filesPaths = [];
+
+  // FilePond.setOptions({
+  //   server: {
+  //     url: 'http://localhost:8080/NGFW/',
+  //     process: {
+  //       url: 'estoreadmin/upload',
+  //       method: 'POST',
+  //       onload: (response) => {
+  //         const filesPath = JSON.parse(response);
+  //         console.log(filesPath);
+  //         // filesPaths.add(JSON.parse(response));
+  //       },
+  //       onerror: (response) => response.data,
+  //     },
+  //     revert: null,
+  //     restore: null,
+  //     load: null,
+  //   }
+  // });
+</script>
 </body>
 
 </html>
