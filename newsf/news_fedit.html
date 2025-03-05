@@ -58,7 +58,7 @@
         padding: 5px;
         border-radius: 5px;
       }
-      input#releasedate {
+      input#publishDate {
         width: 200px;
       }
       div.publishing {
@@ -74,54 +74,92 @@
 
     <!-- 開發畫面 -->
     <main>
-      <div class="newsfedcontainer">
-        <p>新文章/編輯文章</p>
+      <form action="/articleadd" method="post" name="articleadd">
+        <div class="newsfedcontainer">
+          <p>新文章/編輯文章</p>
 
-        <div class="mb-3">
-          <label for="maintitle" class="form-label">主標題</label>
-          <input
-            type="text"
-            class="form-control"
-            id="maintitle"
-            placeholder=""
-          />
-        </div>
+          <div class="mb-3">
+            <!-- <label for="titleimage" class="titleimage">標題圖片</label> -->
+            <p>標題圖片</p>
+            <br />
+            <input
+              type="file"
+              name="titleimage"
+              accept="image/*"
+              onchange="loadFile(event)"
+            />
+            <img id="output" />
+          </div>
+          <div class="mb-3">
+            <label for="maintitle" class="form-label">主標題</label>
+            <input
+              type="text"
+              class="form-control"
+              id="maintitle"
+              name="maintitle"
+              placeholder=""
+            />
+          </div>
 
-        <div class="mb-3">
-          <label for="subtitle" class="form-label">副標題</label>
-          <input
-            type="text"
-            class="form-control"
-            id="subtitle"
-            placeholder=""
-          />
-        </div>
+          <div class="mb-3">
+            <label for="subtitle" class="form-label">副標題</label>
+            <input
+              type="text"
+              class="form-control"
+              id="subtitle"
+              name="subtitle"
+              placeholder=""
+            />
+          </div>
 
-        <div class="mb-3">
-          <label for="articlecontent" class="form-label">文章內容</label>
-          <div id="summernote"></div>
-        </div>
+          <div class="mb-3">
+            <label for="articlecontent" class="form-label">文章內容</label>
+            <!-- <div id="summernote"></div> -->
+            <textarea id="summernote" name="summernote"></textarea>
+            <!-- <input type="text" name="summernote" style="display: none" /> -->
+          </div>
 
-        <div>
-          <label for="releasedate" class="form-label">預計發佈日期</label>
-          <input
-            type="text"
-            class="form-control"
-            id="releasedate"
-            placeholder=""
-          />
+          <div>
+            <label for="publishDate" class="form-label">預計發佈日期</label>
+            <input
+              type="date"
+              class="form-control"
+              id="publishDate"
+              name="publishDate"
+              placeholder=""
+            />
 
-          <div class="publishing">
-            <button>取消</button>
-            <button type="button" id="btnst">儲存</button>
-            <button>預覽</button>
-            <button type="button" id="btnse">送出</button>
+            <div class="publishing">
+              <button>取消</button>
+              <button type="button" id="btnst">儲存</button>
+              <button>預覽</button>
+              <button onclick="se();" type="submit" id="btnse">送出</button>
+            </div>
           </div>
         </div>
-      </div>
+      </form>
     </main>
     <section>
       <script>
+        // function setsummernote() {
+        //   var textareaValue = $("#summernote").summernote("code");
+        //   var summernote_input = document.getElementsByName("summernote")[0];
+        //   summernote_input.value = textareaValue;
+        // }
+        function se() {
+          //setsummernote();
+          document.articleadd.action = "/NGFW/articleadd";
+          document.articleadd.submit();
+        }
+
+        var loadFile = function (event) {
+          var output = document.getElementById("output");
+          output.src = URL.createObjectURL(event.target.files[0]);
+          output.onload = function () {
+            URL.revokeObjectURL(output.src); // free memory
+          };
+        };
+
         var fedit_btnst = document.getElementById("btnst");
         fedit_btnst.addEventListener("click", function () {
           var is_confirm = confirm("是否確定要儲存？");
@@ -148,13 +186,13 @@
     </section>
 
     <script>
-      $("#releasedate").datepicker({
-        // dateFormat: "yy-mm-dd", // 日期格式：年-月-日
-        changeMonth: true, // 啟用月份選擇
-        changeYear: true, // 啟用年份選擇
-        // showButtonPanel: true, // 顯示底部按鈕
-        // showAnim: "fadeIn", // 顯示動畫
-      });
+      // $("#publishDate").datepicker({
+      //   // dateFormat: "yy-mm-dd", // 日期格式：年-月-日
+      //   changeMonth: true, // 啟用月份選擇
+      //   changeYear: true, // 啟用年份選擇
+      //   // showButtonPanel: true, // 顯示底部按鈕
+      //   // showAnim: "fadeIn", // 顯示動畫
+      // });
 
       $("#summernote").summernote({
         placeholder: "Hello_World!!",

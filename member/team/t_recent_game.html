@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>會員中心</title>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
+
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/headers.css">
+  <link rel="stylesheet" href="/css/sidebars.css">
+
+  <!-- jQuery -->
+  <script src="/jquery/jquery-3.7.1.min.js"></script>
+
+
+  <style>
+    aside {
+      /* position: fixed; */
+      float: left;
+      width: 20%;
+      /* height: 100vh; */
+      /* border: 1px solid red; */
+    }
+
+    main {
+      /* border: 1px solid blue; */
+      /* overflow-y: auto; */
+    }
+
+    .container {
+      max-width: 960px;
+    }
+
+    /* S Start */
+    div.newsadd {
+      width: 85.3%;
+      margin: 20px auto;
+    }
+
+    div.newsaddcontainer {
+      width: 85.3%;
+      margin: 20px auto;
+    }
+
+    div.newsaddbt button {
+      align-items: flex-end;
+    }
+
+    /* S end */
+  </style>
+
+
+</head>
+
+<body>
+  <!-- 導入共用 header -->
+  <div class="headerPage"></div>
+
+  <!-- 開發畫面 -->
+  <div class="asidePage"></div>
+  <main>
+    <aside>
+      <div class="flex-shrink-0 p-3">
+        <div>
+          <img src="/img/XXXXX.jpg" alt="" width="50" height="50" class="rounded-circle">
+          <strong>Username</strong>
+        </div>
+
+        <ul class="list-unstyled ps-0">
+          <li class="mb-1">
+            <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
+              data-bs-toggle="collapse" data-bs-target="#member-collapse" aria-expanded="false">
+              會員基本資料
+            </button>
+            <div class="collapse" id="member-collapse">
+              <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                <li><a href="/member/member_info.html"
+                    class="link-body-emphasis d-inline-flex text-decoration-none rounded">基本資料</a>
+                </li>
+              </ul>
+            </div>
+            <div class="collapse" id="member-collapse">
+              <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                <li><a href="/member/member_psw.html"
+                    class="link-body-emphasis d-inline-flex text-decoration-none rounded">修改密碼</a>
+                </li>
+              </ul>
+            </div>
+          </li>
+          <li class="mb-1">
+            <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
+              data-bs-toggle="collapse" data-bs-target="#article-collapse" aria-expanded="false">
+              我的文章/新聞列表
+            </button>
+            <div class="collapse" id="article-collapse">
+              <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                <li><a href="/newsf/news_fmgr.html"
+                    class="link-body-emphasis d-inline-flex text-decoration-none rounded">文章管理功能</a>
+                </li>
+              </ul>
+            </div>
+          </li>
+          <li class="mb-1">
+            <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
+              data-bs-toggle="collapse" data-bs-target="#collection-collapse" aria-expanded="false">
+              我的收藏
+            </button>
+            <div class="collapse" id="collection-collapse">
+              <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                <li><a href="/member/collection/c_article.html"
+                    class="link-body-emphasis d-inline-flex text-decoration-none rounded">收藏文章管理</a>
+                </li>
+                <li><a href="/member/collection/c_news.html"
+                    class="link-body-emphasis d-inline-flex text-decoration-none rounded">收藏新聞管理</a>
+                </li>
+                <li><a href="/member/collection/c_commodity.html"
+                    class="link-body-emphasis d-inline-flex text-decoration-none rounded">收藏商品管理</a>
+                </li>
+              </ul>
+            </div>
+          </li>
+          <li class="mb-1">
+            <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
+              data-bs-toggle="collapse" data-bs-target="#team-collapse" aria-expanded="false">
+              關注球隊
+            </button>
+            <div class="collapse" id="team-collapse">
+              <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                <li><a href="/member/team/t_recent_game.html"
+                    class="link-body-emphasis d-inline-flex text-decoration-none rounded">近期賽事</a>
+                </li>
+                <li><a href="/member/team/t_historical_inf.html"
+                    class="link-body-emphasis d-inline-flex text-decoration-none rounded">歷史資料</a>
+                </li>
+                <li><a href="/member/team/t_player.html"
+                    class="link-body-emphasis d-inline-flex text-decoration-none rounded">關注的球員</a>
+                </li>
+                <li><a href="/member/team/t_cheer.html"
+                    class="link-body-emphasis d-inline-flex text-decoration-none rounded">關注的啦啦隊</a>
+                </li>
+              </ul>
+            </div>
+          </li>
+          <li class="mb-1">
+            <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
+              data-bs-toggle="collapse" data-bs-target="#car-collapse" aria-expanded="false">
+              我的購物車
+            </button>
+            <div class="collapse" id="car-collapse">
+              <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                <li><a href="/estore/cart.html"
+                    class="link-body-emphasis d-inline-flex text-decoration-none rounded">我的購物車</a>
+                </li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </aside>
+
+    <h1>近期賽事</h1>
+    <p>這是近期賽事內容。</p>
+
+    <div class="row  row-cols-1 row-cols-md-2 g-4">
+      <div class="col">
+        <div class="card">
+          <div class="row g-0">
+            <div class="col-md-4">
+              <svg class="bd-placeholder-img" width="100%" height="250" xmlns="http://www.w3.org/2000/svg" role="img"
+                aria-label="Placeholder: Image" preserveAspectRatio="xMidYMid slice" focusable="false">
+                <title>Placeholder</title>
+                <rect width="100%" height="100%" fill="#868e96" /><text x="50%" y="50%" fill="#dee2e6"
+                  dy=".3em">Image</text>
+              </svg>
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title">Team A vs Team B</h5>
+                <p class="card-text"></p>
+                <p class="card-text"></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card">
+          <div class="row g-0">
+            <div class="col-md-4">
+              <svg class="bd-placeholder-img" width="100%" height="250" xmlns="http://www.w3.org/2000/svg" role="img"
+                aria-label="Placeholder: Image" preserveAspectRatio="xMidYMid slice" focusable="false">
+                <title>Placeholder</title>
+                <rect width="100%" height="100%" fill="#868e96" /><text x="50%" y="50%" fill="#dee2e6"
+                  dy=".3em">Image</text>
+              </svg>
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional
+                  content. This content is a little bit longer.</p>
+                <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+  </main>
+
+
+  <!-- 導入共用 footer -->
+  <div class="footerPage"></div>
+
+  <script>
+    $(".headerPage").load("/layout/header.html");
+    $(".footerPage").load("/layout/footer.html");
+    // $(".asidePage").load("./aside.html");
+  </script>
+  <script src="/js/bootstrap.bundle.min.js"></script>
+  <script src="https://kit.fontawesome.com/799bf36dfe.js" crossorigin="anonymous"></script>
+</body>
+
+</html>

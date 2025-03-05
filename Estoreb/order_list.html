@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>上班不要看球賽管理系統</title>
+
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="../../vendors/fontawesome-free/css/all.min.css">
+  <!-- overlayScrollbars -->
+  <link rel="stylesheet" href="../../css/adminlte/OverlayScrollbars.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="../../css/adminlte/adminlte.min.css">
+  <!-- Bootstrap 5 -->
+  <link rel="stylesheet" href="../../css/bootstrap.min.css">
+
+  <!-- DataTables -->
+  <link rel="stylesheet" href="../../vendors/estoreb-orders/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" href="../../vendors/estoreb-orders/responsive.bootstrap4.min.css">
+  <link rel="stylesheet" href="../../vendors/estoreb-orders/buttons.bootstrap4.min.css">
+
+</head>
+
+<body class="hold-transition sidebar-mini">
+
+  <!-- Site wrapper -->
+  <div class="wrapper">
+    <!-- 導入共用 Navbar -->
+    <div class="Navbar"></div>
+    <!-- 導入共用 Sidebar -->
+    <div class="Sidebar"></div>
+
+    <!-- 開發畫面區塊start -->
+    <section class="content-wrapper">
+
+      <!-- content-header，包括頁面名稱、麵包屑 -->
+      <section class="content-header">
+        <div>
+          <nav aria-label="breadcrumb">
+        </div>
+        <ol class="breadcrumb breadcrumb-chevron p-3 bg-body-tertiary rounded-3">
+          <li class="breadcrumb-item">
+            <a class="link-body-emphasis fw-semibold text-decoration-none fs-3" href="#">訂單管理</a>
+          </li>
+          <li class="breadcrumb-item active fs-3" aria-current="page">
+            訂單總覽
+          </li>
+        </ol>
+        </nav>
+      </section>
+      <!-- content-header end -->
+
+      <!-- content，實際頁面內容 -->
+      <section class="content">
+        <div class="card">
+          <!-- card-header -->
+          <div class="card-header">
+            <div class="card-body">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <button type="button" class="btn btn-default dropdown-toggle keyword_dropdwn_btn" data-toggle="dropdown">
+                    關鍵字
+                  </button>
+                  <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Separated link</a>
+                  </div>
+                </div>
+                <!-- /btn-group -->
+                <div class="p-3">
+                  <input type="text" class="form-control form-control-lg fa-align-center">
+                </div>
+                <!-- Split button -->
+                <div class="p-3">
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-success order_status_btn">訂單狀態</button>
+                    <button type="button" class="btn btn-success dropdown-toggle order_status_dropdwn_btn"
+                      data-toggle="dropdown">
+                      <span class="sr-only">Toggle Dropdown</span>
+                    </button>
+                    <div class="dropdown-menu order_status_type" role="menu">
+                       <a class="dropdown-item doing" href="#">進行中</a>
+                       <a class="dropdown-item on-going" href="#">出貨中</a>
+                       <a class="dropdown-item shipping" href="#">運送中</a>
+                       <a class="dropdown-item arrive" href="#">送達門市</a>
+                       <a class="dropdown-item done" href="#">已完成</a>
+                       <a class="dropdown-item cancelled" href="#">已取消</a>
+                       <div class="dropdown-divider"></div>
+                       <a class="dropdown-item" href="#">Separated link</a>
+                    </div>
+                  </div>
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-warning payment_status_btn">交易狀態</button>
+                    <button type="button" class="btn btn-warning dropdown-toggle dropdown-icon payment_status_dropdwn_btn"
+                      data-toggle="dropdown">
+                      <span class="sr-only">Toggle Dropdown</span>
+                    </button>
+                    <div class="dropdown-menu payment_type" role="menu">
+                       <a class="dropdown-item unpay" href="#">未付款</a>
+                       <a class="dropdown-item paid" href="#">已付款</a>
+                       <a class="dropdown-item refunding" href="#">退款中</a>
+                       <a class="dropdown-item refund" href="#">已退款</a>
+                       <div class="dropdown-divider"></div>
+                       <a class="dropdown-item" href="#">Separated link</a>
+                    </div>
+                  </div>
+                </div>
+                <div class="p-3">
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-info order_export_btn">匯出</button>
+                    <button type="button" class="btn btn-info dropdown-toggle dropdown-icon order_export_dropdwn_btn"
+                      data-toggle="dropdown">
+                      <span class="sr-only">Toggle Dropdown</span>
+                    </button>
+                    <div class="dropdown-menu export_type" role="menu">
+                      <a class="dropdown-item for_excel" href="#">.xml</a>
+                      <a class="dropdown-item for_pdf" href="#">.pdf</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <!-- /.card-header -->
+          <!-- card-body -->
+          <div class="card-body">
+            <table id="estoreb_orderdetail" class="table table-bordered table-striped estoreb_orderdetail">
+              <thead>
+                <tr>
+                  <th><input type="checkbox" class="check_all"></th>
+                  <th class="spacing_block"></th>
+                  <th class="order_id">訂單編號</th>
+                  <th class="order_create_date">訂單日期</th>
+                  <th class="order_status">訂單狀態</th>
+                  <th class="order_payment">交易狀態</th>
+                  <th class="user_id">訂購帳號</th>
+                  <th class="order_totalprice">合計</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><input type="checkbox" class="check_el"></td>
+                  <td>
+                    <button class="btn btn-info order_detail_btn">詳情</button>
+                  </td>
+                  <td>訂單id</td>
+                  <td>0000/00/00</td>
+                  <td>未完成</td>
+                  <td>未付款</td>
+                  <td>test111@gmail.com</td>
+                  <th>1234</th>
+                </tr>
+                <tr>
+                  <td><input type="checkbox" class="check_el"></td>
+                  <td>
+                    <button class="btn btn-info order_detail_btn">詳情</button>
+                  </td>
+                  <td>訂單id</td>
+                  <td>0000/00/00</td>
+                  <td>未完成</td>
+                  <td>未付款</td>
+                  <td>test111@gmail.com</td>
+                  <th>1234</th>
+                </tr>
+                <tr>
+                  <td><input type="checkbox" class="check_el"></td>
+                  <td>
+                    <button class="btn btn-info order_detail_btn">詳情</button>
+                  </td>
+                  <td>訂單id</td>
+                  <td>0000/00/00</td>
+                  <td>運送中</td>
+                  <td>已付款</td>
+                  <td>test333@gmail.com</td>
+                  <th>1234</th>
+                </tr>
+                <tr>
+                  <td><input type="checkbox" class="check_el"></td>
+                  <td>
+                    <button class="btn btn-info order_detail_btn">詳情</button>
+                  </td>
+                  <td>訂單id</td>
+                  <td>0000/00/00</td>
+                  <td>進行中</td>
+                  <td>已付款</td>
+                  <td>test333@gmail.com</td>
+                  <th>1234</th>
+                </tr>
+                <tr>
+                  <td><input type="checkbox" class="check_el"></td>
+                  <td>
+                    <button class="btn btn-info order_detail_btn">詳情</button>
+                  </td>
+                  <td>訂單id</td>
+                  <td>0000/00/00</td>
+                  <td>已送達門市</td>
+                  <td>已付款</td>
+                  <td>test333@gmail.com</td>
+                  <th>1234</th>
+                </tr>
+                <tr>
+                  <td><input type="checkbox" class="check_el"></td>
+                  <td>
+                    <button class="btn btn-info order_detail_btn">詳情</button>
+                  </td>
+                  <td>訂單id</td>
+                  <td>0000/00/00</td>
+                  <td>出貨中</td>
+                  <td>已付款</td>
+                  <td>test333@gmail.com</td>
+                  <th>1234</th>
+                </tr>
+                <tr>
+                  <td><input type="checkbox" class="check_el"></td>
+                  <td>
+                    <button class="btn btn-info order_detail_btn">詳情</button>
+                  </td>
+                  <td>訂單id</td>
+                  <td>0000/00/00</td>
+                  <td>已送達門市</td>
+                  <td>退款中</td>
+                  <td>test333@gmail.com</td>
+                  <th>1234</th>
+                </tr>
+                <tr>
+                  <td><input type="checkbox" class="check_el"></td>
+                  <td>
+                    <button class="btn btn-info order_detail_btn">詳情</button>
+                  </td>
+                  <td>訂單id</td>
+                  <td>0000/00/00</td>
+                  <td>已取消</td>
+                  <td>已退款</td>
+                  <td>test333@gmail.com</td>
+                  <th>1234</th>
+                </tr>
+                <tr>
+                  <td><input type="checkbox" class="check_el"></td>
+                  <td>
+                    <button class="btn btn-info order_detail_btn">詳情</button>
+                  </td>
+                  <td>訂單id</td>
+                  <td>0000/00/00</td>
+                  <td>進行中</td>
+                  <td>退款中</td>
+                  <td>test333@gmail.com</td>
+                  <th>1234</th>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <!-- /.card-body -->
+        </div>
+      </section>
+      <!-- content end -->
+    </section>
+    <!-- 開發畫面區塊end -->
+  </div>
+  <!-- wrapper end -->
+
+  <!-- jQuery -->
+  <script src="../../jquery/adminlte/jquery.min.js"></script>
+  <!-- Bootstrap 5 -->
+  <script src="../../js/bootstrap.bundle.min.js"></script>
+  <!-- overlayScrollbars -->
+  <script src="../../jquery/adminlte/jquery.overlayScrollbars.min.js"></script>
+  <!-- AdminLTE App -->
+  <script src="../../js/adminlte/adminlte.min.js"></script>
+
+  <!-- DataTables  & Plugins -->
+  <script src="../../vendors/estoreb-orders/jquery.dataTables.min.js"></script>
+  <script src="../../vendors/estoreb-orders/dataTables.bootstrap4.min.js"></script>
+  <script src="../../vendors/estoreb-orders/dataTables.responsive.min.js"></script>
+  <script src="../../vendors/estoreb-orders/responsive.bootstrap4.min.js"></script>
+  <script src="../../vendors/estoreb-orders/dataTables.buttons.min.js"></script>
+  <script src="../../vendors/estoreb-orders/buttons.bootstrap4.min.js"></script>
+  <script src="../../vendors/estoreb-orders/jszip.min.js"></script>
+  <script src="../../vendors/estoreb-orders/pdfmake.min.js"></script>
+  <script src="../../vendors/estoreb-orders/vfs_fonts.js"></script>
+  <script src="../../vendors/estoreb-orders/buttons.html5.min.js"></script>
+  <script src="../../vendors/estoreb-orders/buttons.print.min.js"></script>
+  <script src="../../vendors/estoreb-orders/buttons.colVis.min.js"></script>
+
+  <script>
+    $(".Navbar").load("../../layout/navbar.html");
+    $(".Sidebar").load("../../layout/sidebar.html");
+  </script>
+</body>
+</html>

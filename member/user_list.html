@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='UTF-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <title>上班不要看球賽管理系統</title>
+
+  <!-- Google Font: Source Sans Pro -->
+  <link rel='stylesheet'
+    href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback'>
+  <!-- Font Awesome -->
+  <link rel='stylesheet' href='../vendors/fontawesome-free/css/all.min.css'>
+  <!-- overlayScrollbars -->
+  <link rel='stylesheet' href='../css/adminlte/OverlayScrollbars.min.css'>
+  <!-- Theme style -->
+  <link rel='stylesheet' href='../css/adminlte/adminlte.min.css'>
+  <!-- Bootstrap 5 -->
+  <link rel='stylesheet' href='../css/bootstrap.min.css'>
+
+  <style>
+    input[disabled] {
+      background: #efefef !important;
+      cursor: not-allowed;
+    }
+
+    div.left_block {
+      /* border: 1px solid green; */
+      flex-basis: 150px;
+      flex-shrink: 0;
+    }
+
+    div.right_block {
+      /* border: 1px solid red; */
+      flex-grow: 1;
+    }
+
+    #preview {
+      border: 1px dashed black;
+      display: inline-block;
+      width: 100%;
+      height: 120px;
+      position: relative;
+      cursor: pointer;
+      text-align: center;
+    }
+
+    #preview span.text {
+      position: absolute;
+      display: inline-block;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      z-index: -1;
+      color: white;
+    }
+
+    #preview img.preview_img {
+      max-width: 100%;
+      max-height: 100%;
+      position: relative;
+      z-index: -1;
+    }
+
+    #preview.-on {
+      box-shadow: 5px 5px 15px white inset, -5px -5px 15px white inset;
+    }
+  </style>
+</head>
+
+<body class='hold-transition sidebar-mini'>
+
+  <!-- Site wrapper -->
+  <div class='wrapper'>
+
+    <!-- 導入共用 Navbar -->
+    <div class='Navbar'></div>
+    <!-- 導入共用 Sidebar -->
+    <div class='Sidebar'></div>
+
+    <!-- 開發畫面區塊start -->
+    <section class='content-wrapper'>
+
+      <!-- content-header，包括頁面名稱、麵包屑 -->
+      <section class='content-header'>
+        <div>
+          <nav aria-label='breadcrumb'>
+        </div>
+        <ol class='breadcrumb breadcrumb-chevron p-3 bg-body-tertiary rounded-3'>
+          <li class='breadcrumb-item'>
+            <a class='link-body-emphasis fw-semibold text-decoration-none fs-3' href='#'>使用者資料管理</a>
+          </li>
+          <li class='breadcrumb-item active fs-3' aria-current='page'>
+            使用者角色管理
+          </li>
+        </ol>
+        </nav>
+      </section>
+      <!-- content-header end -->
+
+      <!-- content，實際頁面內容 -->
+      <section class='content'>
+        <div class='card'>
+          <!-- card-header -->
+          <div class='card-header'>
+            <div class='input-group'>
+              <div class='input-group-prepend'>
+                <button type='button' class='btn btn-default dropdown-toggle keyword_dropdwn_btn'
+                  data-toggle='dropdown'>
+                  關鍵字
+                </button>
+                <div class='dropdown-menu'>
+                  <a class='dropdown-item user_id' href='#'>使用者編號</a>
+                  <a class='dropdown-item user_name' href='#'>使用者姓名</a>
+                  <a class='dropdown-item user_phone' href='#'>使用者電話</a>
+                  <div class='dropdown-divider'></div>
+                  <a class='dropdown-item' href='#'>Separated link</a>
+                </div>
+              </div>
+              <!-- /btn-group -->
+              <div class='p-3'>
+                <input type='text' class='form-control form-control-lg fa-align-center'>
+              </div>
+              <!-- Split button -->
+              <div class='p-3'>
+                <div class='btn-group'>
+                  <button type='button' class='btn btn-success user_role_btn'>使用者角色</button>
+                  <button type='button' class='btn btn-success dropdown-toggle user_role_dropdwn_btn'
+                    data-toggle='dropdown'>
+                    <span class='sr-only'>Toggle Dropdown</span>
+                  </button>
+                  <div class='dropdown-menu user_role' role='menu'>
+                    <a class='dropdown-item normal_user' href='#'>一般使用者</a>
+                    <a class='dropdown-item author' href='#'>文章新聞撰寫者</a>
+                    <a class='dropdown-item' href='#'>Separated link</a>
+                  </div>
+                </div>
+                <div class='btn-group'>
+                  <button type='button' class='btn btn-warning user_status_btn'>狀態</button>
+                  <button type='button' class='btn btn-warning dropdown-toggle dropdown-icon user_status_dropdwn_btn'
+                    data-toggle='dropdown'>
+                    <span class='sr-only'>Toggle Dropdown</span>
+                  </button>
+                  <div class='dropdown-menu user_status' role='menu'>
+                    <a class='dropdown-item inactivated' href='#'>未啟用</a>
+                    <a class='dropdown-item activated' href='#'>已啟用</a>
+                    <a class='dropdown-item grounding' href='#'>停用</a>
+                    <a class='dropdown-item suspended' href='#'>禁用</a>
+                    <div class='dropdown-divider'></div>
+                    <a class='dropdown-item' href='#'>Separated link</a>
+                  </div>
+                </div>
+              </div>
+              <div class='p-3'>
+                <div class='btn-group'>
+                  <button type='button' class='btn btn-info order_export_btn'>匯出</button>
+                  <button type='button' class='btn btn-info dropdown-toggle dropdown-icon order_export_dropdwn_btn'
+                    data-toggle='dropdown'>
+                    <span class='sr-only'>Toggle Dropdown</span>
+                  </button>
+                  <div class='dropdown-menu export_type' role='menu'>
+                    <a class='dropdown-item for_excel' href='#'>.xml</a>
+                    <a class='dropdown-item for_pdf' href='#'>.pdf</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- /.card-header -->
+          <!-- card-body -->
+          <div class='card-body'>
+            <table id='user_info' class='table table-bordered table-striped user_info'>
+              <thead>
+                <tr>
+                  <th><input type='checkbox' class='check_all'></th>
+                  <th class='spacing_block'></th>
+                  <th class='user_id'>使用者編號</th>
+                  <th class='user_name'>使用者姓名</th>
+                  <th class='user_status'>狀態</th>
+                  <th class='user_role'>使用者角色</th>
+                  <th class='user_email'>使用者email</th>
+                  <th class='user_phone'>使用者電話</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><input type='checkbox' class='check_el'></td>
+                  <td>
+                    <button class='btn btn-info order_detail_btn'>詳情</button>
+                  </td>
+                  <td>user_id</td>
+                  <td>塊陶鴨</td>
+                  <td>已啟用</td>
+                  <td>一般使用者</td>
+                  <td>test111@gmail.com</td>
+                  <th>0912345678</th>
+                </tr>
+                <tr>
+                  <td><input type='checkbox' class='check_el'></td>
+                  <td>
+                    <button class='btn btn-info order_detail_btn'>詳情</button>
+                  </td>
+                  <td>user_id</td>
+                  <td>芙利熊孔骨力</td>
+                  <td>未啟用</td>
+                  <td>一般使用者</td>
+                  <td>test111@gmail.com</td>
+                  <th>0922333444</th>
+                </tr>
+                <tr>
+                  <td><input type='checkbox' class='check_el'></td>
+                  <td>
+                    <button class='btn btn-info order_detail_btn'>詳情</button>
+                  </td>
+                  <td>user_id</td>
+                  <td>蒙其D魯蛋</td>
+                  <td>停用</td>
+                  <td>一般使用者</td>
+                  <td>test333@gmail.com</td>
+                  <th>0977888777</th>
+                </tr>
+                <tr>
+                  <td><input type='checkbox' class='check_el'></td>
+                  <td>
+                    <button class='btn btn-info order_detail_btn'>詳情</button>
+                  </td>
+                  <td>user_id</td>
+                  <td>瓊稻穗宮原</td>
+                  <td>停用</td>
+                  <td>文章新聞撰寫者</td>
+                  <td>test333@gmail.com</td>
+                  <th>0977978087</th>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <!-- /.card-body -->
+        </div>
+      </section>
+      <!-- content end -->
+
+    </section>
+    <!-- 開發畫面區塊end -->
+
+  </div>
+  <!-- wrapper end -->
+
+  <!-- jQuery -->
+  <script src='../jquery/adminlte/jquery.min.js'></script>
+  <!-- Bootstrap 5 -->
+  <script src='../js/bootstrap.bundle.min.js'></script>
+  <!-- overlayScrollbars -->
+  <script src='../jquery/adminlte/jquery.overlayScrollbars.min.js'></script>
+  <!-- AdminLTE App -->
+  <script src='../js/adminlte/adminlte.min.js'></script>
+
+  <script>
+    $('.Navbar').load('../layout/navbar.html');
+    $('.Sidebar').load('../layout/sidebar.html');
+
+    
+    // 向下開發功能
+  </script>
+</body>
+
+</html>
