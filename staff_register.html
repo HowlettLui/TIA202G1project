@@ -120,8 +120,7 @@
         <label for="floatingInput">電話*</label>
       </div>
       <div class="form-floating">
-        <input type="staff_password" class="form-control staff_password" placeholder="密碼需含英數 6-12 碼"
-          autocomplete="off">
+        <input type="staff_password" class="form-control staff_password" placeholder="密碼需含英數 6-12 碼" autocomplete="off">
         <label for="floatingPassword">輸入密碼*</label>
       </div>
 
@@ -133,6 +132,7 @@
   <script src="./jquery/jquery-3.7.1.min.js"></script>
   <script src="./js/bootstrap.bundle.min.js"></script>
   <script src="https://kit.fontawesome.com/799bf36dfe.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
   <script>
     $(document).ready(function () {
@@ -167,28 +167,53 @@
         // console.log('d : ', staff_password_length); // 是否能抓出資料長度 -- > 可以抓到
 
         if (staff_name_length == null) {
-          alert('需輸入姓名');
-          return;
+          // alert('需輸入姓名');
+          // return;
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "需輸入姓名",
+          });
         }
 
         if (staff_name_length < 0 || staff_name_length > 30) {
-          alert('使用者名稱長度須介於 0~30 之間');
-          return;
+          // alert('使用者名稱長度須介於 0~30 之間');
+          // return;
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "使用者名稱長度須介於 0~30 之間",
+          });
         }
 
         if (staff_email_length < 0) {
-          alert('需輸入email');
-          return;
+          // alert('需輸入email');
+          // return;
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "需輸入email",
+          });
         }
 
         if (staffPhone.value == null) {
-          alert('需輸入電話');
-          return;
+          // alert('需輸入電話');
+          // return;
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "需輸入電話",
+          });
         }
 
         if (staff_password_length < 6 || staff_password_length > 12) {
-          alert('密碼長度須介於 6~12 之間');
-          return;
+          // alert('密碼長度須介於 6~12 之間');
+          // return;
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "密碼長度須介於 6~12 之間",
+          });
         }
 
         fetch('staff_register', {
@@ -208,10 +233,16 @@
           })
           .then(body => {
             const { successfully, errMsg } = body;
-            alert(successfully ? '註冊成功' : errMsg);
+            // alert(successfully ? '註冊成功' : errMsg);
+            Swal.fire(successfully ? '註冊成功' : {
+              icon: "error",
+              title: "Oops...",
+              text: "註冊失敗",
+            });
           });
       });
     });
   </script>
 </body>
+
 </html>

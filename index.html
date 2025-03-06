@@ -345,136 +345,24 @@
       <div class="my_news_title row pb-3 border-top">
         <h3>商城</h3>
       </div>
-      <div class="album py-5 bg-body-tertiary">
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-          <div class="col">
-            <div class="card shadow-sm">
-              <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg"
-                role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
-                <title>Placeholder</title>
-                <rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%" fill="#eceeef"
-                  dy=".3em">Thumbnail</text>
-              </svg>
-              <div class="card-body">
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-                  additional content. This content is a little bit longer.</p>
-                <div class="d-flex justify-content-between align-items-center">
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                  </div>
-                  <small class="text-body-secondary">9 mins</small>
+      <div id="items" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        <!-- <div class="col" id="item">
+          <div class="card shadow-sm">
+            <img src=${item.itemPhoto} class="itemPhoto img-fluid"
+              style="max-width: 100%; height: 225px; object-fit: cover;" alt="Thumbnail">
+            <div class="card-body">
+              <h3 class="card-text">${item.itemName}</h3>
+              <p class="card-text">$${item.itemPrice}</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button id="addToCollection" type="button" class="btn btn-sm btn-outline-secondary">收藏</button>
+                  <button id="addToCart" type="button" class="btn btn-sm btn-outline-secondary">加入購物車</button>
                 </div>
               </div>
             </div>
           </div>
-          <div class="col">
-            <div class="card shadow-sm">
-              <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg"
-                role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
-                <title>Placeholder</title>
-                <rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%" fill="#eceeef"
-                  dy=".3em">Thumbnail</text>
-              </svg>
-              <div class="card-body">
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-                  additional content. This content is a little bit longer.</p>
-                <div class="d-flex justify-content-between align-items-center">
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                  </div>
-                  <small class="text-body-secondary">9 mins</small>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col">
-            <div class="card shadow-sm">
-              <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg"
-                role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
-                <title>Placeholder</title>
-                <rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%" fill="#eceeef"
-                  dy=".3em">Thumbnail</text>
-              </svg>
-              <div class="card-body">
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-                  additional content. This content is a little bit longer.</p>
-                <div class="d-flex justify-content-between align-items-center">
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                  </div>
-                  <small class="text-body-secondary">9 mins</small>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col">
-            <div class="card shadow-sm">
-              <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg"
-                role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
-                <title>Placeholder</title>
-                <rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%" fill="#eceeef"
-                  dy=".3em">Thumbnail</text>
-              </svg>
-              <div class="card-body">
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-                  additional content. This content is a little bit longer.</p>
-                <div class="d-flex justify-content-between align-items-center">
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                  </div>
-                  <small class="text-body-secondary">9 mins</small>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col">
-            <div class="card shadow-sm">
-              <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg"
-                role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
-                <title>Placeholder</title>
-                <rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%" fill="#eceeef"
-                  dy=".3em">Thumbnail</text>
-              </svg>
-              <div class="card-body">
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-                  additional content. This content is a little bit longer.</p>
-                <div class="d-flex justify-content-between align-items-center">
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                  </div>
-                  <small class="text-body-secondary">9 mins</small>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col">
-            <div class="card shadow-sm">
-              <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg"
-                role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
-                <title>Placeholder</title>
-                <rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%" fill="#eceeef"
-                  dy=".3em">Thumbnail</text>
-              </svg>
-              <div class="card-body">
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-                  additional content. This content is a little bit longer.</p>
-                <div class="d-flex justify-content-between align-items-center">
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                  </div>
-                  <small class="text-body-secondary">9 mins</small>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        </div> -->
+        <!-- items here -->
       </div>
     </div>
 
@@ -491,14 +379,13 @@
   <script src="./jquery/jquery-3.7.1.min.js"></script>
   <script src="./js/bootstrap.bundle.min.js"></script>
   <script src="https://kit.fontawesome.com/799bf36dfe.js" crossorigin="anonymous"></script>
+  <script src="./vendors/slick/slick.min.js"></script>
+
   <script>
     $(".headerPage").load("./layout/header.html");
     $(".footerPage").load("./layout/footer.html");
-  </script>
 
-  <!-- slide -->
-  <script src="./vendors/slick/slick.min.js"></script>
-  <script>
+    // <!-- slide -->
     $('.my_slide_class').slick({
       arrows: true,
       dots: true,
@@ -517,22 +404,88 @@
       ]
     });
 
-    $(document).ready(function(){
+    window.onload = function () {
+      const userData = sessionStorage.getItem("user");
+
+      if (userData) {
+        const user = JSON.parse(userData);
+        console.log("歡迎回來,", user.username);
+        // 這裡可以顯示會員資訊，例如：
+        $('.usercenter').show();
+        $('.logout').show();
+      } else {
+        console.log("尚未登入");
+        // 若未登入，可導向登入頁
+        // window.location.href = "login.html";
+      }
+    };
+
+    $(document).ready(function () {
       // 綁定跳轉登入註冊按鈕
-      $('.login').click(function(){
+      $('.login').click(function () {
         window.location.href = './login.html';
       });
-      $('.register').click(function(){
+      $('.register').click(function () {
         window.location.href = './register.html';
       });
 
-      $('.switch_btn_el').click(function(){
+      $('.switch_btn_el').click(function () {
         $('.switch_btn_el').removeClass('-on');
         $(this).addClass('-on');
       });
       // todo: 這裡要加入切換即時賽況的資料呈現
 
+      // 商城區塊start
+      $(function () {
+        fetch("./estore/shop")
+          .then(response => response.json())
+          .then(items => {
+            for (let item of items) {
+              $("#items").append(
+                `<div class="col" id="item"  data-item-id="${item.itemId}">
+                <div class="card shadow-sm">
+                  <img src=${item.itemPhoto} class="itemPhoto img-fluid"
+                    style="max-width: 100%; height: 225px; object-fit: cover;" alt="Thumbnail">
+                  <div class="card-body">
+                    <h3 class="card-text">${item.itemName}</h3>
+                    <p class="card-text">$${item.itemPrice}</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-sm btn-outline-secondary">收藏</button>
+                        <button type="button" class="btn btn-sm btn-outline-secondary">加入購物車</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>`
+              )
+            }
+          })
+          .catch(error => console.log(error));
+      });
+
+      $(document).on('click', '#item', function () {
+        let itemId = $(this).attr("data-item-id");
+        sessionStorage.setItem("itemId", itemId);
+        window.location.href = "./merchandise.html";
+      });
+
+      $(document).on('mouseenter mouseleave', '#item', function () {
+        $(this).css("cursor", "pointer");
+      });
+
+      $(document).on('click', '#addToCollection', function (e) {
+        e.stopPropagation();
+      })
+
+      $(document).on('click', '#addToCart', function (e) {
+        e.stopPropagation();
+      })
+      // 商城區塊end
+
     });
+
+
   </script>
 
 </body>

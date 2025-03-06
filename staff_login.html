@@ -131,6 +131,7 @@
   <script src="./jquery/jquery-3.7.1.min.js"></script>
   <script src="./js/bootstrap.bundle.min.js"></script>
   <script src="https://kit.fontawesome.com/799bf36dfe.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
   <script>
     $(document).ready(function () {
@@ -145,13 +146,23 @@
         const msg = document.querySelector('.msg');
 
         if (staffEmail.value == null) {
-          alert('email必須輸入');
-          return;
+          // alert('email必須輸入');
+          // return;
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "email必須輸入",
+          });
         }
 
         if (staffPassword.value == null) {
-          alert('密碼必須輸入');
-          return;
+          // alert('密碼必須輸入');
+          // return;
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "密碼必須輸入",
+          });
         }
 
         var login_data = {

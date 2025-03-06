@@ -134,6 +134,7 @@
   <script src="./jquery/jquery-3.7.1.min.js"></script>
   <script src="./js/bootstrap.bundle.min.js"></script>
   <script src="https://kit.fontawesome.com/799bf36dfe.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
   <script>
     $(document).ready(function () {
@@ -148,53 +149,59 @@
         const msg = document.querySelector('.msg');
 
         if (!email.value) {
-          alert('email必須輸入');
-          return;
+          // alert('email必須輸入');
+          // return;
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "email必須輸入",
+          });
         }
 
         if (!password.value) {
-          alert('密碼必須輸入');
-          return;
+          // alert('密碼必須輸入');
+          // return;
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "密碼必須輸入",
+          });
         }
 
-        var login_data = {
-          email: email.value,
-          password: password.value
-        };
-        console.log(login_data);  // 看能不能抓到資料 -- > 可以抓到
+        // var login_data = {
+        //   email: email.value,
+        //   password: password.value
+        // };
+        // console.log(login_data);  // 看能不能抓到資料 -- > 可以抓到
 
         // 從資料庫查會員資料是否存在
-        fetch('login', {
-          method: 'POST',
-          header: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            email: email.value,
-            password: password.value,
-          })
+        fetch(`login/${email.value}/${password.value}`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json"
+          }
         })
           .then(resp => {
             return resp.json()
           })
           .then(body => {
             msg.textContent = '';
+            console.log(body);
 
             // 從資料庫查完的資料回傳是否有該筆資料
             if (body.successfully) {
               alert('登入成功');
-              location.href = 'index.html';
+              sessionStorage.setItem("user", JSON.stringify(user));
+              // location.href = 'index.html';
             } else {
-              msg.textContent = '使用者名稱或密碼錯誤';
+              msg.textContent = body.message;
             }
           });
       });
 
-      $('.reset_password').click(function (e) {
-        e.preventDefault();
-        alert('MDFK重設密碼功能還沒做');
-      });
+      
     });
   </script>
 </body>
+
 </html>
