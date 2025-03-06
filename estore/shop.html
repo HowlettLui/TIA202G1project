@@ -14,125 +14,134 @@
 </head>
 
 <body>
-<!-- 導入共用 header -->
-<div class="headerPage"></div>
+  <!-- 導入共用 header -->
+  <div class="headerPage"></div>
 
-<!-- 開發畫面 -->
-<main>
-  <div class="album py-5 bg-body-tertiary">
-    <div class="container">
-      <!-- header of main -->
-      <div class="d-flex flex-wrap justify-content-center">
-        <h1 class="d-flex align-items-center mb-3 mb-lg-0 me-lg-auto link-body-emphasis pb-5">
-          挑看選看喔</h1>
-        <form class="col-12 col-lg-auto mb-3 mb-lg-0" role="search">
-          <input type="search" class="form-control" placeholder="關鍵字搜尋" aria-label="Search">
-        </form>
-      </div>
-
-      <!-- content -->
-      <div id="items" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-        <div class="col" id="item">
-          <div class="card shadow-sm">
-            <img src=${item.itemPhoto} class="itemPhoto img-fluid"
-                 style="max-width: 100%; height: 225px; object-fit: cover;" alt="Thumbnail">
-            <div class="card-body">
-              <h3 class="card-text">${item.itemName}</h3>
-              <p class="card-text">$${item.itemPrice}</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button id="addToCollection" type="button" class="btn btn-sm btn-outline-secondary">收藏</button>
-                  <button id="addToCart" type="button" class="btn btn-sm btn-outline-secondary">加入購物車</button>
-                </div>
-              </div>
-            </div>
-          </div>
+  <!-- 開發畫面 -->
+  <main>
+    <div class="album py-5 bg-body-tertiary">
+      <div class="container">
+        <!-- header of main -->
+        <div class="d-flex flex-wrap justify-content-center">
+          <h1 class="d-flex align-items-center mb-3 mb-lg-0 me-lg-auto link-body-emphasis pb-5">
+            挑看選看喔</h1>
+          <form class="col-12 col-lg-auto mb-3 mb-lg-0" role="search">
+            <input type="search" class="form-control" placeholder="關鍵字搜尋" aria-label="Search">
+          </form>
         </div>
-        <!-- items here -->
-      </div>
 
-      <!-- page navigation -->
-      <div class="d-flex justify-content-center">
-        <nav aria-label="Page navigation example">
-          <ul class="pagination mt-4">
-            <li class="page-item">
-              <a class="page-link" href="#" aria-label="Previous">
-                <span aria-hidden="true" style="color: var(--bs-secondary-color);">&laquo;</span>
-              </a>
-            </li>
-            <li class="page-item"><a class="page-link" href="#" style="color: var(--bs-secondary-color);">1</a></li>
-            <li class="page-item"><a class="page-link" href="#" style="color: var(--bs-secondary-color);">2</a></li>
-            <li class="page-item"><a class="page-link" href="#" style="color: var(--bs-secondary-color);">3</a></li>
-            <li class="page-item">
-              <a class="page-link" href="#" aria-label="Next">
-                <span aria-hidden="true" style="color: var(--bs-secondary-color);">&raquo;</span>
-              </a>
-            </li>
-          </ul>
-        </nav>
+        <!-- content -->
+        <div id="items" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+          <!-- items here -->
+        </div>
+
+        <!-- page navigation -->
+        <div class="d-flex justify-content-center">
+          <nav aria-label="Page navigation example">
+            <ul class="pagination mt-4">
+              <li class="page-item">
+                <a class="page-link" href="#" aria-label="Previous">
+                  <span aria-hidden="true" style="color: var(--bs-secondary-color);">&laquo;</span>
+                </a>
+              </li>
+              <li class="page-item"><a class="page-link" href="#" style="color: var(--bs-secondary-color);">1</a></li>
+              <li class="page-item"><a class="page-link" href="#" style="color: var(--bs-secondary-color);">2</a></li>
+              <li class="page-item"><a class="page-link" href="#" style="color: var(--bs-secondary-color);">3</a></li>
+              <li class="page-item">
+                <a class="page-link" href="#" aria-label="Next">
+                  <span aria-hidden="true" style="color: var(--bs-secondary-color);">&raquo;</span>
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
       </div>
     </div>
-  </div>
-</main>
+  </main>
 
-<!-- 導入共用 footer -->
-<div class="footerPage"></div>
-`
-<script src="../jquery/jquery-3.7.1.min.js"></script>
-<script>
-  $(".headerPage").load("../layout/header.html");
-  $(".footerPage").load("../layout/footer.html");
+  <!-- 導入共用 footer -->
+  <div class="footerPage"></div>
+  `
+  <script src="../jquery/jquery-3.7.1.min.js"></script>
+  <script>
+    $(".headerPage").load("../layout/header.html");
+    $(".footerPage").load("../layout/footer.html");
 
-  $(function () {
-    fetch("./shop")
-      .then(response => response.json())
-      .then(items => {
-        for (let item of items) {
-          $("#items").append(
-            `<div class="col" id="item"  data-item-id="${item.itemId}">
-                <div class="card shadow-sm">
-                  <img src=${item.itemPhoto} class="itemPhoto img-fluid"
-                    style="max-width: 100%; height: 225px; object-fit: cover;" alt="Thumbnail">
-                  <div class="card-body">
-                    <h3 class="card-text">${item.itemName}</h3>
-                    <p class="card-text">$${item.itemPrice}</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                      <div class="btn-group">
-                        <button type="button" class="btn btn-sm btn-outline-secondary">收藏</button>
-                        <button type="button" class="btn btn-sm btn-outline-secondary">加入購物車</button>
+    $(function () {
+      fetch("shop")
+        .then(response => response.json())
+        .then(items => {
+          for (let item of items) {
+            $("#items").append(
+              `<a id="item" href="./merchandise.html" data-item-id="${item.itemId}" style="text-decoration: none">
+                <div class="col">
+                  <div class="card shadow-sm">
+                    <img src=${item.itemPhoto} class="itemPhoto img-fluid"
+                      style="max-width: 100%; height: 225px; object-fit: cover;" alt="Thumbnail">
+                    <div class="card-body">
+                      <h3 class="card-text">${item.itemName}</h3>
+                      <p class="card-text">$${item.itemPrice}</p>
+                      <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                          <button type="button" class="btn btn-sm btn-outline-secondary">收藏</button>
+<!--                          點這邊的話，預設加入一個商品-->
+<!--                          <button type="button" class="btn btn-sm btn-outline-secondary">加入購物車</button>-->
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>`
-          )
-        }
-      })
-      .catch(error => console.log(error));
-  });
+              </a>`
+            )
+          }
+        })
+        .catch(error => {
+          console.log(error)
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "出了點狀況！請聯絡管理員"
+          });
+        });
+    });
 
-  $(document).on('click', '#item', function () {
-    let itemId = $(this).attr("data-item-id");
-    sessionStorage.setItem("itemId", itemId);
-    window.location.href = "./merchandise.html";
-  });
+    $(document).on("mousedown contextmenu", "#item", function (e) {
+      let itemId = $(this).attr("data-item-id");
+      localStorage.setItem("itemId", itemId);
+    })
 
-  $(document).on('mouseenter mouseleave', '#item', function () {
-    $(this).css("cursor", "pointer");
-  });
+    $(document).on("click", "#item", function (e) {
+      e.preventDefault();
+      e.stopPropagation();
 
-  $(document).on('click', '#addToCollection', function (e) {
-    e.stopPropagation();
-  })
+      let itemId = $(this).attr("data-item-id");
+      localStorage.setItem("itemId", itemId);
 
-  $(document).on('click', '#addToCart', function (e) {
-    e.stopPropagation();
-  })
+      if (e.ctrlKey || e.metaKey || e.button === 1) {
+        window.open("./merchandise.html", "_blank");
+      } else {
+        window.location.href = "./merchandise.html";
+      }
+    });
 
-</script>
+    $(document).on("mouseenter mouseleave", "#item", function () {
+      $(this).css("cursor", "pointer");
+    });
 
-<script src="../js/bootstrap.bundle.min.js"></script>
-<script src="https://kit.fontawesome.com/799bf36dfe.js" crossorigin="anonymous"></script>
+    $(document).on("click", "#addToCollection", function (e) {
+      e.stopPropagation();
+    })
+
+    $(document).on("click", "#addToCart", function (e) {
+      e.stopPropagation();
+    })
+
+  </script>
+
+  <script src="../js/bootstrap.bundle.min.js"></script>
+  <script src="https://kit.fontawesome.com/799bf36dfe.js" crossorigin="anonymous"></script>
+  <!-- sweetalert2 -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 
 </html>

@@ -20,11 +20,11 @@
       width: 100%;
     }
 
-    .dropdown > * {
+    .dropdown>* {
       box-sizing: border-box;
     }
 
-    .dropdown > input {
+    .dropdown>input {
       position: absolute;
       left: .75rem;
       top: 0.375rem;
@@ -34,184 +34,245 @@
 </head>
 
 <body>
-<!-- 導入共用 header -->
-<div class="headerPage"></div>
+  <!-- 導入共用 header -->
+  <div class="headerPage"></div>
 
-<!-- 開發畫面 -->
-<main>
-  <div class="py-5 bg-body-tertiary">
-    <div class="container">
-      <div class="col">
-        <!-- productBrief-->
-        <div class="row">
-          <div class="col-md-5 pt-4 d-flex justify-content-center align-items-center">
-            <img id="itemPhoto" src="" class="img-fluid mx-auto"
-                 style="max-width: 100%; height: auto;" alt="Thumbnail">
-          </div>
-          <div class="col-md-7 pt-4">
-            <h2 id="itemName" class="display-5 fw-normal lh-1 pt-3"></h2>
-            <h3 class="my-1 text-body-emphasis clickable">樂色</h3>
-            <h3 class="my-1 text-body">$999</h3>
-            <p id="itemContent" class="mt-2 lead"></p>
+  <!-- 開發畫面 -->
+  <main>
+    <div class="py-5 bg-body-tertiary">
+      <div class="container">
+        <div class="col">
+          <!-- productBrief-->
+          <div class="row">
+            <div class="col-md-5 pt-4 d-flex justify-content-center align-items-center">
+              <img id="itemPhoto" src="" class="img-fluid mx-auto" style="max-width: 100%; height: auto;"
+                alt="Thumbnail">
+            </div>
+            <div class="col-md-7 pt-4">
+              <h2 id="itemName" class="display-5 fw-normal lh-1 pt-3"></h2>
+              <div id="itemColors">
+                <!-- buttons for itemColors here -->
+              </div>
+              <h3 id="itemPrice" class="my-1 text-body"></h3>
+              <p id="itemContent" class="mt-2 lead"></p>
 
-            <div class="container text-center">
-              <div class="row justify-content-between">
-                <div class="col-12 col-lg-3 col-xxl-4 py-0 px-1 mb-2">
-                  <select class="form-select" aria-label="Default select example">
-                    <option selected disabled>請選擇大小</option>
-                    <option value="1">XS</option>
-                    <option value="2">S</option>
-                    <option value="3">M</option>
-                    <option value="4">L</option>
-                    <option value="5">XL</option>
-                  </select>
-                </div>
-                <div class="col-12 col-lg-3 col-xxl-4 mb-2 py-0 px-1 dropdown">
-                  <input type="text" style="border: none;" value="請選擇或輸入數量">
-                  <select class="form-select" aria-label="Default select example">
-                    <option disabled>請選擇或輸入數量</option>
-                    <option value="1" selected>1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                    <option value="8">8</option>
-                    <option value="9">9</option>
-                    <option value="10">10</option>
-                  </select>
-                </div>
-                <div class="col-12 col-lg-3 col-xxl-2 p-0 mb-2 px-1">
-                  <button type="button" class="btn btn-outline-secondary w-100">加入購物車</button>
-                </div>
-                <div class="col-12 col-lg-3 col-xxl-2 p-0 mb-2 px-1">
-                  <button type="button" class="btn btn-outline-secondary w-100">直接購買</button>
+              <div class="container text-center">
+                <div class="row justify-content-between">
+                  <div class="col-12 col-lg-3 col-xxl-4 py-0 px-1 mb-2">
+                    <select id="itemSizes" class="form-select" aria-label="Default select example">
+                      <option class="default" selected disabled>尚未選擇顏色</option>
+                    </select>
+                  </div>
+                  <div class="col-12 col-lg-3 col-xxl-4 mb-2 py-0 px-1 dropdown">
+                    <select id="itemStock" class="form-select" aria-label="Default select example">
+                      <option class="default" selected disabled>尚未選擇顏色與大小</option>
+                    </select>
+                  </div>
+                  <div class="col-12 col-lg-3 col-xxl-2 p-0 mb-2 px-1">
+                    <button type="button" class="btn btn-outline-secondary w-100">加入購物車</button>
+                  </div>
+                  <div class="col-12 col-lg-3 col-xxl-2 p-0 mb-2 px-1">
+                    <button type="button" class="btn btn-outline-secondary w-100">直接購買</button>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
+
+          <!-- productContent -->
+          <article id="itemDetails" class="my-2 container-fluid overflow-hidden">
+            <h2 class="display-5 order-bottom py-4 mb-1">商品詳情</h2>
+
+          </article>
+
+          <!-- productRecommend -->
+          <h2 class="display-5 border-bottom py-4 mb-1">Recommend Products</h2>
+          <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 mt-0">
+            <div class="col">
+              <div class="card shadow-sm">
+                <svg class="bd-placeholder-img card-img-top" width="100%" height="225"
+                  xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail"
+                  preserveAspectRatio="xMidYMid slice" focusable="false">
+                  <title>Placeholder</title>
+                  <rect width="100%" height="100%" fill="#55595c" />
+                  <text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail
+                  </text>
+                </svg>
+                <div class="card-body">
+                  <p class="card-text">This is a wider card with supporting text below as a natural
+                    lead-in to additional content. This content is a little bit longer.</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                      <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card shadow-sm">
+                <svg class="bd-placeholder-img card-img-top" width="100%" height="225"
+                  xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail"
+                  preserveAspectRatio="xMidYMid slice" focusable="false">
+                  <title>Placeholder</title>
+                  <rect width="100%" height="100%" fill="#55595c" />
+                  <text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail
+                  </text>
+                </svg>
+                <div class="card-body">
+                  <p class="card-text">This is a wider card with supporting text below as a natural
+                    lead-in to additional content. This content is a little bit longer.</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                      <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card shadow-sm">
+                <svg class="bd-placeholder-img card-img-top" width="100%" height="225"
+                  xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail"
+                  preserveAspectRatio="xMidYMid slice" focusable="false">
+                  <title>Placeholder</title>
+                  <rect width="100%" height="100%" fill="#55595c" />
+                  <text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail
+                  </text>
+                </svg>
+                <div class="card-body">
+                  <p class="card-text">This is a wider card with supporting text below as a natural
+                    lead-in to additional content. This content is a little bit longer.</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                      <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
-
-        <!-- productContent -->
-        <article id="itemDetails" class="my-2 container-fluid overflow-hidden">
-          <h2 class="display-5 order-bottom py-4 mb-1">商品詳情</h2>
-
-        </article>
-
-        <!-- productRecommend -->
-        <h2 class="display-5 border-bottom py-4 mb-1">Recommend Products</h2>
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 mt-0">
-          <div class="col">
-            <div class="card shadow-sm">
-              <svg class="bd-placeholder-img card-img-top" width="100%" height="225"
-                   xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail"
-                   preserveAspectRatio="xMidYMid slice" focusable="false">
-                <title>Placeholder</title>
-                <rect width="100%" height="100%" fill="#55595c"/>
-                <text x="50%" y="50%" fill="#eceeef"
-                      dy=".3em">Thumbnail
-                </text>
-              </svg>
-              <div class="card-body">
-                <p class="card-text">This is a wider card with supporting text below as a natural
-                  lead-in to additional content. This content is a little bit longer.</p>
-                <div class="d-flex justify-content-between align-items-center">
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col">
-            <div class="card shadow-sm">
-              <svg class="bd-placeholder-img card-img-top" width="100%" height="225"
-                   xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail"
-                   preserveAspectRatio="xMidYMid slice" focusable="false">
-                <title>Placeholder</title>
-                <rect width="100%" height="100%" fill="#55595c"/>
-                <text x="50%" y="50%" fill="#eceeef"
-                      dy=".3em">Thumbnail
-                </text>
-              </svg>
-              <div class="card-body">
-                <p class="card-text">This is a wider card with supporting text below as a natural
-                  lead-in to additional content. This content is a little bit longer.</p>
-                <div class="d-flex justify-content-between align-items-center">
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col">
-            <div class="card shadow-sm">
-              <svg class="bd-placeholder-img card-img-top" width="100%" height="225"
-                   xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail"
-                   preserveAspectRatio="xMidYMid slice" focusable="false">
-                <title>Placeholder</title>
-                <rect width="100%" height="100%" fill="#55595c"/>
-                <text x="50%" y="50%" fill="#eceeef"
-                      dy=".3em">Thumbnail
-                </text>
-              </svg>
-              <div class="card-body">
-                <p class="card-text">This is a wider card with supporting text below as a natural
-                  lead-in to additional content. This content is a little bit longer.</p>
-                <div class="d-flex justify-content-between align-items-center">
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
       </div>
     </div>
-  </div>
-</main>
+  </main>
 
-<!-- 導入共用 footer -->
-<div class="footerPage"></div>
-<script src="../jquery/jquery-3.7.1.min.js"></script>
-<script>
-  $(".headerPage").load("../layout/header.html");
-  $(".footerPage").load("../layout/footer.html");
+  <!-- 導入共用 footer -->
+  <div class="footerPage"></div>
+  <script src="../jquery/jquery-3.7.1.min.js"></script>
+  <script>
+    $(".headerPage").load("../layout/header.html");
+    $(".footerPage").load("../layout/footer.html");
 
-  $(function () {
-    fetch(`./item/${sessionStorage.getItem("itemId")}`)
-      .then(response => response.json())
-      .then(item => {
-        $("#title").text(item.itemName);
-        $("#itemPhoto").attr("src", item.itemPhoto);
-        $("#itemName").text(item.itemName);
-        $("#itemContent").text(item.itemContent);
-        $("#itemDetails").append(item.itemDetails);
-      })
-      .catch(error => console.error(error));
-  })
+    const manipulateSizes = (color, itemInfos) => {
+      let sizes = itemInfos
+        .filter(itemInfo => itemInfo.itemColor === color)
+        .map(itemInfo =>
+          itemInfo.itemStatus === 1
+            ? `<option value="${itemInfo.itemSize}">${itemInfo.itemSize}</option>`
+            : `<option value="${itemInfo.itemSize}" disabled>${itemInfo.itemSize}</option>`
+        )
+      $("#itemSizes").empty().append(sizes);
+      if (sizes.length === 1) {
+        $("#itemSizes").empty().append(`<option selected disabled>此商品為單一尺寸</option>`);
+      } else {
+        $("#itemSizes").prepend(`<option className="default" selected disabled>請選擇大小</option>`);
+      }
+    }
 
-  $("select.form-select").on("change", function () {
-    this.previousElementSibling.value = this.value;
-    this.previousElementSibling.focus();
-  })
+    const manipulateStocks = (itemInfo) => {
+      $("#itemStock").empty();
+      if (itemInfo.itemStatus === 1) {
+        $("#itemStock").append(`<option className="default" selected disabled>請選擇數量</option>`)
+        let itemStocks = itemInfo.itemStock;
+        if (itemStocks <= 0) {
+          $("#itemStock").empty().append(`<option className="default" selected disabled>商品已售完</option>`);
+        } else {
+          let max = Math.min(10, itemStocks);
+          for (let i = 1; i <= max; i++) {
+            $("#itemStock").append(`<option value="${i}">${i}</option>`)
+          }
+        }
+      } else {
+        $("#itemStock").append(`<option class="default" selected disabled>商品未上架</option>`)
+      }
+    }
 
-  $("div.dropdown>input").on("change", function () {
-    this.nextElementSibling.value = this.value;
-  })
+    $(function () {
+      fetch(`item/${localStorage.getItem("itemId")}`)
+        .then(response => response.json())
+        .then(item => {
+          $("#title").text(item.itemName);
+          $("#itemPhoto").attr("src", item.itemPhoto);
+          $("#itemName").text(item.itemName);
+          $("#itemPrice").text("$" + item.itemPrice);
+          $("#itemContent").text(item.itemContent);
+          $("#itemDetails").append(item.itemDetails);
 
-</script>
+          // 商品有哪些顏色
+          for (let itemColor of item.itemColors) {
+            $("#itemColors").append(`<button type="button" class="btn btn-outline-secondary itemColors mx-1">${itemColor}</button>`)
+          }
+
+          // 單一顏色的話
+          if ($("#itemColors").children().length === 1) {
+            $("button.itemColors").addClass("active");
+            $("#itemSizes").empty();
+
+            // 列出該顏色所有的尺寸以及庫存，需篩選商品上架狀態
+            manipulateSizes($("button.itemColors").text(), item.itemInfos);
+
+            // 單一顏色單一尺寸的話
+            if ($("#itemSizes option").length === 1) {
+              manipulateStocks(item.itemInfos[0])
+            }
+          }
+
+          sessionStorage.setItem("itemInfos", JSON.stringify(item.itemInfos));
+        })
+        .catch(error => {
+          console.error(error)
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "出了點狀況！請聯絡管理員"
+          });
+        });
+    })
+
+    $(document).on("click", "button.itemColors", function () {
+      let itemInfos = JSON.parse(sessionStorage.getItem("itemInfos"));
+
+      $("button.itemColors").removeClass("active");
+      $(this).addClass("active");
+
+      manipulateSizes($(this).text(), itemInfos)
+    })
+
+    // 商品數量確認
+    $(document).on("change", "#itemSizes", function () {
+      let itemInfos = JSON.parse(sessionStorage.getItem("itemInfos"));
+      let itemColorNow = $("button.active").text();
+      let itemSizeNow = $("#itemSizes").val();
+
+      let itemInfoNow = itemInfos.find(
+        itemInfo => itemInfo.itemColor === itemColorNow && itemInfo.itemSize === itemSizeNow
+      );
+
+      manipulateStocks(itemInfoNow);
+    })
+
+  </script>
 
 
-<script src="../js/bootstrap.bundle.min.js"></script>
-<script src="https://kit.fontawesome.com/799bf36dfe.js" crossorigin="anonymous"></script>
+  <script src="../js/bootstrap.bundle.min.js"></script>
+  <script src="https://kit.fontawesome.com/799bf36dfe.js" crossorigin="anonymous"></script>
+  <!-- sweetalert2 -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 
 </html>
