@@ -29,6 +29,21 @@
         margin: 20px auto;
         padding: 2px 2px 2px 2px;
       }
+      div.categorydropdown {
+        /* width: 72%; */
+        /* margin: 20px auto; */
+        padding: 0px 5px 20px 0px;
+      }
+      .img-container {
+        width: 100%;
+        height: 225px; /* 設定容器高度 */
+        overflow: hidden;
+      }
+      .img-container img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
 
       /* S end */
     </style>
@@ -40,17 +55,72 @@
 
     <!-- 開發畫面 -->
     <main>
-      <div class="newsquery">
+      <!-- <div class="newsquery">
         <input type="text" style="margin: 5px" /> ~
         <input type="text" style="margin: 5px" />
         <input type="text" style="margin: 5px" />
         <button>查詢</button>
-      </div>
+      </div> -->
+      <!-- <div class="categorydropdown">
+        <button
+          class="btn btn-secondary dropdown-toggle"
+          type="button"
+          id="dropdownMenuButton1"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          所有分類
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+          <li><a class="dropdown-item" href="#">所有分類</a></li>
+          <li><a class="dropdown-item" href="#">文章</a></li>
+          <li><a class="dropdown-item" href="#">新聞</a></li>
+        </ul>
+      </div> -->
 
       <div class="album py-5 bg-body-tertiary">
         <div class="container">
-          <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-            <div class="col">
+          <div class="categorydropdown">
+            <button
+              class="btn btn-secondary dropdown-toggle"
+              type="button"
+              id="dropdownMenuButton1"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              所有分類
+            </button>
+            <ul
+              class="dropdown-menu"
+              id="dropdownmenu_id"
+              aria-labelledby="dropdownMenuButton1"
+            >
+              <li>
+                <a class="dropdown-item" href="/NGFW/newsf/news_fform.html"
+                  >所有分類</a
+                >
+              </li>
+              <li>
+                <a
+                  class="dropdown-item"
+                  href="/NGFW/newsf/news_fform.html?articleType=0"
+                  >文章</a
+                >
+              </li>
+              <li>
+                <a
+                  class="dropdown-item"
+                  href="/NGFW/newsf/news_fform.html?articleType=1"
+                  >新聞</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div
+            class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3"
+            id="articlelist"
+          >
+            <!-- <div class="col">
               <div class="card shadow-sm">
                 <svg
                   class="bd-placeholder-img card-img-top"
@@ -81,265 +151,8 @@
                   </div>
                 </div>
               </div>
-            </div>
-            <div class="col">
-              <div class="card shadow-sm">
-                <svg
-                  class="bd-placeholder-img card-img-top"
-                  width="100%"
-                  height="225"
-                  xmlns="http://www.w3.org/2000/svg"
-                  role="img"
-                  aria-label="Placeholder: Thumbnail"
-                  preserveAspectRatio="xMidYMid slice"
-                  focusable="false"
-                >
-                  <title>Placeholder</title>
-                  <rect width="100%" height="100%" fill="#55595c" />
-                  <text x="50%" y="50%" fill="#eceeef" dy=".3em">
-                    Thumbnail
-                  </text>
-                </svg>
-                <div class="card-body">
-                  <p class="card-text">
-                    This is a wider card with supporting text below as a natural
-                    lead-in to additional content. This content is a little bit
-                    longer.
-                  </p>
-                  <div
-                    class="d-flex justify-content-between align-items-center"
-                  >
-                    <small class="text-body-secondary">#Date</small>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col">
-              <div class="card shadow-sm">
-                <svg
-                  class="bd-placeholder-img card-img-top"
-                  width="100%"
-                  height="225"
-                  xmlns="http://www.w3.org/2000/svg"
-                  role="img"
-                  aria-label="Placeholder: Thumbnail"
-                  preserveAspectRatio="xMidYMid slice"
-                  focusable="false"
-                >
-                  <title>Placeholder</title>
-                  <rect width="100%" height="100%" fill="#55595c" />
-                  <text x="50%" y="50%" fill="#eceeef" dy=".3em">
-                    Thumbnail
-                  </text>
-                </svg>
-                <div class="card-body">
-                  <p class="card-text">
-                    This is a wider card with supporting text below as a natural
-                    lead-in to additional content. This content is a little bit
-                    longer.
-                  </p>
-                  <div
-                    class="d-flex justify-content-between align-items-center"
-                  >
-                    <small class="text-body-secondary">#Date</small>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="col">
-              <div class="card shadow-sm">
-                <svg
-                  class="bd-placeholder-img card-img-top"
-                  width="100%"
-                  height="225"
-                  xmlns="http://www.w3.org/2000/svg"
-                  role="img"
-                  aria-label="Placeholder: Thumbnail"
-                  preserveAspectRatio="xMidYMid slice"
-                  focusable="false"
-                >
-                  <title>Placeholder</title>
-                  <rect width="100%" height="100%" fill="#55595c" />
-                  <text x="50%" y="50%" fill="#eceeef" dy=".3em">
-                    Thumbnail
-                  </text>
-                </svg>
-                <div class="card-body">
-                  <p class="card-text">
-                    This is a wider card with supporting text below as a natural
-                    lead-in to additional content. This content is a little bit
-                    longer.
-                  </p>
-                  <div
-                    class="d-flex justify-content-between align-items-center"
-                  >
-                    <small class="text-body-secondary">#Date</small>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col">
-              <div class="card shadow-sm">
-                <svg
-                  class="bd-placeholder-img card-img-top"
-                  width="100%"
-                  height="225"
-                  xmlns="http://www.w3.org/2000/svg"
-                  role="img"
-                  aria-label="Placeholder: Thumbnail"
-                  preserveAspectRatio="xMidYMid slice"
-                  focusable="false"
-                >
-                  <title>Placeholder</title>
-                  <rect width="100%" height="100%" fill="#55595c" />
-                  <text x="50%" y="50%" fill="#eceeef" dy=".3em">
-                    Thumbnail
-                  </text>
-                </svg>
-                <div class="card-body">
-                  <p class="card-text">
-                    This is a wider card with supporting text below as a natural
-                    lead-in to additional content. This content is a little bit
-                    longer.
-                  </p>
-                  <div
-                    class="d-flex justify-content-between align-items-center"
-                  >
-                    <small class="text-body-secondary">#Date</small>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col">
-              <div class="card shadow-sm">
-                <svg
-                  class="bd-placeholder-img card-img-top"
-                  width="100%"
-                  height="225"
-                  xmlns="http://www.w3.org/2000/svg"
-                  role="img"
-                  aria-label="Placeholder: Thumbnail"
-                  preserveAspectRatio="xMidYMid slice"
-                  focusable="false"
-                >
-                  <title>Placeholder</title>
-                  <rect width="100%" height="100%" fill="#55595c" />
-                  <text x="50%" y="50%" fill="#eceeef" dy=".3em">
-                    Thumbnail
-                  </text>
-                </svg>
-                <div class="card-body">
-                  <p class="card-text">
-                    This is a wider card with supporting text below as a natural
-                    lead-in to additional content. This content is a little bit
-                    longer.
-                  </p>
-                  <div
-                    class="d-flex justify-content-between align-items-center"
-                  >
-                    <small class="text-body-secondary">#Date</small>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="col">
-              <div class="card shadow-sm">
-                <svg
-                  class="bd-placeholder-img card-img-top"
-                  width="100%"
-                  height="225"
-                  xmlns="http://www.w3.org/2000/svg"
-                  role="img"
-                  aria-label="Placeholder: Thumbnail"
-                  preserveAspectRatio="xMidYMid slice"
-                  focusable="false"
-                >
-                  <title>Placeholder</title>
-                  <rect width="100%" height="100%" fill="#55595c" />
-                  <text x="50%" y="50%" fill="#eceeef" dy=".3em">
-                    Thumbnail
-                  </text>
-                </svg>
-                <div class="card-body">
-                  <p class="card-text">
-                    This is a wider card with supporting text below as a natural
-                    lead-in to additional content. This content is a little bit
-                    longer.
-                  </p>
-                  <div
-                    class="d-flex justify-content-between align-items-center"
-                  >
-                    <small class="text-body-secondary">#Date</small>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col">
-              <div class="card shadow-sm">
-                <svg
-                  class="bd-placeholder-img card-img-top"
-                  width="100%"
-                  height="225"
-                  xmlns="http://www.w3.org/2000/svg"
-                  role="img"
-                  aria-label="Placeholder: Thumbnail"
-                  preserveAspectRatio="xMidYMid slice"
-                  focusable="false"
-                >
-                  <title>Placeholder</title>
-                  <rect width="100%" height="100%" fill="#55595c" />
-                  <text x="50%" y="50%" fill="#eceeef" dy=".3em">
-                    Thumbnail
-                  </text>
-                </svg>
-                <div class="card-body">
-                  <p class="card-text">
-                    This is a wider card with supporting text below as a natural
-                    lead-in to additional content. This content is a little bit
-                    longer.
-                  </p>
-                  <div
-                    class="d-flex justify-content-between align-items-center"
-                  >
-                    <small class="text-body-secondary">#Date</small>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col">
-              <div class="card shadow-sm">
-                <svg
-                  class="bd-placeholder-img card-img-top"
-                  width="100%"
-                  height="225"
-                  xmlns="http://www.w3.org/2000/svg"
-                  role="img"
-                  aria-label="Placeholder: Thumbnail"
-                  preserveAspectRatio="xMidYMid slice"
-                  focusable="false"
-                >
-                  <title>Placeholder</title>
-                  <rect width="100%" height="100%" fill="#55595c" />
-                  <text x="50%" y="50%" fill="#eceeef" dy=".3em">
-                    Thumbnail
-                  </text>
-                </svg>
-                <div class="card-body">
-                  <p class="card-text">
-                    This is a wider card with supporting text below as a natural
-                    lead-in to additional content. This content is a little bit
-                    longer.
-                  </p>
-                  <div
-                    class="d-flex justify-content-between align-items-center"
-                  >
-                    <small class="text-body-secondary">#Date</small>
-                  </div>
-                </div>
-              </div>
-            </div>
+            </div> -->
+            <!-- -------- -->
           </div>
         </div>
       </div>
@@ -358,5 +171,65 @@
       src="https://kit.fontawesome.com/799bf36dfe.js"
       crossorigin="anonymous"
     ></script>
+
+    <script>
+      // function querySelectorOnClick() {
+      //   let queryBtn = document.querySelector("button");
+      //   queryBtn.addEventListener("click", function () {
+      //     let queryInput = document.querySelectorAll("input");
+      //     let queryStr = "";
+      //     queryInput.forEach((input) => {
+      //       queryStr += input.value + ",";
+      //     });
+      //   });
+      // }
+      $(document).ready(function () {
+        const urlParams = new URLSearchParams(window.location.search);
+        const articleType = urlParams.get("articleType");
+        $("#dropdownMenuButton1").text(
+          articleType == 0 ? "文章" : articleType == 1 ? "新聞" : "所有分類"
+        );
+
+        var tmurl = "/NGFW/articleindex";
+        if (articleType != null) {
+          tmurl += "?articleType=" + articleType;
+        }
+        $.ajax({
+          url: tmurl,
+          method: "GET",
+          dataType: "json",
+          success: function (articles) {
+            let tableBody = $("#articlelist");
+            tableBody.empty();
+            articles.forEach((article) => {
+              // let row = `${article.articleId},`;
+              let row = `<div class="col">
+              <div class="card shadow-sm">
+                <div class="img-container">
+                  <img
+                    src="${article.newsPhoto}"
+                    onclick="location.href='/NGFW/newsf/news_fbody.html?articleId=${article.articleId}'"
+                  >
+                  </img>
+                </div>
+                <div class="card-body">
+                  <p class="card-text">
+                    ${article.mainTitle}
+                  </p>
+                  <div
+                    class="d-flex justify-content-between align-items-center"
+                  >
+                    <small class="text-body-secondary">${article.publishDate}</small>
+                  </div>
+                </div>`;
+              tableBody.append(row);
+            });
+          },
+          error: function (xhr, status, error) {
+            console.error("Error fetching data:", error);
+          },
+        });
+      });
+    </script>
   </body>
 </html>
