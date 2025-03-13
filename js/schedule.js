@@ -1,5 +1,4 @@
 const { createApp, ref, defineComponent, onMounted } = Vue;
-const { Calendar } = FullCalendar;
 
 const HeaderComponent = defineComponent({
   setup() {
@@ -152,7 +151,41 @@ footerApp.mount("#footer");
 document.addEventListener('DOMContentLoaded', function () {
   var calendarEl = document.getElementById('calendar');
   var calendar = new FullCalendar.Calendar(calendarEl, {
-    initialView: 'dayGridMonth'
+    initialView: 'dayGridMonth',
+    events: '/backend/game/events',
+    // events: [
+    //   {
+    //     title: "Game001",
+    //     start: "2025-03-12 17:00",
+    //     extendedProps: {
+    //       home: 'AAA',
+    //       away: 'BBB'
+    //     }
+    //   }
+    // ],
+    eventContent: function(arg) {
+      let contentEl = document.createElement('div')
+      contentEl.classList.add("card")
+      contentEl.style.width = '100%'
+      
+      let cardBody = document.createElement('div')
+      cardBody.classList.add("card-body", "text-center")
+
+      let cardTitle = document.createElement('h5')
+      cardTitle.classList.add("card-title")
+      cardTitle.textContent = arg.event.title
+
+      let cardText = document.createElement('p')
+      cardText.classList.add("card-text")
+      cardText.textContent = arg.event.extendedProps.homeTeam + ' vs ' + arg.event.extendedProps.awayTeam
+      
+      cardBody.appendChild(cardTitle)
+      cardBody.appendChild(cardText)
+      contentEl.appendChild(cardBody)
+      
+      let arrayDomNodes = [ contentEl ]
+      return { domNodes: arrayDomNodes }
+    }
   });
   calendar.render();
 });
