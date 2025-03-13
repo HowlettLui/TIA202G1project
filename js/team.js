@@ -166,7 +166,7 @@ const url = "backend/team/list";
 const app = createApp({
   components: { HeaderComponent, FooterComponent, TeamComponent },
   setup() {
-    const teams =ref([]);
+    const teams = ref([]);
     const fetchTeams = async () => {
       try {
         const response = await fetch(url);

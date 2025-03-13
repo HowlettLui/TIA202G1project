@@ -85,6 +85,7 @@
 
           </article>
 
+          <!--        todo: 推薦商品 (優先度低)-->
           <!-- productRecommend -->
           <h2 class="display-5 border-bottom py-4 mb-1">Recommend Products</h2>
           <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 mt-0">
@@ -206,8 +207,9 @@
       fetch(`item/${localStorage.getItem("itemId")}`)
         .then(response => response.json())
         .then(item => {
+          itemPhoto = JSON.parse(item.itemPhoto);
           $("#title").text(item.itemName);
-          $("#itemPhoto").attr("src", item.itemPhoto);
+          $("#itemPhoto").attr("src", itemPhoto.photos[0]);
           $("#itemName").text(item.itemName);
           $("#itemPrice").text("$" + item.itemPrice);
           $("#itemContent").text(item.itemContent);
@@ -265,6 +267,8 @@
 
       manipulateStocks(itemInfoNow);
     })
+
+    // todo: 加入頁面中指定數量的商品到購物車
 
   </script>
 

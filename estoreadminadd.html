@@ -17,18 +17,12 @@
   <link rel="stylesheet" href="./css/adminlte/adminlte.min.css">
   <!-- Bootstrap 5 -->
   <link rel="stylesheet" href="./css/bootstrap.min.css">
-  <!-- dropzonejs -->
-  <!-- <link rel="stylesheet" href="./vendors/dropzone/min/dropzone.min.css"> -->
 
   <!-- for ethan's part -->
   <!-- summernote -->
   <link rel="stylesheet" href="./vendors/summernote-0.9.0-dist/summernote-bs5.min.css">
-  <!-- filepond -->
-  <link href="https://unpkg.com/filepond@^4/dist/filepond.css" rel="stylesheet" />
-  <link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet" />
-  <link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css"
-    rel="stylesheet" />
-  <link href="https://unpkg.com/filepond-plugin-image-edit/dist/filepond-plugin-image-edit.css" rel="stylesheet" />
+  <!-- Uppy -->
+  <link href="https://releases.transloadit.com/uppy/v4.13.3/uppy.min.css" rel="stylesheet">
 
 </head>
 
@@ -68,11 +62,13 @@
           <div class="card-body">
             <div class="row">
 
-              <!-- photos upload with filepond -->
-              <!-- <input type="file" class="filepond" name="filepond" accept="image/png, image/jpeg, image/gif"> -->
-              <!-- <input type="file" class="filepond" name="filepond" multiple data-max-file-size="3MB" data-max-files="10"
-            accept="image/png, image/jpeg, image/gif"> -->
-              <!-- photos upload with filepond end -->
+              <!-- photos upload with Uppy -->
+              <div class="col-12">
+                <label for="item_photo">商品照片</label>
+                <div id="uppy"></div>
+              </div>
+              <!-- photos upload with Uppy end -->
+
               <!-- photos upload with input -->
               <div class="col-12">
                 <label for="item_photo">商品照片</label>
@@ -186,20 +182,12 @@
   <script src="./jquery/adminlte/jquery.overlayScrollbars.min.js"></script>
   <!-- AdminLTE App -->
   <script src="./js/adminlte/adminlte.min.js"></script>
-  <!-- dropzonejs -->
-  <!-- <script src="./vendors/dropzone/min/dropzone.min.js"></script> -->
 
   <!-- for ethan's part -->
   <!-- summernote -->
   <script src="./vendors/summernote-0.9.0-dist/summernote-bs5.js"></script>
   <!-- sweetalert2 -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  <!-- filepond -->
-  <!-- <script src="https://unpkg.com/filepond@^4/dist/filepond.js"></script> -->
-  <!-- <script
-src="https://unpkg.com/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.js"></script>
-<script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script> -->
-  <!-- <script src="https://unpkg.com/filepond-plugin-image-edit/dist/filepond-plugin-image-edit.js"></script> -->
 
   <script>
     $(function () {
@@ -231,11 +219,11 @@ src="https://unpkg.com/filepond-plugin-file-validate-type/dist/filepond-plugin-f
           title: "請再確認",
           text: "請輸入完整資料！"
         });
-      } else if (itemPhotosPath === "") {
+      } else if (!itemPhotosPath) {
         Swal.fire({
           icon: "warning",
           title: "請再確認",
-          text: "請先點選照片上傳按鈕"
+          text: "請先上傳照片"
         });
       } else if (!summernoteValid) {
         Swal.fire({
@@ -321,44 +309,43 @@ src="https://unpkg.com/filepond-plugin-file-validate-type/dist/filepond-plugin-f
       });
       return allValid;
     }
+  </script>
 
-    $('#save_item_photo').on('click', function () {
+  <!-- Uppy -->
+  <script type="module">
+    import { Uppy, Dashboard, XHRUpload } from "https://releases.transloadit.com/uppy/v4.13.3/uppy.min.mjs"
 
-      const formData = new FormData();
-      const input = document.querySelector('#item_photo');
-
-      for (let file of input.files) {
-        formData.append('item_photo', file, file.name);
+    const uppy = new Uppy({
+      restrictions: {
+        maxFileSize: 5 * 1024 * 1024,
+        allowedFileTypes: ['image/*']
       }
-
-      fetch('estoreadmin/upload', {
-        method: 'POST',
-        body: formData,
+    })
+    uppy
+      .use(Dashboard, {
+        target: '#uppy',
+        inline: true,
+        width: 1600,
+        showProgressDetails: true,
+        proudlyDisplayPoweredByUppy: true,
       })
-        .then(resp => resp.json())
-        .then(data => {
-          itemPhotosPath = JSON.stringify(data);
-          Swal.fire({
-            icon: "success",
-            title: "新增成功",
-            text: "新增商品照片成功！",
-          });
-        })
-        .catch((error) => {
-          console.error('Error:', error);
-          Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: "圖片上傳失誤，請重新上傳或者聯絡管理員"
-          });
-        });
+      .use(XHRUpload, {
+        endpoint: 'http://localhost:8080/NGFW/estoreadmin/upload',
+        fieldName: 'item_photo',
+        headers: {
+          'X-Requested-With': 'XMLHttpRequest'
+        }
+      });
 
+    // todo: Uppy上傳完成後回傳的東西還沒接下來
+    uppy.on('complete', (result) => {
+      itemPhotosPath = JSON.stringify(result);
+      console.log('上傳成功:', result.successful);
+      alert(`已上傳 ${result.successful.length} 張圖片`);
     });
-
   </script>
 
   <script>
-
     // 動態載入內容
     // $(document).ready(function () {
     //     // 使用事件代理確保所有 <a> 都正確綁定事件
@@ -372,45 +359,6 @@ src="https://unpkg.com/filepond-plugin-file-validate-type/dist/filepond-plugin-f
     //           }
     //       });
     //     });
-    // });
-
-    // filepond
-    // const filepondPlugins = FilePond.registerPlugin(
-    //   FilePondPluginImagePreview,
-    //   FilePondPluginFileValidateType,
-    //   // FilePondPluginImageEdit
-    // );
-
-    // // Get a reference to the file input element
-    // const inputElement = document.querySelector('input[type="file"]');
-
-    // // Create a FilePond instance
-    // const pond = FilePond.create(inputElement,
-    //   {
-    //     labelIdle: '拖曳或點擊上傳商品照片',
-    //     imagePreviewHeight: 200,
-    //   }
-    // );
-
-    // const filesPaths = [];
-
-    // FilePond.setOptions({
-    //   server: {
-    //     url: 'http://localhost:8080/NGFW/',
-    //     process: {
-    //       url: 'estoreadmin/upload',
-    //       method: 'POST',
-    //       onload: (response) => {
-    //         const filesPath = JSON.parse(response);
-    //         console.log(filesPath);
-    //         // filesPaths.add(JSON.parse(response));
-    //       },
-    //       onerror: (response) => response.data,
-    //     },
-    //     revert: null,
-    //     restore: null,
-    //     load: null,
-    //   }
     // });
   </script>
 </body>
