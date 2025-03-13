@@ -210,6 +210,27 @@ src="https://unpkg.com/filepond-plugin-file-validate-type/dist/filepond-plugin-f
     $(".Navbar").load("./layout/navbar.html");
     $(".Sidebar").load("./layout/sidebar.html");
 
+    // todo: 編輯頁面還沒做完，從admin items點編輯按鈕過來之後，要帶它原本的內容到頁面上
+    //   fetch(`estoreadmin/items/${$(this).attr("data-itemInfoId")}`, {
+    //     method: "PUT",
+    //     headers: {
+    //       'Content-Type': 'application/json'
+    //     },
+    //     body: JSON.stringify({})
+    //   })
+    //     .then(response => response.json())
+    //     .then(itemInfo?item? => {
+    //
+    //     })
+    //     .catch(error => {
+    //       console.error('Error:', error);
+    //       Swal.fire({
+    //         icon: "error",
+    //         title: "Oops...",
+    //         text: "出了點狀況！請聯絡管理員"
+    //       });
+    //     })
+
     $(document).on('blur', 'input.item_related', function () {
       validateFields($(this));
     })
@@ -231,7 +252,7 @@ src="https://unpkg.com/filepond-plugin-file-validate-type/dist/filepond-plugin-f
           title: "請再確認",
           text: "請輸入完整資料！"
         });
-      } else if (itemPhotosPath === "") {
+      } else if (!itemPhotosPath) {
         Swal.fire({
           icon: "warning",
           title: "請再確認",
@@ -357,62 +378,6 @@ src="https://unpkg.com/filepond-plugin-file-validate-type/dist/filepond-plugin-f
 
   </script>
 
-  <script>
-
-    // 動態載入內容
-    // $(document).ready(function () {
-    //     // 使用事件代理確保所有 <a> 都正確綁定事件
-    //     $('li.item_management').on('click', 'a.item_management', function (event) {
-    //       event.stopPropagation(); // 阻止事件冒泡
-    //       event.preventDefault(); // 阻止預設行為
-    //       const url = $(this).attr('href'); // 取得 href 的值
-    //       $('#mainBlock').load(url, function (response, status, xhr) {
-    //           if (status === "error") {
-    //               $('#mainBlock').html("<h1>錯誤</h1><p>無法載入頁面內容。</p>");
-    //           }
-    //       });
-    //     });
-    // });
-
-    // filepond
-    // const filepondPlugins = FilePond.registerPlugin(
-    //   FilePondPluginImagePreview,
-    //   FilePondPluginFileValidateType,
-    //   // FilePondPluginImageEdit
-    // );
-
-    // // Get a reference to the file input element
-    // const inputElement = document.querySelector('input[type="file"]');
-
-    // // Create a FilePond instance
-    // const pond = FilePond.create(inputElement,
-    //   {
-    //     labelIdle: '拖曳或點擊上傳商品照片',
-    //     imagePreviewHeight: 200,
-    //   }
-    // );
-
-    // const filesPaths = [];
-
-    // FilePond.setOptions({
-    //   server: {
-    //     url: 'http://localhost:8080/NGFW/',
-    //     process: {
-    //       url: 'estoreadmin/upload',
-    //       method: 'POST',
-    //       onload: (response) => {
-    //         const filesPath = JSON.parse(response);
-    //         console.log(filesPath);
-    //         // filesPaths.add(JSON.parse(response));
-    //       },
-    //       onerror: (response) => response.data,
-    //     },
-    //     revert: null,
-    //     restore: null,
-    //     load: null,
-    //   }
-    // });
-  </script>
 </body>
 
 </html>
