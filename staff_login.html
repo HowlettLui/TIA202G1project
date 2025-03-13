@@ -172,15 +172,11 @@
         console.log(login_data);  // 看能不能抓到資料 
 
         // 從資料庫查會員資料是否存在
-        fetch('login', {
-          method: 'POST',
+        fetch(`staff_login/${staffEmail.value}/${staffPassword.value}`, {
+          method: 'GET',
           header: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({
-            staffEmail: staffEmail.value,
-            staffPassword: staffPassword.value,
-          })
         })
           .then(resp => {
             return resp.json()
@@ -190,14 +186,25 @@
 
             // 從資料庫查完的資料回傳是否有該筆資料
             if (body.successfully) {
-              alert('登入成功');
+              Swal.fire({
+                icon: "success",
+                title: "成功",
+                text: "您已成功登入",
+              });
+              sessionStorage.setItem("staff", JSON.stringify(body));
               location.href = 'templateb.html';
             } else {
               msg.textContent = '使用者名稱或密碼錯誤';
+              Swal.fire({
+                icon: "error",
+                title: "失敗",
+                text: "您的名稱或密碼錯誤",
+              });
             }
           });
       });
     });
   </script>
 </body>
+
 </html>

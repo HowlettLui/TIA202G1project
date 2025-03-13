@@ -380,6 +380,7 @@
   <script src="./js/bootstrap.bundle.min.js"></script>
   <script src="https://kit.fontawesome.com/799bf36dfe.js" crossorigin="anonymous"></script>
   <script src="./vendors/slick/slick.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
   <script>
     $(".headerPage").load("./layout/header.html");
@@ -409,14 +410,28 @@
 
       if (userData) {
         const user = JSON.parse(userData);
-        console.log("歡迎回來,", user.username);
+        const account = user.account;
         // 這裡可以顯示會員資訊，例如：
         $('.usercenter').show();
         $('.logout').show();
+        $('.account').show();
+        $('#avatar').attr('src', user.avatar);
+        $('.login').hide();
+        $('.register').hide();
+        Swal.fire({
+          icon: "success",
+          title: "歡迎回來",
+          text: "",
+        });
       } else {
-        console.log("尚未登入");
         // 若未登入，可導向登入頁
         // window.location.href = "login.html";
+        $('.usercenter').hide();
+        $('.logout').hide();
+        $('.account').hide();
+        $('#avatar').hide;
+        $('.login').show();
+        $('.register').show();
       }
     };
 

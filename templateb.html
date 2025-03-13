@@ -61,6 +61,40 @@
   <script>
     $(".Navbar").load("./layout/navbar.html");
     $(".Sidebar").load("./layout/sidebar.html");
+
+    window.onload = function () {
+      const staffData = sessionStorage.getItem("staff");
+
+      if (staffData) {
+        const staff = JSON.parse(staffData);
+        const staffAccount = staff.staff_account;
+        const staffRole = staff.staff_role_id;
+        if (staffRole == 1) {
+          $('mameber_management').show();
+          $('team_managemaent').show();
+          $('game_management').show();
+          $('article_management').show();
+          $('order_management').show();
+          $('item_management').show();
+          $('cs_management').show();
+          
+          Swal.fire({
+            icon: "success",
+            title: "歡迎回來",
+            text: "",
+          });
+        }
+        Swal.fire({
+          icon: "success",
+          title: "歡迎回來",
+          text: "",
+        });
+      } else {
+        // 若未登入，可導向登入頁
+        // window.location.href = "login.html";
+
+      }
+    };
   </script>
 </body>
 

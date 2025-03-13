@@ -190,16 +190,20 @@
 
             // 從資料庫查完的資料回傳是否有該筆資料
             if (body.successfully) {
-              alert('登入成功');
-              sessionStorage.setItem("user", JSON.stringify(user));
-              // location.href = 'index.html';
+              Swal.fire({
+                icon: "success",
+                title: "成功!",
+                text: "您已成功登入",
+              });
+              sessionStorage.setItem("user", JSON.stringify(body));
+              location.href = 'index.html';
             } else {
               msg.textContent = body.message;
             }
           });
       });
 
-      
+
     });
   </script>
 </body>
