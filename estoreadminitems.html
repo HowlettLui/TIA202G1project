@@ -202,11 +202,11 @@
                 classForStatus = "bg-success-subtle";
                 break;
               default:
-                console.error('Error:', error);
+                console.error('Error: ', error);
                 Swal.fire({
                   icon: "error",
                   title: "Oops...",
-                  text: "! "
+                  text: "出了點狀況！請聯絡管理員"
                 });
                 break;
             }
@@ -218,7 +218,11 @@
               <td>${itemInfo.itemColor}</td>
               <td class=${itemInfo.itemStock > 0 ? "bg-success-subtle" : "bg-danger-subtle"}>${itemInfo.itemStock}</td>
               <td class=${classForStatus}>${status}</td>
-              <td><button class="btn btn-light editItemInfo" type="submit" data-itemInfoId=${itemInfo.itemInfoId}>編輯</button></td>
+              <td>
+                <button class="btn btn-light editItemInfo" type="submit" data-itemInfoId=${itemInfo.itemInfoId}>編輯</button>
+<!--                編輯完成之後做刪除-->
+<!--                <button class="btn btn-light deleteItemInfo" type="submit" data-itemInfoId=${itemInfo.itemInfoId}>刪除</button>-->
+              </td>
             </tr>`
             )
           }
@@ -233,28 +237,10 @@
         });
     })
 
+    // 編輯按鈕按下後跳轉
     $(document).on("click", ".editItemInfo", function () {
+      // todo: 將必要資訊帶往編輯頁面，應該是itemInfo
       window.location.href = "./estoreadminedit.html";
-      //   下面這段應該是在edit.html的那個頁面內
-      //   fetch(`estoreadmin/items/${$(this).attr("data-itemInfoId")}`, {
-      //     method: "PUT",
-      //     headers: {
-      //       'Content-Type': 'application/json'
-      //     },
-      //     body: JSON.stringify({})
-      //   })
-      //     .then(response => response.json())
-      //     .then(itemInfo?item? => {
-      //
-      //     })
-      //     .catch(error => {
-      //       console.error('Error:', error);
-      //       Swal.fire({
-      //         icon: "error",
-      //         title: "Oops...",
-      //         text: "出了點狀況！請聯絡管理員"
-      //       });
-      //     })
     });
 
   </script>
