@@ -24,12 +24,14 @@
     <!-- Datepicker -->
     <!-- jQuery -->
     <script src="../jquery/jquery-3.7.1.min.js"></script>
+
     <!-- jQuery UI -->
     <link
       rel="stylesheet"
       href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css"
     />
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+    <script src="../js/bootstrap.bundle.min.js"></script>
 
     <!-- --------------------summernote BS5-------------------- -->
     <!-- include libraries(jQuery, bootstrap) -->
@@ -77,23 +79,27 @@
 
     <!-- 開發畫面 -->
     <main>
-      <form action="/NGFW/articleadd" method="post" name="articleadd">
+      <form action="/NGFW/articleedit" method="post" name="articleedit">
         <div class="newsfedcontainer">
-          <p>新文章/編輯文章</p>
-
           <div class="mb-3">
-            <!-- <label for="titleimage" class="titleimage">標題圖片</label> -->
+            <label for="articletype" class="form-label">新增/編輯 類型</label>
+            <br />
+            <select id="articletype" name="articletype">
+              <option value="0">文章</option>
+              <option value="1">新聞</option>
+            </select>
+          </div>
+          <input
+            type="number"
+            style="display: none"
+            id="articleid"
+            name="articleid"
+            placeholder=""
+          />
+          <div class="mb-3">
             <p>標題圖片</p>
             <br />
-            <!-- <input
-              type="file"
-              name="titleimage"
-              accept="image/*"
-              onchange="loadFile(event)"
-            />
-            <img id="output" /> -->
             <input id="inp" type="file" />
-            <!-- <p id="b64"></p> -->
             <br />
             <input
               type="text"
@@ -127,9 +133,7 @@
 
           <div class="mb-3">
             <label for="articlecontent" class="form-label">文章內容</label>
-            <!-- <div id="summernote"></div> -->
             <textarea id="summernote" name="summernote"></textarea>
-            <!-- <input type="text" name="summernote" style="display: none" /> -->
           </div>
 
           <div>
@@ -144,9 +148,7 @@
             />
 
             <div class="publishing">
-              <button>取消</button>
-              <button type="button" id="btnst">儲存</button>
-              <button>預覽</button>
+              <button id="cancel">取消</button>
               <button type="submit" id="btnse">送出</button>
             </div>
           </div>
@@ -155,24 +157,12 @@
     </main>
     <section>
       <script>
-        // function setsummernote() {
-        //   var textareaValue = $("#summernote").summernote("code");
-        //   var summernote_input = document.getElementsByName("summernote")[0];
-        //   summernote_input.value = textareaValue;
+        // function se() {
+        //   //setsummernote();
+        //   document.articleadd.action = "/NGFW/articleadd";
+        //   document.articleadd.submit();
         // }
-        function se() {
-          //setsummernote();
-          document.articleadd.action = "/NGFW/articleadd";
-          document.articleadd.submit();
-        }
 
-        // var loadFile = function (event) {
-        //   var output = document.getElementById("output");
-        //   output.src = URL.createObjectURL(event.target.files[0]);
-        //   output.onload = function () {
-        //     URL.revokeObjectURL(output.src); // free memory
-        //   };
-        // };
         function readFile() {
           if (!this.files || !this.files[0]) return;
           const FR = new FileReader();
@@ -187,93 +177,90 @@
         }
         document.querySelector("#inp").addEventListener("change", readFile);
 
-        function send(e, form) {
-          e.preventDefault();
-          fetch(form.action, {
-            method: "post",
-            headers: {
-              "Content-Type":
-                "application/x-www-form-urlencoded; charset=utf-8",
-            },
-            body: {
-              "": "",
-            },
-          })
-            .then(function (response) {
-              alert(response);
-              return response.json();
-            })
-            .then(function (json) {
-              alert(json.errMsg);
-            });
+        document.getElementById("cancel").onclick = function () {
+          window.history.back();
+        };
 
-          console.log("We send post asynchronously (AJAX)");
-        }
+        // function send(e, form) {
+        //   e.preventDefault();
+        //   fetch(form.action, {
+        //     method: "post",
+        //     headers: {
+        //       "Content-Type":
+        //         "application/x-www-form-urlencoded; charset=utf-8",
+        //     },
+        //     body: {
+        //       "": "",
+        //     },
+        //   })
+        //     .then(function (response) {
+        //       alert(response);
+        //       return response.json();
+        //     })
+        //     .then(function (json) {
+        //       alert(json.errMsg);
+        //     });
 
-        // var fedit_btnst = document.getElementById("btnst");
-        // fedit_btnst.addEventListener("click", function () {
-        //   var is_confirm = confirm("是否確定要儲存？");
-        //   //console.log(is_confirm);
-
-        //   if (is_confirm) {
-        //     alert("儲存成功");
-        //   } else {
-        //     alert("取消");
-        //   }
-        // });
-        // var fedit_btnse = document.getElementById("btnse");
-        // fedit_btnse.addEventListener("click", function () {
-        //   var is_confirm = confirm("是否確定要送出？");
-        //   //console.log(is_confirm);
-
-        //   if (is_confirm) {
-        //     alert("送出成功");
-        //   } else {
-        //     alert("取消");
-        //   }
-        // });
+        //   console.log("We send post asynchronously (AJAX)");
+        // }
       </script>
     </section>
 
-    <script>
-      // $("#publishDate").datepicker({
-      //   // dateFormat: "yy-mm-dd", // 日期格式：年-月-日
-      //   changeMonth: true, // 啟用月份選擇
-      //   changeYear: true, // 啟用年份選擇
-      //   // showButtonPanel: true, // 顯示底部按鈕
-      //   // showAnim: "fadeIn", // 顯示動畫
-      // });
-
-      $("#summernote").summernote({
-        placeholder: "Hello_World!!",
-        tabsize: 2,
-        height: 300,
-        toolbar: [
-          ["style", ["style"]],
-          ["font", ["bold", "underline", "clear"]],
-          ["fontname", ["fontname"]],
-          ["color", ["color"]],
-          ["para", ["ul", "ol", "paragraph"]],
-          ["table", ["table"]],
-          ["insert", ["link", "picture", "video"]],
-          // ['view', ['fullscreen', 'codeview', 'help']]
-          ["view", ["codeview", "help"]],
-        ],
-      });
-    </script>
+    <script></script>
 
     <!-- 導入共用 footer -->
     <div class="footerPage"></div>
-    <script src="../jquery/jquery-3.7.1.min.js"></script>
+
     <script>
       $(".headerPage").load("../layout/header.html");
       $(".footerPage").load("../layout/footer.html");
     </script>
 
-    <script src="../js/bootstrap.bundle.min.js"></script>
     <script
       src="https://kit.fontawesome.com/799bf36dfe.js"
       crossorigin="anonymous"
     ></script>
+    <script>
+      $(document).ready(function () {
+        $("#summernote").summernote({
+          placeholder: "Hello_World!!",
+          tabsize: 2,
+          height: 300,
+          toolbar: [
+            ["style", ["style"]],
+            ["font", ["bold", "underline", "clear"]],
+            ["fontname", ["fontname"]],
+            ["color", ["color"]],
+            ["para", ["ul", "ol", "paragraph"]],
+            ["table", ["table"]],
+            ["insert", ["link", "picture", "video"]],
+            // ['view', ['fullscreen', 'codeview', 'help']]
+            ["view", ["codeview", "help"]],
+          ],
+        });
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const articleId = urlParams.get("articleId");
+        $.ajax({
+          url: "/NGFW/articleedit?articleId=" + articleId,
+          method: "GET",
+          dataType: "json",
+          success: function (articles) {
+            $("#articleid").val(articleId);
+            $("#articletype").val(articles.articleType);
+            $("#maintitle").val(articles.mainTitle);
+            $("#publishDate").val(articles.publishDate.replaceAll("/", "-"));
+            $("#img").attr("src", articles.newsPhoto);
+            $("#b64").val(articles.newsPhoto);
+            $("#subtitle").val(articles.subTitle);
+            $("#summernote").summernote("code", articles.content);
+          },
+          error: function (xhr, status, error) {
+            // alert("資料載入失敗：" + error);
+            console.error("Error fetching data:", error);
+          },
+        });
+      });
+    </script>
   </body>
 </html>

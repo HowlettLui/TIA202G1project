@@ -35,7 +35,7 @@
       }
       div.newsbmglisttitle {
         display: flex;
-        margin: 5px 0 5px 0;
+        /* margin: 5px 0 5px 0; */
       }
 
       div.newsbmglistcontainer2 {
@@ -47,18 +47,23 @@
       }
       div div.author {
         width: 150px;
+        /* margin-right: 100px; */
       }
       div div.article {
         width: 300px;
+        /* margin-right: 50px; */
       }
       div div.status {
         width: 135px;
+        /* margin-right: 50px; */
       }
       div div.submitdate {
         width: 200px;
+        /* margin-right: 50px; */
       }
       div div.publishingdate {
         width: 200px;
+        /* margin-right: 50px; */
       }
       div.newsbmglistcontainer2 button {
         font-size: 14px;
@@ -84,39 +89,41 @@
         </div>
 
         <div class="newsbmglisttitle">
-          <input class="chb" type="checkbox" />
-          <div class="author">作者</div>
+          <div class="author" style="margin-left: 19px">作者</div>
           <div class="article">文章</div>
           <div class="status">狀態</div>
           <div class="submitdate">送出時間</div>
           <div class="publishingdate">發表時間</div>
         </div>
         <hr />
-        <div class="newsbmglistcontainer2">
-          <input class="chb" type="checkbox" />
-          <div class="author">我是作者</div>
-          <div class="article">文章標題</div>
-          <div class="status">審核中</div>
-          <div class="submitdate">yyyy/mm/dd/hh/MM</div>
-          <div class="publishingdate">yyyy/mm/dd/hh/MM</div>
-          <div class="bt">
-            <button>審核管理</button>
-            <button>核准文章</button>
+        <div class="mgrarticlelist" id="mgrarticlelist">
+          <!-- <div class="newsbmglistcontainer2">
+            <input class="chb" type="checkbox" />
+            <div class="author">我是作者</div>
+            <div class="article">文章標題</div>
+            <div class="status">審核中</div>
+            <div class="submitdate">yyyy/mm/dd</div>
+            <div class="publishingdate">yyyy/mm/dd</div>
+            <div class="bt">
+              <button>審核管理</button>
+              <button>核准文章</button>
+            </div>
           </div>
+          <hr /> -->
         </div>
-        <hr />
-        <div class="newsbmglistcontainer2">
+        <!-- <hr /> -->
+        <!-- <div class="newsbmglistcontainer2">
           <input class="chb" type="checkbox" />
           <div class="author">作者B君</div>
           <div class="article">文章標題</div>
           <div class="status">審核中</div>
-          <div class="submitdate">yyyy/mm/dd/hh/MM</div>
-          <div class="publishingdate">yyyy/mm/dd/hh/MM</div>
+          <div class="submitdate">yyyy/mm/dd</div>
+          <div class="publishingdate">yyyy/mm/dd</div>
           <div class="bt">
             <button>審核管理</button>
             <button>核准文章</button>
           </div>
-        </div>
+        </div> -->
       </div>
     </main>
 
@@ -133,5 +140,61 @@
       src="https://kit.fontawesome.com/799bf36dfe.js"
       crossorigin="anonymous"
     ></script>
+
+    <script>
+      $(document).ready(function () {
+        // const urlParams = new URLSearchParams(window.location.search);
+        // const articleType = urlParams.get("articleType");
+        // $("#dropdownMenuButton1").text(
+        //   articleType == 0 ? "文章" : articleType == 1 ? "新聞" : "所有分類"
+        // );
+
+        // var tmurl = "/NGFW/articleindex";
+        // if (articleType != null) {
+        //   tmurl += "?articleType=" + articleType;
+        // }
+        $.ajax({
+          url: "/NGFW/articlesmgr",
+          method: "GET",
+          dataType: "json",
+          success: function (articles) {
+            let tableBody = $("#mgrarticlelist");
+            tableBody.empty();
+            articles.forEach((article) => {
+              let row = `<div class="newsbmglistcontainer2">
+              <input class="chb" type="checkbox" />
+              <div class="author">${article.userId}</div>
+              <div class="article">${article.mainTitle}</div>
+              <div class="status">${article.status}</div>
+              <div class="submitdate">${article.createTime}</div>
+              <div class="publishingdate">${article.publishDate}</div>
+              <div class="bt">
+                <button onclick="location.href='/NGFW/newsb/news_bmgrview.html?articleId=${article.articleId}'">審核管理</button>
+                <button>核准文章</button>
+              </div>
+            </div>
+            <hr />`;
+              tableBody.append(row);
+            });
+          },
+          error: function (xhr, status, error) {
+            console.error("Error fetching data:", error);
+          },
+        });
+      });
+    </script>
   </body>
 </html>
+<!-- switch (${article.status}) {
+  case 0:
+    <div class="status">待審核</div>;
+    break;
+  case 1:
+    <div class="status">已上版</div>;
+    break;
+  case 2:
+    <div class="status">已下架</div>;
+    break;
+  default:
+    <div class="status">未知</div>;
+} -->
