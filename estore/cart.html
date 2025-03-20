@@ -141,8 +141,8 @@
   let totalPrice;
 
   $(document).ready(function () {
-    // todo: 應該要取userId來用，應為fetch (`cart/${sessionStorage.getItem("userId")}`)
-    fetch("cart/601")
+    // todo: 應該要取userId來用，應為fetch (`/NGFW/estore/cart/${sessionStorage.getItem("userId")}`)
+    fetch("/NGFW/estore/cart/601")
       .then(response => response.json())
       .then(itemInfos => {
         if (itemInfos.length === 0) {
@@ -306,8 +306,8 @@
 
   // 更新資料庫中的購物車內容
   async function editItemInfoInCart(itemInfoId, itemCount) {
-    // todo: 應該用 fetch(`cart/editCart/${sessionStorage.getItem("userId")}/${itemInfoId}`, {
-    fetch(`cart/editCart/601/${itemInfoId}`, {
+    // todo: 應該用 fetch(`/NGFW/estore/cart/editCart/${sessionStorage.getItem("userId")}/${itemInfoId}`, {
+    fetch(`/NGFW/estore/cart/editCart/601/${itemInfoId}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -360,8 +360,8 @@
 
   // 從資料庫中刪除購物車中的iteminfo
   async function deleteItemInfoInCart(itemInfoId) {
-    // todo: 應該用 fetch(`cart/delete/${sessionStorage.getItem("userId")}/${itemInfoId}`, {
-    fetch(`cart/delete/601/${itemInfoId}`, {
+    // todo: 應該用 fetch(`/NGFW/estore/cart/delete/${sessionStorage.getItem("userId")}/${itemInfoId}`, {
+    fetch(`/NGFW/estore/cart/delete/601/${itemInfoId}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -395,7 +395,7 @@
 
   // 更新商品價格
   const updateItemPriceInCart = (itemId) => {
-    return fetch(`item/price/${itemId}`)
+    return fetch(`/NGFW/estore/item/price/${itemId}`)
       .then(response => response.text());
   };
 

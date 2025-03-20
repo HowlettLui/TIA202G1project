@@ -139,7 +139,7 @@
   $(".Sidebar").load("./layout/sidebar.html");
 
   $(function () {
-    fetch("estoreadmin/items")
+    fetch("/NGFW/estoreadmin/items")
       .then(response => response.json())
       .then(items => {
         for (let item of items) {
@@ -196,7 +196,7 @@
       $(this).find("i.arrow").removeClass("fa-angle-down").addClass("fa-angle-left");
     }
 
-    fetch(`estoreadmin/items/${$(this).attr("data-bs-target").slice(1)}`)
+    fetch(`/NGFW/estoreadmin/items/${$(this).attr("data-bs-target").slice(1)}`)
       .then(response => response.json())
       .then(item => {
         $("#" + item.itemId).find("tbody.itemInfosAdmin").empty();
@@ -281,7 +281,7 @@
     } else if ($(e.target).hasClass("removeItemInfoFromSale")) {
       status = -1;
     }
-    fetch(`estoreadmin/iteminfo/list/${itemInfoId}/${status}`, {
+    fetch(`/NGFW/estoreadmin/iteminfo/list/${itemInfoId}/${status}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json"

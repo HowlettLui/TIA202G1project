@@ -68,7 +68,7 @@
   $(".footerPage").load("../layout/footer.html");
 
   $(function () {
-    fetch("shop")
+    fetch("/NGFW/estore/shop")
       .then(response => response.json())
       .then(items => {
         for (let item of items) {

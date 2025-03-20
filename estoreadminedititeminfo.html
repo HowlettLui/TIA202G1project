@@ -123,7 +123,7 @@
 
   // 從admin items點編輯iteminfo按鈕過來之後，要帶它原本的內容到頁面上
   $(function () {
-    fetch(`estoreadmin/item/getiteminfo/${sessionStorage.getItem("itemInfoId")}`)
+    fetch(`/NGFW/estoreadmin/item/getiteminfo/${sessionStorage.getItem("itemInfoId")}`)
       .then(response => response.json())
       .then(itemInfo => {
         if (itemInfo.result) {
@@ -170,7 +170,7 @@
     } else {
 
       // 編輯itemInfo，發API
-      fetch(`estoreadmin/item/edititeminfo/${sessionStorage.getItem("itemInfoId")}`, {
+      fetch(`/NGFW/estoreadmin/item/edititeminfo/${sessionStorage.getItem("itemInfoId")}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json'

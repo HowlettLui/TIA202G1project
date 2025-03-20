@@ -205,7 +205,7 @@
   }
 
   $(function () {
-    fetch(`item/${localStorage.getItem("itemId")}`)
+    fetch(`/NGFW/estore/item/${localStorage.getItem("itemId")}`)
       .then(response => response.json())
       .then(item => {
         itemPhoto = JSON.parse(item.itemPhoto);
@@ -274,7 +274,7 @@
     let detailItemCount = $("select#itemStock option:selected").val();
 
     if (itemInfoId && (detailItemCount == parseInt(detailItemCount))) {
-      fetch(`cart/addToCart`, {
+      fetch(`/NGFW/estore/cart/addToCart`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
