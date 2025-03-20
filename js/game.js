@@ -163,7 +163,64 @@ const Tab1Component = defineComponent({
     return {};
   },
   template: `
-  <div>tab1</div>
+  <div class="row text-center mt-5">
+    <div class="col-5">隊伍1</div>
+    <div class="col-2"></div>
+    <div class="col-5">隊伍2</div>
+
+    <div class="w-100"></div>
+    <div class="col-5">40/100</div>
+    <div class="col-2">FG</div>
+    <div class="col-5">40/100</div>
+
+    <div class="w-100"></div>
+    <div class="col-5">40%</div>
+    <div class="col-2">FG%</div>
+    <div class="col-5">40%</div>
+
+    <div class="w-100"></div>
+    <div class="col-5">20/50</div>
+    <div class="col-2">2PFG</div>
+    <div class="col-5">20/50</div>
+
+    <div class="w-100"></div>
+    <div class="col-5">40%</div>
+    <div class="col-2">2PFG%</div>
+    <div class="col-5">40%</div>
+    
+    <div class="w-100"></div>
+    <div class="col-5">20/50</div>
+    <div class="col-2">3PFG</div>
+    <div class="col-5">20/50</div>
+    <div class="w-100"></div>
+    <div class="col-5">40%</div>
+    <div class="col-2">3PFG%</div>
+    <div class="col-5">40%</div>
+    <div class="w-100"></div>
+    <div class="col-5">20/50</div>
+    <div class="col-2">FT</div>
+    <div class="col-5">20/50</div>
+    <div class="w-100"></div>
+    <div class="col-5">40</div>
+    <div class="col-2">REB</div>
+    <div class="col-5">40</div>
+    <div class="w-100"></div>
+    <div class="col-5">40</div>
+    <div class="col-2">AST</div>
+    <div class="col-5">40</div>
+    <div class="w-100"></div>
+    <div class="col-5">40</div>
+    <div class="col-2">STL</div>
+    <div class="col-5">40</div>
+    <div class="w-100"></div>
+    <div class="col-5">40</div>
+    <div class="col-2">BLK</div>
+    <div class="col-5">40</div>
+    <div class="w-100"></div>
+    <div class="col-5">40</div>
+    <div class="col-2">TO</div>
+    <div class="col-5">40</div>
+  </div>
   `
 });
 
@@ -199,15 +256,15 @@ const app = createApp({
       <HeaderComponent />
       <GameInfoComponent />
       <div class="container mt-5">
-        <ul class="nav nav-tabs">
-          <li class="nav-item" @click="show('tab1')" :class="{ active: tab === 'tab1' }">
-            <a class="nav-link" href="#">球賽總攬</a>
+        <ul class="nav nav-pills nav-fill">
+          <li class="nav-item" @click="show('tab1')" >
+            <button class="nav-link" :class="{ active: tab === 'tab1' }">球賽總覽</button>
           </li>
-          <li class="nav-item" @click="show('tab2')" :class="{ active: tab === 'tab2' }">
-            <a class="nav-link" href="#">比賽數據</a>
+          <li class="nav-item" @click="show('tab2')">
+            <button class="nav-link" :class="{ active: tab === 'tab2' }">比賽數據</button>
           </li>
-          <li class="nav-item" @click="show('tab3')" :class="{ active: tab === 'tab3' }">
-            <a class="nav-link" href="#">比賽詳情</a>
+          <li class="nav-item" @click="show('tab3')">
+            <button class="nav-link" :class="{ active: tab === 'tab3' }">比賽詳情</button>
           </li>
         </ul>
         <Tab1Component v-if="tab === 'tab1'" />
