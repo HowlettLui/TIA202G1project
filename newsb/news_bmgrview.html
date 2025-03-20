@@ -31,6 +31,16 @@
         width: 85.3%;
         margin: 20px auto;
       }
+      .img-container {
+        width: 100%;
+        height: 500px; /* 設定容器高度 */
+        overflow: hidden;
+      }
+      .img-container img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
       div .texetarea-inherit {
         width: 117.2%;
         height: 100px;
@@ -51,12 +61,16 @@
     <!-- 開發畫面 -->
     <main>
       <div class="newscontent">
-        <span class="title" style="font-size: 30px">#Title</span>
+        <span
+          class="maintitle"
+          id="maintitle_id"
+          style="font-size: 30px"
+        ></span>
         <hr />
-        <span class="date">#Date</span>
+        <span class="publishDate" id="publishDate_id"></span>
 
         <div class="card mb-3">
-          <svg
+          <!-- <svg
             class="bd-placeholder-img card-img-top"
             width="100%"
             height="500"
@@ -69,11 +83,18 @@
             <title>Placeholder</title>
             <rect width="100%" height="100%" fill="#868e96"></rect>
             <text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image cap</text>
-          </svg>
+          </svg> -->
+          <div class="img-container">
+            <img
+              class="bd-placeholder-img card-img-top"
+              id="newsphoto_id"
+              src=""
+            />
+          </div>
           <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto
+            <h5 class="subtitle" id="subtitle_id"></h5>
+            <p class="card-text" id="card-text_id">
+              <!-- Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto
               doloribus quam iste commodi quisquam ipsam saepe amet, impedit,
               atque dolorum blanditiis, veritatis consequuntur et perferendis
               sed fuga fugit tempora temporibus nemo sunt. Aliquid nostrum
@@ -108,11 +129,11 @@
               natus vitae non tempora fugit soluta cumque corrupti voluptatem
               recusandae dignissimos ipsam id explicabo nam, assumenda deserunt,
               iste error animi nulla corporis ipsa porro sit iure. Consequatur,
-              similique. Error, minima totam.
+              similique. Error, minima totam. -->
             </p>
-            <p class="card-text">
+            <!-- <p class="card-text">
               <small class="text-body-secondary">Last updated 3 mins ago</small>
-            </p>
+            </p> -->
           </div>
         </div>
         <div class="review">
@@ -138,5 +159,28 @@
       src="https://kit.fontawesome.com/799bf36dfe.js"
       crossorigin="anonymous"
     ></script>
+
+    <script>
+      $(document).ready(function () {
+        const urlParams = new URLSearchParams(window.location.search);
+        const articleId = urlParams.get("articleId");
+        $.ajax({
+          url: "/NGFW/articlereview?articleId=" + articleId,
+          method: "GET",
+          dataType: "json",
+          success: function (articles) {
+            $("#maintitle_id").text(articles.mainTitle);
+            $("#publishDate_id").text(articles.publishDate);
+            $("#newsphoto_id").attr("src", articles.newsPhoto);
+            $("#subtitle_id").text(articles.subTitle);
+            $("#card-text_id").html(articles.content);
+          },
+          error: function (xhr, status, error) {
+            // alert("資料載入失敗：" + error);
+            console.error("Error fetching data:", error);
+          },
+        });
+      });
+    </script>
   </body>
 </html>
