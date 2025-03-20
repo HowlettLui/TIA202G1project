@@ -57,6 +57,7 @@
   <script src="./jquery/adminlte/jquery.overlayScrollbars.min.js"></script>
   <!-- AdminLTE App -->
   <script src="./js/adminlte/adminlte.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
   <script>
     $(".Navbar").load("./layout/navbar.html");
@@ -64,36 +65,92 @@
 
     window.onload = function () {
       const staffData = sessionStorage.getItem("staff");
+      const staff = JSON.parse(staffData);
+      const staffAccount = staff.staffAccount;
+      const staffRole = staff.staffRoleId;
+      const staffStatus = staff.staffStatus;
 
       if (staffData) {
-        const staff = JSON.parse(staffData);
-        const staffAccount = staff.staff_account;
-        const staffRole = staff.staff_role_id;
+
         if (staffRole == 1) {
-          $('mameber_management').show();
+          $('member_management').show();
           $('team_managemaent').show();
           $('game_management').show();
           $('article_management').show();
           $('order_management').show();
           $('item_management').show();
           $('cs_management').show();
-          
+
           Swal.fire({
             icon: "success",
             title: "歡迎回來",
             text: "",
           });
         }
-        Swal.fire({
-          icon: "success",
-          title: "歡迎回來",
-          text: "",
-        });
-      } else {
-        // 若未登入，可導向登入頁
-        // window.location.href = "login.html";
-
       }
+
+      // =======================  sidebar controll  =====================
+      $(".user_management").click(function () {
+        if (staffRole != 1) {
+          Swal.fire({
+            icon: "error",
+            title: "權限問題",
+            text: "請聯絡管理員",
+          }).then(() => {
+            window.location.href = "./templateb.html";
+          });
+        } else {
+          window.location.href = "./user/user_manage.html";
+        }
+      });
+
+      $('.staff_management').click(function () {
+        if (staffRole == 1) {
+          window.location.href = "./staff/staff_info.html";
+        } else {
+          window.location.href = "./staff/staff_list.html";
+        }
+      });
+
+      $('.team_list').click(function () {
+        Swal.fire({
+          icon: "error",
+          title: "施工中",
+          text: "敬請期待",
+        });
+      });
+
+      $('.player_list').click(function () {
+        Swal.fire({
+          icon: "error",
+          title: "施工中",
+          text: "敬請期待",
+        });
+      });
+
+      $('.cl_list').click(function () {
+        Swal.fire({
+          icon: "error",
+          title: "施工中",
+          text: "敬請期待",
+        });
+      });
+
+      $('.game_date').click(function () {
+        Swal.fire({
+          icon: "error",
+          title: "施工中",
+          text: "敬請期待",
+        });
+      });
+
+      $('.game_list').click(function () {
+        Swal.fire({
+          icon: "error",
+          title: "施工中",
+          text: "敬請期待",
+        });
+      });
     };
   </script>
 </body>

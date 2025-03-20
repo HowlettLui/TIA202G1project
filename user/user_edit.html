@@ -289,9 +289,9 @@
           phone: phone
         };
 
-        console.log('更新資料: ', requestData);
+        // console.log('更新資料: ', requestData);
 
-        fetch('user_edit', {
+        fetch('/NGFW/user/user_edit', {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json'
@@ -301,35 +301,22 @@
           .then(response => response.json())
           .then(data => {
             if (data.successfully) {
-              alert('更新成功:', data.message);
               Swal.fire({
                 icon: "success",
                 title: "更新成功!",
                 text: "",
               });
-              // // 更新 sessionStorage 中的資料
-              // sessionStorage.setItem("user", JSON.stringify(data)); 
-              // // 更新頁面上的資料
-              // sessionStorage.setItem("userId", user.userId);
-              // sessionStorage.setItem("name", name);
-              // sessionStorage.setItem("email", email);
-              // sessionStorage.setItem("phone", phone);
-              // // sessionStorage.setItem("image", image);
-              // currentUser.textContent = name;
-              // name.value = name;
-              // email.value = email;
-              // phone.value = phone;
-              // // image.value = image;
-              // console.log(user);
+              // 更新 sessionStorage 中的資料
+              // console.log('更新成功:', data);
+              sessionStorage.setItem("user.avatar", JSON.stringify(data.avatar));
+              sessionStorage.setItem("user.email", JSON.stringify(data.email));
+              sessionStorage.setItem("user.name", JSON.stringify(data.name));
+              sessionStorage.setItem("user.phone", JSON.stringify(data.phone)); 
+
+              // image.value = image;
+              console.log(user);
 
               window.location.href = '../user/user_info.html';
-
-              // 插入使用者資料
-              // $("#userid").val(user.userId);
-              // $("#name").val(user.name);
-              // $("#accout").val(user.account);
-              // $("#email").val(user.email);
-              // $("#phone").val(user.phone);
             } else {
               alert('更新失敗:', data.message);
             }
@@ -357,5 +344,10 @@
     //     });
     // })();
     // });
+
+    // 取消按鈕
+    $('#cancelBtn').on("click", function () {
+      window.location.href = '../user/user_info.html';
+    });
   </script>
 </body>

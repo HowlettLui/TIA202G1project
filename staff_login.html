@@ -186,13 +186,26 @@
 
             // 從資料庫查完的資料回傳是否有該筆資料
             if (body.successfully) {
-              Swal.fire({
-                icon: "success",
-                title: "成功",
-                text: "您已成功登入",
-              });
               sessionStorage.setItem("staff", JSON.stringify(body));
-              location.href = 'templateb.html';
+              const staffStatus = body.staffStatus;
+              if (staffStatus === 0) {
+                Swal.fire({
+                  icon: "error",
+                  title: "權限問題",
+                  text: "請聯絡管理員",
+                }).then(() => {
+                  sessionStorage.clear();
+                  window.location.href = 'staff_login.html';
+                });
+              } else {
+                Swal.fire({
+                  icon: "success",
+                  title: "成功",
+                  text: "您已成功登入",
+                }).then(() => {
+                  window.location.href = 'templateb.html';
+                });
+              }
             } else {
               msg.textContent = '使用者名稱或密碼錯誤';
               Swal.fire({

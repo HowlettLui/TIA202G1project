@@ -216,6 +216,8 @@
   </script>
   <script src="../js/bootstrap.bundle.min.js"></script>
   <script src="https://kit.fontawesome.com/799bf36dfe.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
   <script>
     $(document).ready(function () {
 
@@ -280,7 +282,7 @@
       });
 
       function checkOldPassword() {
-        fetch(`user_pwd/${(oldPassword.val())}`, {
+        fetch(`/NGFW/user/user_pwd/${(oldPassword.val())}`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json'
@@ -288,7 +290,12 @@
         })
           .then(resp => resp.json())
           .then(body => {
-            saveBtn.disabled = !body['successfully'];
+              saveBtn.disabled = !body['successfully'];
+              Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "舊密碼錯誤",
+              });
           });
       }
 
@@ -299,6 +306,8 @@
       $('#saveBtn').click(function (e) {
         // e.preventDefault();
         // 新密碼與確認密碼不符
+        checkOldPassword();
+
         if (newPassword != confirmPassword) {
           $('#result').text('驗證失敗 ❌，新密碼與驗證密不符，請再試一次').css('color', 'red');
           // generateCaptcha();
@@ -310,7 +319,6 @@
           // generateCaptcha();
         }
 
-        checkOldPassword();
 
         // 驗證碼輸入錯誤
         // if (captchaInput.toUpperCase() != captchaText) {
@@ -333,9 +341,9 @@
           password: newPassword.val(),
         };
 
-        console.log(npwdData);
+        // console.log(npwdData);
 
-        fetch('user_pwd', {
+        fetch('/NGFW/user/user_pwd', {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json'
@@ -346,17 +354,17 @@
           .then(data => {
             if (data.successfully) {
               alert('更新成功:', data.message);
-
-              sessionStorage.setItem("password", user.password);
-              const newUser = JSON.parse(userData);
-
+              sessionStorage.setItem("user.password", JSON.stringify(data.password));
               console.log(user);
-
+              
               Swal.fire({
                 icon: "success",
                 title: "更新成功",
                 text: "",
               });
+
+
+
 
               window.location.href = './user_info.html';
 
@@ -369,6 +377,8 @@
           });
       });
     });
+
+    // 取消按鈕
 
   </script>
 </body>
