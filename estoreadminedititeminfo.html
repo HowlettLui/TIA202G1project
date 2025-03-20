@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>上班不要看球賽管理系統</title>
+
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="./vendors/fontawesome-free/css/all.min.css">
+  <!-- overlayScrollbars -->
+  <link rel="stylesheet" href="./css/adminlte/OverlayScrollbars.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="./css/adminlte/adminlte.min.css">
+  <!-- Bootstrap 5 -->
+  <link rel="stylesheet" href="./css/bootstrap.min.css">
+
+  <!-- for ethan's part -->
+
+</head>
+
+<body class="hold-transition sidebar-mini">
+
+<!-- Site wrapper -->
+<div class="wrapper">
+
+  <!-- 導入共用 Navbar -->
+  <div class="Navbar"></div>
+  <!-- 導入共用 Sidebar -->
+  <div class="Sidebar"></div>
+
+  <!-- 開發畫面區塊start -->
+  <section id="mainBlock" class="content-wrapper">
+    <!-- content-header -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>編輯商品</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">商品管理</a></li>
+              <li class="breadcrumb-item active">編輯商品</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- content-header end -->
+
+    <!-- content，實際頁面內容 -->
+    <section class="content">
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-sm-6">
+              <!-- text input -->
+              <div class="form-group">
+                <label for="item_color">商品顏色</label>
+                <input id="item_color" name="item_color" type="text" class="form-control item_related"
+                       placeholder="Enter ...">
+                <div class="invalid-feedback">請輸入顏色！</div>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <!-- text input -->
+              <div class="form-group">
+                <label for="item_size">商品大小</label>
+                <input id="item_size" name="item_size" type="text" class="form-control item_related"
+                       placeholder="Enter ...">
+                <div class="invalid-feedback">請輸入大小！</div>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <!-- text input -->
+              <div class="form-group">
+                <label for="item_stock">商品數量</label>
+                <input id="item_stock" name="item_stock" type="text" class="form-control should_be_a_number"
+                       placeholder="Enter ...">
+                <div class="invalid-feedback">請輸入數量！</div>
+              </div>
+            </div>
+
+          </div>
+          <div class="mt-4">
+            <button id="save_item" class="btn btn-success" type="button">儲存商品</button>
+            <button id="publish_item" class="btn btn-primary" type="button">商品上架</button>
+            <button id="cancel" class="btn btn-warning" type="button">取消</button>
+          </div>
+        </div>
+        <!-- card-body end -->
+      </div>
+      <!-- card end -->
+    </section>
+    <!-- content end -->
+  </section>
+  <!-- 開發畫面區塊end -->
+
+</div>
+<!-- wrapper end -->
+
+<!-- jQuery -->
+<script src="./jquery/adminlte/jquery.min.js"></script>
+<!-- Bootstrap 5 -->
+<script src="./js/bootstrap.bundle.min.js"></script>
+<!-- overlayScrollbars -->
+<script src="./jquery/adminlte/jquery.overlayScrollbars.min.js"></script>
+<!-- AdminLTE App -->
+<script src="./js/adminlte/adminlte.min.js"></script>
+
+<!-- for ethan's part -->
+<!-- sweetalert2 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+
+  $(".Navbar").load("./layout/navbar.html");
+  $(".Sidebar").load("./layout/sidebar.html");
+
+  // 從admin items點編輯iteminfo按鈕過來之後，要帶它原本的內容到頁面上
+  $(function () {
+    fetch(`/NGFW/estoreadmin/item/getiteminfo/${sessionStorage.getItem("itemInfoId")}`)
+      .then(response => response.json())
+      .then(itemInfo => {
+        if (itemInfo.result) {
+          $('#item_color').val(itemInfo.itemColor);
+          $('#item_size').val(itemInfo.itemSize);
+          $('#item_stock').val(itemInfo.itemStock);
+        } else {
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: itemInfo.message
+          });
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "出了點狀況！請聯絡管理員"
+        });
+      })
+  })
+
+  $(document).on('blur', 'input.item_related', function () {
+    validateFields($(this));
+  })
+
+  $(document).on('blur', 'input.should_be_a_number', function () {
+    validateFields($(this), true);
+  })
+
+  $(document).on("click", "#save_item, #publish_item", function (e) {
+    let itemStatus = e.target.id === "save_item" ? 0 : 1;
+    let isValid = validateFields($('input.item_related'));
+    let numValid = validateFields($('input.should_be_a_number'), true);
+
+    if (!isValid || !numValid) {
+      Swal.fire({
+        icon: "warning",
+        title: "請再確認",
+        text: "請輸入完整資料！"
+      });
+    } else {
+
+      // 編輯itemInfo，發API
+      fetch(`/NGFW/estoreadmin/item/edititeminfo/${sessionStorage.getItem("itemInfoId")}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          itemInfoId: sessionStorage.getItem("itemInfoId"),
+          itemSize: $('#item_size').val(),
+          itemColor: $('#item_color').val(),
+          itemStock: $('#item_stock').val(),
+          itemStatus: itemStatus,
+          // todo: staffId: sessionStorage.getItem("staffId")
+          staffId: 1
+        })
+      })
+        .then(resp => resp.json())
+        .then(itemInfo => {
+          if (itemInfo.result) {
+            Swal.fire({
+              icon: "success",
+              title: "更新成功",
+              text: itemInfo.message,
+            })
+              .then(() => {
+                window.location.href = "./estoreadminitems.html";
+              })
+          } else {
+            Swal.fire({
+              icon: "error",
+              title: "更新失敗",
+              text: itemInfo.message,
+            })
+          }
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "出了點狀況！請聯絡管理員"
+          });
+        });
+    }
+  });
+
+  $(document).on("click", "#cancel", function () {
+    window.location.href = "estoreadminitems.html";
+  })
+
+  function validateFields(items, checkNumber = false) {
+    let allValid = true;
+    items.each(function () {
+      let value = $(this).val().trim();
+      let isValid = value !== "";
+
+      if (checkNumber) {
+        isValid = isValid && !isNaN(value);
+      }
+
+      if (isValid) {
+        $(this).addClass("is-valid").removeClass("is-invalid");
+      } else {
+        $(this).addClass("is-invalid").removeClass("is-valid");
+        allValid = false;
+      }
+    });
+    return allValid;
+  }
+</script>
+
+</body>
+
+</html>

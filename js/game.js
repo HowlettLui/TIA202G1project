@@ -127,71 +127,152 @@ const FooterComponent = defineComponent({
   `
 });
 
-const headerApp = createApp({
-  components: { HeaderComponent },
+const GameInfoComponent = defineComponent({
+  setup() {
+    return {};
+  },
   template: `
-    <div>
-      <HeaderComponent />
+    <div class="container mt-5">
+      <div class="row row-cols-lg-auto">
+        <div class="col-12">
+          <h5>mm/DD HH:MM</h5>
+        </div>
+        <div class="col-12">
+          <span>地點  進場人數:XXXX</span>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col-5 text-center">
+          <h1>隊伍1</h1>
+          <h2>隊伍1得分</h2>
+        </div>
+        <div class="col-2 text-center">
+          <h1>VS</h1>
+        </div>
+        <div class="col-5 text-center">
+          <h1>隊伍2</h1>
+          <h2>隊伍2得分</h2>
+        </div>
+      </div>
     </div>
   `
 });
-headerApp.mount("#header");
 
-const footerApp = createApp({
-  components: { FooterComponent },
+const Tab1Component = defineComponent({
+  setup() {
+    return {};
+  },
+  template: `
+  <div class="row text-center mt-5">
+    <div class="col-5">隊伍1</div>
+    <div class="col-2"></div>
+    <div class="col-5">隊伍2</div>
+
+    <div class="w-100"></div>
+    <div class="col-5">40/100</div>
+    <div class="col-2">FG</div>
+    <div class="col-5">40/100</div>
+
+    <div class="w-100"></div>
+    <div class="col-5">40%</div>
+    <div class="col-2">FG%</div>
+    <div class="col-5">40%</div>
+
+    <div class="w-100"></div>
+    <div class="col-5">20/50</div>
+    <div class="col-2">2PFG</div>
+    <div class="col-5">20/50</div>
+
+    <div class="w-100"></div>
+    <div class="col-5">40%</div>
+    <div class="col-2">2PFG%</div>
+    <div class="col-5">40%</div>
+    
+    <div class="w-100"></div>
+    <div class="col-5">20/50</div>
+    <div class="col-2">3PFG</div>
+    <div class="col-5">20/50</div>
+    <div class="w-100"></div>
+    <div class="col-5">40%</div>
+    <div class="col-2">3PFG%</div>
+    <div class="col-5">40%</div>
+    <div class="w-100"></div>
+    <div class="col-5">20/50</div>
+    <div class="col-2">FT</div>
+    <div class="col-5">20/50</div>
+    <div class="w-100"></div>
+    <div class="col-5">40</div>
+    <div class="col-2">REB</div>
+    <div class="col-5">40</div>
+    <div class="w-100"></div>
+    <div class="col-5">40</div>
+    <div class="col-2">AST</div>
+    <div class="col-5">40</div>
+    <div class="w-100"></div>
+    <div class="col-5">40</div>
+    <div class="col-2">STL</div>
+    <div class="col-5">40</div>
+    <div class="w-100"></div>
+    <div class="col-5">40</div>
+    <div class="col-2">BLK</div>
+    <div class="col-5">40</div>
+    <div class="w-100"></div>
+    <div class="col-5">40</div>
+    <div class="col-2">TO</div>
+    <div class="col-5">40</div>
+  </div>
+  `
+});
+
+const Tab2Component = defineComponent({
+  setup() {
+    return {};
+  },
+  template: `
+  <div>tab2</div>
+  `
+});
+
+const Tab3Component = defineComponent({
+  setup() {
+    return {};
+  },
+  template: `
+  <div>tab3</div>
+  `
+});
+
+const app = createApp({
+  components: { HeaderComponent, FooterComponent, GameInfoComponent, Tab1Component, Tab2Component, Tab3Component },
+  setup() {
+    const tab = ref('tab1');
+    const show = (tabName) => {
+      tab.value = tabName;
+    };
+    return { tab, show };
+  },
   template: `
     <div>
+      <HeaderComponent />
+      <GameInfoComponent />
+      <div class="container mt-5">
+        <ul class="nav nav-pills nav-fill">
+          <li class="nav-item" @click="show('tab1')" >
+            <button class="nav-link" :class="{ active: tab === 'tab1' }">球賽總覽</button>
+          </li>
+          <li class="nav-item" @click="show('tab2')">
+            <button class="nav-link" :class="{ active: tab === 'tab2' }">比賽數據</button>
+          </li>
+          <li class="nav-item" @click="show('tab3')">
+            <button class="nav-link" :class="{ active: tab === 'tab3' }">比賽詳情</button>
+          </li>
+        </ul>
+        <Tab1Component v-if="tab === 'tab1'" />
+        <Tab2Component v-if="tab === 'tab2'" />
+        <Tab3Component v-if="tab === 'tab3'" />
+      </div>
       <FooterComponent />
     </div>
   `
 });
-footerApp.mount("#footer");
-
-
-document.addEventListener('DOMContentLoaded', function () {
-  var calendarEl = document.getElementById('calendar');
-  var calendar = new FullCalendar.Calendar(calendarEl, {
-    initialView: 'dayGridMonth',
-    events: '/backend/game/events',
-    // events: [
-    //   {
-    //     title: "Game001",
-    //     start: "2025-03-12 17:00",
-    //     extendedProps: {
-    //       home: 'AAA',
-    //       away: 'BBB'
-    //     }
-    //   }
-    // ],
-    stickyFooterScrollbar: true,
-    eventContent: function(arg) {
-      let contentEl = document.createElement('div')
-      contentEl.classList.add("card")
-      contentEl.style.width = '100%'
-      
-      let cardBody = document.createElement('div')
-      cardBody.classList.add("card-body", "text-center")
-
-      let cardTitle = document.createElement('h5')
-      cardTitle.classList.add("card-title")
-      cardTitle.textContent = arg.event.title
-
-      let cardText = document.createElement('p')
-      cardText.classList.add("card-text")
-      cardText.textContent = arg.event.extendedProps.homeTeam + ' vs ' + arg.event.extendedProps.awayTeam
-
-      let linxEl = document.createElement('a')
-      linxEl.classList.add("stretched-link")
-      linxEl.href = '/game.html?id=' + arg.event.title
-      
-      cardBody.appendChild(cardTitle)
-      cardBody.appendChild(cardText)
-      contentEl.appendChild(cardBody)
-      contentEl.appendChild(linxEl)
-      
-      let arrayDomNodes = [ contentEl ]
-      return { domNodes: arrayDomNodes }
-    }
-  });
-  calendar.render();
-});
+app.mount("#app")
