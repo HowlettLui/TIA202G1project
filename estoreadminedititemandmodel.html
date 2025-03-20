@@ -20,9 +20,9 @@
 
   <!-- for ethan's part -->
   <!-- summernote -->
-  <link rel="stylesheet" href="./vendors/summernote-0.9.0-dist/summernote-bs5.min.css">
+  <!--  <link rel="stylesheet" href="./vendors/summernote-0.9.0-dist/summernote-bs5.min.css">-->
   <!-- Uppy -->
-  <link href="https://releases.transloadit.com/uppy/v4.13.3/uppy.min.css" rel="stylesheet">
+  <!--  <link href="https://releases.transloadit.com/uppy/v4.13.3/uppy.min.css" rel="stylesheet">-->
 
 </head>
 
@@ -43,12 +43,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>新增商品</h1>
+            <h1>編輯商品</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">商品管理</a></li>
-              <li class="breadcrumb-item active">新增商品</li>
+              <li class="breadcrumb-item active">編輯商品</li>
             </ol>
           </div>
         </div>
@@ -63,10 +63,10 @@
           <div class="row">
 
             <!-- photos upload with Uppy -->
-            <div class="col-12">
-              <label>商品照片</label>
-              <div id="uppy"></div>
-            </div>
+            <!--            <div class="col-12">-->
+            <!--              <label>商品照片</label>-->
+            <!--              <div id="uppy"></div>-->
+            <!--            </div>-->
             <!-- photos upload with Uppy end -->
 
             <!-- photos upload with input -->
@@ -95,24 +95,24 @@
                 <div class="invalid-feedback">請輸入名稱！</div>
               </div>
             </div>
-            <div class="col-sm-6">
-              <!-- text input -->
-              <div class="form-group">
-                <label for="item_color">商品顏色</label>
-                <input id="item_color" name="item_color" type="text" class="form-control item_related"
-                       placeholder="Enter ...">
-                <div class="invalid-feedback">請輸入顏色！</div>
-              </div>
-            </div>
-            <div class="col-sm-6">
-              <!-- text input -->
-              <div class="form-group">
-                <label for="item_size">商品大小</label>
-                <input id="item_size" name="item_size" type="text" class="form-control item_related"
-                       placeholder="Enter ...">
-                <div class="invalid-feedback">請輸入大小！</div>
-              </div>
-            </div>
+            <!--            <div class="col-sm-6">-->
+            <!--              &lt;!&ndash; text input &ndash;&gt;-->
+            <!--              <div class="form-group">-->
+            <!--                <label for="item_color">商品顏色</label>-->
+            <!--                <input id="item_color" name="item_color" type="text" class="form-control item_related"-->
+            <!--                       placeholder="Enter ...">-->
+            <!--                <div class="invalid-feedback">請輸入顏色！</div>-->
+            <!--              </div>-->
+            <!--            </div>-->
+            <!--            <div class="col-sm-6">-->
+            <!--              &lt;!&ndash; text input &ndash;&gt;-->
+            <!--              <div class="form-group">-->
+            <!--                <label for="item_size">商品大小</label>-->
+            <!--                <input id="item_size" name="item_size" type="text" class="form-control item_related"-->
+            <!--                       placeholder="Enter ...">-->
+            <!--                <div class="invalid-feedback">請輸入大小！</div>-->
+            <!--              </div>-->
+            <!--            </div>-->
             <div class="col-sm-6">
               <!-- text input -->
               <div class="form-group">
@@ -140,26 +140,25 @@
                 <div class="invalid-feedback">請輸入價格！</div>
               </div>
             </div>
-            <div class="col-sm-6">
-              <!-- text input -->
-              <div class="form-group">
-                <label for="item_stock">商品數量</label>
-                <input id="item_stock" name="item_stock" type="text" class="form-control should_be_a_number"
-                       placeholder="Enter ...">
-                <div class="invalid-feedback">請輸入數量！</div>
-              </div>
-            </div>
+            <!--            <div class="col-sm-6">-->
+            <!--              &lt;!&ndash; text input &ndash;&gt;-->
+            <!--              <div class="form-group">-->
+            <!--                <label for="item_stock">商品數量</label>-->
+            <!--                <input id="item_stock" name="item_stock" type="text" class="form-control should_be_a_number"-->
+            <!--                       placeholder="Enter ...">-->
+            <!--                <div class="invalid-feedback">請輸入數量！</div>-->
+            <!--              </div>-->
+            <!--            </div>-->
 
             <!-- summernote -->
-            <div class="col-12">
-              <label for="summernote">商品詳細內容</label>
-              <div id="summernote">請輸入商品詳細內容</div>
-            </div>
+            <!--            <div class="col-12">-->
+            <!--              <label for="summernote">商品詳細內容</label>-->
+            <!--              <div id="summernote">請輸入商品詳細內容</div>-->
+            <!--            </div>-->
 
           </div>
           <div class="mt-4">
             <button id="save_item" class="btn btn-success" type="button">儲存商品</button>
-            <button id="publish_item" class="btn btn-primary" type="button">商品上架</button>
             <button id="cancel" class="btn btn-warning" type="button">取消</button>
           </div>
         </div>
@@ -185,18 +184,55 @@
 
 <!-- for ethan's part -->
 <!-- summernote -->
-<script src="./vendors/summernote-0.9.0-dist/summernote-bs5.js"></script>
+<!--<script src="./vendors/summernote-0.9.0-dist/summernote-bs5.js"></script>-->
 <!-- sweetalert2 -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
-  $(function () {
-    // Summernote
-    $('#summernote').summernote()
-  })
+  // $(function () {
+  //   // Summernote
+  //   $('#summernote').summernote()
+  // })
 
   $(".Navbar").load("./layout/navbar.html");
   $(".Sidebar").load("./layout/sidebar.html");
+
+  let itemId;
+  let itemModelId;
+
+  // todo: 編輯頁面還沒做完，從admin items點編輯按鈕過來之後，要帶它原本的內容到頁面上
+  $(function () {
+    fetch(`estoreadmin/item/getitem/${sessionStorage.getItem("itemId")}`)
+      .then(response => response.json())
+      .then(item => {
+        if (item.result) {
+          itemId = item.itemId;
+          itemModelId = item.itemModel.itemModelId;
+          $('#item_model').val(item.itemModel.itemModel);
+          $('#item_name').val(item.itemName);
+          $('#item_type').val(item.itemType);
+          $('#item_content').val(item.itemContent);
+          $('#item_price').val(item.itemPrice);
+          // itemInfo.item.itemPhoto;
+          // itemInfo.item.itemDetails;
+        } else {
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "出了點狀況！請聯絡管理員"
+          });
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "出了點狀況！請聯絡管理員"
+        });
+      })
+
+  })
 
   $(document).on('blur', 'input.item_related', function () {
     validateFields($(this));
@@ -206,13 +242,12 @@
     validateFields($(this), true);
   })
 
-  let itemPhotosPath;
+  // let itemPhotosPath;
 
-  $(document).on("click", "#save_item, #publish_item", function (e) {
-    let itemStatus = e.target.id === "save_item" ? 0 : 1;
+  $(document).on("click", "#save_item", function (e) {
     let isValid = validateFields($('input.item_related'));
     let numValid = validateFields($('input.should_be_a_number'), true);
-    let summernoteValid = ($('#summernote').summernote('code') !== "請輸入商品詳細內容") && ($('#summernote').summernote('code').trim() !== "");
+    // let summernoteValid = ($('#summernote').summernote('code') !== "請輸入商品詳細內容") && ($('#summernote').summernote('code').trim() !== "");
 
     if (!isValid || !numValid) {
       Swal.fire({
@@ -220,61 +255,57 @@
         title: "請再確認",
         text: "請輸入完整資料！"
       });
-    } else if (!itemPhotosPath) {
-      Swal.fire({
-        icon: "warning",
-        title: "請再確認",
-        text: "請先上傳照片"
-      });
-    } else if (!summernoteValid) {
-      Swal.fire({
-        icon: "warning",
-        title: "請再確認",
-        text: "請輸入商品詳細內容！"
-      });
+      // } else if (!itemPhotosPath) {  // todo: Uppy可以讀上來之後再改回(!itemPhotosPath)
+      //   Swal.fire({
+      //     icon: "warning",
+      //     title: "請再確認",
+      //     text: "請先上傳照片"
+      //   });
+      // } else if (!summernoteValid) {  // todo: summernote可以讀上來之後再改回(!summernoteValid)
+      //   Swal.fire({
+      //     icon: "warning",
+      //     title: "請再確認",
+      //     text: "請輸入商品詳細內容！"
+      //   });
     } else {
       const itemModel = {
+        itemModelId: itemModelId,
         itemModel: $('#item_model').val(),
         // todo: staffId: sessionStorage.getItem("staffId")
         staffId: 1
       }
       const item = {
+        itemId: itemId,
+        itemModelId: itemModelId,
         itemName: $('#item_name').val(),
         itemContent: $('#item_content').val(),
         itemType: $('#item_type').val(),
         itemPrice: $('#item_price').val(),
-        itemDetails: $('#summernote').summernote('code'),
-        itemPhoto: itemPhotosPath.toString(),
-        // todo: staffId: sessionStorage.getItem("staffId")
-        staffId: 1
-      }
-      const itemInfo = {
-        itemSize: $('#item_size').val(),
-        itemColor: $('#item_color').val(),
-        itemStock: $('#item_stock').val(),
-        itemStatus: itemStatus,
+        // itemDetails: $('#summernote').summernote('code'), // todo: summernote可以讀上來之後再改回
+        // itemPhoto: itemPhotosPath.toString(), // todo: Uppy可以讀上來之後再改回
         // todo: staffId: sessionStorage.getItem("staffId")
         staffId: 1
       }
 
-      fetch('estoreadmin/add', {
-        method: 'POST',
+
+      // todo: 編輯itemModel、item，發API
+      fetch(`estoreadmin/item/edititem/${sessionStorage.getItem("itemId")}`, {
+        method: 'PUT',
         headers: {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
           itemModel,
-          item,
-          itemInfo
+          item
         })
       })
         .then(resp => resp.json())
-        .then(itemInfo => {
-          if (itemInfo.result) {
+        .then(item => {
+          if (item.result) {
             Swal.fire({
               icon: "success",
-              title: "新增成功",
-              text: itemInfo.message,
+              title: "更新成功",
+              text: item.message,
             })
               .then(() => {
                 window.location.href = "./estoreadminitems.html";
@@ -282,9 +313,9 @@
           } else {
             Swal.fire({
               icon: "error",
-              title: "新增失敗",
-              text: itemInfo.message,
-            });
+              title: "更新失敗",
+              text: item.message,
+            })
           }
         })
         .catch((error) => {
@@ -325,58 +356,38 @@
 
 <!-- Uppy -->
 <script type="module">
-  import {Uppy, Dashboard, XHRUpload} from "https://releases.transloadit.com/uppy/v4.13.3/uppy.min.mjs"
-
-  const uppy = new Uppy({
-    restrictions: {
-      maxFileSize: 5 * 1024 * 1024,
-      allowedFileTypes: ['image/*']
-    }
-  })
-  uppy
-    .use(Dashboard, {
-      target: '#uppy',
-      inline: true,
-      width: 1600,
-      showProgressDetails: true,
-      proudlyDisplayPoweredByUppy: true,
-    })
-    .use(XHRUpload, {
-      endpoint: 'http://localhost:8080/NGFW/estoreadmin/upload',
-      fieldName: 'item_photo',
-      headers: {
-        'X-Requested-With': 'XMLHttpRequest'
-      }
-    });
-
-  // todo: Uppy上傳完成後回傳的東西還沒接下來，要存成 itemPhotosPath 讓新增商品去存，alert也要改用Swal
-  uppy.on('complete', (result) => {
-    itemPhotosPath = JSON.stringify(result);
-    console.log('上傳成功:', result.successful);
-    Swal.fire({
-      icon: "error",
-      title: "Oops...",
-      text: `已上傳 ${result.successful.length} 張圖片`
-    });
-  });
-</script>
-
-<script>
-  // 動態載入內容
-  // $(document).ready(function () {
-  //     // 使用事件代理確保所有 <a> 都正確綁定事件
-  //     $('li.item_management').on('click', 'a.item_management', function (event) {
-  //       event.stopPropagation(); // 阻止事件冒泡
-  //       event.preventDefault(); // 阻止預設行為
-  //       const url = $(this).attr('href'); // 取得 href 的值
-  //       $('#mainBlock').load(url, function (response, status, xhr) {
-  //           if (status === "error") {
-  //               $('#mainBlock').html("<h1>錯誤</h1><p>無法載入頁面內容。</p>");
-  //           }
-  //       });
-  //     });
+  // import {Uppy, Dashboard, XHRUpload} from "https://releases.transloadit.com/uppy/v4.13.3/uppy.min.mjs"
+  //
+  // const uppy = new Uppy({
+  //   restrictions: {
+  //     maxFileSize: 5 * 1024 * 1024,
+  //     allowedFileTypes: ['image/*']
+  //   }
+  // })
+  // uppy
+  //   .use(Dashboard, {
+  //     target: '#uppy',
+  //     inline: true,
+  //     width: 1600,
+  //     showProgressDetails: true,
+  //     proudlyDisplayPoweredByUppy: true,
+  //   })
+  //   .use(XHRUpload, {
+  //     endpoint: 'http://localhost:8080/NGFW/estoreadmin/upload',
+  //     fieldName: 'item_photo',
+  //     headers: {
+  //       'X-Requested-With': 'XMLHttpRequest'
+  //     }
+  //   });
+  //
+  // // todo: Uppy上傳完成後回傳的東西還沒接下來，要存成 itemPhotosPath 讓新增商品去存，alert也要改用Swal
+  // uppy.on('complete', (result) => {
+  //   itemPhotosPath = JSON.stringify(result);
+  //   console.log('上傳成功:', result.successful);
+  //   alert(`已上傳 ${result.successful.length} 張圖片`);
   // });
 </script>
+
 </body>
 
 </html>
