@@ -206,7 +206,12 @@
       <div class="my_news_title row pb-3 border-top">
         <h3>文章/新聞</h3>
       </div>
-      <div class="album py-5 bg-body-tertiary">
+    </div>
+    <div
+      class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3"
+      id="articlelist"
+    >
+      <!-- <div class="album py-5 bg-body-tertiary">
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
           <div class="col">
             <div class="card shadow-sm">
@@ -336,7 +341,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
 
     <!-- =================================== 商城區塊 ============================================= -->
@@ -367,10 +372,10 @@
     </div>
 
     <!-- =================================== 客服區塊 ============================================= -->
-    <div class="cs_container">
+    <!-- <div class="cs_container">
       <svg class="cs_container_el" width=70px height=70px></svg>
     </div>
-    </div>
+    </div> -->
   </main>
 
   <!-- 導入共用 footer -->
@@ -437,18 +442,66 @@
 
     $(document).ready(function () {
       // 綁定跳轉登入註冊按鈕
-      $('.login').click(function () {
-        window.location.href = './login.html';
-      });
-      $('.register').click(function () {
-        window.location.href = './register.html';
-      });
+      // $('.login').click(function () {
+      //   window.location.href = './login.html';
+      // });
+      // $('.register').click(function () {
+      //   window.location.href = './register.html';
+      // });
 
       $('.switch_btn_el').click(function () {
         $('.switch_btn_el').removeClass('-on');
         $(this).addClass('-on');
       });
       // todo: 這裡要加入切換即時賽況的資料呈現
+
+      // 文章/新聞區塊
+      const urlParams = new URLSearchParams(window.location.search);
+      const articleType = urlParams.get("articleType");
+      $("#dropdownMenuButton1").text(
+        articleType == 0 ? "文章" : articleType == 1 ? "新聞" : "所有分類"
+      );
+
+      var tmurl = "/NGFW/articleindex";
+      if (articleType != null) {
+        tmurl += "?articleType=" + articleType;
+      }
+      $.ajax({
+        url: tmurl,
+        method: "GET",
+        dataType: "json",
+        success: function (articles) {
+          let tableBody = $("#articlelist");
+          tableBody.empty();
+          articles.forEach((article) => {
+            // let row = `${article.articleId},`;
+            let row = `<div class="col">
+              <div class="card shadow-sm">
+                <div class="img-container">
+                  <img
+                    src="${article.newsPhoto}"
+                    onclick="location.href='/NGFW/newsf/news_fbody.html?articleId=${article.articleId}'"
+                  >
+                  </img>
+                </div>
+                <div class="card-body">
+                  <p class="card-text">
+                    ${article.mainTitle}
+                  </p>
+                  <div
+                    class="d-flex justify-content-between align-items-center"
+                  >
+                    <small class="text-body-secondary">${article.publishDate}</small>
+                  </div>
+                </div>`;
+            tableBody.append(row);
+          });
+        },
+        error: function (xhr, status, error) {
+          console.error("Error fetching data:", error);
+        },
+      });
+
 
       // 商城區塊start
       $(function () {

@@ -64,45 +64,7 @@
     $(".Sidebar").load("./layout/sidebar.html");
 
     window.onload = function () {
-      const staffData = sessionStorage.getItem("staff");
-      const staff = JSON.parse(staffData);
-      const staffAccount = staff.staffAccount;
-      const staffRole = staff.staffRoleId;
-      const staffStatus = staff.staffStatus;
-
-      if (staffData) {
-
-        if (staffRole == 1) {
-          $('member_management').show();
-          $('team_managemaent').show();
-          $('game_management').show();
-          $('article_management').show();
-          $('order_management').show();
-          $('item_management').show();
-          $('cs_management').show();
-
-          Swal.fire({
-            icon: "success",
-            title: "歡迎回來",
-            text: "",
-          });
-        }
-      }
-
-      // =======================  sidebar controll  =====================
-      $(".user_management").click(function () {
-        if (staffRole != 1) {
-          Swal.fire({
-            icon: "error",
-            title: "權限問題",
-            text: "請聯絡管理員",
-          }).then(() => {
-            window.location.href = "./templateb.html";
-          });
-        } else {
-          window.location.href = "./user/user_manage.html";
-        }
-      });
+      
 
       $('.staff_management').click(function () {
         if (staffRole == 1) {

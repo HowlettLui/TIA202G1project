@@ -23,47 +23,74 @@
         </div>
         <div class="offcanvas-body">
           <ul class="navbar-nav justify-content-start flex-grow-1 pe-3">
-            <li class="nav-item mx-4 mx-sm-0"><a href="#" class="nav-link link-body-emphasis px-2 active"
+            <li class="nav-item mx-4 mx-sm-0"><a href="/index.html" class="nav-link link-body-emphasis px-2 active"
                 aria-current="page">首頁</a></li>
-            <li class="nav-item mx-4 mx-sm-0"><a href="#" class="nav-link link-body-emphasis px-2">即時賽況</a>
+            <li class="nav-item mx-4 mx-sm-0"><a href="/game.html" class="nav-link link-body-emphasis px-2">即時賽況</a>
             </li>
-            <li class="nav-item mx-4 mx-sm-0"><a href="#" class="nav-link link-body-emphasis px-2">歷史球賽</a>
+            <li class="nav-item mx-4 mx-sm-0"><a href="/schedule.html" class="nav-link link-body-emphasis px-2">歷史球賽</a>
             </li>
-            <li class="nav-item mx-4 mx-sm-0"><a href="#" class="nav-link link-body-emphasis px-2">文章</a>
+            <li class="nav-item mx-4 mx-sm-0"><a href="/newsf/news_fform.html"
+                class="nav-link link-body-emphasis px-2">文章 / 新聞</a>
             </li>
-            <li class="nav-item mx-4 mx-sm-0"><a href="#" class="nav-link link-body-emphasis px-2">新聞</a>
+            <li class="nav-item mx-4 mx-sm-0"><a href="/team.html" class="nav-link link-body-emphasis px-2">球隊</a>
             </li>
-            <li class="nav-item mx-4 mx-sm-0"><a href="#" class="nav-link link-body-emphasis px-2">球隊</a>
+            <li class="nav-item mx-4 mx-sm-0"><a href="/player.html" class="nav-link link-body-emphasis px-2">球員名單</a>
             </li>
-            <li class="nav-item mx-4 mx-sm-0"><a href="#" class="nav-link link-body-emphasis px-2">球員名單</a>
-            </li>
-            <li class="nav-item mx-4 mx-sm-0"><a href="#" class="nav-link link-body-emphasis px-2">商城</a>
+            <li class="nav-item mx-4 mx-sm-0"><a href="/estore/shop.html"
+                class="nav-link link-body-emphasis px-2">商城</a>
             </li>
           </ul>
         </div>
       </div>
       <ul class="nav order-last">
-        <li class="nav-item"><a href="#" class="nav-link link-body-emphasis px-2"><i
+        <li class="nav-item"><a href="/estore/cart.html" class="nav-link link-body-emphasis px-2"><i
               class="fa-solid fa-cart-shopping"></i></a></li>
-        <li class="nav-item login"><a href="#" class="nav-link link-body-emphasis px-2">登入</a></li>
-        <li class="nav-item register"><a href="#" class="nav-link link-body-emphasis px-2">註冊</a></li>
+        <li class="nav-item login"><a href="/login.html" class="nav-link link-body-emphasis px-2">登入</a></li>
+        <li class="nav-item register"><a href="/register.html" class="nav-link link-body-emphasis px-2">註冊</a></li>
         <div class="d-flex">
           <img id="avatar" class="rounded-circle" style="height: 30px">
         </div>
         <li class="nav-item account" style="display: none"><a href="#" class="nav-link link-body-emphasis px-2">會員帳號</a>
         </li>
-        <li class="nav-item usercenter" style="display: none"><a href="#"
+        <li class="nav-item usercenter" style="display: none"><a href="/user/user_info.html"
             class="nav-link link-body-emphasis px-2">會員中心</a></li>
-        <li class="nav-item logout" style="display: none"><a href="#" class="nav-link link-body-emphasis px-2">登出</a>
+        <li class="nav-item logout" style="display: none"><a class="nav-link link-body-emphasis px-2">登出</a>
         </li>
       </ul>
     </div>
   </nav>
 </header>
 
-<script>
-  $('.usercenter').click(function () {
-    window.location.href = './user/user_info.html';
-  });
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+<script>
+  window.onload = function () {
+    const userData = sessionStorage.getItem("user");
+
+    if (userData) {
+      const user = JSON.parse(userData);
+      const account = user.account;
+      // 這裡可以顯示會員資訊，例如：
+      $('.usercenter').show();
+      $('.logout').show();
+      $('.account').show();
+      $('#avatar').attr('src', user.avatar);
+      $('.login').hide();
+      $('.register').hide();
+      Swal.fire({
+        icon: "success",
+        title: "歡迎回來",
+        text: "",
+      });
+    } else {
+      // 若未登入，可導向登入頁
+      // window.location.href = "login.html";
+      $('.usercenter').hide();
+      $('.logout').hide();
+      $('.account').hide();
+      $('#avatar').hide;
+      $('.login').show();
+      $('.register').show();
+    }
+  };
 </script>

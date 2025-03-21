@@ -30,7 +30,7 @@
               </a>
             </li>
             <li class="nav-item staff_management">
-              <a href="./staff/staff_info.html" class="nav-link">
+              <a href="/staff/staff_info.html" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>工作人員角色管理</p>
               </a>
@@ -38,7 +38,7 @@
           </ul>
         </li>
         <li class="nav-item team_managemaent">
-          <a href="#" class="nav-link">
+          <a href="/teamadmin.html" class="nav-link">
             <i class="nav-icon fas fa-sitemap"></i>
             <p class="pl-1">
               球隊資料管理
@@ -47,19 +47,19 @@
           </a>
           <ul class="nav nav-treeview team_list">
             <li class="nav-item">
-              <a href="#" class="nav-link">
+              <a href="/teamlist.html" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>球隊名單</p>
               </a>
             </li>
             <li class="nav-item player_list">
-              <a href="#" class="nav-link">
+              <a href="/playerlist.html" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>球員名單</p>
               </a>
             </li>
             <li class="nav-item cl_list">
-              <a href="#" class="nav-link">
+              <a href="/cheerleaderlist.html" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>啦啦隊名單</p>
               </a>
@@ -76,13 +76,13 @@
           </a>
           <ul class="nav nav-treeview game_date">
             <li class="nav-item">
-              <a href="#" class="nav-link">
+              <a href="/scheduleadmin.html" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>賽程日期</p>
               </a>
             </li>
             <li class="nav-item game_info">
-              <a href="#" class="nav-link">
+              <a href="/gameadmin.html" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>賽事資訊</p>
               </a>
@@ -90,7 +90,7 @@
           </ul>
         </li>
         <li class="nav-item article_management">
-          <a href="#" class="nav-link">
+          <a href="/newsb/news_bmgrlist.html" class="nav-link">
             <i class="nav-icon far fa-newspaper"></i>
             <p class="pl-1">
               文章/新聞管理
@@ -107,7 +107,7 @@
           </a>
           <ul class="nav nav-treeview order_list">
             <li class="nav-item">
-              <a href="#" class="nav-link">
+              <a href="/estoreadminorders.html" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>訂單總覽</p>
               </a>
@@ -115,7 +115,7 @@
           </ul>
         </li>
         <li class="nav-item item_management">
-          <a href="estoreadmin.html" class="nav-link">
+          <a href="" class="nav-link">
             <i class="nav-icon fas fa-tag"></i>
             <p class="pl-1">
               商品管理
@@ -124,20 +124,21 @@
           </a>
           <ul class="nav nav-treeview all_items">
             <li class="nav-item">
-              <a href="/estoreadmin/allitems.html" class="nav-link item_management">
+              <a href="/estoreadminitems.html" class="nav-link item_management">
                 <i class="far fa-circle nav-icon"></i>
                 <p>平台商品</p>
               </a>
             </li>
             <li class="nav-item item_manage">
-              <a href="/estoreadmin/additem.html" class="nav-link item_management">
+              <a href="/estoreadminadd.html" class="nav-link item_management">
                 <i class="far fa-circle nav-icon"></i>
                 <p>新增商品</p>
               </a>
             </li>
           </ul>
         </li>
-        <li class="nav-item cs_management">
+        <!-- Todo 後續開發 -->
+        <!-- <li class="nav-item cs_management">
           <a href="#" class="nav-link">
             <i class="nav-icon fas fa-headphones"></i>
             <p class="pl-1">
@@ -159,8 +160,52 @@
               </a>
             </li>
           </ul>
-        </li>
+        </li> -->
       </ul>
     </nav>
   </div>
 </aside>
+
+<script>
+  window.onload = function () {
+    const staffData = sessionStorage.getItem("staff");
+    const staff = JSON.parse(staffData);
+    const staffAccount = staff.staffAccount;
+    const staffRole = staff.staffRoleId;
+    const staffStatus = staff.staffStatus;
+
+    // if (staffData) {
+
+    //   if (staffRole == 1) {
+    //     $('member_management').show();
+    //     $('team_managemaent').show();
+    //     $('game_management').show();
+    //     $('article_management').show();
+    //     $('order_management').show();
+    //     $('item_management').show();
+    //     $('cs_management').show();
+
+    //     Swal.fire({
+    //       icon: "success",
+    //       title: "歡迎回來",
+    //       text: "",
+    //     });
+    //   }
+    // }
+
+    // =======================  sidebar controll  =====================
+    // $(".user_management").click(function () {
+    //   if (staffRole != 1) {
+    //     Swal.fire({
+    //       icon: "error",
+    //       title: "權限問題",
+    //       text: "請聯絡管理員",
+    //     }).then(() => {
+    //       window.location.href = "./templateb.html";
+    //     });
+    //   } else {
+    //     window.location.href = "./user/user_manage.html";
+    //   }
+    // });
+  };
+</script>
