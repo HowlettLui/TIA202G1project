@@ -20,7 +20,7 @@
 
   <!-- for ethan's part -->
   <!-- summernote -->
-  <!--  <link rel="stylesheet" href="./vendors/summernote-0.9.0-dist/summernote-bs5.min.css">-->
+  <link rel="stylesheet" href="./vendors/summernote-0.9.0-dist/summernote-bs5.min.css">
   <!-- Uppy -->
   <!--  <link href="https://releases.transloadit.com/uppy/v4.13.3/uppy.min.css" rel="stylesheet">-->
 
@@ -95,24 +95,6 @@
                 <div class="invalid-feedback">請輸入名稱！</div>
               </div>
             </div>
-            <!--            <div class="col-sm-6">-->
-            <!--              &lt;!&ndash; text input &ndash;&gt;-->
-            <!--              <div class="form-group">-->
-            <!--                <label for="item_color">商品顏色</label>-->
-            <!--                <input id="item_color" name="item_color" type="text" class="form-control item_related"-->
-            <!--                       placeholder="Enter ...">-->
-            <!--                <div class="invalid-feedback">請輸入顏色！</div>-->
-            <!--              </div>-->
-            <!--            </div>-->
-            <!--            <div class="col-sm-6">-->
-            <!--              &lt;!&ndash; text input &ndash;&gt;-->
-            <!--              <div class="form-group">-->
-            <!--                <label for="item_size">商品大小</label>-->
-            <!--                <input id="item_size" name="item_size" type="text" class="form-control item_related"-->
-            <!--                       placeholder="Enter ...">-->
-            <!--                <div class="invalid-feedback">請輸入大小！</div>-->
-            <!--              </div>-->
-            <!--            </div>-->
             <div class="col-sm-6">
               <!-- text input -->
               <div class="form-group">
@@ -140,21 +122,12 @@
                 <div class="invalid-feedback">請輸入價格！</div>
               </div>
             </div>
-            <!--            <div class="col-sm-6">-->
-            <!--              &lt;!&ndash; text input &ndash;&gt;-->
-            <!--              <div class="form-group">-->
-            <!--                <label for="item_stock">商品數量</label>-->
-            <!--                <input id="item_stock" name="item_stock" type="text" class="form-control should_be_a_number"-->
-            <!--                       placeholder="Enter ...">-->
-            <!--                <div class="invalid-feedback">請輸入數量！</div>-->
-            <!--              </div>-->
-            <!--            </div>-->
 
             <!-- summernote -->
-            <!--            <div class="col-12">-->
-            <!--              <label for="summernote">商品詳細內容</label>-->
-            <!--              <div id="summernote">請輸入商品詳細內容</div>-->
-            <!--            </div>-->
+            <div class="col-12">
+              <label for="summernote">商品詳細內容</label>
+              <div id="summernote">請輸入商品詳細內容</div>
+            </div>
 
           </div>
           <div class="mt-4">
@@ -184,15 +157,15 @@
 
 <!-- for ethan's part -->
 <!-- summernote -->
-<!--<script src="./vendors/summernote-0.9.0-dist/summernote-bs5.js"></script>-->
+<script src="./vendors/summernote-0.9.0-dist/summernote-bs5.js"></script>
 <!-- sweetalert2 -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
-  // $(function () {
-  //   // Summernote
-  //   $('#summernote').summernote()
-  // })
+  $(function () {
+    // Summernote
+    $('#summernote').summernote()
+  })
 
   $(".Navbar").load("./layout/navbar.html");
   $(".Sidebar").load("./layout/sidebar.html");
@@ -213,8 +186,8 @@
           $('#item_type').val(item.itemType);
           $('#item_content').val(item.itemContent);
           $('#item_price').val(item.itemPrice);
+          $('#summernote').summernote('code', item.itemDetails)
           // itemInfo.item.itemPhoto;
-          // itemInfo.item.itemDetails;
         } else {
           Swal.fire({
             icon: "error",
@@ -247,7 +220,7 @@
   $(document).on("click", "#save_item", function (e) {
     let isValid = validateFields($('input.item_related'));
     let numValid = validateFields($('input.should_be_a_number'), true);
-    // let summernoteValid = ($('#summernote').summernote('code') !== "請輸入商品詳細內容") && ($('#summernote').summernote('code').trim() !== "");
+    let summernoteValid = ($('#summernote').summernote('code') !== "請輸入商品詳細內容") && ($('#summernote').summernote('code').trim() !== "");
 
     if (!isValid || !numValid) {
       Swal.fire({
@@ -261,12 +234,12 @@
       //     title: "請再確認",
       //     text: "請先上傳照片"
       //   });
-      // } else if (!summernoteValid) {  // todo: summernote可以讀上來之後再改回(!summernoteValid)
-      //   Swal.fire({
-      //     icon: "warning",
-      //     title: "請再確認",
-      //     text: "請輸入商品詳細內容！"
-      //   });
+    } else if (!summernoteValid) {
+      Swal.fire({
+        icon: "warning",
+        title: "請再確認",
+        text: "請輸入商品詳細內容！"
+      });
     } else {
       const itemModel = {
         itemModelId: itemModelId,
@@ -281,7 +254,7 @@
         itemContent: $('#item_content').val(),
         itemType: $('#item_type').val(),
         itemPrice: $('#item_price').val(),
-        // itemDetails: $('#summernote').summernote('code'), // todo: summernote可以讀上來之後再改回
+        itemDetails: $('#summernote').summernote('code'),
         // itemPhoto: itemPhotosPath.toString(), // todo: Uppy可以讀上來之後再改回
         // todo: staffId: sessionStorage.getItem("staffId")
         staffId: 1

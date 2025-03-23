@@ -149,8 +149,7 @@
           Swal.fire({
             icon: "info",
             title: "購物車內沒有商品",
-            // todo: 商城網址還沒貼
-            html: `<a href="">請先到商城內選購</a>`
+            html: `<a href="/estore/shop.html">請先到商城內選購</a>`
           });
         } else {
           totalPrice = 0;
@@ -160,60 +159,60 @@
               itemPhoto = JSON.parse(itemInfo.itemPhotoInCart);
               $("ul.itemsInCart").append(
                 `<li class="list-group-item d-flex justify-content-between lh-sm px-0">
-                <div class="col-1">
-                  <div class="d-flex justify-content-center">
-                    <input class="form-check-input checkboxOnItem" type="checkbox" checked/>
-                  </div>
-                </div>
-                <div class="col-auto d-block">
-                  <img src=${itemPhoto.photos[0]} class="itemPhoto img-fluid"
-                       style="max-width: 100px; height: 100px; object-fit: cover;" alt="Thumbnail"/>
-                </div>
-                <div class="col px-4 d-flex flex-column position-static itemBrief">
-                  <div class="position-relative cartItem" data-item-id="${itemInfo.itemId}" data-itemInfo-id="${itemInfo.itemInfoId}">
-                    <h4 class="mb-0 itemName">${itemInfo.itemName}</h4>
-                    <div class="my-1 text-body-secondary itemColor" style="display: inline-block;">
-                      ${itemInfo.itemColor}<p class="my-1 text-body-secondary" style="display: inline-block;">, </p>
+                  <div class="col-1">
+                    <div class="d-flex justify-content-center">
+                      <input class="form-check-input checkboxOnItem" type="checkbox" checked/>
                     </div>
-                    <div class="my-1 text-body-secondary itemSize" style="display: inline-block;">${itemInfo.itemSize}</div>
-                    <p class="card-text my-1 itemPriceInCart">$${itemInfo.itemPriceInCart}</p>
-                    <a href="./merchandise.html" class="icon-link gap-1 icon-link-hover stretched-link"></a>
                   </div>
-                  <div class="row my-1 justify-content-between">
-                    <!-- 數量按鈕 -->
-                    <div class="col-auto list-group list-group-horizontal my-1">
-                      <div class="list-group-item list-group-item-action list-group-item-light w-auto reduceItemCount"><i
-                        class="fa-solid fa-minus"></i></div>
-                      <input type="text" class="list-group-item list-group-item-light text-center itemCountsInCart" size="1"
-                             value=${itemInfo.itemCountsInCart}
-                             disabled/>
-                      <div class="list-group-item list-group-item-action list-group-item-light w-auto increaseItemCount"><i
-                        class="fa-solid fa-plus"></i></div>
+                  <div class="col-auto d-block">
+                    <img src=${itemPhoto.photos[0]} class="itemPhoto img-fluid"
+                         style="max-width: 100px; height: 100px; object-fit: cover;" alt="Thumbnail"/>
+                  </div>
+                  <div class="col px-4 d-flex flex-column position-static itemBrief">
+                    <div class="position-relative cartItem" data-item-id="${itemInfo.itemId}" data-itemInfo-id="${itemInfo.itemInfoId}">
+                      <h4 class="mb-0 itemName">${itemInfo.itemName}</h4>
+                      <div class="my-1 text-body-secondary itemColor" style="display: inline-block;">
+                        ${itemInfo.itemColor}<p class="my-1 text-body-secondary" style="display: inline-block;">, </p>
+                      </div>
+                      <div class="my-1 text-body-secondary itemSize" style="display: inline-block;">${itemInfo.itemSize}</div>
+                      <p class="card-text my-1 itemPriceInCart">$${itemInfo.itemPriceInCart}</p>
+                      <a href="./merchandise.html" class="icon-link gap-1 icon-link-hover stretched-link"></a>
                     </div>
+                    <div class="row my-1 justify-content-between">
+                      <!-- 數量按鈕 -->
+                      <div class="col-auto list-group list-group-horizontal my-1">
+                        <div class="list-group-item list-group-item-action list-group-item-light w-auto reduceItemCount"><i
+                          class="fa-solid fa-minus"></i></div>
+                        <input type="text" class="list-group-item list-group-item-light text-center itemCountsInCart" size="1"
+                               value=${itemInfo.itemCountsInCart}
+                               disabled/>
+                        <div class="list-group-item list-group-item-action list-group-item-light w-auto increaseItemCount"><i
+                          class="fa-solid fa-plus"></i></div>
+                      </div>
 
-                    <!-- 收藏、刪除按鈕 -->
-                    <div class="col-auto row my-1">
-            <!--          todo: 點選後收藏商品 (優先度低)-->
-            <!--          <div className="col-6 p-0 px-1">-->
-            <!--            <button type="button" className="btn btn-outline-secondary w-100 border-0">收藏</button>-->
-            <!--          </div>-->
-                      <div class="p-0 px-1">
-                        <button type="button" class="btn btn-outline-secondary w-100 border-0 deleteItem">刪除</button>
+                      <!-- 收藏、刪除按鈕 -->
+                      <div class="col-auto row my-1">
+              <!--          todo: 點選後收藏商品 (優先度低)-->
+              <!--          <div className="col-6 p-0 px-1">-->
+              <!--            <button type="button" className="btn btn-outline-secondary w-100 border-0">收藏</button>-->
+              <!--          </div>-->
+                        <div class="p-0 px-1">
+                          <button type="button" class="btn btn-outline-secondary w-100 border-0 deleteItem">刪除</button>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              </li>`
+                </li>`
               )
               $("span.itemsCountToCheckout").text($("input.checkboxOnItem:checked").length);
               $("ul.itemsToCheckoutList").append(
                 `<li class="list-group-item d-flex justify-content-between lh-sm">
-                <div>
-                  <h6 class="my-0">${itemInfo.itemName}</h6>
-                  <small class="text-body-secondary">${itemInfo.itemColor}, ${itemInfo.itemSize}</small>
-                </div>
-                <span class="text-body-secondary">$${itemInfo.itemPriceInCart}</span>
-              </li>`
+                  <div>
+                    <h6 class="my-0">${itemInfo.itemName}</h6>
+                    <small class="text-body-secondary" data-itemInfo-id="${itemInfo.itemInfoId}" data-itemCountsInCart="${itemInfo.itemCountsInCart}">${itemInfo.itemColor}, ${itemInfo.itemSize}</small>
+                  </div>
+                  <span class="text-body-secondary" data-itemCountsInCart="${itemInfo.itemCountsInCart}">$${itemInfo.itemPriceInCart} x ${itemInfo.itemCountsInCart}</span>
+                </li>`
               )
               totalPrice += itemInfo.itemPriceInCart * itemInfo.itemCountsInCart;
             } else {
@@ -227,6 +226,11 @@
           $("li.totalPrice strong").text(`$${totalPrice}`);
         }
         updateCheckAllState();
+        $("div.itemBrief").each(function () {
+          let itemInfoId = $(this).find("div.cartItem").attr("data-iteminfo-id");
+          let itemCount = $(this).find(".itemCountsInCart").val();
+          editItemInfoInCart(itemInfoId, itemCount);
+        })
       })
       .catch(error => {
         console.error(error)
@@ -297,14 +301,14 @@
     deleteItemInfoInCart(itemInfoId);
   });
 
-  // todo: 前往結帳頁面 orders.html
+  // 前往結帳頁面 receipt.html
   $(".continueToCheckout").on("click", function () {
     let elementHTML = $("#itemsToCheckout").prop("outerHTML");
     sessionStorage.setItem("itemsToCheckout", elementHTML);
-    window.location.href = "receipt.html";
+    window.location.href = "/NGFW/estore/receipt.html";
   })
 
-  // 更新資料庫中的購物車內容
+  // 更新資料庫中的購物車商品數量
   async function editItemInfoInCart(itemInfoId, itemCount) {
     // todo: 應該用 fetch(`/NGFW/estore/cart/editCart/${sessionStorage.getItem("userId")}/${itemInfoId}`, {
     fetch(`/NGFW/estore/cart/editCart/601/${itemInfoId}`, {
@@ -324,14 +328,14 @@
         if (!cart.result) {
           console.log(`${cart.message}`)
           Swal.fire({
-            icon: "error",
+            icon: "warning",
             title: "Oops...",
             text: cart.message
           })
             .then(() => {
-              if (parseInt(cart.message.split(" ")[1]) > 0) {
+              if (cart.detailItemCount > 0) {
                 // 庫存數量小於input數量
-                $(`div[data-itemInfo-id=${itemInfoId}]`).next().find("input.itemCountsInCart").val(cart.message.split(" ")[1]);
+                $(`div[data-itemInfo-id=${itemInfoId}]`).next().find("input.itemCountsInCart").val(cart.detailItemCount);
                 adjustmentForCheckout();
               } else {
                 // 因為商品庫存為0或因為商品已下架，所以刪除該筆cart_detail，打刪除的API
@@ -460,6 +464,8 @@
 
   $(document).on("click", "input.checkboxOnItem", function (e) {
     e.stopPropagation();
+    let itemInfoId = $(this).closest("li").find("div.cartItem").attr("data-iteminfo-id");
+    let itemCount = $(this).closest("li").find(".itemCountsInCart").val();
     let itemId = $(this).closest("li").find("div.cartItem").attr("data-item-id");
     if (itemId) {
       updateItemPriceInCart(itemId)
@@ -477,6 +483,7 @@
         });
     }
     updateCheckAllState();
+    editItemInfoInCart(itemInfoId, itemCount);
   });
 
 </script>

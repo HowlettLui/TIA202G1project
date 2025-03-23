@@ -178,11 +178,13 @@
           ? `<option value="${itemInfo.itemSize}" class="itemInfo" data-itemInfo-id="${itemInfo.itemInfoId}">${itemInfo.itemSize}</option>`
           : `<option value="${itemInfo.itemSize}" class="itemInfo" data-itemInfo-id="${itemInfo.itemInfoId}" disabled>${itemInfo.itemSize}</option>`
       )
-    $("#itemSizes").empty().append(sizes);
+
     if (sizes.length === 1) {
-      $("#itemSizes").empty().append(`<option selected disabled>此商品為單一尺寸</option>`);
+      let itemInfo = itemInfos.filter(itemInfo => itemInfo.itemColor === color)[0];
+      $("#itemSizes").empty().append(`<option selected data-itemInfo-id="${itemInfo.itemInfoId}" disabled>此商品為單一尺寸</option>`);
+      manipulateStocks(itemInfo);
     } else {
-      $("#itemSizes").prepend(`<option className="default" selected disabled>請選擇大小</option>`);
+      $("#itemSizes").empty().append(`<option className="default" selected disabled>請選擇大小</option>`).append(sizes);
     }
   }
 
@@ -199,8 +201,10 @@
           $("#itemStock").append(`<option value="${i}">${i}</option>`)
         }
       }
-    } else {
+    } else if (itemInfo.itemStatus === 0) {
       $("#itemStock").append(`<option class="default" selected disabled>商品未上架</option>`)
+    } else if (itemInfo.itemStatus === -1) {
+      $("#itemStock").append(`<option class="default" selected disabled>商品已下架</option>`)
     }
   }
 
@@ -295,7 +299,7 @@
               text: cart.message,
             })
               .then(() => {
-                window.location.reload()
+                window.location.href = "./shop.html";
               })
           } else {
             Swal.fire({
@@ -320,7 +324,7 @@
       Swal.fire({
         icon: "info",
         title: "尚未選擇商品",
-        text: "請先選擇商品顏色、大小、數量"
+        text: "請先選擇商品顏色、大小或數量"
       });
     }
   })
