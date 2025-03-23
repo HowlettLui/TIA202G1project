@@ -207,10 +207,7 @@
         <h3>文章/新聞</h3>
       </div>
     </div>
-    <div
-      class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3"
-      id="articlelist"
-    >
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" id="articlelist">
       <!-- <div class="album py-5 bg-body-tertiary">
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
           <div class="col">
@@ -505,27 +502,32 @@
 
       // 商城區塊start
       $(function () {
-        fetch("./estore/shop")
+        fetch("/NGFW/estore/shop")
           .then(response => response.json())
           .then(items => {
             for (let item of items) {
+              itemPhoto = JSON.parse(item.itemPhoto);
               $("#items").append(
-                `<div class="col" id="item"  data-item-id="${item.itemId}">
-                <div class="card shadow-sm">
-                  <img src=${item.itemPhoto} class="itemPhoto img-fluid"
-                    style="max-width: 100%; height: 225px; object-fit: cover;" alt="Thumbnail">
-                  <div class="card-body">
-                    <h3 class="card-text">${item.itemName}</h3>
-                    <p class="card-text">$${item.itemPrice}</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                      <div class="btn-group">
-                        <button type="button" class="btn btn-sm btn-outline-secondary">收藏</button>
-                        <button type="button" class="btn btn-sm btn-outline-secondary">加入購物車</button>
+                `<a class="item" href="./merchandise.html" data-item-id="${item.itemId}" style="text-decoration: none">
+                <div class="col">
+                  <div class="card shadow-sm">
+                    <img src=${itemPhoto.photos[0]} class="itemPhoto img-fluid"
+                      style="max-width: 100%; height: 225px; object-fit: cover;" alt="Thumbnail">
+                    <div class="card-body">
+                      <h3 class="card-text">${item.itemName}</h3>
+                      <p class="card-text">$${item.itemPrice}</p>
+                      <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                          <button type="button" class="btn btn-sm btn-outline-secondary">收藏</button>
+<!--                          todo-->
+<!--                          點這邊的話，預設加入一個商品-->
+<!--                          <button type="button" class="btn btn-sm btn-outline-secondary">加入購物車</button>-->
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>`
+              </a>`
               )
             }
           })

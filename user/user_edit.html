@@ -161,14 +161,14 @@
             <h4 class="mb-3">個人資料</h4>
             <form class="needs-validation" novalidate>
               <div class="row g-3">
-                <!-- <div class="col-12">
+                <div class="col-12">
                   <label for="image" class="form-label"></label>
                   <input type="file" class="form-control" id="image">
-                  <img id="img">
+                  <img src="" id="user_avatar" class="avatar" src="" alt="avatar" style="width: 100px; height: 100px;">
                   <div class="invalid-feedback">
                     Valid first name is required.
                   </div>
-                </div> -->
+                </div>
               </div>
               <div class="row g-3">
                 <div class="col-12">
@@ -240,10 +240,12 @@
     $(document).ready(function () {
       const userData = sessionStorage.getItem("user");
       const user = JSON.parse(userData);
+      const image = document.getElementsByClassName('avatar')[0];
       console.log(user);
 
       // 插入使用者資料
       $("#userid").val(user.userId);
+      $("#image").val(user.avatar);
       $("#name").val(user.name);
       $("#accout").val(user.account);
       $("#email").val(user.email);
@@ -252,8 +254,6 @@
       // 儲存資料
       $('#saveBtn').on("click", function (e) {
         var form = document.querySelector('.needs-validation');
-
-        // const image = $('#image').length;
 
         // 檢查表單是否通過驗證
         if (!form.checkValidity()) {
@@ -266,21 +266,6 @@
         const name = $('#name').val();
         const email = $('#email').val();
         const phone = $('#phone').val();
-
-        // debugger;
-        // const fileReader = new FileReader();
-        // fileReader.addEventListener('load', e => {
-        //   const imageBase64 = e.target.result.split(',')[1];
-        //   console.log('圖片:', imageBase64);
-        // });
-        //   fileReader.readAsDataURL(user_image1790.files[0]);
-        //   console.log('圖片:', fileReader.readAsDataURL(uuser_image1790.files[0]));
-        // });
-
-        // $('#user_image').on('change', function (e) {
-        //   const file = e.target.files[0];
-        //   fileReader.readAsDataURL(file);
-        // });
 
         const requestData = {
           userId: user.userId,
@@ -309,15 +294,16 @@
               // 更新 sessionStorage 中的資料
               // console.log('更新成功:', data);
               
-              sessionStorage.setItem("user.avatar", JSON.stringify(data.avatar));
-              sessionStorage.setItem("user.email", JSON.stringify(data.email));
-              sessionStorage.setItem("user.name", JSON.stringify(data.name));
-              sessionStorage.setItem("user.phone", JSON.stringify(data.phone)); 
+
+              // sessionStorage.setItem("user.avatar", JSON.stringify(data.avatar));
+              // sessionStorage.setItem("user.email", JSON.stringify(data.email));
+              // sessionStorage.setItem("user.name", JSON.stringify(data.name));
+              // sessionStorage.setItem("user.phone", JSON.stringify(data.phone)); 
 
               // image.value = image;
               console.log(user);
 
-              window.location.href = '../user/user_info.html';
+              window.location.href = './user/user_info.html';
             } else {
               alert('更新失敗:', data.message);
             }

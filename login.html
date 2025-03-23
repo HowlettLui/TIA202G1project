@@ -127,7 +127,7 @@
       <p class="mt-5 divier_wrapper">
         <span class="divier_el">或</span>
       </p>
-      <button class="btn btn-primary w-100 py-2 my-3 oauth__btn_el" type="submit">使用Google帳戶登入</button>
+      <button class="btn btn-primary w-100 py-2 my-3 oauth_btn_el" type="submit">使用Google帳戶登入</button>
       <p class="mt-5 mb-3 text-body-secondary">&copy; 2017–2025</p>
     </form>
   </main>
@@ -137,16 +137,50 @@
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
   <script>
+    $(window).on('load', function () {
+      fetch("profile")
+        .then(response => response.json())
+        .then(data => {
+          // access_token.textContent = data.access_token;
+          // userInfo.textContent = data.userInfo;
+          // sessionStorage.setItem("access_token", data.access_token);
+          sessionStorage.setItem("oauthUser", data.userInfo);
+        })
+        .then(() => {
+          if (sessionStorage.getItem("oauthUser") != null || sessionStorage.getItem("oauthUser") != undefined || sessionStorage.getItem("oauthUser") != "") {
+
+            const oauthUser = JSON.parse(sessionStorage.getItem("oauthUser"));
+            const user = {
+              account: oauthUser.name,
+              name: oauthUser.name,
+              email: oauthUser.email,
+              avatar: oauthUser.picture
+            };
+            sessionStorage.setItem("user", JSON.stringify(user));
+            Swal.fire({
+              icon: "success",
+              title: "成功!",
+              text: `您已成功登入，歡迎回來 ${user.name}`,
+            });
+            location.href = './index.html';
+          } else {
+            alert("尚未登入");
+          }
+        })
+        .catch(error => console.error(error));
+    });
+
     $(document).ready(function () {
       // e.preventDefault(); // 停止預設事件
       // e.stopPropagation(); // 停止冒泡事件
+      const email = document.querySelector('.email');
+      const password = document.querySelector('.password');
+      const msg = document.querySelector('.msg');
+      const oauth_btn = document.querySelector('.oauth_btn_el');
 
       $('.login_btn_el').click(function (e) {
         e.preventDefault();
 
-        const email = document.querySelector('.email');
-        const password = document.querySelector('.password');
-        const msg = document.querySelector('.msg');
 
         if (!email.value) {
           // alert('email必須輸入');
@@ -175,7 +209,7 @@
         // console.log(login_data);  // 看能不能抓到資料 -- > 可以抓到
 
         // 從資料庫查會員資料是否存在
-        fetch(`NGFW//login/${email.value}/${password.value}`, {
+        fetch(`/NGFW/login/${email.value}/${password.value}`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json"
@@ -196,15 +230,21 @@
                 text: "您已成功登入",
               });
               sessionStorage.setItem("user", JSON.stringify(body));
-              location.href = 'index.html';
+              location.href = './index.html';
             } else {
               msg.textContent = body.message;
             }
           });
       });
 
-
+      $('.oauth_btn_el').click(function (e) {
+        e.preventDefault();
+        location.href = "http://localhost:8080/NGFW/anotherOauthLogin";   // 之後修改到正式環境路徑
+      });
     });
+
+
+
   </script>
 </body>
 
