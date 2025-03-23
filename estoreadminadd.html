@@ -62,22 +62,8 @@
         <div class="card-body">
           <div class="row">
 
-            <!-- photos upload with Uppy -->
-            <div class="col-12">
-              <label>商品照片</label>
-              <div id="uppy"></div>
-            </div>
-            <!-- photos upload with Uppy end -->
 
-            <!-- photos upload with input -->
-            <!--            <div class="col-12">-->
-            <!--              <label for="item_photo">商品照片</label>-->
-            <!--              <button id="save_item_photo" class="btn btn-sm btn-light mb-2" type="button">照片上傳</button>-->
-            <!--              <input id="item_photo" name="item_photo" type="file" class="form-control mb-3" multiple>-->
-            <!--            </div>-->
-            <!-- photos upload with input end -->
-
-            <div class="col-sm-6 mt-3">
+            <div class="col-sm-6 mb-1">
               <!-- text input -->
               <div class="form-group">
                 <label for="item_model">商品型號</label>
@@ -86,7 +72,7 @@
                 <div class="invalid-feedback">請輸入型號！</div>
               </div>
             </div>
-            <div class="col-sm-6 mt-3">
+            <div class="col-sm-6 mb-1">
               <!-- text input -->
               <div class="form-group">
                 <label for="item_name">商品名稱</label>
@@ -95,7 +81,13 @@
                 <div class="invalid-feedback">請輸入名稱！</div>
               </div>
             </div>
-            <div class="col-sm-6">
+            <!-- photos upload with Uppy -->
+            <div class="col-12 my-1 uppyArea">
+              <label>商品照片</label>
+              <div id="uppy"></div>
+            </div>
+            <!-- photos upload with Uppy end -->
+            <div class="col-sm-6 my-1">
               <!-- text input -->
               <div class="form-group">
                 <label for="item_color">商品顏色</label>
@@ -104,7 +96,7 @@
                 <div class="invalid-feedback">請輸入顏色！</div>
               </div>
             </div>
-            <div class="col-sm-6">
+            <div class="col-sm-6 my-1">
               <!-- text input -->
               <div class="form-group">
                 <label for="item_size">商品大小</label>
@@ -113,7 +105,7 @@
                 <div class="invalid-feedback">請輸入大小！</div>
               </div>
             </div>
-            <div class="col-sm-6">
+            <div class="col-sm-6 my-1 item_type">
               <!-- text input -->
               <div class="form-group">
                 <label for="item_type">商品類型</label>
@@ -122,7 +114,7 @@
                 <div class="invalid-feedback">請輸入類型！</div>
               </div>
             </div>
-            <div class="col-sm-6">
+            <div class="col-sm-6 my-1 item_content">
               <!-- text input -->
               <div class="form-group">
                 <label for="item_content">商品簡介</label>
@@ -131,7 +123,7 @@
                 <div class="invalid-feedback">請輸入簡介！</div>
               </div>
             </div>
-            <div class="col-sm-6">
+            <div class="col-sm-6 my-1 item_price">
               <!-- text input -->
               <div class="form-group">
                 <label for="item_price">商品價格</label>
@@ -140,7 +132,7 @@
                 <div class="invalid-feedback">請輸入價格！</div>
               </div>
             </div>
-            <div class="col-sm-6">
+            <div class="col-sm-6 my-1">
               <!-- text input -->
               <div class="form-group">
                 <label for="item_stock">商品數量</label>
@@ -151,13 +143,13 @@
             </div>
 
             <!-- summernote -->
-            <div class="col-12">
+            <div class="col-12 my-1 summernoteArea">
               <label for="summernote">商品詳細內容</label>
               <div id="summernote">請輸入商品詳細內容</div>
             </div>
 
           </div>
-          <div class="mt-4">
+          <div class="mt-3">
             <button id="save_item" class="btn btn-success" type="button">儲存商品</button>
             <button id="publish_item" class="btn btn-primary" type="button">商品上架</button>
             <button id="cancel" class="btn btn-warning" type="button">取消</button>
@@ -208,25 +200,53 @@
 
   let itemPhotosPath;
 
+  // 動態確認item name是否重複
+  let itemAndModelExist;
+  $("#item_name, #item_model").on("change", function () {
+    let itemName = $("#item_name").val();
+    let itemModel = $("#item_model").val();
+    if (itemName && itemModel) {
+      fetch(`/NGFW/estoreadmin/item/checkExist/${itemModel}/${itemName}`)
+        .then(resp => resp.text())
+        .then(text => {
+          if (text === "true") {
+            $("div.uppyArea").hide();
+            $("div.summernoteArea").hide();
+            $("div.item_type").hide();
+            $("div.item_content").hide();
+            $("div.item_price").hide();
+            itemAndModelExist = true;
+          } else {
+            $("div.uppyArea").show();
+            $("div.summernoteArea").show();
+            $("div.item_type").show();
+            $("div.item_content").show();
+            $("div.item_price").show();
+            itemAndModelExist = false;
+          }
+        })
+    }
+  })
+
   $(document).on("click", "#save_item, #publish_item", function (e) {
     let itemStatus = e.target.id === "save_item" ? 0 : 1;
     let isValid = validateFields($('input.item_related'));
     let numValid = validateFields($('input.should_be_a_number'), true);
     let summernoteValid = ($('#summernote').summernote('code') !== "請輸入商品詳細內容") && ($('#summernote').summernote('code').trim() !== "");
 
-    if (!isValid || !numValid) {
+    if ((!isValid || !numValid) && !itemAndModelExist) {
       Swal.fire({
         icon: "warning",
         title: "請再確認",
         text: "請輸入完整資料！"
       });
-    } else if (!itemPhotosPath) {
+    } else if (!itemPhotosPath && !itemAndModelExist) {
       Swal.fire({
         icon: "warning",
         title: "請再確認",
         text: "請先上傳照片"
       });
-    } else if (!summernoteValid) {
+    } else if (!summernoteValid && !itemAndModelExist) {
       Swal.fire({
         icon: "warning",
         title: "請再確認",
@@ -244,7 +264,7 @@
         itemType: $('#item_type').val(),
         itemPrice: $('#item_price').val(),
         itemDetails: $('#summernote').summernote('code'),
-        itemPhoto: itemPhotosPath.toString(),
+        itemPhoto: itemPhotosPath ? itemPhotosPath.toString() : "",
         // todo: staffId: sessionStorage.getItem("staffId")
         staffId: 1
       }
@@ -338,6 +358,7 @@
       target: '#uppy',
       inline: true,
       width: 1600,
+      height: 400,
       showProgressDetails: true,
       proudlyDisplayPoweredByUppy: true,
     })
@@ -349,34 +370,23 @@
       }
     });
 
-  // todo: Uppy上傳完成後回傳的東西還沒接下來，要存成 itemPhotosPath 讓新增商品去存，alert也要改用Swal
+  // Uppy上傳完成後回傳的東西接下來，存成 itemPhotosPath 讓新增商品去存，alert改用Swal
   uppy.on('complete', (result) => {
-    itemPhotosPath = JSON.stringify(result);
-    console.log('上傳成功:', result.successful);
+    let photoLocations = [];
+    for (let obj of result.successful) {
+      photoLocations.push(obj.response.body.photoLocation);
+    }
+    itemPhotosPath = JSON.stringify({
+      "photos": photoLocations
+    });
     Swal.fire({
-      icon: "error",
-      title: "Oops...",
+      icon: "success",
+      title: "上傳成功",
       text: `已上傳 ${result.successful.length} 張圖片`
     });
   });
 </script>
 
-<script>
-  // 動態載入內容
-  // $(document).ready(function () {
-  //     // 使用事件代理確保所有 <a> 都正確綁定事件
-  //     $('li.item_management').on('click', 'a.item_management', function (event) {
-  //       event.stopPropagation(); // 阻止事件冒泡
-  //       event.preventDefault(); // 阻止預設行為
-  //       const url = $(this).attr('href'); // 取得 href 的值
-  //       $('#mainBlock').load(url, function (response, status, xhr) {
-  //           if (status === "error") {
-  //               $('#mainBlock').html("<h1>錯誤</h1><p>無法載入頁面內容。</p>");
-  //           }
-  //       });
-  //     });
-  // });
-</script>
 </body>
 
 </html>
