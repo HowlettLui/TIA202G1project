@@ -63,103 +63,102 @@
 </head>
 
 <body>
-  <!-- 導入共用 header -->
-  <div class="headerPage"></div>
+<!-- 導入共用 header -->
+<div class="headerPage"></div>
 
-  <!-- 開發畫面 -->
-  <main>
-    <div class="bg-body-tertiary">
-      <div class="container py-5">
+<!-- 開發畫面 -->
+<main>
+  <div class="bg-body-tertiary">
+    <div class="container py-5">
 
-        <!-- progress bar -->
-        <div class="row">
-          <div class="col-12 col-md-5 col-lg-4 col-xl-3">
-            <h1 class="mb-3 mb-lg-0 me-lg-auto link-body-emphasis">購物車</h1>
-          </div>
-          <div class="col-12 col-md-6 col-lg-6 col-xl-7 text-center p-0 mx-0">
-            <ul id="progressbar" class="p-0 mb-1">
-              <li class="active" id="step1"><strong>訂單明細確認</strong></li>
-              <li id="step2"><strong>填寫付款資料</strong></li>
-              <li id="step3"><strong>購買完成</strong></li>
-            </ul>
-            <div class="progress" role="progressbar" aria-label="Example 1px high" aria-valuenow="calc(100/6)"
-              aria-valuemin="0" aria-valuemax="100" style="height: 1px">
-              <div class="progress-bar" style="width: calc(100%/6)"></div>
-            </div>
-          </div>
+      <!-- progress bar -->
+      <div class="row">
+        <div class="col-12 col-md-5 col-lg-4 col-xl-3">
+          <h1 class="mb-3 mb-lg-0 me-lg-auto link-body-emphasis">購物車</h1>
         </div>
-
-        <!-- cart -->
-        <div class="row mt-5">
-
-          <!-- items in cart -->
-          <div class="col-lg-8">
-            <ul class="list-group mb-3 bg-body-tertiary itemsInCart">
-              <!-- 全選用checkbox -->
-              <li class="list-group-item d-flex justify-content-between lh-sm px-0">
-                <div class="col-1">
-                  <div class="d-flex justify-content-center">
-                    <input class="form-check-input" type="checkbox" id="check_all" checked>
-                  </div>
-                </div>
-              </li>
-              <!-- items -->
-            </ul>
-          </div>
-
-          <!-- todo: 購物車右半邊的頁面，根據選取的商品項目變動-->
-          <!-- cart details -->
-          <div class="col-lg-4" id="itemsToCheckout">
-            <h4 class="d-flex justify-content-between align-items-center mb-3">
-              <span class="text-secondary">Your cart</span>
-              <span class="badge bg-secondary rounded-pill itemsCountToCheckout"></span>
-            </h4>
-            <ul class="list-group mb-3 itemsToCheckoutList">
-              <!-- itemsToCheckoutList -->
-            </ul>
-            <ul class="list-group mb-3 itemsToCheckoutListTotalPrice">
-              <li class="list-group-item d-flex justify-content-between totalPrice">
-                <span>Total (NTD)</span>
-                <strong></strong>
-              </li>
-            </ul>
-
-            <button class="w-100 btn btn-secondary btn-lg continueToCheckout" type="button">Continue to
-              checkout</button>
+        <div class="col-12 col-md-6 col-lg-6 col-xl-7 text-center p-0 mx-0">
+          <ul id="progressbar" class="p-0 mb-1">
+            <li class="active" id="step1"><strong>訂單明細確認</strong></li>
+            <li id="step2"><strong>填寫付款資料</strong></li>
+            <li id="step3"><strong>購買完成</strong></li>
+          </ul>
+          <div class="progress" role="progressbar" aria-label="Example 1px high" aria-valuenow="calc(100/6)"
+               aria-valuemin="0" aria-valuemax="100" style="height: 1px">
+            <div class="progress-bar" style="width: calc(100%/6)"></div>
           </div>
         </div>
       </div>
+
+      <!-- cart -->
+      <div class="row mt-5">
+
+        <!-- items in cart -->
+        <div class="col-lg-8">
+          <ul class="list-group mb-3 bg-body-tertiary itemsInCart">
+            <!-- 全選用checkbox -->
+            <li class="list-group-item d-flex justify-content-between lh-sm px-0">
+              <div class="col-1">
+                <div class="d-flex justify-content-center">
+                  <input class="form-check-input" type="checkbox" id="check_all" checked>
+                </div>
+              </div>
+            </li>
+            <!-- items -->
+          </ul>
+        </div>
+
+        <!-- todo: 購物車右半邊的頁面，根據選取的商品項目變動-->
+        <!-- cart details -->
+        <div class="col-lg-4" id="itemsToCheckout">
+          <h4 class="d-flex justify-content-between align-items-center mb-3">
+            <span class="text-secondary">Your cart</span>
+            <span class="badge bg-secondary rounded-pill itemsCountToCheckout"></span>
+          </h4>
+          <ul class="list-group mb-3 itemsToCheckoutList">
+            <!-- itemsToCheckoutList -->
+          </ul>
+          <ul class="list-group mb-3 itemsToCheckoutListTotalPrice">
+            <li class="list-group-item d-flex justify-content-between totalPrice">
+              <span>Total (NTD)</span>
+              <strong></strong>
+            </li>
+          </ul>
+
+          <button class="w-100 btn btn-secondary btn-lg continueToCheckout" type="button">Continue to checkout</button>
+        </div>
+      </div>
     </div>
-  </main>
+  </div>
+</main>
 
-  <!-- 導入共用 footer -->
-  <div class="footerPage"></div>
-  <script src="../jquery/jquery-3.7.1.min.js"></script>
-  <script>
-    $(".headerPage").load("../layout/header.html");
-    $(".footerPage").load("../layout/footer.html");
+<!-- 導入共用 footer -->
+<div class="footerPage"></div>
+<script src="../jquery/jquery-3.7.1.min.js"></script>
+<script>
+  $(".headerPage").load("../layout/header.html");
+  $(".footerPage").load("../layout/footer.html");
 
-    let totalPrice;
+  let totalPrice;
 
-    $(document).ready(function () {
-      // todo: 應該要取userId來用，應為fetch (`/NGFW/estore/cart/${sessionStorage.getItem("userId")}`)
-      fetch("/NGFW/estore/cart/601")
-        .then(response => response.json())
-        .then(itemInfos => {
-          if (itemInfos.length === 0) {
-            Swal.fire({
-              icon: "info",
-              title: "購物車內沒有商品",
-              html: `<a href="/estore/shop.html">請先到商城內選購</a>`
-            });
-          } else {
-            totalPrice = 0;
-            for (let itemInfo of itemInfos) {
-              if (itemInfo.result === true) {
-                //   itemInfo {itemInfoId, itemId, itemSize, itemColor, itemStock, itemStatus, staffId, createTime, itemName, itemPriceInCart, itemCountsInCart, itemPhotoInCart}
-                itemPhoto = JSON.parse(itemInfo.itemPhotoInCart);
-                $("ul.itemsInCart").append(
-                  `<li class="list-group-item d-flex justify-content-between lh-sm px-0">
+  $(document).ready(function () {
+    // todo: 應該要取userId來用，應為fetch (`/NGFW/estore/cart/${sessionStorage.getItem("userId")}`)
+    fetch("/NGFW/estore/cart/601")
+      .then(response => response.json())
+      .then(itemInfos => {
+        if (itemInfos.length === 0) {
+          Swal.fire({
+            icon: "info",
+            title: "購物車內沒有商品",
+            html: `<a href="/estore/shop.html">請先到商城內選購</a>`
+          });
+        } else {
+          totalPrice = 0;
+          for (let itemInfo of itemInfos) {
+            if (itemInfo.result === true) {
+              //   itemInfo {itemInfoId, itemId, itemSize, itemColor, itemStock, itemStatus, staffId, createTime, itemName, itemPriceInCart, itemCountsInCart, itemPhotoInCart}
+              itemPhoto = JSON.parse(itemInfo.itemPhotoInCart);
+              $("ul.itemsInCart").append(
+                `<li class="list-group-item d-flex justify-content-between lh-sm px-0">
                   <div class="col-1">
                     <div class="d-flex justify-content-center">
                       <input class="form-check-input checkboxOnItem" type="checkbox" checked/>
@@ -204,77 +203,50 @@
                     </div>
                   </div>
                 </li>`
-                )
-                $("span.itemsCountToCheckout").text($("input.checkboxOnItem:checked").length);
-                $("ul.itemsToCheckoutList").append(
-                  `<li class="list-group-item d-flex justify-content-between lh-sm">
+              )
+              $("span.itemsCountToCheckout").text($("input.checkboxOnItem:checked").length);
+              $("ul.itemsToCheckoutList").append(
+                `<li class="list-group-item d-flex justify-content-between lh-sm">
                   <div>
                     <h6 class="my-0">${itemInfo.itemName}</h6>
                     <small class="text-body-secondary" data-itemInfo-id="${itemInfo.itemInfoId}" data-itemCountsInCart="${itemInfo.itemCountsInCart}">${itemInfo.itemColor}, ${itemInfo.itemSize}</small>
                   </div>
                   <span class="text-body-secondary" data-itemCountsInCart="${itemInfo.itemCountsInCart}">$${itemInfo.itemPriceInCart} x ${itemInfo.itemCountsInCart}</span>
                 </li>`
-                )
-                totalPrice += itemInfo.itemPriceInCart * itemInfo.itemCountsInCart;
-              } else {
-                Swal.fire({
-                  icon: "error",
-                  title: "Oops...",
-                  text: itemInfo.message
-                });
-              }
+              )
+              totalPrice += itemInfo.itemPriceInCart * itemInfo.itemCountsInCart;
+            } else {
+              Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: itemInfo.message
+              });
             }
-            $("li.totalPrice strong").text(`$${totalPrice}`);
           }
-          updateCheckAllState();
-          $("div.itemBrief").each(function () {
-            let itemInfoId = $(this).find("div.cartItem").attr("data-iteminfo-id");
-            let itemCount = $(this).find(".itemCountsInCart").val();
-            editItemInfoInCart(itemInfoId, itemCount);
-          })
-        })
-        .catch(error => {
-          console.error(error)
-          Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: "出了點狀況！請聯絡管理員"
-          });
-        });
-    })
-
-    // 點選減少商品按鈕
-    $(document).on("click", ".reduceItemCount", function () {
-      let itemCount = $(this).next().val() - 1;
-      if (itemCount > 0) {
-        $(this).next().val(itemCount);
-        let itemId = $(this).closest("li").find("div.cartItem").attr("data-item-id");
-        updateItemPriceInCart(itemId)
-          .then(itemPriceInCart => {
-            $(this).closest("li").find("p.itemPriceInCart").text("$" + (itemPriceInCart ?? "未取得資訊"));
-            adjustmentForCheckout();
-          })
-          .catch(error => {
-            console.error(error)
-            Swal.fire({
-              icon: "error",
-              title: "Oops...",
-              text: "出了點狀況！請聯絡管理員"
-            });
-          });
-      } else {
-        $(this).closest("li").remove();
-        adjustmentForCheckout();
+          $("li.totalPrice strong").text(`$${totalPrice}`);
+        }
         updateCheckAllState();
-      }
-      let itemInfoId = $(this).closest("li").find("div.cartItem").attr("data-itemInfo-id");
-      editItemInfoInCart(itemInfoId, itemCount);
-    })
+        $("div.itemBrief").each(function () {
+          let itemInfoId = $(this).find("div.cartItem").attr("data-iteminfo-id");
+          let itemCount = $(this).find(".itemCountsInCart").val();
+          editItemInfoInCart(itemInfoId, itemCount);
+        })
+      })
+      .catch(error => {
+        console.error(error)
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "出了點狀況！請聯絡管理員"
+        });
+      });
+  })
 
-    // 點選增加商品按鈕
-    $(document).on("click", ".increaseItemCount", function () {
-      let itemCount = $(this).prev().val() - -1;
-      $(this).prev().val(itemCount);
+  // 點選減少商品按鈕
+  $(document).on("click", ".reduceItemCount", function () {
+    let itemCount = $(this).next().val() - 1;
+    if (itemCount > 0) {
+      $(this).next().val(itemCount);
       let itemId = $(this).closest("li").find("div.cartItem").attr("data-item-id");
       updateItemPriceInCart(itemId)
         .then(itemPriceInCart => {
@@ -289,210 +261,237 @@
             text: "出了點狀況！請聯絡管理員"
           });
         });
-      let itemInfoId = $(this).closest("li").find("div.cartItem").attr("data-itemInfo-id");
-      editItemInfoInCart(itemInfoId, itemCount);
-    })
-
-    // 點選刪除商品按鈕，調整checkout項目、確認商品當下價格後更新總價
-    $(document).on("click", "button.deleteItem", function () {
+    } else {
       $(this).closest("li").remove();
       adjustmentForCheckout();
       updateCheckAllState();
-      let itemInfoId = $(this).closest("li").find("div.cartItem").attr("data-itemInfo-id");
-      deleteItemInfoInCart(itemInfoId);
-    });
-
-    // 再確認一次商品數量後，前往結帳頁面 receipt.html
-    $(".continueToCheckout").on("click", function () {
-      let elementHTML = $("#itemsToCheckout").prop("outerHTML");
-      sessionStorage.setItem("itemsToCheckout", elementHTML);
-      window.location.href = "/NGFW/estore/receipt.html";
-    })
-
-    // 更新資料庫中的購物車商品數量
-    async function editItemInfoInCart(itemInfoId, itemCount) {
-      // todo: 應該用 fetch(`/NGFW/estore/cart/editCart/${sessionStorage.getItem("userId")}/${itemInfoId}`, {
-      fetch(`/NGFW/estore/cart/editCart/601/${itemInfoId}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          "userId": 601, // todo: 應該從sessionStorage拿
-          "itemInfoId": itemInfoId,
-          "detailItemCount": itemCount
-        })
-      })
-        .then(response => response.json())
-        .then(cart => {
-          // 如果更新失敗，區分原因，庫存數量小於input數量、庫存數量為0、商品已下架
-          if (!cart.result) {
-            console.log(`${cart.message}`)
-            Swal.fire({
-              icon: "warning",
-              title: "Oops...",
-              text: cart.message
-            })
-              .then(() => {
-                if (cart.detailItemCount > 0) {
-                  // 庫存數量小於input數量
-                  $(`div[data-itemInfo-id=${itemInfoId}]`).next().find("input.itemCountsInCart").val(cart.detailItemCount);
-                  adjustmentForCheckout();
-                } else {
-                  // 因為商品庫存為0或因為商品已下架，所以刪除該筆cart_detail，打刪除的API
-                  deleteItemInfoInCart(itemInfoId)
-                    .then(
-                      $(`div[data-itemInfo-id=${itemInfoId}]`).closest("li").remove(),
-                      adjustmentForCheckout(),
-                      updateCheckAllState()
-                    )
-                }
-              })
-          } else if (parseInt(cart.detailItemCount) === 0) {
-            // 因為購物車內商品數量為0，所以刪除該筆cart_detail，打刪除的API
-            deleteItemInfoInCart(itemInfoId);
-          }
-        })
-        .catch(error => {
-          console.error(error)
-          Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: "出了點狀況！請聯絡管理員"
-          });
-        })
     }
+    let itemInfoId = $(this).closest("li").find("div.cartItem").attr("data-itemInfo-id");
+    editItemInfoInCart(itemInfoId, itemCount);
+  })
 
-    // 從資料庫中刪除購物車中的iteminfo
-    async function deleteItemInfoInCart(itemInfoId) {
-      // todo: 應該用 fetch(`/NGFW/estore/cart/delete/${sessionStorage.getItem("userId")}/${itemInfoId}`, {
-      fetch(`/NGFW/estore/cart/delete/601/${itemInfoId}`, {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
+  // 點選增加商品按鈕
+  $(document).on("click", ".increaseItemCount", function () {
+    let itemCount = $(this).prev().val() - -1;
+    $(this).prev().val(itemCount);
+    let itemId = $(this).closest("li").find("div.cartItem").attr("data-item-id");
+    updateItemPriceInCart(itemId)
+      .then(itemPriceInCart => {
+        $(this).closest("li").find("p.itemPriceInCart").text("$" + (itemPriceInCart ?? "未取得資訊"));
+        adjustmentForCheckout();
+      })
+      .catch(error => {
+        console.error(error)
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "出了點狀況！請聯絡管理員"
+        });
+      });
+    let itemInfoId = $(this).closest("li").find("div.cartItem").attr("data-itemInfo-id");
+    editItemInfoInCart(itemInfoId, itemCount);
+  })
+
+  // 點選刪除商品按鈕，調整checkout項目、確認商品當下價格後更新總價
+  $(document).on("click", "button.deleteItem", function () {
+    $(this).closest("li").remove();
+    adjustmentForCheckout();
+    updateCheckAllState();
+    let itemInfoId = $(this).closest("li").find("div.cartItem").attr("data-itemInfo-id");
+    deleteItemInfoInCart(itemInfoId);
+  });
+
+  // 前往結帳頁面 receipt.html
+  $(".continueToCheckout").on("click", function () {
+    let elementHTML = $("#itemsToCheckout").prop("outerHTML");
+    sessionStorage.setItem("itemsToCheckout", elementHTML);
+    window.location.href = "/NGFW/estore/receipt.html";
+  })
+
+  // 更新資料庫中的購物車商品數量
+  async function editItemInfoInCart(itemInfoId, itemCount) {
+    // todo: 應該用 fetch(`/NGFW/estore/cart/editCart/${sessionStorage.getItem("userId")}/${itemInfoId}`, {
+    fetch(`/NGFW/estore/cart/editCart/601/${itemInfoId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        "userId": 601, // todo: 應該從sessionStorage拿
+        "itemInfoId": itemInfoId,
+        "detailItemCount": itemCount
+      })
+    })
+      .then(response => response.json())
+      .then(cart => {
+        // 如果更新失敗，區分原因，庫存數量小於input數量、庫存數量為0、商品已下架
+        if (!cart.result) {
+          console.log(`${cart.message}`)
+          Swal.fire({
+            icon: "warning",
+            title: "Oops...",
+            text: cart.message
+          })
+            .then(() => {
+              if (cart.detailItemCount > 0) {
+                // 庫存數量小於input數量
+                $(`div[data-itemInfo-id=${itemInfoId}]`).next().find("input.itemCountsInCart").val(cart.detailItemCount);
+                adjustmentForCheckout();
+              } else {
+                // 因為商品庫存為0或因為商品已下架，所以刪除該筆cart_detail，打刪除的API
+                deleteItemInfoInCart(itemInfoId)
+                  .then(
+                    $(`div[data-itemInfo-id=${itemInfoId}]`).closest("li").remove(),
+                    adjustmentForCheckout(),
+                    updateCheckAllState()
+                  )
+              }
+            })
+        } else if (parseInt(cart.detailItemCount) === 0) {
+          // 因為購物車內商品數量為0，所以刪除該筆cart_detail，打刪除的API
+          deleteItemInfoInCart(itemInfoId);
         }
       })
-        .then(resp => resp.text())
-        .then(result => {
-          if (parseInt(result) === 1) {
-            Swal.fire({
-              icon: "success",
-              title: "移除成功!",
-              text: "商品已從購物車中移除"
-            });
-          } else {
-            Swal.fire({
-              icon: "error",
-              title: "Oops...",
-              text: "出了點狀況！請聯絡管理員"
-            });
-          }
-        })
-        .catch(error => {
-          console.error(error)
+      .catch(error => {
+        console.error(error)
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "出了點狀況！請聯絡管理員"
+        });
+      })
+  }
+
+  // 從資料庫中刪除購物車中的iteminfo
+  async function deleteItemInfoInCart(itemInfoId) {
+    // todo: 應該用 fetch(`/NGFW/estore/cart/delete/${sessionStorage.getItem("userId")}/${itemInfoId}`, {
+    fetch(`/NGFW/estore/cart/delete/601/${itemInfoId}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      }
+    })
+      .then(resp => resp.text())
+      .then(result => {
+        if (parseInt(result) === 1) {
+          Swal.fire({
+            icon: "success",
+            title: "移除成功!",
+            text: "商品已從購物車中移除"
+          });
+        } else {
           Swal.fire({
             icon: "error",
             title: "Oops...",
             text: "出了點狀況！請聯絡管理員"
           });
-        })
-    }
+        }
+      })
+      .catch(error => {
+        console.error(error)
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "出了點狀況！請聯絡管理員"
+        });
+      })
+  }
 
-    // 更新商品價格
-    const updateItemPriceInCart = (itemId) => {
-      return fetch(`/NGFW/estore/item/price/${itemId}`)
-        .then(response => response.text());
-    };
+  // 更新商品價格
+  const updateItemPriceInCart = (itemId) => {
+    return fetch(`/NGFW/estore/item/price/${itemId}`)
+      .then(response => response.text());
+  };
 
-    // 欲結帳項目調整
-    const adjustmentForCheckout = () => {
-      $("span.itemsCountToCheckout").text($("input.checkboxOnItem:checked").length);
-      $("ul.itemsToCheckoutList").empty();
-      let itemsSelected = $("input.checkboxOnItem:checked")
-      totalPrice = 0;
-      itemsSelected.each(function () {
-        // todo: 更新目前item價格
-        let itemPriceInCart = $(this).closest("li").find("p.itemPriceInCart").text().split("$")[1];
-        let itemName = $(this).closest("li").find("h4").text();
-        let itemColorAndSize = $(this).closest("li").find("div.itemColor").text() + $(this).closest("li").find("div.itemSize").text();
-        let itemCountsInCart = $(this).closest("li").find("input.itemCountsInCart").val();
-        $("ul.itemsToCheckoutList").append(
-          `<li class="list-group-item d-flex justify-content-between lh-sm">
+  // 欲結帳項目調整
+  const adjustmentForCheckout = () => {
+    $("span.itemsCountToCheckout").text($("input.checkboxOnItem:checked").length);
+    $("ul.itemsToCheckoutList").empty();
+    let itemsSelected = $("input.checkboxOnItem:checked")
+    totalPrice = 0;
+    itemsSelected.each(function () {
+      // todo: 更新目前item價格
+      let itemPriceInCart = $(this).closest("li").find("p.itemPriceInCart").text().split("$")[1];
+      let itemName = $(this).closest("li").find("h4").text();
+      let itemColorAndSize = $(this).closest("li").find("div.itemColor").text() + $(this).closest("li").find("div.itemSize").text();
+      let itemCountsInCart = $(this).closest("li").find("input.itemCountsInCart").val();
+      $("ul.itemsToCheckoutList").append(
+        `<li class="list-group-item d-flex justify-content-between lh-sm">
             <div>
               <h6 class="my-0">${itemName}</h6>
               <small class="text-body-secondary">${itemColorAndSize}</small>
             </div>
             <span class="text-body-secondary">$${itemPriceInCart}</span>
           </li>`
-        )
-        totalPrice += parseInt(itemPriceInCart) * parseInt(itemCountsInCart);
-      });
-      $("li.totalPrice strong").text(`$${totalPrice}`);
-    };
+      )
+      totalPrice += parseInt(itemPriceInCart) * parseInt(itemCountsInCart);
+    });
+    $("li.totalPrice strong").text(`$${totalPrice}`);
+  };
 
-    // 更新checkall checkbox的勾選狀態
-    const updateCheckAllState = () => {
-      $("#check_all").prop("checked", ($("input.checkboxOnItem").length === $("input.checkboxOnItem:checked").length) && $("input.checkboxOnItem").length !== 0);
+  // 更新checkall checkbox的勾選狀態
+  const updateCheckAllState = () => {
+    $("#check_all").prop("checked", ($("input.checkboxOnItem").length === $("input.checkboxOnItem:checked").length) && $("input.checkboxOnItem").length !== 0);
+  }
+
+  $(document).on("mousedown contextmenu", ".cartItem", function (e) {
+    let itemId = $(this).attr("data-item-id");
+    localStorage.setItem("itemId", itemId);
+  })
+
+  $(document).on("click", ".cartItem", function (e) {
+    e.preventDefault();
+    e.stopPropagation();
+
+    let itemId = $(this).attr("data-item-id");
+    localStorage.setItem("itemId", itemId);
+
+    if (e.ctrlKey || e.metaKey || e.button === 1) {
+      window.open("./merchandise.html", "_blank");
+    } else {
+      window.location.href = "./merchandise.html";
     }
+  });
 
-    $(document).on("mousedown contextmenu", ".cartItem", function (e) {
-      let itemId = $(this).attr("data-item-id");
-      localStorage.setItem("itemId", itemId);
-    })
+  $(document).on("mouseenter mouseleave", ".cartItem", function () {
+    $(this).css("cursor", "pointer");
+  });
 
-    $(document).on("click", ".cartItem", function (e) {
-      e.preventDefault();
-      e.stopPropagation();
+  $(document).on("ready click", "#check_all", function () {
+    $("input.checkboxOnItem").prop("checked", $(this).prop("checked"));
+    adjustmentForCheckout();
+  });
 
-      let itemId = $(this).attr("data-item-id");
-      localStorage.setItem("itemId", itemId);
-
-      if (e.ctrlKey || e.metaKey || e.button === 1) {
-        window.open("./merchandise.html", "_blank");
-      } else {
-        window.location.href = "./merchandise.html";
-      }
-    });
-
-    $(document).on("mouseenter mouseleave", ".cartItem", function () {
-      $(this).css("cursor", "pointer");
-    });
-
-    $(document).on("ready click", "#check_all", function () {
-      $("input.checkboxOnItem").prop("checked", $(this).prop("checked"));
-      adjustmentForCheckout();
-    });
-
-    $(document).on("click", "input.checkboxOnItem", function (e) {
-      e.stopPropagation();
-      let itemInfoId = $(this).closest("li").find("div.cartItem").attr("data-iteminfo-id");
-      let itemCount = $(this).closest("li").find(".itemCountsInCart").val();
-      let itemId = $(this).closest("li").find("div.cartItem").attr("data-item-id");
-      if (itemId) {
-        updateItemPriceInCart(itemId)
-          .then(itemPriceInCart => {
-            $(this).closest("li").find("p.itemPriceInCart").text("$" + (itemPriceInCart ?? "未取得資訊"));
-            adjustmentForCheckout();
-          })
-          .catch(error => {
-            console.error(error)
-            Swal.fire({
-              icon: "error",
-              title: "Oops...",
-              text: "出了點狀況！請聯絡管理員"
-            });
+  $(document).on("click", "input.checkboxOnItem", function (e) {
+    e.stopPropagation();
+    let itemInfoId = $(this).closest("li").find("div.cartItem").attr("data-iteminfo-id");
+    let itemCount = $(this).closest("li").find(".itemCountsInCart").val();
+    let itemId = $(this).closest("li").find("div.cartItem").attr("data-item-id");
+    if (itemId) {
+      updateItemPriceInCart(itemId)
+        .then(itemPriceInCart => {
+          $(this).closest("li").find("p.itemPriceInCart").text("$" + (itemPriceInCart ?? "未取得資訊"));
+          adjustmentForCheckout();
+        })
+        .catch(error => {
+          console.error(error)
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "出了點狀況！請聯絡管理員"
           });
-      }
-      updateCheckAllState();
-      editItemInfoInCart(itemInfoId, itemCount);
-    });
+        });
+    }
+    updateCheckAllState();
+    editItemInfoInCart(itemInfoId, itemCount);
+  });
 
-  </script>
+</script>
 
-  <script src="../js/bootstrap.bundle.min.js"></script>
-  <script src="https://kit.fontawesome.com/799bf36dfe.js" crossorigin="anonymous"></script>
-  <!-- sweetalert2 -->
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="../js/bootstrap.bundle.min.js"></script>
+<script src="https://kit.fontawesome.com/799bf36dfe.js" crossorigin="anonymous"></script>
+<!-- sweetalert2 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 
 </html>

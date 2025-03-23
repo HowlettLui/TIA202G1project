@@ -112,17 +112,17 @@
 
                 <div id="twzipcode" class="col-12">
                   <div class="row">
-                    <div class="col-md-5 county">
+                    <div class="col-md-5 county mb-2">
                       <label for="county" class="form-label">縣市</label>
                       <div data-role="county" data-style="Style Name form-control" data-value="臺北市"
                            id="county"></div>
                     </div>
-                    <div class="col-md-5 district">
+                    <div class="col-md-5 district mb-2">
                       <label for="district" class="form-label">鄉鎮市區</label>
                       <div data-role="district" data-style="Style Name form-control" data-value="信義區"
                            id="district"></div>
                     </div>
-                    <div class="col-md-2 zipcode">
+                    <div class="col-md-2 zipcode mb-2">
                       <label for="zipcode" class="form-label">郵遞區號</label>
                       <div data-role="zipcode" data-style="Style Name form-control" data-value="110" id="zipcode"></div>
                       <div class="invalid-feedback">
@@ -193,6 +193,7 @@
   $(".headerPage").load("../layout/header.html");
   $(".footerPage").load("../layout/footer.html");
 
+  // input內容是否填寫的判斷
   function validateFields(elements, checkNumber = false) {
     let allValid = true;
     elements.each(function () {
@@ -213,13 +214,14 @@
     return allValid;
   }
 
-  $(document).on("click", "div.shippingMethod", function (e) {
-    if (!$(e.target).is('input[type="radio"]')) {
-      $(e.target).closest("div.form-check").find("input[type='radio']").prop("checked", true);
-    }
-  })
+  // todo: 如果有超商取貨的話，再打開來判斷
+  // $(document).on("click", "div.shippingMethod", function (e) {
+  //   if (!$(e.target).is('input[type="radio"]')) {
+  //     $(e.target).closest("div.form-check").find("input[type='radio']").prop("checked", true);
+  //   }
+  // })
 
-  // 超商電子地圖
+  // todo: 超商電子地圖
   // $("#chooseConvenienceStore").on("click", function () {
   //   fetch("https://logistics-stage.ecpay.com.tw/Express/map", {
   //     method: "POST",
@@ -277,7 +279,7 @@
     //   })
   })
 
-  $(".continueToCheckout").on("click", function () {
+  $(document).on("click", ".continueToCheckout", function () {
     let isValid = validateFields($("input#address, div#zipcode input"));
 
     if (!isValid) {
@@ -322,7 +324,7 @@
       })
         .then(resp => resp.json())
         .then(order => {
-          $("#result").html(order.result ? "結帳成功" : order.message);
+          $("#result").html(order.message);
         })
     }
   })
