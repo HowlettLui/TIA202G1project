@@ -172,39 +172,69 @@
 
   let itemId;
   let itemModelId;
+  let staff;
 
-  // todo: 編輯頁面還沒做完，從admin items點編輯按鈕過來之後，要帶它原本的內容到頁面上
+  // 從admin items點編輯按鈕過來之後，要帶它原本的內容到頁面上
   $(function () {
-    fetch(`/NGFW/estoreadmin/item/getitem/${sessionStorage.getItem("itemId")}`)
-      .then(response => response.json())
-      .then(item => {
-        if (item.result) {
-          itemId = item.itemId;
-          itemModelId = item.itemModel.itemModelId;
-          $('#item_model').val(item.itemModel.itemModel);
-          $('#item_name').val(item.itemName);
-          $('#item_type').val(item.itemType);
-          $('#item_content').val(item.itemContent);
-          $('#item_price').val(item.itemPrice);
-          $('#summernote').summernote('code', item.itemDetails)
-          // itemInfo.item.itemPhoto;
-        } else {
+    staff = JSON.parse(sessionStorage.getItem("staff"));
+    if ((!staff) || !staff.staffId) {
+      Swal.fire({
+        icon: 'warning',
+        title: '尚未登入',
+        text: '請先登入再進入商品編輯頁面'
+      })
+        .then(() => {
+          window.location.href = "/staff_login.html";
+        })
+    } else if (staff.staffStatus !== 1) {
+      Swal.fire({
+        icon: 'warning',
+        title: '帳號尚未開通',
+        text: '請先開通帳號再進入商品編輯頁面'
+      })
+        .then(() => {
+          window.location.href = "/templateb.html";
+        })
+    } else if (staff.staffRoleId !== 1 && staff.staffRoleId !== 3) {
+      Swal.fire({
+        icon: 'warning',
+        title: '權限錯誤',
+        text: '請以正確的帳號登入再進入商品編輯頁面'
+      })
+        .then(() => {
+          window.location.href = "/staff_login.html";
+        })
+    } else {
+      fetch(`/NGFW/estoreadmin/item/getitem/${sessionStorage.getItem("itemId")}`)
+        .then(response => response.json())
+        .then(item => {
+          if (item.result) {
+            itemId = item.itemId;
+            itemModelId = item.itemModel.itemModelId;
+            $('#item_model').val(item.itemModel.itemModel);
+            $('#item_name').val(item.itemName);
+            $('#item_type').val(item.itemType);
+            $('#item_content').val(item.itemContent);
+            $('#item_price').val(item.itemPrice);
+            $('#summernote').summernote('code', item.itemDetails)
+            // itemInfo.item.itemPhoto;
+          } else {
+            Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: "出了點狀況！請聯絡管理員"
+            });
+          }
+        })
+        .catch(error => {
+          console.error('Error:', error);
           Swal.fire({
             icon: "error",
             title: "Oops...",
             text: "出了點狀況！請聯絡管理員"
           });
-        }
-      })
-      .catch(error => {
-        console.error('Error:', error);
-        Swal.fire({
-          icon: "error",
-          title: "Oops...",
-          text: "出了點狀況！請聯絡管理員"
-        });
-      })
-
+        })
+    }
   })
 
   $(document).on('blur', 'input.item_related', function () {
@@ -244,8 +274,7 @@
       const itemModel = {
         itemModelId: itemModelId,
         itemModel: $('#item_model').val(),
-        // todo: staffId: sessionStorage.getItem("staffId")
-        staffId: 1
+        staffId: staff.staffId
       }
       const item = {
         itemId: itemId,
@@ -256,12 +285,11 @@
         itemPrice: $('#item_price').val(),
         itemDetails: $('#summernote').summernote('code'),
         // itemPhoto: itemPhotosPath.toString(), // todo: Uppy可以讀上來之後再改回
-        // todo: staffId: sessionStorage.getItem("staffId")
-        staffId: 1
+        staffId: staff.staffId
       }
 
 
-      // todo: 編輯itemModel、item，發API
+      // 編輯itemModel、item，發API
       fetch(`/NGFW/estoreadmin/item/edititem/${sessionStorage.getItem("itemId")}`, {
         method: 'PUT',
         headers: {
@@ -346,7 +374,7 @@
   //     proudlyDisplayPoweredByUppy: true,
   //   })
   //   .use(XHRUpload, {
-  //     endpoint: 'http://localhost:8080/NGFW/estoreadmin/upload',
+  //     endpoint: '/NGFW/estoreadmin/upload',
   //     fieldName: 'item_photo',
   //     headers: {
   //       'X-Requested-With': 'XMLHttpRequest'

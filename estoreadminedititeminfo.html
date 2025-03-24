@@ -121,31 +121,63 @@
   $(".Navbar").load("./layout/navbar.html");
   $(".Sidebar").load("./layout/sidebar.html");
 
+  let staff;
+
   // 從admin items點編輯iteminfo按鈕過來之後，要帶它原本的內容到頁面上
   $(function () {
-    fetch(`/NGFW/estoreadmin/item/getiteminfo/${sessionStorage.getItem("itemInfoId")}`)
-      .then(response => response.json())
-      .then(itemInfo => {
-        if (itemInfo.result) {
-          $('#item_color').val(itemInfo.itemColor);
-          $('#item_size').val(itemInfo.itemSize);
-          $('#item_stock').val(itemInfo.itemStock);
-        } else {
+    staff = JSON.parse(sessionStorage.getItem("staff"));
+    if ((!staff) || !staff.staffId) {
+      Swal.fire({
+        icon: 'warning',
+        title: '尚未登入',
+        text: '請先登入再進入商品編輯頁面'
+      })
+        .then(() => {
+          window.location.href = "/staff_login.html";
+        })
+    } else if (staff.staffStatus !== 1) {
+      Swal.fire({
+        icon: 'warning',
+        title: '帳號尚未開通',
+        text: '請先開通帳號再進入商品編輯頁面'
+      })
+        .then(() => {
+          window.location.href = "/templateb.html";
+        })
+    } else if (staff.staffRoleId !== 1 && staff.staffRoleId !== 3) {
+      Swal.fire({
+        icon: 'warning',
+        title: '權限錯誤',
+        text: '請以正確的帳號登入再進入商品編輯頁面'
+      })
+        .then(() => {
+          window.location.href = "/staff_login.html";
+        })
+    } else {
+      fetch(`/NGFW/estoreadmin/item/getiteminfo/${sessionStorage.getItem("itemInfoId")}`)
+        .then(response => response.json())
+        .then(itemInfo => {
+          if (itemInfo.result) {
+            $('#item_color').val(itemInfo.itemColor);
+            $('#item_size').val(itemInfo.itemSize);
+            $('#item_stock').val(itemInfo.itemStock);
+          } else {
+            Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: itemInfo.message
+            });
+          }
+        })
+        .catch(error => {
+          console.error('Error:', error);
           Swal.fire({
             icon: "error",
             title: "Oops...",
-            text: itemInfo.message
+            text: "出了點狀況！請聯絡管理員"
           });
-        }
-      })
-      .catch(error => {
-        console.error('Error:', error);
-        Swal.fire({
-          icon: "error",
-          title: "Oops...",
-          text: "出了點狀況！請聯絡管理員"
-        });
-      })
+        })
+    }
   })
 
   $(document).on('blur', 'input.item_related', function () {
@@ -181,8 +213,7 @@
           itemColor: $('#item_color').val(),
           itemStock: $('#item_stock').val(),
           itemStatus: itemStatus,
-          // todo: staffId: sessionStorage.getItem("staffId")
-          staffId: 1
+          staffId: staff.staffId
         })
       })
         .then(resp => resp.json())

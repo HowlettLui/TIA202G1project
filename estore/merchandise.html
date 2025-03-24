@@ -58,22 +58,18 @@
 
             <div class="container text-center">
               <div class="row justify-content-between">
-                <div class="col-12 col-lg-3 col-xxl-4 py-0 px-1 mb-2">
+                <div class="col-12 col-lg-4 col-xxl-5 py-0 px-1 mb-2">
                   <select id="itemSizes" class="form-select" aria-label="Default select example">
                     <option class="default" selected disabled>尚未選擇顏色</option>
                   </select>
                 </div>
-                <div class="col-12 col-lg-3 col-xxl-4 mb-2 py-0 px-1 dropdown">
+                <div class="col-12 col-lg-4 col-xxl-5 mb-2 py-0 px-1 dropdown">
                   <select id="itemStock" class="form-select" aria-label="Default select example">
                     <option class="default" selected disabled>尚未選擇顏色與大小</option>
                   </select>
                 </div>
-                <div class="col-12 col-lg-3 col-xxl-2 p-0 mb-2 px-1">
+                <div class="col-12 col-lg-4 col-xxl-2 p-0 mb-2 px-1">
                   <button type="button" class="btn btn-outline-secondary w-100" id="addToCart">加入購物車</button>
-                </div>
-                <div class="col-12 col-lg-3 col-xxl-2 p-0 mb-2 px-1">
-                  <!--                  todo: 直接購買功能還沒寫 -->
-                  <button type="button" class="btn btn-outline-secondary w-100">直接購買</button>
                 </div>
               </div>
             </div>
@@ -272,60 +268,82 @@
     manipulateStocks(itemInfoNow);
   })
 
+  let user;
+
   // 加入頁面中指定數量的商品到購物車
   $(document).on("click", "#addToCart", function () {
-    let itemInfoId = $("select#itemSizes option:selected").attr("data-itemInfo-id");
-    let detailItemCount = $("select#itemStock option:selected").val();
-
-    if (itemInfoId && (detailItemCount == parseInt(detailItemCount))) {
-      fetch(`/NGFW/estore/cart/addToCart`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          // todo: 應該要取userId來用，應為${localStorage.getItem("userId")}
-          "userId": 601,
-          "itemInfoId": itemInfoId,
-          "detailItemCount": detailItemCount
-        })
+    user = JSON.parse(sessionStorage.getItem("user"));
+    if ((!user) || !user.userId) {
+      Swal.fire({
+        icon: 'warning',
+        title: '尚未登入',
+        text: '請先登入再進行選購'
       })
-        .then(resp => resp.json())
-        .then(cart => {
-          if (cart.result) {
-            Swal.fire({
-              icon: "success",
-              title: "新增成功",
-              text: cart.message,
-            })
-              .then(() => {
-                window.location.href = "./shop.html";
+        .then(() => {
+          window.location.href = "/login.html";
+        })
+    } else if (!user.status) {
+      Swal.fire({
+        icon: 'warning',
+        title: '尚未開通',
+        text: '請先開通帳號再進行選購'
+      })
+        .then(() => {
+          window.location.href = "/estore/shop.html";
+        })
+    } else {
+      let itemInfoId = $("select#itemSizes option:selected").attr("data-itemInfo-id");
+      let detailItemCount = $("select#itemStock option:selected").val();
+
+      if (itemInfoId && (detailItemCount == parseInt(detailItemCount))) {
+        fetch(`/NGFW/estore/cart/addToCart`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            "userId": user.userId,
+            "itemInfoId": itemInfoId,
+            "detailItemCount": detailItemCount
+          })
+        })
+          .then(resp => resp.json())
+          .then(cart => {
+            if (cart.result) {
+              Swal.fire({
+                icon: "success",
+                title: "新增成功",
+                text: cart.message,
               })
-          } else {
+                .then(() => {
+                  window.location.href = "./shop.html";
+                })
+            } else {
+              Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: cart.message,
+              })
+                .then(() => {
+                  window.location.reload()
+                })
+            }
+          })
+          .catch(error => {
+            console.error(error)
             Swal.fire({
               icon: "error",
               title: "Oops...",
-              text: cart.message,
-            })
-              .then(() => {
-                window.location.reload()
-              })
-          }
-        })
-        .catch(error => {
-          console.error(error)
-          Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: "出了點狀況！請聯絡管理員"
-          });
-        })
-    } else {
-      Swal.fire({
-        icon: "info",
-        title: "尚未選擇商品",
-        text: "請先選擇商品顏色、大小或數量"
-      });
+              text: "出了點狀況！請聯絡管理員"
+            });
+          })
+      } else {
+        Swal.fire({
+          icon: "info",
+          title: "尚未選擇商品",
+          text: "請先選擇商品顏色、大小或數量"
+        });
+      }
     }
   })
 
