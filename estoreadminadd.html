@@ -182,9 +182,42 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
+  let staff;
+
   $(function () {
     // Summernote
-    $('#summernote').summernote()
+    $('#summernote').summernote();
+
+    staff = JSON.parse(sessionStorage.getItem("staff"));
+
+    if ((!staff) || !staff.staffId) {
+      Swal.fire({
+        icon: 'warning',
+        title: '尚未登入',
+        text: '請先登入再新增商品'
+      })
+        .then(() => {
+          window.location.href = "/staff_login.html";
+        })
+    } else if (staff.staffStatus !== 1) {
+      Swal.fire({
+        icon: 'warning',
+        title: '帳號尚未開通',
+        text: '請先開通帳號再新增商品'
+      })
+        .then(() => {
+          window.location.href = "/templateb.html";
+        })
+    } else if (staff.staffRoleId !== 1 && staff.staffRoleId !== 3) {
+      Swal.fire({
+        icon: 'warning',
+        title: '權限錯誤',
+        text: '請以正確的帳號登入再新增商品'
+      })
+        .then(() => {
+          window.location.href = "/staff_login.html";
+        })
+    }
   })
 
   $(".Navbar").load("./layout/navbar.html");
@@ -255,8 +288,7 @@
     } else {
       const itemModel = {
         itemModel: $('#item_model').val(),
-        // todo: staffId: sessionStorage.getItem("staffId")
-        staffId: 1
+        staffId: staff.staffId
       }
       const item = {
         itemName: $('#item_name').val(),
@@ -265,16 +297,14 @@
         itemPrice: $('#item_price').val(),
         itemDetails: $('#summernote').summernote('code'),
         itemPhoto: itemPhotosPath ? itemPhotosPath.toString() : "",
-        // todo: staffId: sessionStorage.getItem("staffId")
-        staffId: 1
+        staffId: staff.staffId
       }
       const itemInfo = {
         itemSize: $('#item_size').val(),
         itemColor: $('#item_color').val(),
         itemStock: $('#item_stock').val(),
         itemStatus: itemStatus,
-        // todo: staffId: sessionStorage.getItem("staffId")
-        staffId: 1
+        staffId: staff.staffId
       }
 
       fetch('/NGFW/estoreadmin/add', {
@@ -363,7 +393,7 @@
       proudlyDisplayPoweredByUppy: true,
     })
     .use(XHRUpload, {
-      endpoint: 'http://localhost:8080/NGFW/estoreadmin/upload',
+      endpoint: '/NGFW/estoreadmin/upload',
       fieldName: 'item_photo',
       headers: {
         'X-Requested-With': 'XMLHttpRequest'

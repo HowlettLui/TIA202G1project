@@ -107,7 +107,7 @@
           </ul>
         </div>
 
-        <!-- todo: 購物車右半邊的頁面，根據選取的商品項目變動-->
+        <!-- 購物車右半邊的頁面，根據選取的商品項目變動-->
         <!-- cart details -->
         <div class="col-lg-4" id="itemsToCheckout">
           <h4 class="d-flex justify-content-between align-items-center mb-3">
@@ -139,26 +139,50 @@
   $(".footerPage").load("../layout/footer.html");
 
   let totalPrice;
+  let user;
 
   $(document).ready(function () {
-    // todo: 應該要取userId來用，應為fetch (`/NGFW/estore/cart/${sessionStorage.getItem("userId")}`)
-    fetch("/NGFW/estore/cart/601")
-      .then(response => response.json())
-      .then(itemInfos => {
-        if (itemInfos.length === 0) {
-          Swal.fire({
-            icon: "info",
-            title: "購物車內沒有商品",
-            html: `<a href="/estore/shop.html">請先到商城內選購</a>`
-          });
-        } else {
-          totalPrice = 0;
-          for (let itemInfo of itemInfos) {
-            if (itemInfo.result === true) {
-              //   itemInfo {itemInfoId, itemId, itemSize, itemColor, itemStock, itemStatus, staffId, createTime, itemName, itemPriceInCart, itemCountsInCart, itemPhotoInCart}
-              itemPhoto = JSON.parse(itemInfo.itemPhotoInCart);
-              $("ul.itemsInCart").append(
-                `<li class="list-group-item d-flex justify-content-between lh-sm px-0">
+    user = JSON.parse(sessionStorage.getItem("user"));
+
+    if ((!user) || !user.userId) {
+      Swal.fire({
+        icon: 'warning',
+        title: '尚未登入',
+        text: '請先登入再進行選購'
+      })
+        .then(() => {
+          window.location.href = "/login.html";
+        })
+    } else if (!user.status) {
+      Swal.fire({
+        icon: 'warning',
+        title: '尚未開通',
+        text: '請先開通帳號再進行選購'
+      })
+        .then(() => {
+          window.location.href = "/estore/shop.html";
+        })
+    } else {
+      fetch(`/NGFW/estore/cart/${user.userId}`)
+        .then(response => response.json())
+        .then(itemInfos => {
+          if (itemInfos.length === 0) {
+            Swal.fire({
+              icon: "info",
+              title: "購物車內沒有商品",
+              html: "請先到商城內選購"
+            })
+              .then(() => {
+                window.location.href = "/estore/shop.html";
+              })
+          } else {
+            totalPrice = 0;
+            for (let itemInfo of itemInfos) {
+              if (itemInfo.result === true) {
+                //   itemInfo {itemInfoId, itemId, itemSize, itemColor, itemStock, itemStatus, staffId, createTime, itemName, itemPriceInCart, itemCountsInCart, itemPhotoInCart}
+                itemPhoto = JSON.parse(itemInfo.itemPhotoInCart);
+                $("ul.itemsInCart").append(
+                  `<li class="list-group-item d-flex justify-content-between lh-sm px-0">
                   <div class="col-1">
                     <div class="d-flex justify-content-center">
                       <input class="form-check-input checkboxOnItem" type="checkbox" checked/>
@@ -203,43 +227,44 @@
                     </div>
                   </div>
                 </li>`
-              )
-              $("span.itemsCountToCheckout").text($("input.checkboxOnItem:checked").length);
-              $("ul.itemsToCheckoutList").append(
-                `<li class="list-group-item d-flex justify-content-between lh-sm">
+                )
+                $("span.itemsCountToCheckout").text($("input.checkboxOnItem:checked").length);
+                $("ul.itemsToCheckoutList").append(
+                  `<li class="list-group-item d-flex justify-content-between lh-sm">
                   <div>
                     <h6 class="my-0">${itemInfo.itemName}</h6>
                     <small class="text-body-secondary" data-itemInfo-id="${itemInfo.itemInfoId}" data-itemCountsInCart="${itemInfo.itemCountsInCart}">${itemInfo.itemColor}, ${itemInfo.itemSize}</small>
                   </div>
                   <span class="text-body-secondary" data-itemCountsInCart="${itemInfo.itemCountsInCart}">$${itemInfo.itemPriceInCart} x ${itemInfo.itemCountsInCart}</span>
                 </li>`
-              )
-              totalPrice += itemInfo.itemPriceInCart * itemInfo.itemCountsInCart;
-            } else {
-              Swal.fire({
-                icon: "error",
-                title: "Oops...",
-                text: itemInfo.message
-              });
+                )
+                totalPrice += itemInfo.itemPriceInCart * itemInfo.itemCountsInCart;
+              } else {
+                Swal.fire({
+                  icon: "error",
+                  title: "Oops...",
+                  text: itemInfo.message
+                });
+              }
             }
+            $("li.totalPrice strong").text(`$${totalPrice}`);
           }
-          $("li.totalPrice strong").text(`$${totalPrice}`);
-        }
-        updateCheckAllState();
-        $("div.itemBrief").each(function () {
-          let itemInfoId = $(this).find("div.cartItem").attr("data-iteminfo-id");
-          let itemCount = $(this).find(".itemCountsInCart").val();
-          editItemInfoInCart(itemInfoId, itemCount);
+          updateCheckAllState();
+          $("div.itemBrief").each(function () {
+            let itemInfoId = $(this).find("div.cartItem").attr("data-iteminfo-id");
+            let itemCount = $(this).find(".itemCountsInCart").val();
+            editItemInfoInCart(itemInfoId, itemCount);
+          })
         })
-      })
-      .catch(error => {
-        console.error(error)
-        Swal.fire({
-          icon: "error",
-          title: "Oops...",
-          text: "出了點狀況！請聯絡管理員"
+        .catch(error => {
+          console.error(error)
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "出了點狀況！請聯絡管理員"
+          });
         });
-      });
+    }
   })
 
   // 點選減少商品按鈕
@@ -303,21 +328,40 @@
 
   // 前往結帳頁面 receipt.html
   $(".continueToCheckout").on("click", function () {
-    let elementHTML = $("#itemsToCheckout").prop("outerHTML");
-    sessionStorage.setItem("itemsToCheckout", elementHTML);
-    window.location.href = "/NGFW/estore/receipt.html";
+    if (parseInt($("span.itemsCountToCheckout").text()) !== 0) {
+      let elementHTML = $("#itemsToCheckout").prop("outerHTML");
+      sessionStorage.setItem("itemsToCheckout", elementHTML);
+      window.location.href = "/estore/receipt.html";
+    } else {
+      if ($("ul.itemsInCart li").length > 1) {
+        Swal.fire({
+          icon: "warning",
+          title: "尚未選擇商品",
+          text: "請選擇商品後再前往結帳頁面"
+        })
+      } else {
+        Swal.fire({
+          icon: "warning",
+          title: "購物車內沒有商品",
+          text: "請選購商品後再前往結帳頁面"
+        })
+          .then(() => {
+            window.location.href = "/estore/shop.html";
+          })
+      }
+    }
   })
 
   // 更新資料庫中的購物車商品數量
   async function editItemInfoInCart(itemInfoId, itemCount) {
-    // todo: 應該用 fetch(`/NGFW/estore/cart/editCart/${sessionStorage.getItem("userId")}/${itemInfoId}`, {
-    fetch(`/NGFW/estore/cart/editCart/601/${itemInfoId}`, {
+    fetch(`/NGFW/estore/cart/editCart/${user.userId}/${itemInfoId}`, {
+      // fetch(`/NGFW/estore/cart/editCart/601/${itemInfoId}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        "userId": 601, // todo: 應該從sessionStorage拿
+        "userId": user.userId,
         "itemInfoId": itemInfoId,
         "detailItemCount": itemCount
       })
@@ -364,8 +408,8 @@
 
   // 從資料庫中刪除購物車中的iteminfo
   async function deleteItemInfoInCart(itemInfoId) {
-    // todo: 應該用 fetch(`/NGFW/estore/cart/delete/${sessionStorage.getItem("userId")}/${itemInfoId}`, {
-    fetch(`/NGFW/estore/cart/delete/601/${itemInfoId}`, {
+    fetch(`/NGFW/estore/cart/delete/${user.userId}/${itemInfoId}`, {
+      // fetch(`/NGFW/estore/cart/delete/601/${itemInfoId}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -410,7 +454,7 @@
     let itemsSelected = $("input.checkboxOnItem:checked")
     totalPrice = 0;
     itemsSelected.each(function () {
-      // todo: 更新目前item價格
+      // 更新目前item價格
       let itemPriceInCart = $(this).closest("li").find("p.itemPriceInCart").text().split("$")[1];
       let itemName = $(this).closest("li").find("h4").text();
       let itemColorAndSize = $(this).closest("li").find("div.itemColor").text() + $(this).closest("li").find("div.itemSize").text();
@@ -421,7 +465,7 @@
               <h6 class="my-0">${itemName}</h6>
               <small class="text-body-secondary">${itemColorAndSize}</small>
             </div>
-            <span class="text-body-secondary">$${itemPriceInCart}</span>
+            <span class="text-body-secondary">$${itemPriceInCart} x ${itemCountsInCart}</span>
           </li>`
       )
       totalPrice += parseInt(itemPriceInCart) * parseInt(itemCountsInCart);

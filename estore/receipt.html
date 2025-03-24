@@ -193,6 +193,61 @@
   $(".headerPage").load("../layout/header.html");
   $(".footerPage").load("../layout/footer.html");
 
+  let user;
+
+  // 從購物車帶來的結帳清單
+  $(function () {
+    user = JSON.parse(sessionStorage.getItem("user"));
+    if ((!user) || !user.userId) {
+      Swal.fire({
+        icon: 'warning',
+        title: '尚未登入',
+        text: '請先登入再進行購買'
+      })
+        .then(() => {
+          window.location.href = "/login.html";
+        })
+    } else if (!user.status) {
+      Swal.fire({
+        icon: 'warning',
+        title: '尚未開通',
+        text: '請先開通帳號再進行購買'
+      })
+        .then(() => {
+          window.location.href = "/estore/shop.html";
+        })
+    } else {
+      let savedElement = sessionStorage.getItem("itemsToCheckout");
+      if (savedElement !== null) {
+        $("#itemsToCheckout").replaceWith(savedElement);
+      } else {
+        Swal.fire({
+          icon: 'warning',
+          title: '尚未選購商品',
+          text: '請先選購再進行結帳'
+        })
+          .then(() => {
+            window.location.href = "/estore/shop.html";
+          })
+      }
+    }
+
+    // fetch("", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify({})
+    // })
+    //   .then(resp => resp.json())
+    //   .then(data => {
+    //
+    //   })
+    //   .catch(error => {
+    //     console.error(error)
+    //   })
+  })
+
   // input內容是否填寫的判斷
   function validateFields(elements, checkNumber = false) {
     let allValid = true;
@@ -222,30 +277,30 @@
   // })
 
   // todo: 超商電子地圖
-  // $("#chooseConvenienceStore").on("click", function () {
-  //   fetch("https://logistics-stage.ecpay.com.tw/Express/map", {
-  //     method: "POST",
-  //     // mode: 'no-cors',
-  //     headers: {
-  //       "Accept": "text/html",
-  //       "Content-Type": "application/x-www-form-urlencoded",
-  //     },
-  //     body: JSON.stringify({
-  //       "MerchantID": "3002599",
-  //       "LogisticsType": "CVS",
-  //       "LogisticsSubType": "UNIMARTC2C",
-  //       "IsCollection": "N",
-  //       "ServerReplyURL": "./receipt.html"
-  //     })
-  //   })
-  //     .then(resp => resp.html)
-  //     .then(body => {
-  //       sessionStorage.setItem("CVSAddress", body);
-  //     })
-  //     .catch(err => {
-  //       console.log(err);
-  //     })
-  // })
+  $("#chooseConvenienceStore").on("click", function () {
+    fetch("https://logistics-stage.ecpay.com.tw/Express/map", {
+      method: "POST",
+      // mode: 'no-cors',
+      headers: {
+        "Accept": "text/html",
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: JSON.stringify({
+        "MerchantID": "3002599",
+        "LogisticsType": "CVS",
+        "LogisticsSubType": "UNIMARTC2C",
+        "IsCollection": "N",
+        "ServerReplyURL": "./receipt.html"
+      })
+    })
+      .then(resp => resp.html)
+      .then(body => {
+        sessionStorage.setItem("CVSAddress", body);
+      })
+      .catch(err => {
+        console.log(err);
+      })
+  })
 
   $('#twzipcode').twzipcode();
   $('#twzipcode div selector').twzipcode({
@@ -255,28 +310,6 @@
 
   $(document).on("change", "#twzipcode", function () {
     console.log($('#twzipcode').twzipcode('get', ['county', 'district', 'zipcode']));
-  })
-
-  $(function () {
-    let savedElement = sessionStorage.getItem("itemsToCheckout");
-    if (savedElement !== null) {
-      $("#itemsToCheckout").replaceWith(savedElement);
-    }
-
-    // fetch("", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify({})
-    // })
-    //   .then(resp => resp.json())
-    //   .then(data => {
-    //
-    //   })
-    //   .catch(error => {
-    //     console.error(error)
-    //   })
   })
 
   $(document).on("click", ".continueToCheckout", function () {
@@ -302,8 +335,7 @@
         }
       ];
       let order = {
-        // todo: "userId": sessionStorage.getItem("userId"),
-        "userId": 601,
+        "userId": user.userId,
         "orderStatus": 0,
         "orderPayment": 0,
         "orderShipment": 0,
@@ -312,8 +344,7 @@
         "orderDescription": "備註說明",
         "receipts": receipts
       };
-      // todo: 應該是fetch(`/NGFW/estore/order/pay/${sessionStorage.getItem("userId")}`, {
-      fetch("/NGFW/estore/order/pay/601", {
+      fetch(`/NGFW/estore/order/pay/${user.userId}`, {
         method: "POST",
         body: JSON.stringify(
           order

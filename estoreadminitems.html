@@ -135,16 +135,47 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
+  let staff;
+
   $(".Navbar").load("./layout/navbar.html");
   $(".Sidebar").load("./layout/sidebar.html");
 
   $(function () {
-    fetch("/NGFW/estoreadmin/items")
-      .then(response => response.json())
-      .then(items => {
-        for (let item of items) {
-          $("#itemsAdmin").append(
-            `<tr data-bs-toggle="collapse" data-bs-target=#${item.itemId} class="accordion-toggle" aria-expanded="false">
+    staff = JSON.parse(sessionStorage.getItem("staff"));
+    if ((!staff) || !staff.staffId) {
+      Swal.fire({
+        icon: 'warning',
+        title: '尚未登入',
+        text: '請先登入再進入平台商品頁面'
+      })
+        .then(() => {
+          window.location.href = "/staff_login.html";
+        })
+    } else if (staff.staffStatus !== 1) {
+      Swal.fire({
+        icon: 'warning',
+        title: '帳號尚未開通',
+        text: '請先開通帳號再進入平台商品頁面'
+      })
+        .then(() => {
+          window.location.href = "/templateb.html";
+        })
+    } else if (staff.staffRoleId !== 1 && staff.staffRoleId !== 3) {
+      Swal.fire({
+        icon: 'warning',
+        title: '權限錯誤',
+        text: '請以正確的帳號登入再進入平台商品頁面'
+      })
+        .then(() => {
+          window.location.href = "/staff_login.html";
+        })
+    } else {
+      fetch("/NGFW/estoreadmin/items")
+        .then(response => response.json())
+        .then(items => {
+          for (let item of items) {
+            $("#itemsAdmin").append(
+              `<tr data-bs-toggle="collapse" data-bs-target=#${item.itemId} class="accordion-toggle" aria-expanded="false">
                 <td>${item.itemType}</td>
                 <td>${item.itemModel.itemModel}</td>
                 <td>${item.itemName}</td>
@@ -174,17 +205,18 @@
                   </div>
                 </td>
               </tr>`
-          )
-        }
-      })
-      .catch(error => {
-        console.error('Error:', error);
-        Swal.fire({
-          icon: "error",
-          title: "Oops...",
-          text: "出了點狀況！請聯絡管理員"
+            )
+          }
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "出了點狀況！請聯絡管理員"
+          });
         });
-      });
+    }
   })
 
   $(document).on("click", "tr.accordion-toggle", function () {
@@ -299,10 +331,18 @@
               $(`.listItemInfoForSale[data-itemInfo-id=${itemInfoId}], .removeItemInfoFromSale[data-itemInfo-id=${itemInfoId}]`).each(function () {
                 $(this).prop('disabled', !$(this).prop('disabled'));
               });
-              $(`.listItemInfoForSale[data-itemInfo-id=${itemInfoId}]`).closest("td").prev()
-                .toggleClass('bg-danger-subtle')
-                .toggleClass('bg-success-subtle')
-                .text(status == 1 ? "已上架" : "已下架");
+              let itemInfoStatusArea = $(`.listItemInfoForSale[data-itemInfo-id=${itemInfoId}]`).closest("td").prev()
+              if (itemInfoStatusArea.hasClass("bg-warning-subtle")) {
+                itemInfoStatusArea
+                  .removeClass("bg-warning-subtle")
+                  .addClass("bg-success-subtle")
+                  .text("已上架");
+              } else {
+                itemInfoStatusArea
+                  .toggleClass('bg-danger-subtle')
+                  .toggleClass('bg-success-subtle')
+                  .text(parseInt(status) === 1 ? "已上架" : "已下架");
+              }
             })
         } else {
           Swal.fire({
