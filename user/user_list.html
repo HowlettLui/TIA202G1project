@@ -183,39 +183,6 @@
                 </tr>
               </thead>
               <tbody class='user_lists'>
-                
-                <tr>
-                  <td><input type='checkbox' class='check_el'></td>
-                  <td>user_id</td>
-                  <td>塊陶鴨</td>
-                  <td>
-                    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                      data-bs-toggle="dropdown" aria-expanded="false">
-                      狀態
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                      <li><a class="dropdown-item unautorized">未啟用</a></li>
-                      <li><a class="dropdown-item activated">啟用</a></li>
-                      <li><a class="dropdown-item suspended">停用</a></li>
-                    </ul>
-                  </td>
-                  <td>
-                    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                      data-bs-toggle="dropdown" aria-expanded="false">
-                      使用者角色
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                      <li><a class="dropdown-item unautorized_user">未啟用使用者</a></li>
-                      <li><a class="dropdown-item author">文章編輯者</a></li>
-                      <li><a class="dropdown-item normal_user">一般使用者</a></li>
-                    </ul>
-                  </td>
-                  <td>test111@gmail.com</td>
-                  <th>0912345678</th>
-                  <td>
-                    <button class='btn btn-info list_save_btn'>存檔</button>
-                  </td>
-                </tr>
               </tbody>
             </table>
           </div>
@@ -249,40 +216,66 @@
         .then(response => response.json())
         .then(lists => {
           for (let list of lists) {
+            if (list.status === 0) {
+              list.status = "未啟用";
+            } else {
+              if (list.status === 1) {
+                list.status = "已啟用";
+              } else {
+                list.status = "停用";
+              }
+            }
+
+            if (list.role.roleId === 4) {
+              list.role.roleType = "文章編輯者";
+            } else {
+              if (list.role.roleId === 6) {
+                list.role.roleType = "一般使用者";
+              } else {
+                if (list.role.roleId === 13) {
+                  list.role.roleType = "未啟用使用者";
+                };
+              }
+            }
+
             $(".user_lists").append(
               `<tr>
-                <td><input type='checkbox' class='check_el'></td>
-                  <td class="userId">${list.userId}</td>
+                  <td><input type='checkbox' class='check_el'></td>
+                  <td class="userId" data-bs-target=#${list.userId}>${list.userId}</td>
                   <td>${list.name}</td>
                   <td>
-                    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                    <button class="btn btn-secondary dropdown-toggle status_dropdown" href="#" role="button" id="dropdownMenuLink" type="button"
+                      data-bs-toggle="dropdown" aria-expanded="false">
                       ${list.status}
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                      <li><a class="dropdown-item unautorized">未啟用</a></li>
-                      <li><a class="dropdown-item activated">啟用</a></li>
-                      <li><a class="dropdown-item suspended">停用</a></li>
+                    </button>
+                    <ul class="dropdown-menu drop_status" data-bs-target=#${list.status} aria-labelledby="dropdownMenuLink">
+                      <li><a class="dropdown-item drop_status_el inactivated" value="0">未啟用</a></li>
+                      <li><a class="dropdown-item drop_status_el activated" value="1">已啟用</a></li>
+                      <li><a class="dropdown-item drop_status_el grounding" value="2">停用</a></li>
                     </ul>
                   </td>
                   <td>
-                    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                      ${list.role}
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                      <li><a class="dropdown-item unautorized_user">未啟用使用者</a></li>
-                      <li><a class="dropdown-item author">文章編輯者</a></li>
-                      <li><a class="dropdown-item normal_user">一般使用者</a></li>
+                    <button class="btn btn-secondary dropdown-toggle role_dropdown" href="#" role="button" id="dropdownMenuLink"
+                      data-bs-toggle="dropdown" aria-expanded="false">
+                      ${list.role.roleType}
+                    </button>
+                    <ul class="dropdown-menu drop_role" data-bs-target=#${list.roleId} aria-labelledby="dropdownMenuLink">
+                      <li><a class="dropdown-item drop_role_el admin" value="4">文章編輯者</a></li>
+                      <li><a class="dropdown-item drop_role_el cs" value="6">一般使用者</a></li>
+                      <li><a class="dropdown-item drop_role_el store" value="13">未啟用使用者</a></li>
                     </ul>
                   </td>
                   <td>${list.email}</td>
-                  <th>${list.phone}</th>
+                  <td>${list.phone}</td>
                   <td>
-                    <button class='btn btn-info list_save_btn'>存檔</button>
+                    <button class='btn btn-primary save_btn'>儲存</button>
+                    <button class='btn btn-warning cancel_btn'>取消</button>
+                    <button class='btn btn-info detail_btn'>詳情</button>
                   </td>
                 </tr>`
             )
-
           }
+          sessionStorage.setItem("lists", JSON.stringify(lists));
         })
         .catch(error => {
           console.log(error)
@@ -292,16 +285,142 @@
             text: "出了點狀況！請聯絡管理員"
           });
         });
+
+      let updateStatusValue = "";
+      let updateRoleIdValue = "";
+      // for status dropdown
+      $(document).on('click', '.drop_status_el', function (e) {
+        const selectedUserStatus = $(this).closest('tr').find('ul.drop_status').attr('data-bs-target').slice(1);
+        const selectedStatus = $(this).text();
+        $(this).closest('td').find('.status_dropdown').text(selectedStatus);
+        updateStatusValue = parseInt(e.target.getAttribute('value'));
+      });
+
+      // for role dropdown
+      $(document).on('click', '.drop_role_el', function (e) {
+        const selectedRole = $(this).text();
+        $(this).closest('td').find('.role_dropdown').text(selectedRole);
+        updateRoleIdValue = parseInt(e.target.getAttribute('value'));
+      });
+
+      $('.user_lists').on('click', '.save_btn', function () {
+
+        let userList = JSON.parse(sessionStorage.getItem('lists'));
+        let targetUserId = parseInt($(this).closest('tr').find('.userId').attr('data-bs-target').slice(1));
+
+        let userToUpdate = {};
+        for (let i = 0; i < userList.length; i++) {
+          if (userList[i].userId === targetUserId) {
+            userToUpdate = userList[i]; // 找到要修改的員工
+            break;
+          }
+        };
+
+        if (userToUpdate) {
+          let setStatus = "";
+          let setRoleId = "";
+
+          if (userToUpdate.status === "未啟用") {
+            userToUpdate.status = "0";
+          } else {
+            if (userToUpdate.status === "已啟用") {
+              userToUpdate.status = "1";
+            } else {
+              userToUpdate.status = "2";
+            }
+          };
+
+          if (updateStatusValue === "") {
+            setStatus = parseInt(userToUpdate.status);
+          } else {
+            setStatus = updateStatusValue;
+          };
+
+          if (updateRoleIdValue === "") {
+            setRoleId = parseInt(userToUpdate.role.roleId);
+          } else {
+            setRoleId = updateRoleIdValue;
+          };
+
+          const userSREdit = {
+            userId: targetUserId,
+            name: userToUpdate.name,
+            email: userToUpdate.email,
+            phone: userToUpdate.phone,
+            status: setStatus,
+            roleId: setRoleId
+          };
+
+          fetch('/NGFW/user/manage', {
+            method: 'PUT',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(userSREdit)
+          })
+            .then(resp => {
+              return resp.json();
+            })
+            .then(data => {
+              if (data.successfully) {
+                Swal.fire({
+                  icon: "success",
+                  title: "更新成功",
+                  text: ""
+                });
+              } else {
+                Swal.fire({
+                  icon: "error",
+                  title: "Oh shit..",
+                  text: "請與管理員聯絡"
+                });
+
+              }
+              // 更新sessionStorage
+              let updatedUserList = JSON.parse(sessionStorage.getItem('lists'));
+
+              for (let i = 0; i < updatedUserList.length; i++) {
+                if (updatedUserList[i].userId === data.userId) {
+                  updatedUserList[i] = {
+                    userId: data.userId,
+                    userAccount: updatedUserList[i].account,
+                    name: updatedUserList[i].name,
+                    email: updatedUserList[i].email,
+                    phone: updatedUserList[i].phone,
+                    status: data.status,
+                    roleId: data.roleId,
+                    role: data.role,
+                    sucessfully: data.successfully
+                  }
+                  break;
+                }
+              };
+              sessionStorage.setItem('lists', JSON.stringify(updatedUserList));
+            })
+            .catch(error => {
+              alert('更新失敗: ' + error.message);
+              Swal.fire({
+                icon: "error",
+                title: "Oops..",
+                text: "請與管理員聯絡"
+              });
+            });
+        } else {
+          Swal.fire({
+            icon: "error",
+            title: "Oh no..",
+            text: "請聯絡管理員"
+          });
+        }
+
+      });
     });
+
 
     $(document).on("click", "button.list_save_btn", function (e) {
       e.preventDefault();
       e.stopPropagation();
       let userListId = $(this).closest('tr').find('td.userId').text().trim();
-      // console.log(this);
-      // let staffListId = $(this).attr("staff_list_id");
-      console.log(userListId);
-      // localStorage.setItem("itemId", itemId);
     });
   </script>
 </body>

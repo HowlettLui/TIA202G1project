@@ -48,6 +48,14 @@
       align-items: flex-end;
     }
 
+    img.avatar {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px dotted black;
+    }
+
     /* S end */
   </style>
 </head>
@@ -164,7 +172,7 @@
                 <div class="col-12">
                   <label for="image" class="form-label"></label>
                   <input type="file" class="form-control" id="image">
-                  <img src="" id="user_avatar" class="avatar" src="" alt="avatar" style="width: 100px; height: 100px;">
+                  <img src="../img/default-150x150.png" id="userAvatar" class="avatar" src="" alt="avatar" style="width: 100px; height: 100px;">
                   <div class="invalid-feedback">
                     Valid first name is required.
                   </div>
@@ -240,16 +248,32 @@
     $(document).ready(function () {
       const userData = sessionStorage.getItem("user");
       const user = JSON.parse(userData);
-      const image = document.getElementsByClassName('avatar')[0];
+
       console.log(user);
 
       // 插入使用者資料
       $("#userid").val(user.userId);
-      $("#image").val(user.avatar);
+      $("#userAvatar").val(user.avatar);
       $("#name").val(user.name);
       $("#accout").val(user.account);
       $("#email").val(user.email);
       $("#phone").val(user.phone);
+
+      document.getElementById('image').addEventListener('change', function (e) {
+        const file = e.target.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onloadend = function () {
+            // 取得base64格式的圖片
+            const base64Image = reader.result;
+
+            // 顯示在img區塊
+            document.getElementById('userAvatar').src = base64Image;
+          };
+          reader.readAsDataURL(file);
+        }
+      });
+
 
       // 儲存資料
       $('#saveBtn').on("click", function (e) {
@@ -292,16 +316,21 @@
                 text: "",
               });
               // 更新 sessionStorage 中的資料
-              // console.log('更新成功:', data);
-              
+              const updatedUser = JSON.parse(sessionStorage.getItem("user"));
 
-              // sessionStorage.setItem("user.avatar", JSON.stringify(data.avatar));
-              // sessionStorage.setItem("user.email", JSON.stringify(data.email));
-              // sessionStorage.setItem("user.name", JSON.stringify(data.name));
-              // sessionStorage.setItem("user.phone", JSON.stringify(data.phone)); 
-
-              // image.value = image;
-              console.log(user);
+              updatedUser = {
+                userId: user.userId,
+                account: data.account,
+                // avatar: data.avatar,
+                name: data.name,
+                email: data.email,
+                phone: data.phone,
+                status: user.status,
+                roleId: user.roleId,
+                role: user.role,
+                successfully: user.successfully
+              }
+              sessionStorage.setItem("user", JSON.stringify(updatedUser));
 
               window.location.href = './user/user_info.html';
             } else {
@@ -309,32 +338,32 @@
             }
           })
           .catch(error => {
-            alert('發生錯誤:', error);
+            alert('發生錯誤:', data.message);
           });
       });
-    });
-    // 啟用 Bootstrap 表單驗證
-    // (function () {
-    //     'use strict'
 
-    //     var forms = document.querySelectorAll('.needs-validation');
+      // 啟用 Bootstrap 表單驗證
+      (function () {
+        'use strict'
 
-    //     Array.prototype.slice.call(forms).forEach(function (form) {
-    //         form.addEventListener('submit', function (event) {
-    //             if (!form.checkValidity()) {
-    //                 event.preventDefault();
-    //                 event.stopPropagation();
-    //             }
+        var forms = document.querySelectorAll('.needs-validation');
 
-    //             form.classList.add('was-validated');
-    //         }, false);
-    //     });
-    // })();
-    // });
+        Array.prototype.slice.call(forms).forEach(function (form) {
+          form.addEventListener('submit', function (event) {
+            if (!form.checkValidity()) {
+              event.preventDefault();
+              event.stopPropagation();
+            }
 
-    // 取消按鈕
-    $('#cancelBtn').on("click", function () {
-      window.location.href = '../user/user_info.html';
+            form.classList.add('was-validated');
+          }, false);
+        });
+      })();
+
+      // 取消按鈕
+      $('#cancelBtn').on("click", function () {
+        window.location.href = '../user/user_info.html';
+      });
     });
   </script>
 </body>
