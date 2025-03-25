@@ -172,7 +172,7 @@
             title: "Oops...",
             text: "需輸入使用者名稱",
           });
-        }
+        };
 
         if (account_length < 5 || account_length > 30) {
           // alert('使用者名稱長度須介於 5~30 之間');
@@ -182,7 +182,7 @@
             title: "Oops...",
             text: "使用者名稱長度須介於 5~30 之間",
           });
-        }
+        };
 
         if (password_length < 6 || password_length > 12) {
           // alert('密碼長度須介於 6~12 之間');
@@ -192,7 +192,7 @@
             title: "Oops...",
             text: "密碼長度須介於 6~12 之間",
           });
-        }
+        };
 
         if (confirm_password.value !== password.value) {
           // alert('密碼與確認密碼不相符');
@@ -202,29 +202,26 @@
             title: "Oops...",
             text: "密碼與確認密碼不相符",
           });
-        }
+        };
 
         fetch('/NGFW/register', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify(
-          //   {
-          //   account: account.value,
-          //   email: email.value,
-          //   password: password.value,
-          //   confirmPassword: confirm_password.value,
-          // }
-          register_data
-        )
+          body: JSON.stringify(register_data)
         })
           .then(resp => {
             return resp.json()
           })
           .then(body => {
             const { successfully, errMsg } = body;
-            alert(successfully ? '註冊成功' : errMsg);
+            Swal.fire({
+              icon: "success",
+              title: "註冊成功",
+              text: "請重新登入",
+            });
+            window.location.href = "./index.html";
           });
       });
     });
