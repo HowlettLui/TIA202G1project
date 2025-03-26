@@ -198,7 +198,7 @@
         }
       }
     } else if (itemInfo.itemStatus === 0) {
-      $("#itemStock").append(`<option class="default" selected disabled>商品未上架</option>`)
+      $("#itemStock").append(`<option class="default" selected disabled>商品未上架，敬請期待</option>`)
     } else if (itemInfo.itemStatus === -1) {
       $("#itemStock").append(`<option class="default" selected disabled>商品已下架</option>`)
     }
@@ -280,7 +280,7 @@
         text: '請先登入再進行選購'
       })
         .then(() => {
-          window.location.href = "/login.html";
+          window.location.href = "../login.html";
         })
     } else if (!user.status) {
       Swal.fire({
@@ -289,7 +289,7 @@
         text: '請先開通帳號再進行選購'
       })
         .then(() => {
-          window.location.href = "/estore/shop.html";
+          window.location.href = "./shop.html";
         })
     } else {
       let itemInfoId = $("select#itemSizes option:selected").attr("data-itemInfo-id");

@@ -11,188 +11,403 @@
   <link rel="stylesheet" href="../css/bootstrap.min.css">
   <link rel="stylesheet" href="../css/headers.css">
 
+  <style>
+    .orders td, .receipts td, .expandIndicator i, .expandIndicator button {
+      vertical-align: middle;
+    }
+  </style>
+
 </head>
 
 <body>
-  <!-- 導入共用 header -->
-  <div class="headerPage"></div>
+<!-- 導入共用 header -->
+<div class="headerPage"></div>
 
-  <!-- 開發畫面 -->
-  <main>
-    <div class="bg-body-tertiary">
-      <div class="container py-5">
-        <!-- header of main -->
-        <div class="d-flex flex-wrap justify-content-center">
-          <h1 class="d-flex align-items-center mb-3 mb-lg-0 me-lg-auto link-body-emphasis pb-5">
-            我的訂單</h1>
-          <form class="col-12 col-lg-auto mb-3 mb-lg-0" role="search">
-            <input type="search" class="form-control" placeholder="關鍵字搜尋" aria-label="Search">
-          </form>
-        </div>
+<!-- 開發畫面 -->
+<main>
+  <div class="bg-body-tertiary">
+    <div class="container py-5">
+      <!-- header of main -->
+      <div class="d-flex flex-wrap justify-content-center">
+        <h1 class="d-flex align-items-center mb-3 mb-lg-0 me-lg-auto link-body-emphasis pb-5">
+          我的訂單</h1>
+        <form class="col-12 col-lg-auto mb-3 mb-lg-0" role="search">
+          <input type="search" class="form-control" placeholder="關鍵字搜尋" aria-label="Search">
+        </form>
+      </div>
 
-        <!-- orders -->
-        <table class="table table-striped table-hover">
-          <thead class="table-light">
-            <tr>
-              <th></th>
-              <th>1</th>
-              <th>2</th>
-              <th>3</th>
-              <th>4</th>
-              <th>5</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr data-bs-toggle="collapse" data-bs-target="#demo1" class="accordion-toggle">
-              <td>
-                <!-- <button class="btn btn-default btn-xs"><span
-                                        class="glyphicon glyphicon-eye-open"></span></button> -->
-              </td>
-              <td>Demo1</td>
-              <td>Demo1</td>
-              <td>Demo1</td>
-              <td>Demo1</td>
-              <td>Demo1</td>
-            </tr>
-            <tr>
-              <td colspan="12" class="hiddenRow" style="--bs-table-hover-bg: var(--bs-body-bg)">
-                <div class="accordian-body collapse" id="demo1">
-                  <table class="table table-striped table-hover">
-                    <thead>
-                      <tr class="info">
-                        <th>a</th>
-                        <th>b</th>
-                        <th>c</th>
-                        <th>d</th>
-                        <th>e</th>
-                        <th>f</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>ex1</td>
-                        <td>ex1</td>
-                        <td>ex1</td>
-                        <td>ex1</td>
-                        <td>ex1</td>
-                        <td>
-                          <a href="#">詳細資料1</a>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>ex2</td>
-                        <td>ex2</td>
-                        <td>ex2</td>
-                        <td>ex2</td>
-                        <td>ex2</td>
-                        <td>
-                          <a href="#">詳細資料2</a>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>ex3</td>
-                        <td>ex3</td>
-                        <td>ex3</td>
-                        <td>ex3</td>
-                        <td>ex3</td>
-                        <td>
-                          <a href="#">詳細資料3</a>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>ex4</td>
-                        <td>ex4</td>
-                        <td>ex4</td>
-                        <td>ex4</td>
-                        <td>ex4</td>
-                        <td>
-                          <a href="#">詳細資料4</a>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </td>
-            </tr>
-            <tr data-bs-toggle="collapse" data-bs-target="#demo2" class="accordion-toggle">
-              <td>
-                <!-- <button class="btn btn-default btn-xs"><span
-                                        class="glyphicon glyphicon-eye-open"></span></button> -->
-              </td>
-              <td>Demo2</td>
-              <td>Demo2</td>
-              <td>Demo2</td>
-              <td>Demo2</td>
-              <td>Demo2</td>
-            </tr>
-            <tr>
-              <td colspan="6" class="hiddenRow" style="--bs-table-hover-bg: var(--bs-body-bg)">
-                <div id="demo2" class="accordian-body collapse">
-                  Demo2
-                  <!-- 放table -->
-                </div>
-              </td>
-            </tr>
-            <tr data-bs-toggle="collapse" data-bs-target="#demo3" class="accordion-toggle">
-              <td>
-                <!-- <button class="btn btn-default btn-xs"><span
-                                        class="glyphicon glyphicon-eye-open"></span></button> -->
-              </td>
-              <td>Demo3</td>
-              <td>Demo3</td>
-              <td>Demo3</td>
-              <td>Demo3</td>
-              <td>Demo3</td>
-            </tr>
-            <tr>
-              <td colspan="6" class="hiddenRow" style="--bs-table-hover-bg: var(--bs-body-bg)">
-                <div id="demo3" class="accordian-body collapse">
-                  Demo3
-                  <!-- 放table -->
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-
-
-
-        <!-- page navigation -->
-        <div class="d-flex justify-content-center">
-          <nav aria-label="Page navigation example">
-            <ul class="pagination mt-4">
-              <li class="page-item">
-                <a class="page-link" href="#" aria-label="Previous">
-                  <span aria-hidden="true" style="color: var(--bs-secondary-color);">&laquo;</span>
-                </a>
-              </li>
-              <li class="page-item"><a class="page-link" href="#" style="color: var(--bs-secondary-color);">1</a></li>
-              <li class="page-item"><a class="page-link" href="#" style="color: var(--bs-secondary-color);">2</a></li>
-              <li class="page-item"><a class="page-link" href="#" style="color: var(--bs-secondary-color);">3</a></li>
-              <li class="page-item">
-                <a class="page-link" href="#" aria-label="Next">
-                  <span aria-hidden="true" style="color: var(--bs-secondary-color);">&raquo;</span>
-                </a>
-              </li>
-            </ul>
-          </nav>
+      <!-- orders -->
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-12">
+              <table class="table table-striped table-hover orders">
+                <thead class="table-light">
+                <tr>
+                  <th class="col-1">訂單編號</th>
+                  <th class="col-1">訂單狀態</th>
+                  <th class="col-1">付款方式</th>
+                  <th class="col-1">運送方式</th>
+                  <th class="col-2">運送地址</th>
+                  <th class="col-1">訂單總價</th>
+                  <th class="col-3">訂單內容</th>
+                  <th class="col-2"></th>
+                </tr>
+                </thead>
+                <tbody id="orders">
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
       </div>
+
+
+      <!-- page navigation -->
+      <div class="d-flex justify-content-center">
+        <nav aria-label="Page navigation example">
+          <ul class="pagination mt-4">
+            <li class="page-item">
+              <a class="page-link" href="#" aria-label="Previous">
+                <span aria-hidden="true" style="color: var(--bs-secondary-color);">&laquo;</span>
+              </a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#" style="color: var(--bs-secondary-color);">1</a></li>
+            <li class="page-item"><a class="page-link" href="#" style="color: var(--bs-secondary-color);">2</a></li>
+            <li class="page-item"><a class="page-link" href="#" style="color: var(--bs-secondary-color);">3</a></li>
+            <li class="page-item">
+              <a class="page-link" href="#" aria-label="Next">
+                <span aria-hidden="true" style="color: var(--bs-secondary-color);">&raquo;</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
     </div>
+  </div>
 
-  </main>
+</main>
 
-  <!-- 導入共用 footer -->
-  <div class="footerPage"></div>
-  <script src="../jquery/jquery-3.7.1.min.js"></script>
-  <script>
-    $(".headerPage").load("../layout/header.html");
-    $(".footerPage").load("../layout/footer.html");
-  </script>
+<!-- 導入共用 footer -->
+<div class="footerPage"></div>
 
+<script src="../jquery/jquery-3.7.1.min.js"></script>
+<script src="../js/bootstrap.bundle.min.js"></script>
+<script src="https://kit.fontawesome.com/799bf36dfe.js" crossorigin="anonymous"></script>
+<!-- sweetalert2 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-  <script src="../js/bootstrap.bundle.min.js"></script>
-  <script src="https://kit.fontawesome.com/799bf36dfe.js" crossorigin="anonymous"></script>
+<script>
+  $(".headerPage").load("../layout/header.html");
+  $(".footerPage").load("../layout/footer.html");
+
+  let user;
+
+  $(async function () {
+    user = JSON.parse(sessionStorage.getItem("user"));
+
+    if ((!user) || !user.userId) {
+      Swal.fire({
+        icon: 'warning',
+        title: '尚未登入',
+        text: '需先登入才能確認訂單'
+      })
+        .then(() => {
+          window.location.href = "../login.html";
+        })
+    } else if (!user.status) {
+      Swal.fire({
+        icon: 'warning',
+        title: '尚未開通',
+        text: '帳號尚未開通，請先開通帳號'
+      })
+        .then(() => {
+          window.location.href = "./shop.html";
+        })
+    } else {
+      try {
+        const resp = await fetch(`/NGFW/estore/orders/${user.userId}`);
+        const orders = await resp.json();
+
+        const ecpayCheck = orders.map(async order => {
+          if (order.orderPayment === 0 && (order.orderStatus === 0 || order.orderStatus === 1) && (order.orderStatus !== -2 || order.orderStatus !== -1)) {
+            try {
+              // 從ecpay取得目前訂單狀態
+              const resp = await fetch(`/NGFW/estore/orders/ecpaystatus/${order.orderId}`, {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json"
+                }
+              });
+              const data = await resp.text();
+
+              const formData = new FormData();
+              const pairs = data.split("&");
+              pairs.forEach((pair) => {
+                const [key, value] = pair.split("=");
+                formData.append(key, decodeURIComponent(value));
+              })
+              if (parseInt(formData.get("TradeStatus")) === 1) {
+                order.orderStatus = 3;
+              } else {
+                order.orderStatus = -2;
+              }
+              try {
+                // 更新訂單資料
+                const resp = await fetch(`/NGFW/estore/order/edit/${order.orderId}/${order.orderStatus}`, {
+                  method: "PUT",
+                  headers: {
+                    "Content-Type": "application/json"
+                  }
+                });
+                const orderUpdateResult = await resp.json();
+                if (orderUpdateResult.result === true) {
+                  if (order.orderStatus === -2) {
+                    // 付款失敗，將itemInfo的stock加回去
+                    try {
+                      const resp = await fetch(`/NGFW/estore/order/editItemInfo/${order.orderId}`, {
+                        method: "PUT",
+                        headers: {
+                          "Content-Type": "application/json"
+                        }
+                      });
+                      const result = await resp.text();
+                      if (parseInt(result) !== 0) {
+                        throw new Error('更新商品數量失敗，receiptId: ' + result);
+                      }
+                    } catch (error) {
+                      console.error('Error:', error);
+                      Swal.fire({
+                        icon: "error",
+                        title: "更新商品數量失敗",
+                        text: "出了點狀況！請聯絡管理員"
+                      });
+                    }
+                  }
+                } else {
+                  throw new Error('更新訂單資料失敗');
+                }
+              } catch (error) {
+                console.error('Error:', error);
+                Swal.fire({
+                  icon: "error",
+                  title: "更新訂單資料失敗",
+                  text: "出了點狀況！請聯絡管理員"
+                });
+              }
+            } catch (error) {
+              console.error('Error:', error);
+              Swal.fire({
+                icon: "error",
+                title: "取得訂單狀態失敗",
+                text: "出了點狀況！請聯絡管理員"
+              });
+            }
+          }
+        });
+        await Promise.all(ecpayCheck)
+          .then(() => {
+            for (let order of orders) {
+              orderList(order);
+            }
+          });
+      } catch (error) {
+        console.error('Error:', error);
+        Swal.fire({
+          icon: "error",
+          title: "取得訂單失敗",
+          text: "出了點狀況！請聯絡管理員"
+        });
+      }
+    }
+  })
+
+  // 點選以展開訂單明細
+  $(document).on("click", "td.accordion-toggle", function () {
+
+    if ($(this).hasClass("collapsed")) {
+      $(this).closest("tr").find("i.arrow").removeClass("fa-angle-down");
+      $(this).closest("tr").find("i.arrow").addClass("fa-angle-left");
+    } else {
+      $(this).closest("tr").find("i.arrow").removeClass("fa-angle-left");
+      $(this).closest("tr").find("i.arrow").addClass("fa-angle-down");
+    }
+
+    let orderId = $(this).attr("data-bs-target").slice(1);
+
+    fetch(`/NGFW/estore/orders/receipts/${orderId}`)
+      .then(response => response.json())
+      .then(receipts => {
+        $("#" + orderId).find("tbody.receipts").empty();
+        for (let receipt of receipts) {
+          $("#" + orderId).find("tbody.receipts").append(
+            `<tr>
+              <td></td>
+              <td>${receipt.itemName}, ${receipt.itemInfoColor}, ${receipt.itemInfoSize}</td>
+              <td>${receipt.receiptItemPrice}</td>
+              <td>${receipt.receiptItemCount}</td>
+            </tr>`
+          )
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "出了點狀況！請聯絡管理員"
+        });
+      });
+  })
+
+  // 取消訂單 (變更訂單狀態) API
+  $(document).on("click", "button.editOrder", async function () {
+    let buttonElement = $(this);
+    if (buttonElement.prop("disabled", false)) {
+      Swal.fire({
+        icon: "info",
+        title: "確認要取消訂單嗎？",
+        showCancelButton: true,
+        confirmButtonText: "確認",
+      })
+        .then(async (result) => {
+          if (result.isConfirmed) {
+            let orderId = buttonElement.attr("data-order-id");
+            try {
+              // 更新訂單資料
+              const resp = await fetch(`/NGFW/estore/order/edit/${orderId}/-1`, {
+                method: "PUT",
+                headers: {
+                  "Content-Type": "application/json"
+                }
+              });
+              const orderUpdateResult = await resp.json();
+              if (orderUpdateResult.result === true) {
+                // 取消訂單，將itemInfo的stock加回去
+                try {
+                  const resp = await fetch(`/NGFW/estore/order/editItemInfo/${orderId}`, {
+                    method: "PUT",
+                    headers: {
+                      "Content-Type": "application/json"
+                    }
+                  });
+                  const result = await resp.text();
+                  if (parseInt(result) !== 0) {
+                    throw new Error('更新商品數量失敗，receiptId: ' + result);
+                  }
+                } catch (error) {
+                  console.error('Error:', error);
+                  Swal.fire({
+                    icon: "error",
+                    title: "更新商品數量失敗",
+                    text: "出了點狀況！請聯絡管理員"
+                  });
+                }
+              }
+            } catch (error) {
+              console.error('Error:', error);
+              Swal.fire({
+                icon: "error",
+                title: "更新訂單資料失敗",
+                text: "出了點狀況！請聯絡管理員"
+              });
+            }
+            buttonElement.prop("disabled", true);
+            buttonElement.closest("tr").find("td").eq(1).text("已取消");
+          }
+        })
+    }
+  })
+
+  // 將取得的orders組裝起來
+  const orderList = function (order) {
+    let orderStatus;
+    let orderPayment;
+    let orderShipment;
+
+    // 將狀態改為中文
+    if (order.orderStatus === 0) {
+      orderStatus = "未付款"
+    } else if (order.orderStatus === 1) {
+      orderStatus = "尚未收款"
+    } else if (order.orderStatus === 2) {
+      orderStatus = "未收款，出貨中"
+    } else if (order.orderStatus === 3) {
+      orderStatus = "已付款"
+    } else if (order.orderStatus === 4) {
+      orderStatus = "已付款，出貨中"
+    } else if (order.orderStatus === 5) {
+      orderStatus = "已完成"
+    } else if (order.orderStatus === -1) {
+      orderStatus = "已取消"
+    } else if (order.orderStatus === -2) {
+      orderStatus = "付款失敗"
+    }
+    if (order.orderPayment === 0) {
+      orderPayment = "線上結帳";
+    } else if (order.orderPayment === 1) {
+      orderPayment = "貨到付款";
+    } else {
+      Swal.fire({
+        icon: 'error',
+        title: '訂單資訊錯誤',
+        text: '取得訂單資訊失敗，請聯絡管理員'
+      })
+    }
+    if (parseInt(order.orderShipment) === 0) {
+      orderShipment = "宅配"
+    } else if (parseInt(order.orderShipment) === 1) {
+      orderShipment = "超商取貨"
+    } else {
+      Swal.fire({
+        icon: 'error',
+        title: '訂單資訊錯誤',
+        text: '取得訂單資訊失敗，請聯絡管理員'
+      })
+    }
+
+    $("#orders").append(
+      `<tr class="" aria-expanded="false">
+        <td data-bs-toggle="collapse" data-bs-target=#${order.orderId} class="accordion-toggle">${order.orderId}</td>
+        <td data-bs-toggle="collapse" data-bs-target=#${order.orderId} class="accordion-toggle">${orderStatus}</td>
+        <td data-bs-toggle="collapse" data-bs-target=#${order.orderId} class="accordion-toggle">${orderPayment}</td>
+        <td data-bs-toggle="collapse" data-bs-target=#${order.orderId} class="accordion-toggle">${orderShipment}</td>
+        <td data-bs-toggle="collapse" data-bs-target=#${order.orderId} class="accordion-toggle">${order.orderAddress}</td>
+        <td data-bs-toggle="collapse" data-bs-target=#${order.orderId} class="accordion-toggle">${order.orderTotalPrice} 元</td>
+        <td data-bs-toggle="collapse" data-bs-target=#${order.orderId} class="accordion-toggle">${order.orderDescription}</td>
+        <td>
+          <div class="row justify-content-around expandIndicator">
+            <div class="col-auto">
+              <button class="btn btn-sm btn-light editOrder" type="button" data-order-id=${order.orderId} ${[5, -1, -2].includes(order.orderStatus) ? "disabled" : ""}>取消訂單</button>
+            </div>
+            <div class="col-auto">
+              <i class="fas fa-angle-left arrow ml-2"></i>
+            </div>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="12" class="hiddenRow" style="--bs-table-hover-bg: var(--bs-body-bg)">
+          <div class="accordian-body collapse" id="${order.orderId}">
+            <table class="table table-striped table-hover table-bordered receipts">
+              <thead class="table-light">
+                <tr class="receiptHeaders">
+                  <th class="col-2">訂單明細：</th>
+                  <th class="col-6">商品名稱與規格</th>
+                  <th class="col-2">價格</th>
+                  <th class="col-2">數量</th>
+                </tr>
+              </thead>
+              <tbody class="receipts">
+              </tbody>
+            </table>
+          </div>
+        </td>
+      </tr>`
+    )
+  }
+</script>
+
 </body>
 
 </html>
