@@ -151,7 +151,7 @@
         text: '請先登入再進行選購'
       })
         .then(() => {
-          window.location.href = "/login.html";
+          window.location.href = "../login.html";
         })
     } else if (!user.status) {
       Swal.fire({
@@ -160,7 +160,7 @@
         text: '請先開通帳號再進行選購'
       })
         .then(() => {
-          window.location.href = "/estore/shop.html";
+          window.location.href = "./shop.html";
         })
     } else {
       fetch(`/NGFW/estore/cart/${user.userId}`)
@@ -173,7 +173,7 @@
               html: "請先到商城內選購"
             })
               .then(() => {
-                window.location.href = "/estore/shop.html";
+                window.location.href = "./shop.html";
               })
           } else {
             totalPrice = 0;
@@ -231,12 +231,12 @@
                 $("span.itemsCountToCheckout").text($("input.checkboxOnItem:checked").length);
                 $("ul.itemsToCheckoutList").append(
                   `<li class="list-group-item d-flex justify-content-between lh-sm">
-                  <div>
-                    <h6 class="my-0">${itemInfo.itemName}</h6>
-                    <small class="text-body-secondary" data-itemInfo-id="${itemInfo.itemInfoId}" data-itemCountsInCart="${itemInfo.itemCountsInCart}">${itemInfo.itemColor}, ${itemInfo.itemSize}</small>
-                  </div>
-                  <span class="text-body-secondary" data-itemCountsInCart="${itemInfo.itemCountsInCart}">$${itemInfo.itemPriceInCart} x ${itemInfo.itemCountsInCart}</span>
-                </li>`
+                    <div>
+                      <h6 class="my-0" data-item-id="${itemInfo.itemId}">${itemInfo.itemName}</h6>
+                      <small class="text-body-secondary" data-itemInfo-id="${itemInfo.itemInfoId}" data-itemCountsInCart="${itemInfo.itemCountsInCart}">${itemInfo.itemColor}, ${itemInfo.itemSize}</small>
+                    </div>
+                    <span class="text-body-secondary" data-itemPriceInCart="${itemInfo.itemPriceInCart}" data-itemCountsInCart="${itemInfo.itemCountsInCart}">$${itemInfo.itemPriceInCart} x ${itemInfo.itemCountsInCart}</span>
+                  </li>`
                 )
                 totalPrice += itemInfo.itemPriceInCart * itemInfo.itemCountsInCart;
               } else {
@@ -331,7 +331,7 @@
     if (parseInt($("span.itemsCountToCheckout").text()) !== 0) {
       let elementHTML = $("#itemsToCheckout").prop("outerHTML");
       sessionStorage.setItem("itemsToCheckout", elementHTML);
-      window.location.href = "/estore/receipt.html";
+      window.location.href = "./receipt.html";
     } else {
       if ($("ul.itemsInCart li").length > 1) {
         Swal.fire({
@@ -346,7 +346,7 @@
           text: "請選購商品後再前往結帳頁面"
         })
           .then(() => {
-            window.location.href = "/estore/shop.html";
+            window.location.href = "./shop.html";
           })
       }
     }
@@ -457,15 +457,17 @@
       // 更新目前item價格
       let itemPriceInCart = $(this).closest("li").find("p.itemPriceInCart").text().split("$")[1];
       let itemName = $(this).closest("li").find("h4").text();
-      let itemColorAndSize = $(this).closest("li").find("div.itemColor").text() + $(this).closest("li").find("div.itemSize").text();
+      let itemColorAndSize = $(this).closest("li").find("div.itemColor").text().trim().split(",")[0] + ", " + $(this).closest("li").find("div.itemSize").text();
       let itemCountsInCart = $(this).closest("li").find("input.itemCountsInCart").val();
+      let itemInfoId = $(this).closest("li").find("div.cartItem").attr("data-iteminfo-id");
+      let itemId = $(this).closest("li").find("div.cartItem").attr("data-item-id");
       $("ul.itemsToCheckoutList").append(
         `<li class="list-group-item d-flex justify-content-between lh-sm">
             <div>
-              <h6 class="my-0">${itemName}</h6>
-              <small class="text-body-secondary">${itemColorAndSize}</small>
+              <h6 class="my-0" data-item-id="${itemId}">${itemName}</h6>
+              <small class="text-body-secondary" data-itemInfo-id="${itemInfoId}" data-itemCountsInCart="${itemCountsInCart}">${itemColorAndSize}</small>
             </div>
-            <span class="text-body-secondary">$${itemPriceInCart} x ${itemCountsInCart}</span>
+            <span class="text-body-secondary" data-itemPriceInCart="${itemPriceInCart}" data-itemCountsInCart="${itemCountsInCart}">$${itemPriceInCart} x ${itemCountsInCart}</span>
           </li>`
       )
       totalPrice += parseInt(itemPriceInCart) * parseInt(itemCountsInCart);

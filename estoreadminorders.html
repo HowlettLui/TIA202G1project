@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>上班不要看球賽管理系統</title>
+
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="./vendors/fontawesome-free/css/all.min.css">
+  <!-- overlayScrollbars -->
+  <link rel="stylesheet" href="./css/adminlte/OverlayScrollbars.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="./css/adminlte/adminlte.min.css">
+  <!-- Bootstrap 5 -->
+  <link rel="stylesheet" href="./css/bootstrap.min.css">
+  <!-- dropzonejs -->
+  <link rel="stylesheet" href="./vendors/dropzone/min/dropzone.min.css">
+
+  <style>
+    .items td,
+    .iteminfos td,
+    .accordion-toggle i {
+      vertical-align: middle;
+    }
+  </style>
+</head>
+
+<body class="hold-transition sidebar-mini">
+
+  <!-- Site wrapper -->
+  <div class="wrapper">
+
+    <!-- 導入共用 Navbar -->
+    <div class="Navbar"></div>
+    <!-- 導入共用 Sidebar -->
+    <div class="Sidebar"></div>
+
+    <!-- 開發畫面區塊start -->
+    <section id="mainBlock" class="content-wrapper">
+      <!-- content-header -->
+      <section class="content-header">
+        <div class="container-fluid">
+          <div class="row mb-2">
+            <div class="col-sm-6">
+              <h1>所有訂單</h1>
+            </div>
+            <div class="col-sm-6">
+              <ol class="breadcrumb float-sm-right">
+                <li class="breadcrumb-item"><a href="#">訂單管理</a></li>
+                <li class="breadcrumb-item active">所有商品</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- content-header end -->
+
+      <!-- content，實際頁面內容 -->
+      <section class="content">
+        <div class="card">
+          <div class="card-body">
+            <div class="row">
+
+              <div class="col-12">
+                <!-- search bar -->
+                <div class="d-flex flex-wrap mb-3">
+                  <form class="col-12 col-lg-auto mb-3 mb-lg-0" role="search">
+                    <input type="search" class="form-control" placeholder="關鍵字搜尋" aria-label="Search">
+                  </form>
+                </div>
+
+                <!-- orders -->
+                <table class="table table-striped table-hover orders">
+                  <thead class="table-light">
+                    <tr>
+                      <th class="col-1">訂單編號</th>
+                      <th class="col-1">訂單狀態</th>
+                      <th class="col-1">付款方式</th>
+                      <th class="col-1">運送方式</th>
+                      <th class="col-2">運送地址</th>
+                      <th class="col-1">訂單總價</th>
+                      <th class="col-4">訂單內容</th>
+                      <th class="col-1"></th>
+                    </tr>
+                  </thead>
+                  <tbody id="orders">
+                    <tr aria-expanded="false">
+                      <td>${order.orderId}</td>
+                      <td>
+                        <div class="dropdown">
+                          <button class="btn btn-sm btn-secondary dropdown-toggle" type="button"
+                            data-bs-toggle="dropdown" aria-expanded="false" id="test">
+                            Dropdown button
+                          </button>
+                          <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Action</a></li>
+                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                          </ul>
+                        </div>
+                      </td>
+                      <td>${orderPayment}</td>
+                      <td>${orderShipment}</td>
+                      <td>${order.orderAddress}</td>
+                      <td>${order.orderTotalPrice} 元</td>
+                      <td>${order.orderDescription}</td>
+                      <td>
+                        <div class="row justify-content-around">
+                          <div class="col-auto">
+                            <button data-bs-toggle="collapse" data-bs-target=#${order.orderId}
+                              class="btn btn-sm btn-light accordion-toggle editOrder" type="button"
+                              data-order-id=${order.orderId} ${[4, -1, -2].includes(order.orderStatus) ? "disabled" : ""
+                              }>詳細內容</button>
+                          </div>
+                          <div class="col-auto">
+                            <i class="fas fa-angle-left arrow ml-2"></i>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td colspan="12" class="hiddenRow" style="--bs-table-hover-bg: var(--bs-body-bg)">
+                        <div class="accordian-body collapse" id="${order.orderId}">
+                          <table class="table table-striped table-hover table-bordered receipts">
+                            <thead class="table-light">
+                              <tr class="receiptHeaders">
+                                <th class="col-2">訂單明細：</th>
+                                <th class="col-6">商品名稱與規格</th>
+                                <th class="col-2">價格</th>
+                                <th class="col-2">數量</th>
+                              </tr>
+                            </thead>
+                            <tbody class="receipts">
+                            </tbody>
+                          </table>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+
+                <!-- page navigation -->
+                <div class="d-flex justify-content-center">
+                  <nav aria-label="Page navigation example">
+                    <ul class="pagination mt-4">
+                      <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Previous">
+                          <span aria-hidden="true" style="color: var(--bs-secondary-color);">&laquo;</span>
+                        </a>
+                      </li>
+                      <li class="page-item"><a class="page-link" href="#"
+                          style="color: var(--bs-secondary-color);">1</a></li>
+                      <li class="page-item"><a class="page-link" href="#"
+                          style="color: var(--bs-secondary-color);">2</a></li>
+                      <li class="page-item"><a class="page-link" href="#"
+                          style="color: var(--bs-secondary-color);">3</a></li>
+                      <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Next">
+                          <span aria-hidden="true" style="color: var(--bs-secondary-color);">&raquo;</span>
+                        </a>
+                      </li>
+                    </ul>
+                  </nav>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- card-body end -->
+        </div>
+        <!-- card end -->
+      </section>
+      <!-- content end -->
+    </section>
+    <!-- 開發畫面區塊end -->
+
+  </div>
+  <!-- wrapper end -->
+
+  <!-- jQuery -->
+  <script src="./jquery/adminlte/jquery.min.js"></script>
+  <!-- Bootstrap 5 -->
+  <script src="./js/bootstrap.bundle.min.js"></script>
+  <!-- overlayScrollbars -->
+  <script src="./jquery/adminlte/jquery.overlayScrollbars.min.js"></script>
+  <!-- AdminLTE App -->
+  <script src="./js/adminlte/adminlte.min.js"></script>
+  <!-- sweetalert2 -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <script>
+
+    $(document).on("click", "#test", function () {
+      console.log($(this).text());
+      $(this).text("123");
+    })
+
+    let staff;
+
+    $(".Navbar").load("./layout/navbar.html");
+    $(".Sidebar").load("./layout/sidebar.html");
+
+
+
+    $(document).on("click", "button.accordion-toggle", function () {
+      console.log($(this).hasClass("collapsed"));
+
+      if ($(this).hasClass("collapsed")) {
+        $(this).closest("div").next().find("i.arrow").removeClass("fa-angle-down");
+        $(this).closest("div").next().find("i.arrow").addClass("fa-angle-left");
+      } else {
+        $(this).closest("div").next().find("i.arrow").removeClass("fa-angle-left");
+        $(this).closest("div").next().find("i.arrow").addClass("fa-angle-down");
+      }
+
+      let orderId = $(this).attr("data-bs-target").slice(1);
+
+
+    })
+
+    // 將取得的orders組裝起來
+    const orderList = function (order) {
+      let orderStatus;
+      let orderPayment;
+      let orderShipment;
+
+      // 將狀態改為中文
+      if (order.orderStatus === 0) {
+        orderStatus = "未付款"
+      } else if (order.orderStatus === 1) {
+        orderStatus = "尚未收款"
+      } else if (order.orderStatus === 2) {
+        orderStatus = "已付款"
+      } else if (order.orderStatus === 3) {
+        orderStatus = "已付款，出貨中"
+      } else if (order.orderStatus === 4) {
+        orderStatus = "已完成"
+      } else if (order.orderStatus === -1) {
+        orderStatus = "已取消"
+      } else if (order.orderStatus === -2) {
+        orderStatus = "付款失敗"
+      }
+      if (order.orderPayment === 0) {
+        orderPayment = "線上結帳";
+      } else if (order.orderPayment === 1) {
+        orderPayment = "貨到付款";
+      } else {
+        Swal.fire({
+          icon: 'error',
+          title: '訂單資訊錯誤',
+          text: '取得訂單資訊失敗，請聯絡管理員'
+        })
+      }
+      if (parseInt(order.orderShipment) === 0) {
+        orderShipment = "宅配"
+      } else if (parseInt(order.orderShipment) === 1) {
+        orderShipment = "超商取貨"
+      } else {
+        Swal.fire({
+          icon: 'error',
+          title: '訂單資訊錯誤',
+          text: '取得訂單資訊失敗，請聯絡管理員'
+        })
+      }
+
+      $("#orders").append(
+        `<tr data-bs-toggle="collapse" data-bs-target=#${order.orderId} class="accordion-toggle" aria-expanded="false">
+        <td>${order.orderId}</td>
+        <td>${orderStatus}</td>
+        <td>${orderPayment}</td>
+        <td>${orderShipment}</td>
+        <td>${order.orderAddress}</td>
+        <td>${order.orderTotalPrice} 元</td>
+        <td>${order.orderDescription}</td>
+        <td>
+          <div class="row justify-content-around">
+            <div class="col-auto">
+              <button class="btn btn-sm btn-light editOrder" type="button" data-order-id=${order.orderId} ${[4, -1, -2].includes(order.orderStatus) ? "disabled" : ""}>取消訂單</button>
+            </div>
+            <div class="col-auto">
+              <i class="fas fa-angle-left arrow ml-2"></i>
+            </div>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="12" class="hiddenRow" style="--bs-table-hover-bg: var(--bs-body-bg)">
+          <div class="accordian-body collapse" id="${order.orderId}">
+            <table class="table table-striped table-hover table-bordered receipts">
+              <thead class="table-light">
+                <tr class="receiptHeaders">
+                  <th class="col-2">訂單明細：</th>
+                  <th class="col-6">商品名稱與規格</th>
+                  <th class="col-2">價格</th>
+                  <th class="col-2">數量</th>
+                </tr>
+              </thead>
+              <tbody class="receipts">
+              </tbody>
+            </table>
+          </div>
+        </td>
+      </tr>`
+      )
+    }
+
+
+  </script>
+
+</body>
+
+</html>
