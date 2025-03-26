@@ -108,76 +108,56 @@ const FooterComponent = defineComponent({
   `
 });
 
-const headerApp = createApp({
-  components: { HeaderComponent },
+const PlayerComponent1 = defineComponent({
+  setup() {
+    return {};
+  },
+  template: `
+  <div class="container mt-5">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+      <div class="col">
+        <div class="card">
+          <img src="https://via.placeholder.com/300" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">Player Name</h5>
+            <p class="card-text">Player Info</p>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card">
+          <img src="https://via.placeholder.com/300" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">Player Name</h5>
+            <p class="card-text">Player Info</p>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card">
+          <img src="https://via.placeholder.com/300" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">Player Name</h5>
+            <p class="card-text">Player Info</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  `
+});
+
+const app = createApp({
+  components: { PlayerComponent1, HeaderComponent, FooterComponent },
+  setup() {
+    return {};
+  },
   template: `
     <div>
       <HeaderComponent />
-    </div>
-  `
-});
-headerApp.mount("#header");
-
-const footerApp = createApp({
-  components: { FooterComponent },
-  template: `
-    <div>
+      <PlayerComponent1 />
       <FooterComponent />
     </div>
   `
 });
-footerApp.mount("#footer");
-
-
-document.addEventListener('DOMContentLoaded', function () {
-  var calendarEl = document.getElementById('calendar');
-  var calendar = new FullCalendar.Calendar(calendarEl, {
-    initialView: 'dayGridMonth',
-    events: '/NGFW/game/events',
-    // events: [
-    //   {
-    //     title: "Game001",
-    //     start: "2025-03-12 17:00",
-    //     extendedProps: {
-    //       home: 'AAA',
-    //       away: 'BBB'
-    //     }
-    //   }
-    // ],
-    stickyFooterScrollbar: true,
-    eventContent: function(arg) {
-      let contentEl = document.createElement('div')
-      contentEl.classList.add("card")
-      contentEl.style.width = '100%'
-      
-      let cardBody = document.createElement('div')
-      cardBody.classList.add("card-body", "text-center")
-
-      let cardTitle = document.createElement('h5')
-      cardTitle.classList.add("card-title")
-      cardTitle.textContent = arg.event.title
-
-      let cardText = document.createElement('p')
-      cardText.classList.add("card-text")
-      cardText.textContent = arg.event.extendedProps.homeTeam + ' vs ' + arg.event.extendedProps.awayTeam
-
-      let cardText2 = document.createElement('p')
-      cardText2.classList.add("card-text")
-      cardText2.textContent = arg.event.extendedProps.homeScore + ' : ' + arg.event.extendedProps.awayScore
-
-      let linxEl = document.createElement('a')
-      linxEl.classList.add("stretched-link")
-      linxEl.href = '/game.html?id=' + arg.event.title
-      
-      cardBody.appendChild(cardTitle)
-      cardBody.appendChild(cardText)
-      cardBody.appendChild(cardText2)
-      contentEl.appendChild(cardBody)
-      contentEl.appendChild(linxEl)
-      
-      let arrayDomNodes = [ contentEl ]
-      return { domNodes: arrayDomNodes }
-    }
-  });
-  calendar.render();
-});
+app.mount("#app")
