@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>文章/新聞_編輯</title>
+    <title>文章/新聞_新增</title>
     <link
       rel="canonical"
       href="https://getbootstrap.com/docs/5.3/examples/headers/"
@@ -63,7 +63,7 @@
 
     <!-- 開發畫面 -->
     <main>
-      <form action="/NGFW/articleedit" method="post" name="articleedit">
+      <form action="/NGFW/articleadd" method="post" name="articleadd">
         <input type="text" id="status" name="status" style="display: none" />
         <div class="newsfedcontainer">
           <div class="mb-3">
@@ -74,13 +74,7 @@
               <option value="1">新聞</option>
             </select>
           </div>
-          <input
-            type="number"
-            style="display: none"
-            id="articleid"
-            name="articleid"
-            placeholder=""
-          />
+
           <div class="mb-3">
             <p>標題圖片</p>
             <br />
@@ -150,7 +144,7 @@
       <script>
         function save(status) {
           document.getElementById("status").value = status;
-          document.articleedit.submit();
+          document.articleadd.submit();
         }
 
         function readFile() {
@@ -199,28 +193,6 @@
             // ['view', ['fullscreen', 'codeview', 'help']]
             ["view", ["codeview", "help"]],
           ],
-        });
-
-        const urlParams = new URLSearchParams(window.location.search);
-        const articleId = urlParams.get("articleId");
-        $.ajax({
-          url: "/NGFW/articleedit?articleId=" + articleId,
-          method: "GET",
-          dataType: "json",
-          success: function (articles) {
-            $("#articleid").val(articleId);
-            $("#articletype").val(articles.articleType);
-            $("#maintitle").val(articles.mainTitle);
-            $("#publishDate").val(articles.publishDate.replaceAll("/", "-"));
-            $("#img").attr("src", articles.newsPhoto);
-            $("#b64").val(articles.newsPhoto);
-            $("#subtitle").val(articles.subTitle);
-            $("#summernote").summernote("code", articles.content);
-          },
-          error: function (xhr, status, error) {
-            // alert("資料載入失敗：" + error);
-            console.error("Error fetching data:", error);
-          },
         });
       });
     </script>
