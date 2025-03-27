@@ -133,7 +133,7 @@
         text: '請先登入再進入商品編輯頁面'
       })
         .then(() => {
-          window.location.href = "/staff_login.html";
+          window.location.href = "./staff_login.html";
         })
     } else if (staff.staffStatus !== 1) {
       Swal.fire({
@@ -142,7 +142,7 @@
         text: '請先開通帳號再進入商品編輯頁面'
       })
         .then(() => {
-          window.location.href = "/templateb.html";
+          window.location.href = "./templateb.html";
         })
     } else if (staff.staffRoleId !== 1 && staff.staffRoleId !== 3) {
       Swal.fire({
@@ -151,7 +151,7 @@
         text: '請以正確的帳號登入再進入商品編輯頁面'
       })
         .then(() => {
-          window.location.href = "/staff_login.html";
+          window.location.href = "./staff_login.html";
         })
     } else {
       fetch(`/NGFW/estoreadmin/item/getiteminfo/${sessionStorage.getItem("itemInfoId")}`)
@@ -247,7 +247,7 @@
   });
 
   $(document).on("click", "#cancel", function () {
-    window.location.href = "estoreadminitems.html";
+    window.location.href = "./estoreadminitems.html";
   })
 
   function validateFields(items, checkNumber = false) {

@@ -31,9 +31,11 @@
       <div class="d-flex flex-wrap justify-content-center">
         <h1 class="d-flex align-items-center mb-3 mb-lg-0 me-lg-auto link-body-emphasis pb-5">
           我的訂單</h1>
-        <form class="col-12 col-lg-auto mb-3 mb-lg-0" role="search">
-          <input type="search" class="form-control" placeholder="關鍵字搜尋" aria-label="Search">
-        </form>
+        <!-- todo: 有空再做關鍵字搜尋 -->
+        <!-- 關鍵字搜尋 -->
+        <!--        <form class="col-12 col-lg-auto mb-3 mb-lg-0" role="search">-->
+        <!--          <input type="search" class="form-control" placeholder="關鍵字搜尋" aria-label="Search">-->
+        <!--        </form>-->
       </div>
 
       <!-- orders -->
@@ -63,26 +65,27 @@
       </div>
 
 
+      <!-- todo: 有空再做page navigation -->
       <!-- page navigation -->
-      <div class="d-flex justify-content-center">
-        <nav aria-label="Page navigation example">
-          <ul class="pagination mt-4">
-            <li class="page-item">
-              <a class="page-link" href="#" aria-label="Previous">
-                <span aria-hidden="true" style="color: var(--bs-secondary-color);">&laquo;</span>
-              </a>
-            </li>
-            <li class="page-item"><a class="page-link" href="#" style="color: var(--bs-secondary-color);">1</a></li>
-            <li class="page-item"><a class="page-link" href="#" style="color: var(--bs-secondary-color);">2</a></li>
-            <li class="page-item"><a class="page-link" href="#" style="color: var(--bs-secondary-color);">3</a></li>
-            <li class="page-item">
-              <a class="page-link" href="#" aria-label="Next">
-                <span aria-hidden="true" style="color: var(--bs-secondary-color);">&raquo;</span>
-              </a>
-            </li>
-          </ul>
-        </nav>
-      </div>
+      <!--      <div class="d-flex justify-content-center">-->
+      <!--        <nav aria-label="Page navigation example">-->
+      <!--          <ul class="pagination mt-4">-->
+      <!--            <li class="page-item">-->
+      <!--              <a class="page-link" href="#" aria-label="Previous">-->
+      <!--                <span aria-hidden="true" style="color: var(&#45;&#45;bs-secondary-color);">&laquo;</span>-->
+      <!--              </a>-->
+      <!--            </li>-->
+      <!--            <li class="page-item"><a class="page-link" href="#" style="color: var(&#45;&#45;bs-secondary-color);">1</a></li>-->
+      <!--            <li class="page-item"><a class="page-link" href="#" style="color: var(&#45;&#45;bs-secondary-color);">2</a></li>-->
+      <!--            <li class="page-item"><a class="page-link" href="#" style="color: var(&#45;&#45;bs-secondary-color);">3</a></li>-->
+      <!--            <li class="page-item">-->
+      <!--              <a class="page-link" href="#" aria-label="Next">-->
+      <!--                <span aria-hidden="true" style="color: var(&#45;&#45;bs-secondary-color);">&raquo;</span>-->
+      <!--              </a>-->
+      <!--            </li>-->
+      <!--          </ul>-->
+      <!--        </nav>-->
+      <!--      </div>-->
     </div>
   </div>
 
@@ -207,7 +210,7 @@
         });
         await Promise.all(ecpayCheck)
           .then(() => {
-            for (let order of orders) {
+            for (let order of orders.slice().reverse()) {
               orderList(order);
             }
           });
