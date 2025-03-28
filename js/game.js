@@ -111,31 +111,43 @@ const FooterComponent = defineComponent({
   `
 });
 
+const url = '/NGFW/game/byId?id=88'
 const GameInfoComponent = defineComponent({
+  props: ['game'],
   setup() {
-    return {};
+    const game = ref(null);
+    const fetchGameData = async () => {
+      try {
+        const response = await fetch(url);
+        const data = await response.json();
+        game.value = data;
+      } catch (error) {
+        console.error('Fetch error:', error);
+      }
+    };
+    onMounted(fetchGameData);
+    return {game};
   },
   template: `
-    <div class="container mt-5">
+    <div v-if="game" class="container mt-5">
       <div class="row row-cols-lg-auto">
         <div class="col-12">
-          <h5>mm/DD HH:MM</h5>
+          <h5>{{game.gameDate}}</h5>
         </div>
-        <div class="col-12">
-          <span>地點  進場人數:XXXX</span>
-        </div>
+        <div class="col-12">{{game.gameLocation}}</div>  
+
       </div>
       <div class="row mt-3">
         <div class="col-5 text-center">
-          <h1>隊伍1</h1>
-          <h2>隊伍1得分</h2>
+          <h1>{{game.homeTeam.teamName}}</h1>
+          <h2>{{game.homeTeamScore}}</h2>
         </div>
         <div class="col-2 text-center">
           <h1>VS</h1>
         </div>
         <div class="col-5 text-center">
-          <h1>隊伍2</h1>
-          <h2>隊伍2得分</h2>
+          <h1>{{game.awayTeam.teamName}}</h1>
+          <h2>{{game.awayTeamScore}}</h2>
         </div>
       </div>
     </div>
@@ -208,8 +220,6 @@ const Tab1Component = defineComponent({
   `
 });
 
-// 出賽球員數據
-// 球員名 出賽時間  得分 2pt命中 2pt出手 2pt% 3pt命中 3pt出手 3pt% FT命中 FT出手 FT% REB AST STL BLK TO PF
 const Tab2Component = defineComponent({
   setup() {
     return {};
