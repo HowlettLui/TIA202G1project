@@ -82,77 +82,9 @@
 
         </article>
 
-        <!--        todo: 推薦商品 (優先度低)-->
-        <!-- productRecommend -->
+        <!-- roductRecommend (by item type)   todo: 推薦商品 (客製化) -->
         <h2 class="display-5 border-bottom py-4 mb-1">Recommend Products</h2>
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 mt-0">
-          <div class="col">
-            <div class="card shadow-sm">
-              <svg class="bd-placeholder-img card-img-top" width="100%" height="225"
-                   xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail"
-                   preserveAspectRatio="xMidYMid slice" focusable="false">
-                <title>Placeholder</title>
-                <rect width="100%" height="100%" fill="#55595c"/>
-                <text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail
-                </text>
-              </svg>
-              <div class="card-body">
-                <p class="card-text">This is a wider card with supporting text below as a natural
-                  lead-in to additional content. This content is a little bit longer.</p>
-                <div class="d-flex justify-content-between align-items-center">
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col">
-            <div class="card shadow-sm">
-              <svg class="bd-placeholder-img card-img-top" width="100%" height="225"
-                   xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail"
-                   preserveAspectRatio="xMidYMid slice" focusable="false">
-                <title>Placeholder</title>
-                <rect width="100%" height="100%" fill="#55595c"/>
-                <text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail
-                </text>
-              </svg>
-              <div class="card-body">
-                <p class="card-text">This is a wider card with supporting text below as a natural
-                  lead-in to additional content. This content is a little bit longer.</p>
-                <div class="d-flex justify-content-between align-items-center">
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col">
-            <div class="card shadow-sm">
-              <svg class="bd-placeholder-img card-img-top" width="100%" height="225"
-                   xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail"
-                   preserveAspectRatio="xMidYMid slice" focusable="false">
-                <title>Placeholder</title>
-                <rect width="100%" height="100%" fill="#55595c"/>
-                <text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail
-                </text>
-              </svg>
-              <div class="card-body">
-                <p class="card-text">This is a wider card with supporting text below as a natural
-                  lead-in to additional content. This content is a little bit longer.</p>
-                <div class="d-flex justify-content-between align-items-center">
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <div id="recommend" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 mt-0"></div>
 
       </div>
     </div>
@@ -198,16 +130,16 @@
         }
       }
     } else if (itemInfo.itemStatus === 0) {
-      $("#itemStock").append(`<option class="default" selected disabled>商品未上架</option>`)
+      $("#itemStock").append(`<option class="default" selected disabled>商品未上架，敬請期待</option>`)
     } else if (itemInfo.itemStatus === -1) {
       $("#itemStock").append(`<option class="default" selected disabled>商品已下架</option>`)
     }
   }
 
-  $(function () {
+  $(async function () {
     fetch(`/NGFW/estore/item/${localStorage.getItem("itemId")}`)
       .then(response => response.json())
-      .then(item => {
+      .then(async item => {
         itemPhoto = JSON.parse(item.itemPhoto);
         $("#title").text(item.itemName);
         $("#itemPhoto").attr("src", itemPhoto.photos[0]);
@@ -235,6 +167,46 @@
           }
         }
         sessionStorage.setItem("itemInfos", JSON.stringify(item.itemInfos));
+
+        // 推薦同類型商品
+        fetch(`/NGFW/estore/shop/recommend/${item.itemType}`)
+          .then(resp => resp.json())
+          .then(items => {
+            let itemPhotoForRecommend;
+            for (let item of items) {
+              itemPhotoForRecommend = JSON.parse(item.itemPhoto);
+              $("#recommend").append(
+                `<a class="item" href="./merchandise.html" data-item-id="${item.itemId}" style="text-decoration: none">
+                <div class="col">
+                  <div class="card shadow-sm">
+                    <img src=${itemPhotoForRecommend.photos[0]} class="itemPhoto img-fluid"
+                      style="max-width: 100%; height: 225px; object-fit: cover;" alt="Thumbnail">
+                    <div class="card-body">
+                      <h3 class="card-text">${item.itemName}</h3>
+                      <p class="card-text">$${item.itemPrice}</p>
+                      <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+<!--                          todo: 收藏商品按鈕 -->
+<!--                          <button type="button" class="btn btn-sm btn-outline-secondary">收藏</button>-->
+<!--                          todo: 點選加入購物車的話，如果是單一規格的商品就直接加入一項到購物車、如果是多個規格的商品則導向該商品頁面並提示選擇規格 -->
+<!--                          <button type="button" class="btn btn-sm btn-outline-secondary">加入購物車</button>-->
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </a>`
+              )
+            }
+          })
+          .catch(error => {
+            console.error(error)
+            Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: "出了點狀況！請聯絡管理員"
+            })
+          });
       })
       .catch(error => {
         console.error(error)
@@ -280,7 +252,7 @@
         text: '請先登入再進行選購'
       })
         .then(() => {
-          window.location.href = "/login.html";
+          window.location.href = "../login.html";
         })
     } else if (!user.status) {
       Swal.fire({
@@ -289,7 +261,7 @@
         text: '請先開通帳號再進行選購'
       })
         .then(() => {
-          window.location.href = "/estore/shop.html";
+          window.location.href = "./shop.html";
         })
     } else {
       let itemInfoId = $("select#itemSizes option:selected").attr("data-itemInfo-id");
@@ -346,6 +318,20 @@
       }
     }
   })
+
+  $(document).on("click", ".item", function (e) {
+    e.preventDefault();
+    e.stopPropagation();
+
+    let itemId = $(this).attr("data-item-id");
+    localStorage.setItem("itemId", itemId);
+
+    if (e.ctrlKey || e.metaKey || e.button === 1) {
+      window.open("./merchandise.html", "_blank");
+    } else {
+      window.location.href = "./merchandise.html";
+    }
+  });
 
 </script>
 

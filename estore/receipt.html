@@ -102,14 +102,6 @@
               <input id="homeDelivery" name="shippingMethod" type="radio" class="form-check-input" checked required>
               <label class="form-check-label" for="homeDelivery">宅配</label>
               <div class="row g-3 mt-1">
-                <div class="col-12">
-                  <label for="address" class="form-label">地址</label>
-                  <input type="text" class="form-control" id="address" placeholder="AA區BBB街DD號">
-                  <div class="invalid-feedback">
-                    Please enter your shipping address.
-                  </div>
-                </div>
-
                 <div id="twzipcode" class="col-12">
                   <div class="row">
                     <div class="col-md-5 county mb-2">
@@ -129,6 +121,14 @@
                         Please enter your shipping address.
                       </div>
                     </div>
+                  </div>
+                </div>
+
+                <div class="col-12">
+                  <label for="address" class="form-label">地址</label>
+                  <input type="text" class="form-control" id="address" placeholder="AAA街BBB巷CCC號DDD樓">
+                  <div class="invalid-feedback">
+                    請輸入收件地址
                   </div>
                 </div>
               </div>
@@ -155,7 +155,7 @@
           <div class="my-3 paymentMethod">
             <div class="form-check">
               <input id="credit" name="paymentMethod" type="radio" class="form-check-input" checked required>
-              <label class="form-check-label" for="credit">信用卡一次性付款</label>
+              <label class="form-check-label" for="credit">線上付款</label>
             </div>
             <div class="form-check">
               <input id="cashOnDelivery" name="paymentMethod" type="radio" class="form-check-input" required>
@@ -205,7 +205,7 @@
         text: '請先登入再進行購買'
       })
         .then(() => {
-          window.location.href = "/login.html";
+          window.location.href = "../login.html";
         })
     } else if (!user.status) {
       Swal.fire({
@@ -214,7 +214,7 @@
         text: '請先開通帳號再進行購買'
       })
         .then(() => {
-          window.location.href = "/estore/shop.html";
+          window.location.href = "./shop.html";
         })
     } else {
       let savedElement = sessionStorage.getItem("itemsToCheckout");
@@ -227,25 +227,10 @@
           text: '請先選購再進行結帳'
         })
           .then(() => {
-            window.location.href = "/estore/shop.html";
+            window.location.href = "./shop.html";
           })
       }
     }
-
-    // fetch("", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify({})
-    // })
-    //   .then(resp => resp.json())
-    //   .then(data => {
-    //
-    //   })
-    //   .catch(error => {
-    //     console.error(error)
-    //   })
   })
 
   // input內容是否填寫的判斷
@@ -277,42 +262,38 @@
   // })
 
   // todo: 超商電子地圖
-  $("#chooseConvenienceStore").on("click", function () {
-    fetch("https://logistics-stage.ecpay.com.tw/Express/map", {
-      method: "POST",
-      // mode: 'no-cors',
-      headers: {
-        "Accept": "text/html",
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
-      body: JSON.stringify({
-        "MerchantID": "3002599",
-        "LogisticsType": "CVS",
-        "LogisticsSubType": "UNIMARTC2C",
-        "IsCollection": "N",
-        "ServerReplyURL": "./receipt.html"
-      })
-    })
-      .then(resp => resp.html)
-      .then(body => {
-        sessionStorage.setItem("CVSAddress", body);
-      })
-      .catch(err => {
-        console.log(err);
-      })
-  })
+  // $("#chooseConvenienceStore").on("click", function () {
+  //   fetch("https://logistics-stage.ecpay.com.tw/Express/map", {
+  //     method: "POST",
+  //     // mode: 'no-cors',
+  //     headers: {
+  //       "Accept": "text/html",
+  //       "Content-Type": "application/x-www-form-urlencoded",
+  //     },
+  //     body: JSON.stringify({
+  //       "MerchantID": "3002599",
+  //       "LogisticsType": "CVS",
+  //       "LogisticsSubType": "UNIMARTC2C",
+  //       "IsCollection": "N",
+  //       "ServerReplyURL": "./receipt.html"
+  //     })
+  //   })
+  //     .then(resp => resp.html)
+  //     .then(body => {
+  //       sessionStorage.setItem("CVSAddress", body);
+  //     })
+  //     .catch(err => {
+  //       console.log(err);
+  //     })
+  // })
 
   $('#twzipcode').twzipcode();
   $('#twzipcode div selector').twzipcode({
     'zipcodeSel': 110,
-    'readonly': false
+    'readonly': true
   });
 
-  $(document).on("change", "#twzipcode", function () {
-    console.log($('#twzipcode').twzipcode('get', ['county', 'district', 'zipcode']));
-  })
-
-  $(document).on("click", ".continueToCheckout", function () {
+  $(document).on("click", ".continueToCheckout", async function () {
     let isValid = validateFields($("input#address, div#zipcode input"));
 
     if (!isValid) {
@@ -322,43 +303,155 @@
         text: "請輸入完整資料！"
       });
     } else {
-      let receipts = [
-        {
-          "itemInfoId": 2,
-          "receiptItemCount": 2,
-          "receiptItemPrice": 1200,
-        },
-        {
-          "itemInfoId": 19,
-          "receiptItemCount": 1,
-          "receiptItemPrice": 1500,
-        }
-      ];
-      let order = {
-        "userId": user.userId,
-        "orderStatus": 0,
-        "orderPayment": 0,
-        "orderShipment": 0,
-        "orderAddress": "104台北市中山區南京東路三段219號4F",
-        "orderTotalPrice": 3900,
-        "orderDescription": "備註說明",
-        "receipts": receipts
-      };
-      fetch(`/NGFW/estore/order/pay/${user.userId}`, {
-        method: "POST",
-        body: JSON.stringify(
-          order
-        ),
-        headers: {
-          "Content-Type": "application/json"
-        }
+      // 更新商品價格後，如果有變動，用alert
+      let itemIds = [];
+      $("ul.itemsToCheckoutList li").each(function () {
+        itemIds.push($(this).find("h6").attr("data-item-id"));
       })
-        .then(resp => resp.json())
-        .then(order => {
-          $("#result").html(order.message);
+
+      await updateItemPriceInCart(itemIds)
+        .then(() => {
+          let [county, district, zipcode] = $('#twzipcode').twzipcode('get', ['county', 'district', 'zipcode']);
+          let address = zipcode + county + district + $('#address').val();
+          let itemsInCheckoutForEcpay = [];
+          let receipts = [];
+
+          $("ul.itemsToCheckoutList li").each(function () {
+            itemsInCheckoutForEcpay.push(
+              $(this).find("h6").text() + ", " + $(this).find("small").text()
+            );
+            receipts.push({
+              // receiptId
+              // orderId
+              "itemInfoId": parseInt($(this).find("small").attr("data-iteminfo-id")),
+              "receiptItemCount": parseInt($(this).find("span").attr("data-itemcountsincart")),
+              "receiptItemPrice": parseInt($(this).find("span").attr("data-itempriceincart"))
+            })
+          })
+
+          let order = {
+            // orderId
+            "userId": user.userId,
+            "orderStatus": 0, // 固定先以未付款送往後端
+            "orderPayment": $("#credit").prop("checked") ? 0 : 1, // 信用卡 (0) 或貨到付款 (1)
+            // todo: 之後有做超商取貨再改：$("#homeDelivery").prop("checked") ? 0 : 1
+            "orderShipment": 0, // 宅配 (0) 或超商取貨 (1)
+            "orderAddress": address,
+            "orderTotalPrice": parseInt($("li.totalPrice").find("strong").text().split("$")[1]),
+            "orderDescription": itemsInCheckoutForEcpay.toString(),
+            "receipts": receipts
+          };
+
+          fetch(`/NGFW/estore/order/pay/${user.userId}`, {
+            method: "POST",
+            body: JSON.stringify(
+              order
+            ),
+            headers: {
+              "Content-Type": "application/json"
+            }
+          })
+            .then(resp => resp.json())
+            .then(order => {
+              if (order.result) {
+                if (order.orderStatus === -1) {
+                  Swal.fire({
+                    icon: "warning",
+                    title: "商品數量不足",
+                    text: order.message
+                  })
+                    .then((result) => {
+                      if (result.isConfirmed) {
+                        window.location.href = "./cart.html";
+                        // window.location.href = "/NGFW/estore/cart.html";
+                      }
+                    })
+                } else {
+                  if (order.orderPayment === 0) {
+                    $("#result").html(order.message);
+                  } else if (order.orderPayment === 1) {
+                    Swal.fire({
+                      icon: "success",
+                      title: "新增成功",
+                      text: order.message
+                    })
+                      .then((result) => {
+                        if (result.isConfirmed) {
+                          window.location.href = "./orders.html";
+                          // window.location.href = "/NGFW/estore/orders.html";
+                        }
+                      })
+                  }
+                }
+              } else {
+                Swal.fire({
+                  icon: "warning",
+                  title: "發生錯誤",
+                  text: order.message
+                })
+                  .then((result) => {
+                    if (result.isConfirmed) {
+                      window.location.href = "./shop.html";
+                      // window.location.href = "/NGFW/estore/shop.html";
+                    }
+                  })
+              }
+            })
+            .catch(err => {
+              console.log(err);
+              Swal.fire({
+                icon: 'error',
+                title: '連線失敗',
+                text: '結帳失敗，請聯絡管理員'
+              })
+            })
+        })
+        .catch(error => {
+          console.log(error);
+          Swal.fire({
+            icon: 'error',
+            title: '更新價格失敗',
+            text: '更新價格失敗，請聯絡管理員'
+          })
+            .then((result) => {
+              if (result.isConfirmed) {
+                window.location.href = "./receipt.html";
+                // window.location.href = "/NGFW/estore/receipt.html";
+              }
+            })
         })
     }
   })
+
+  // 結帳前最後一次確認商品價格是否有變動，有動的話就跳回cart.html請用戶再確認
+  const updateItemPriceInCart = async (itemIds) => {
+    const fetchPrices = itemIds.map(itemId =>
+      fetch(`/NGFW/estore/item/price/${itemId}`)
+        .then(response => response.text())
+        .then(data => {
+          let element = $(`h6[data-item-id=${itemId}]`).closest("li").find("span");
+          let originCount = element.text().split(" x ")[1];
+          let originalPrice = parseInt(element.text().split(" x ")[0].split("$")[1]);
+          if (parseInt(data) !== originalPrice) {
+            element
+              .attr("data-itempriceincart", parseInt(data))
+              .text("$" + data + " x " + originCount);
+            Swal.fire({
+              icon: 'warning',
+              title: '商品價格更動',
+              text: '部分商品價格已有更動，請再到購物車確認選購項目'
+            })
+              .then((result) => {
+                if (result.isConfirmed) {
+                  window.location.href = "./cart.html";
+                  // window.location.href = "/NGFW/estore/cart.html";
+                }
+              })
+          }
+        })
+    )
+    await Promise.all(fetchPrices);
+  };
 
 </script>
 

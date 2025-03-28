@@ -17,11 +17,9 @@
   <link rel="stylesheet" href="./css/adminlte/adminlte.min.css">
   <!-- Bootstrap 5 -->
   <link rel="stylesheet" href="./css/bootstrap.min.css">
-  <!-- dropzonejs -->
-  <link rel="stylesheet" href="./vendors/dropzone/min/dropzone.min.css">
 
   <style>
-    .items td, .iteminfos td, .accordion-toggle i {
+    .items td, .iteminfos td, .expandIndicator i, .expandIndicator button {
       vertical-align: middle;
     }
   </style>
@@ -66,8 +64,8 @@
             <div class="col-12">
               <!-- search bar -->
               <div class="d-flex flex-wrap mb-3">
-                <form class="col-12 col-lg-auto mb-3 mb-lg-0" role="search">
-                  <input type="search" class="form-control" placeholder="關鍵字搜尋" aria-label="Search">
+                <form id="searchForm" class="col-12 col-lg-auto mb-3 mb-lg-0" role="search">
+                  <input type="search" id="keyword" class="form-control" placeholder="關鍵字搜尋" aria-label="Search">
                 </form>
               </div>
 
@@ -86,29 +84,30 @@
                 </tbody>
               </table>
 
+              <!-- todo: 有空再做page navigation -->
               <!-- page navigation -->
-              <div class="d-flex justify-content-center">
-                <nav aria-label="Page navigation example">
-                  <ul class="pagination mt-4">
-                    <li class="page-item">
-                      <a class="page-link" href="#" aria-label="Previous">
-                        <span aria-hidden="true" style="color: var(--bs-secondary-color);">&laquo;</span>
-                      </a>
-                    </li>
-                    <li class="page-item"><a class="page-link" href="#"
-                                             style="color: var(--bs-secondary-color);">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#"
-                                             style="color: var(--bs-secondary-color);">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#"
-                                             style="color: var(--bs-secondary-color);">3</a></li>
-                    <li class="page-item">
-                      <a class="page-link" href="#" aria-label="Next">
-                        <span aria-hidden="true" style="color: var(--bs-secondary-color);">&raquo;</span>
-                      </a>
-                    </li>
-                  </ul>
-                </nav>
-              </div>
+              <!--              <div class="d-flex justify-content-center">-->
+              <!--                <nav aria-label="Page navigation example">-->
+              <!--                  <ul class="pagination mt-4">-->
+              <!--                    <li class="page-item">-->
+              <!--                      <a class="page-link" href="#" aria-label="Previous">-->
+              <!--                        <span aria-hidden="true" style="color: var(&#45;&#45;bs-secondary-color);">&laquo;</span>-->
+              <!--                      </a>-->
+              <!--                    </li>-->
+              <!--                    <li class="page-item"><a class="page-link" href="#"-->
+              <!--                                             style="color: var(&#45;&#45;bs-secondary-color);">1</a></li>-->
+              <!--                    <li class="page-item"><a class="page-link" href="#"-->
+              <!--                                             style="color: var(&#45;&#45;bs-secondary-color);">2</a></li>-->
+              <!--                    <li class="page-item"><a class="page-link" href="#"-->
+              <!--                                             style="color: var(&#45;&#45;bs-secondary-color);">3</a></li>-->
+              <!--                    <li class="page-item">-->
+              <!--                      <a class="page-link" href="#" aria-label="Next">-->
+              <!--                        <span aria-hidden="true" style="color: var(&#45;&#45;bs-secondary-color);">&raquo;</span>-->
+              <!--                      </a>-->
+              <!--                    </li>-->
+              <!--                  </ul>-->
+              <!--                </nav>-->
+              <!--              </div>-->
             </div>
           </div>
         </div>
@@ -149,7 +148,7 @@
         text: '請先登入再進入平台商品頁面'
       })
         .then(() => {
-          window.location.href = "/staff_login.html";
+          window.location.href = "./staff_login.html";
         })
     } else if (staff.staffStatus !== 1) {
       Swal.fire({
@@ -158,7 +157,7 @@
         text: '請先開通帳號再進入平台商品頁面'
       })
         .then(() => {
-          window.location.href = "/templateb.html";
+          window.location.href = "./templateb.html";
         })
     } else if (staff.staffRoleId !== 1 && staff.staffRoleId !== 3) {
       Swal.fire({
@@ -167,7 +166,7 @@
         text: '請以正確的帳號登入再進入平台商品頁面'
       })
         .then(() => {
-          window.location.href = "/staff_login.html";
+          window.location.href = "./staff_login.html";
         })
     } else {
       fetch("/NGFW/estoreadmin/items")
@@ -175,14 +174,20 @@
         .then(items => {
           for (let item of items) {
             $("#itemsAdmin").append(
-              `<tr data-bs-toggle="collapse" data-bs-target=#${item.itemId} class="accordion-toggle" aria-expanded="false">
-                <td>${item.itemType}</td>
-                <td>${item.itemModel.itemModel}</td>
-                <td>${item.itemName}</td>
-                <td>${item.itemPrice} 元</td>
-                <td>
-                  <button class="btn btn-sm btn-light editItemAndModel" type="button" data-item-id=${item.itemId}>編輯</button>
-                  <i class="fas fa-angle-left arrow ml-2"></i>
+              `<tr class="" aria-expanded="false">
+                <td data-bs-toggle="collapse" data-bs-target=#${item.itemId} class="accordion-toggle">${item.itemType}</td>
+                <td data-bs-toggle="collapse" data-bs-target=#${item.itemId} class="accordion-toggle">${item.itemModel.itemModel}</td>
+                <td data-bs-toggle="collapse" data-bs-target=#${item.itemId} class="accordion-toggle">${item.itemName}</td>
+                <td data-bs-toggle="collapse" data-bs-target=#${item.itemId} class="accordion-toggle">${item.itemPrice} 元</td>
+                <td class="editButton">
+                  <div class="row justify-content-around expandIndicator">
+                    <div class="col-auto">
+                      <button class="btn btn-sm btn-light editItemAndModel" type="button" data-item-id=${item.itemId}>編輯</button>
+                    </div>
+                    <div class="col-auto">
+                      <i class="fas fa-angle-left arrow ml-2"></i>
+                    </div>
+                  </div>
                 </td>
               </tr>
               <tr>
@@ -219,13 +224,14 @@
     }
   })
 
-  $(document).on("click", "tr.accordion-toggle", function () {
+  $(document).on("click", "td.accordion-toggle", function () {
 
-
-    if ($(this).find("i.arrow").hasClass("fa-angle-left")) {
-      $(this).find("i.arrow").removeClass("fa-angle-left").addClass("fa-angle-down");
+    if ($(this).hasClass("collapsed")) {
+      $(this).closest("tr").find("i.arrow").removeClass("fa-angle-down");
+      $(this).closest("tr").find("i.arrow").addClass("fa-angle-left");
     } else {
-      $(this).find("i.arrow").removeClass("fa-angle-down").addClass("fa-angle-left");
+      $(this).closest("tr").find("i.arrow").removeClass("fa-angle-left");
+      $(this).closest("tr").find("i.arrow").addClass("fa-angle-down");
     }
 
     fetch(`/NGFW/estoreadmin/items/${$(this).attr("data-bs-target").slice(1)}`)
@@ -293,15 +299,16 @@
   $(document).on("click", ".editItemInfo", function () {
     // 將itemInfoId帶往編輯頁面
     sessionStorage.setItem("itemInfoId", $(this).attr("data-itemInfo-id"));
-    window.location.href = "estoreadminedititeminfo.html";
+    window.location.href = "./estoreadminedititeminfo.html";
   });
 
   // 編輯按鈕按下後跳轉estoreadminedititemandmodel.html頁面
   $(document).on("click", ".editItemAndModel", function (e) {
+    e.preventDefault();
     e.stopPropagation();
     // 將itemId帶往編輯頁面
     sessionStorage.setItem("itemId", $(this).attr("data-item-id"));
-    window.location.href = "estoreadminedititemandmodel.html";
+    window.location.href = "./estoreadminedititemandmodel.html";
   });
 
   // 點選上架、下架按鈕
@@ -362,6 +369,71 @@
       })
   })
 
+  // 搜尋功能
+  $(document).on("submit", "#searchForm", function (e) {
+    e.preventDefault();
+
+    let keyword = $("#keyword").val().trim();
+    if (keyword.length !== 0) {
+      fetch(`/NGFW/estoreadmin/items/search?keyword=${keyword}`)
+        .then(resp => resp.json())
+        .then(items => {
+          if (items.length === 0) {
+            $("#itemsAdmin").empty();
+          } else {
+            $("#itemsAdmin").empty();
+            for (let item of items) {
+              $("#itemsAdmin").append(
+                `<tr class="" aria-expanded="false">
+                <td data-bs-toggle="collapse" data-bs-target=#${item.itemId} class="accordion-toggle">${item.itemType}</td>
+                <td data-bs-toggle="collapse" data-bs-target=#${item.itemId} class="accordion-toggle">${item.itemModel.itemModel}</td>
+                <td data-bs-toggle="collapse" data-bs-target=#${item.itemId} class="accordion-toggle">${item.itemName}</td>
+                <td data-bs-toggle="collapse" data-bs-target=#${item.itemId} class="accordion-toggle">${item.itemPrice} 元</td>
+                <td class="editButton">
+                  <div class="row justify-content-around expandIndicator">
+                    <div class="col-auto">
+                      <button class="btn btn-sm btn-light editItemAndModel" type="button" data-item-id=${item.itemId}>編輯</button>
+                    </div>
+                    <div class="col-auto">
+                      <i class="fas fa-angle-left arrow ml-2"></i>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="12" class="hiddenRow" style="--bs-table-hover-bg: var(--bs-body-bg)">
+                  <div class="accordian-body collapse" id="${item.itemId}">
+                    <table class="table table-striped table-hover iteminfos">
+                      <thead class="table-light">
+                        <tr class="info">
+                          <th class="col-2">商品詳細規格：</th>
+                          <th class="col-2">尺寸</th>
+                          <th class="col-2">顏色</th>
+                          <th class="col-2">庫存</th>
+                          <th class="col-2">狀態</th>
+                          <th class="col-2"></th>
+                        </tr>
+                      </thead>
+                      <tbody class="itemInfosAdmin">
+                      </tbody>
+                    </table>
+                  </div>
+                </td>
+              </tr>`
+              )
+            }
+          }
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "取得資料失敗，請聯絡管理員"
+          })
+        })
+    }
+  });
 </script>
 
 </body>

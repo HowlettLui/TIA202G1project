@@ -1,32 +1,30 @@
 <!DOCTYPE html>
-<html lang="en" data-bs-theme="light">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>文章/新聞_管理列表</title>
-    <link
-      rel="canonical"
-      href="https://getbootstrap.com/docs/5.3/examples/headers/"
-    />
-    <link
-      rel="canonical"
-      href="https://getbootstrap.com/docs/5.3/examples/footers/"
-    />
+    <title>上班不要看球賽管理系統</title>
 
+    <!-- Google Font: Source Sans Pro -->
     <link
       rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/@docsearch/css@3"
+      href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback"
     />
-
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="../vendors/fontawesome-free/css/all.min.css" />
+    <!-- overlayScrollbars -->
+    <link rel="stylesheet" href="../css/adminlte/OverlayScrollbars.min.css" />
+    <!-- Theme style -->
+    <link rel="stylesheet" href="../css/adminlte/adminlte.min.css" />
+    <!-- Bootstrap 5 -->
     <link rel="stylesheet" href="../css/bootstrap.min.css" />
-    <link rel="stylesheet" href="../css/headers.css" />
 
     <style>
       /* S Start */
       div.newsbmglistcontainer {
         border: 1px solid gray;
-        width: 85.3%;
-        margin: 20px auto;
+        margin-top: 20px;
+        margin-bottom: 8px;
         padding: 5px;
         border-radius: 5px;
       }
@@ -35,145 +33,291 @@
       }
       div.newsbmglisttitle {
         display: flex;
-        /* margin: 5px 0 5px 0; */
+        margin: 10px 0 10px 0;
+        font-weight: bold;
       }
 
       div.newsbmglistcontainer2 {
         display: flex;
-        /* position: relative; */
       }
       div input.chb {
         margin-right: 5px;
       }
       div div.author {
-        width: 150px;
-        /* margin-right: 100px; */
+        width: 200px;
       }
       div div.article {
-        width: 300px;
-        /* margin-right: 50px; */
+        width: 350px;
       }
       div div.status {
         width: 135px;
-        /* margin-right: 50px; */
       }
       div div.submitdate {
         width: 200px;
-        /* margin-right: 50px; */
       }
       div div.publishingdate {
         width: 200px;
-        /* margin-right: 50px; */
       }
       div.newsbmglistcontainer2 button {
         font-size: 14px;
         width: 80px;
       }
-      /* div.newsbmglistcontainer2 div.bt {
-        position: absolute;
-        right: 2px;
-      } */
+
       /* S end */
     </style>
   </head>
 
-  <body>
-    <!-- 導入共用 header -->
-    <div class="headerPage"></div>
+  <body class="hold-transition sidebar-mini">
+    <!-- Site wrapper -->
+    <div class="wrapper">
+      <!-- 導入共用 Navbar -->
+      <div class="Navbar"></div>
+      <!-- 導入共用 Sidebar -->
+      <div class="Sidebar"></div>
 
-    <!-- 開發畫面 -->
-    <main>
-      <div class="newsbmglistcontainer">
-        <div class="mgrbt">
-          <button>批次核准</button>
-        </div>
+      <!-- 開發畫面區塊start -->
+      <section class="content-wrapper">
+        <!-- content-header，包括頁面名稱、麵包屑 -->
+        <section class="content-header"></section>
+        <!-- content-header end -->
 
-        <div class="newsbmglisttitle">
-          <div class="author" style="margin-left: 19px">作者</div>
-          <div class="article">文章</div>
-          <div class="status">狀態</div>
-          <div class="submitdate">送出時間</div>
-          <div class="publishingdate">發表時間</div>
-        </div>
-        <hr />
-        <div class="mgrarticlelist" id="mgrarticlelist">
-          <!-- <div class="newsbmglistcontainer2">
-            <input class="chb" type="checkbox" />
-            <div class="author">我是作者</div>
-            <div class="article">文章標題</div>
-            <div class="status">審核中</div>
-            <div class="submitdate">yyyy/mm/dd</div>
-            <div class="publishingdate">yyyy/mm/dd</div>
-            <div class="bt">
-              <button>審核管理</button>
-              <button>核准文章</button>
+        <!-- content，實際頁面內容 -->
+        <section class="content">
+          <div class="categorydropdown">
+            <button
+              class="btn btn-secondary dropdown-toggle"
+              type="button"
+              id="dropdownMenuButton1"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              所有狀態
+            </button>
+            <ul
+              class="dropdown-menu"
+              id="dropdownmenu_id"
+              aria-labelledby="dropdownMenuButton1"
+            >
+              <li>
+                <a class="dropdown-item" href="/NGFW/newsb/news_bmgrlist.html"
+                  >所有狀態</a
+                >
+              </li>
+              <li>
+                <a
+                  class="dropdown-item"
+                  href="/NGFW/newsb/news_bmgrlist.html?status=0"
+                  >編輯中</a
+                >
+              </li>
+              <li>
+                <a
+                  class="dropdown-item"
+                  href="/NGFW/newsb/news_bmgrlist.html?status=1"
+                  >已上架</a
+                >
+              </li>
+              <li>
+                <a
+                  class="dropdown-item"
+                  href="/NGFW/newsb/news_bmgrlist.html?status=2"
+                  >待審核</a
+                >
+              </li>
+              <li>
+                <a
+                  class="dropdown-item"
+                  href="/NGFW/newsb/news_bmgrlist.html?status=3"
+                  >已退回</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div class="newsbmglistcontainer">
+            <div class="newsbmglisttitle">
+              <div class="author">作者</div>
+              <div class="article">文章</div>
+              <div class="status">狀態</div>
+              <div class="submitdate">送出時間</div>
+              <div class="publishingdate">發表時間</div>
             </div>
+            <div class="mgrarticlelist" id="mgrarticlelist"></div>
           </div>
-          <hr /> -->
-        </div>
-        <!-- <hr /> -->
-        <!-- <div class="newsbmglistcontainer2">
-          <input class="chb" type="checkbox" />
-          <div class="author">作者B君</div>
-          <div class="article">文章標題</div>
-          <div class="status">審核中</div>
-          <div class="submitdate">yyyy/mm/dd</div>
-          <div class="publishingdate">yyyy/mm/dd</div>
-          <div class="bt">
-            <button>審核管理</button>
-            <button>核准文章</button>
-          </div>
-        </div> -->
-      </div>
-    </main>
+        </section>
+        <!-- content end -->
+      </section>
+      <!-- 開發畫面區塊end -->
+    </div>
+    <!-- wrapper end -->
 
-    <!-- 導入共用 footer -->
-    <div class="footerPage"></div>
-    <script src="../jquery/jquery-3.7.1.min.js"></script>
-    <script>
-      $(".headerPage").load("../layout/header.html");
-      $(".footerPage").load("../layout/footer.html");
-    </script>
-
+    <!-- jQuery -->
+    <script src="../jquery/adminlte/jquery.min.js"></script>
+    <!-- Bootstrap 5 -->
     <script src="../js/bootstrap.bundle.min.js"></script>
-    <script
-      src="https://kit.fontawesome.com/799bf36dfe.js"
-      crossorigin="anonymous"
-    ></script>
+    <!-- overlayScrollbars -->
+    <script src="../jquery/adminlte/jquery.overlayScrollbars.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="../js/adminlte/adminlte.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+      $(".Navbar").load("../layout/navbar.html");
+      $(".Sidebar").load("../layout/sidebar.html");
+
+      window.onload = function () {
+        const staffData = sessionStorage.getItem("staff");
+        const staff = JSON.parse(staffData);
+        const staffAccount = staff.staffAccount;
+        const staffRole = staff.staffRoleId;
+        const staffStatus = staff.staffStatus;
+
+        if (staffData) {
+          if (staffRole == 1) {
+            $("member_management").show();
+            $("team_managemaent").show();
+            $("game_management").show();
+            $("article_management").show();
+            $("order_management").show();
+            $("item_management").show();
+            $("cs_management").show();
+
+            Swal.fire({
+              icon: "success",
+              title: "歡迎回來",
+              text: "",
+            });
+          }
+        }
+
+        // =======================  sidebar controll  =====================
+        $(".user_management").click(function () {
+          if (staffRole != 1) {
+            Swal.fire({
+              icon: "error",
+              title: "權限問題",
+              text: "請聯絡管理員",
+            }).then(() => {
+              window.location.href = "../templateb.html";
+            });
+          } else {
+            window.location.href = "../user/user_manage.html";
+          }
+        });
+
+        $(".staff_management").click(function () {
+          if (staffRole == 1) {
+            window.location.href = "../staff/staff_info.html";
+          } else {
+            window.location.href = "../staff/staff_list.html";
+          }
+        });
+
+        $(".team_list").click(function () {
+          Swal.fire({
+            icon: "error",
+            title: "施工中",
+            text: "敬請期待",
+          });
+        });
+
+        $(".player_list").click(function () {
+          Swal.fire({
+            icon: "error",
+            title: "施工中",
+            text: "敬請期待",
+          });
+        });
+
+        $(".cl_list").click(function () {
+          Swal.fire({
+            icon: "error",
+            title: "施工中",
+            text: "敬請期待",
+          });
+        });
+
+        $(".game_date").click(function () {
+          Swal.fire({
+            icon: "error",
+            title: "施工中",
+            text: "敬請期待",
+          });
+        });
+
+        $(".game_list").click(function () {
+          Swal.fire({
+            icon: "error",
+            title: "施工中",
+            text: "敬請期待",
+          });
+        });
+      };
+    </script>
 
     <script>
       $(document).ready(function () {
-        // const urlParams = new URLSearchParams(window.location.search);
-        // const articleType = urlParams.get("articleType");
-        // $("#dropdownMenuButton1").text(
-        //   articleType == 0 ? "文章" : articleType == 1 ? "新聞" : "所有分類"
-        // );
+        const urlParams = new URLSearchParams(window.location.search);
+        const statusType = urlParams.get("status");
 
-        // var tmurl = "/NGFW/articleindex";
-        // if (articleType != null) {
-        //   tmurl += "?articleType=" + articleType;
-        // }
+        var tmpstatustp = "";
+        switch (statusType) {
+          case "0":
+            tmpstatustp = "編輯中";
+            break;
+          case "1":
+            tmpstatustp = "已上架";
+            break;
+          case "2":
+            tmpstatustp = "待審核";
+            break;
+          case "3":
+            tmpstatustp = "已退回";
+            break;
+          default:
+            tmpstatustp = "所有狀態";
+            break;
+        }
+        $("#dropdownMenuButton1").text(tmpstatustp);
+
+        var tmurl = "/NGFW/articlesmgr";
+        if (statusType != null) {
+          tmurl += "?status=" + statusType;
+        }
         $.ajax({
-          url: "/NGFW/articlesmgr",
+          url: tmurl,
           method: "GET",
           dataType: "json",
           success: function (articles) {
             let tableBody = $("#mgrarticlelist");
             tableBody.empty();
             articles.forEach((article) => {
-              let row = `<div class="newsbmglistcontainer2">
-              <input class="chb" type="checkbox" />
-              <div class="author">${article.userId}</div>
-              <div class="article">${article.mainTitle}</div>
-              <div class="status">${article.status}</div>
-              <div class="submitdate">${article.createTime}</div>
-              <div class="publishingdate">${article.publishDate}</div>
-              <div class="bt">
-                <button onclick="location.href='/NGFW/newsb/news_bmgrview.html?articleId=${article.articleId}'">審核管理</button>
-                <button>核准文章</button>
-              </div>
-            </div>
-            <hr />`;
+              var tmpstatus = "";
+              switch (article.status) {
+                case "0":
+                  tmpstatus = "編輯中";
+                  break;
+                case "1":
+                  tmpstatus = "已上架";
+                  break;
+                case "2":
+                  tmpstatus = "待審核";
+                  break;
+                case "3":
+                  tmpstatus = "已退回";
+                  break;
+              }
+
+              let row = `<hr />
+              <div class="newsbmglistcontainer2">
+                <div class="author">${article.name}</div>
+                <div class="article text-truncate">${article.mainTitle}</div>
+                <div class="status">${tmpstatus}</div>
+                <div class="submitdate">${article.createTime}</div>
+                <div class="publishingdate">${article.publishDate}</div>
+                <div class="bt">
+                  <button onclick="location.href='/NGFW/newsb/news_bmgrview.html?articleId=${article.articleId}'">審核管理</button>
+                </div>
+              </div>`;
               tableBody.append(row);
             });
           },
@@ -185,16 +329,3 @@
     </script>
   </body>
 </html>
-<!-- switch (${article.status}) {
-  case 0:
-    <div class="status">待審核</div>;
-    break;
-  case 1:
-    <div class="status">已上版</div>;
-    break;
-  case 2:
-    <div class="status">已下架</div>;
-    break;
-  default:
-    <div class="status">未知</div>;
-} -->
