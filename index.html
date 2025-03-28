@@ -42,7 +42,8 @@
     }
 
     div.my_slide_img>img {
-      max-width: 100%;
+      max-width: 1400px;
+      transition: transform 1s ease-in-out;
     }
 
     div.slick-slide.img {
@@ -122,18 +123,20 @@
   <main class="container">
     <div class="my_main_container">
       <!-- =================================== slide 區塊 ============================================= -->
-      <div class="my_slide_class">
-        <div class="my_slide_img"><img src="https://picsum.photos/id/238/1400/600"></div>
-        <div class="my_slide_img"><img src="https://picsum.photos/id/239/1400/600"></div>
-        <div class="my_slide_img"><img src="https://picsum.photos/id/240/1400/600"></div>
-        <div class="my_slide_img"><img src="https://picsum.photos/id/241/1400/600"></div>
-        <div class="my_slide_img"><img src="https://picsum.photos/id/242/1400/600"></div>
-        <div class="my_slide_img"><img src="https://picsum.photos/id/243/1400/600"></div>
-        <div class="my_slide_img"><img src="https://picsum.photos/id/244/1400/600"></div>
+      <div class="slide_container">
+        <div class="my_slide_class">
+          <div class="my_slide_img"><img class="slide-item-id" data-item-el-id="" src=""></div>
+          <div class="my_slide_img"><img class="slide-item-id" data-item-el-id="" src=""></div>
+          <div class="my_slide_img"><img class="slide-item-id" data-item-el-id="" src=""></div>
+          <div class="my_slide_img"><img class="slide-item-id" data-item-el-id="" src=""></div>
+          <!-- <div class="my_slide_img"><img src=""></div>
+          <div class="my_slide_img"><img src=""></div> -->
+        </div>
       </div>
 
       <!-- =================================== 即時賽況 ============================================= -->
-      <div class="switch_btn row container">
+      <!-- <div class="switch_btn row container">
+
         <div class="row row-cols-2 row-cols-lg-4">
           <div class="switch_btn_el col text-center p-3 -on">
             <h3>AAALeague</h3>
@@ -142,9 +145,12 @@
             <h3>BBBLeague</h3>
           </div>
         </div>
-      </div>
+      </div> -->
 
       <div class="live_game container row mx-5 my-3">
+        
+        <div id="app"></div>
+
         <div class="live_game_date col-lg-2">
           <div class="d-flex align-items-middle flex-column mb-3">
             <div class="fs-2 ">00/00 (一)</div>
@@ -208,137 +214,6 @@
       </div>
     </div>
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" id="articlelist">
-      <!-- <div class="album py-5 bg-body-tertiary">
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-          <div class="col">
-            <div class="card shadow-sm">
-              <svg class="bd-placeholder-img card-img-top" width="100%" height=225px xmlns="http://www.w3.org/2000/svg"
-                role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
-                <title>Placeholder</title>
-                <rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%" fill="#eceeef"
-                  dy=".3em">Thumbnail</text>
-              </svg>
-              <div class="card-body">
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-                  additional content. This content is a little bit longer.</p>
-                <div class="d-flex justify-content-between align-items-center">
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                  </div>
-                  <small class="text-body-secondary">9 mins</small>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col">
-            <div class="card shadow-sm">
-              <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg"
-                role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
-                <title>Placeholder</title>
-                <rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%" fill="#eceeef"
-                  dy=".3em">Thumbnail</text>
-              </svg>
-              <div class="card-body">
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-                  additional content. This content is a little bit longer.</p>
-                <div class="d-flex justify-content-between align-items-center">
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                  </div>
-                  <small class="text-body-secondary">9 mins</small>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col">
-            <div class="card shadow-sm">
-              <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg"
-                role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
-                <title>Placeholder</title>
-                <rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%" fill="#eceeef"
-                  dy=".3em">Thumbnail</text>
-              </svg>
-              <div class="card-body">
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-                  additional content. This content is a little bit longer.</p>
-                <div class="d-flex justify-content-between align-items-center">
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                  </div>
-                  <small class="text-body-secondary">9 mins</small>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col">
-            <div class="card shadow-sm">
-              <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg"
-                role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
-                <title>Placeholder</title>
-                <rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%" fill="#eceeef"
-                  dy=".3em">Thumbnail</text>
-              </svg>
-              <div class="card-body">
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-                  additional content. This content is a little bit longer.</p>
-                <div class="d-flex justify-content-between align-items-center">
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                  </div>
-                  <small class="text-body-secondary">9 mins</small>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col">
-            <div class="card shadow-sm">
-              <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg"
-                role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
-                <title>Placeholder</title>
-                <rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%" fill="#eceeef"
-                  dy=".3em">Thumbnail</text>
-              </svg>
-              <div class="card-body">
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-                  additional content. This content is a little bit longer.</p>
-                <div class="d-flex justify-content-between align-items-center">
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                  </div>
-                  <small class="text-body-secondary">9 mins</small>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col">
-            <div class="card shadow-sm">
-              <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg"
-                role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
-                <title>Placeholder</title>
-                <rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%" fill="#eceeef"
-                  dy=".3em">Thumbnail</text>
-              </svg>
-              <div class="card-body">
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-                  additional content. This content is a little bit longer.</p>
-                <div class="d-flex justify-content-between align-items-center">
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                  </div>
-                  <small class="text-body-secondary">9 mins</small>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div> -->
     </div>
 
     <!-- =================================== 商城區塊 ============================================= -->
@@ -348,23 +223,6 @@
         <h3>商城</h3>
       </div>
       <div id="items" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-        <!-- <div class="col" id="item">
-          <div class="card shadow-sm">
-            <img src=${item.itemPhoto} class="itemPhoto img-fluid"
-              style="max-width: 100%; height: 225px; object-fit: cover;" alt="Thumbnail">
-            <div class="card-body">
-              <h3 class="card-text">${item.itemName}</h3>
-              <p class="card-text">$${item.itemPrice}</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button id="addToCollection" type="button" class="btn btn-sm btn-outline-secondary">收藏</button>
-                  <button id="addToCart" type="button" class="btn btn-sm btn-outline-secondary">加入購物車</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div> -->
-        <!-- items here -->
       </div>
     </div>
 
@@ -383,11 +241,11 @@
   <script src="https://kit.fontawesome.com/799bf36dfe.js" crossorigin="anonymous"></script>
   <script src="./vendors/slick/slick.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="./js/live.js" async></script>
 
   <script>
     $(".headerPage").load("./layout/header.html");
     $(".footerPage").load("./layout/footer.html");
-
     // <!-- slide -->
     $('.my_slide_class').slick({
       arrows: true,
@@ -407,7 +265,15 @@
       ]
     });
 
-    window.onload = function () {
+    // 設定 5 秒後觸發點擊下一張按鈕
+    setInterval(() => {
+      $('.slick-next').click();
+    }, 5000);
+
+    window.ready = function () {
+      // const slickNext = document.querySelector('.slick-next');
+
+
       const userData = sessionStorage.getItem("user");
 
       if (userData) {
@@ -438,14 +304,6 @@
     };
 
     $(document).ready(function () {
-      // 綁定跳轉登入註冊按鈕
-      // $('.login').click(function () {
-      //   window.location.href = './login.html';
-      // });
-      // $('.register').click(function () {
-      //   window.location.href = './register.html';
-      // });
-
       $('.switch_btn_el').click(function () {
         $('.switch_btn_el').removeClass('-on');
         $(this).addClass('-on');
@@ -478,6 +336,7 @@
                   <img
                     src="${article.newsPhoto}"
                     onclick="location.href='/NGFW/newsf/news_fbody.html?articleId=${article.articleId}'"
+                    style="max-width: 100%; height: 225px; object-fit: cover;"
                   >
                   </img>
                 </div>
@@ -519,9 +378,7 @@
                       <div class="d-flex justify-content-between align-items-center">
                         <div class="btn-group">
                           <button type="button" class="btn btn-sm btn-outline-secondary">收藏</button>
-<!--                          todo-->
-<!--                          點這邊的話，預設加入一個商品-->
-<!--                          <button type="button" class="btn btn-sm btn-outline-secondary">加入購物車</button>-->
+                          <button type="button" class="btn btn-sm btn-outline-secondary">加入購物車</button>
                         </div>
                       </div>
                     </div>
@@ -530,27 +387,53 @@
               </a>`
               )
             }
+            sessionStorage.setItem("items", JSON.stringify(items));
+
           })
-          .catch(error => console.log(error));
+          .catch(error => {
+            console.log(error)
+            Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: "出了點狀況！請聯絡管理員"
+            });
+          });
+
+        // 從 sessionStorage 取得儲存的商品資料
+        let items = JSON.parse(sessionStorage.getItem("items"));
+
+        if (items && items.length > 0) {
+          // 隨機選擇 6 筆商品
+          let randomItems = [];
+          while (randomItems.length < 6) {
+            let randomIndex = Math.floor(Math.random() * items.length);
+            if (!randomItems.includes(items[randomIndex])) {
+              randomItems.push(items[randomIndex]);
+            }
+          }
+
+          console.log(randomItems);
+
+          randomItems.forEach((item, index) => {
+            let itemPhoto = JSON.parse(item.itemPhoto);
+            let slideItemId = item.itemId;
+            let imgSrc = itemPhoto.photos[0];
+
+            // 更新對應的 img 元素的 src 屬性
+            $(".my_slide_class .my_slide_img img").eq(index).attr("src", imgSrc);
+            $(".my_slide_class .my_slide_img img").eq(index).attr("data-item-el-id", slideItemId);
+          });
+
+        } else {
+          console.log("No items found in sessionStorage.");
+        }
       });
 
-      $(document).on('click', '#item', function () {
-        let itemId = $(this).attr("data-item-id");
-        sessionStorage.setItem("itemId", itemId);
-        window.location.href = "./merchandise.html";
+      $(document).on('click', '.slide-item-id', function () {
+        let itemId = $(this).attr("data-item-el-id");
+        localStorage.setItem("itemId", itemId);
+        window.location.href = "NGFW/estore/merchandise.html";
       });
-
-      $(document).on('mouseenter mouseleave', '#item', function () {
-        $(this).css("cursor", "pointer");
-      });
-
-      $(document).on('click', '#addToCollection', function (e) {
-        e.stopPropagation();
-      })
-
-      $(document).on('click', '#addToCart', function (e) {
-        e.stopPropagation();
-      })
       // 商城區塊end
 
     });

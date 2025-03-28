@@ -16,44 +16,97 @@
   <script src="../jquery/jquery-3.7.1.min.js"></script>
 
   <style>
-    aside {
-      /* position: fixed; */
-      float: left;
-      width: 20%;
-      /* height: 100vh; */
-      /* border: 1px solid red; */
-    }
+    * {
+      box-sizing: border-box;
 
-    main {
-      /* border: 1px solid blue; */
-      /* overflow-y: auto; */
-    }
+      aside {
+        /* position: fixed; */
+        float: left;
+        width: 20%;
+        /* height: 100vh; */
+        /* border: 1px solid red; */
+      }
 
-    .container {
-      max-width: 960px;
-    }
+      main {
+        /* border: 1px solid blue; */
+        /* overflow-y: auto; */
+      }
 
-    /* S Start */
-    div.newsadd {
-      width: 85.3%;
-      margin: 20px auto;
-    }
+      .container {
+        max-width: 960px;
+      }
 
-    div.newsaddcontainer {
-      width: 85.3%;
-      margin: 20px auto;
-    }
+      /* S Start */
+      div.newsadd {
+        width: 85.3%;
+        margin: 20px auto;
+      }
 
-    div.newsaddbt button {
-      align-items: flex-end;
-    }
+      div.newsaddcontainer {
+        width: 85.3%;
+        margin: 20px auto;
+      }
 
-    img.avatar {
-      width: 100px;
-      height: 100px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 2px dotted black;
+      div.newsaddbt button {
+        align-items: flex-end;
+      }
+
+      /* for avatar  */
+
+      #preview {
+        border: 1px dashed black;
+        display: inline-block;
+        width: 100%;
+        height: 200px;
+        border-radius: 50%;
+        position: relative;
+        cursor: pointer;
+        text-align: center;
+      }
+
+      #preview span.text {
+        position: absolute;
+        display: inline-block;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 1;
+        color: black;
+      }
+
+      #preview img.preview_img {
+        max-width: 100%;
+        max-height: 100%;
+        position: absolute;
+        z-index: 0;
+      }
+
+      div.avatar_block {
+        padding: 5px 10px 10px 5px;
+      }
+
+      div.avatar_block {
+        flex-basis: 200px;
+        flex-shrink: 0;
+      }
+
+      #input_avatar {
+        display: none;
+        /* opacity: 0;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        cursor: pointer; */
+      }
+
+      /* input[disabled] {
+        background: white !important;
+        cursor: not-allowed;
+      }
+
+      #preview.-on {
+        box-shadow: 5px 5px 15px white inset, -5px -5px 15px black inset;
+      } */
     }
 
     /* S end */
@@ -169,10 +222,11 @@
             <h4 class="mb-3">個人資料</h4>
             <form class="needs-validation" novalidate>
               <div class="row g-3">
-                <div class="col-12">
-                  <label for="image" class="form-label"></label>
-                  <input type="file" class="form-control" id="image">
-                  <img src="../img/default-150x150.png" id="userAvatar" class="avatar" src="" alt="avatar" style="width: 100px; height: 100px;">
+                <div class="col-12 avatar_block">
+                  <input type="file" id="input_avatar" class="form-control">
+                  <div id="preview" class="user_avatar drop_zone" style="width: 150px; height: 150px;">
+                    <span class="text">請上傳頭像</span>
+                  </div>
                   <div class="invalid-feedback">
                     Valid first name is required.
                   </div>
@@ -245,7 +299,7 @@
 
   <script>
 
-    $(document).ready(function () {
+    // $(document).ready(function () {
       const userData = sessionStorage.getItem("user");
       const user = JSON.parse(userData);
 
@@ -259,20 +313,88 @@
       $("#email").val(user.email);
       $("#phone").val(user.phone);
 
-      document.getElementById('image').addEventListener('change', function (e) {
-        const file = e.target.files[0];
-        if (file) {
-          const reader = new FileReader();
-          reader.onloadend = function () {
-            // 取得base64格式的圖片
-            const base64Image = reader.result;
+      // document.getElementById('image').addEventListener('change', function (e) {
+      //   const file = e.target.files[0];
+      //   if (file) {
+      //     const reader = new FileReader();
+      //     reader.onloadend = function () {
+      //       // 取得base64格式的圖片
+      //       const base64Image = reader.result;
 
-            // 顯示在img區塊
-            document.getElementById('userAvatar').src = base64Image;
-          };
-          reader.readAsDataURL(file);
+      //       // 顯示在img區塊
+      //       document.getElementById('userAvatar').src = base64Image;
+      //     };
+      //     reader.readAsDataURL(file);
+      //   }
+      // });
+
+
+      let preview_el = document.getElementById("preview");
+
+      preview_el.addEventListener("dragover", function (e) {
+        e.preventDefault();
+        console.log("dragover");
+      });
+
+      preview_el.addEventListener("dragenter", function (e) {
+        e.target.classList.add("-on");
+      });
+
+      preview_el.addEventListener("dragleave", function (e) {
+        e.target.classList.remove("-on");
+      });
+
+      preview_el.addEventListener("drop", function (e) {
+        e.preventDefault();
+
+        e.target.classList.remove("-on");
+        console.log(e.dataTransfer.files);
+        preview_img(e.dataTransfer.files[0]);
+      });
+
+      // 透過 File 物件顯示預覽圖
+      let input_avatar_el = document.getElementById("input_avatar");
+
+
+      var preview_img = function (file) {
+
+        var reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.addEventListener("load", function () {
+          let img_str_el = `<img src="${reader.result}" class="preview_img">`;
+          preview_el.innerHTML = img_str_el;
+        });
+      };
+
+      preview_el.addEventListener("click", function () {
+        input_avatar_el.click();
+        console.log("click");
+      });
+
+      input_avatar_el.addEventListener("change", function (e) {
+        // console.log(this.files);
+
+        if (this.files.length > 0) {
+          preview_img(this.files[0]);
+        } else {
+          input_avatar_el.innerHTML = `<span class="text">預覽圖</span>`;
         }
       });
+
+      // document.getElementById('input_avatar').addEventListener('change', function (event) {
+      //   var file = event.target.files[0];
+      //   if (file) {
+      //     var reader = new FileReader();
+      //     reader.onload = function (e) {
+      //       var img = document.createElement('img');
+      //       img.src = e.target.result;
+      //       img.classList.add('preview_img'); // 添加類別樣式
+      //       document.getElementById('preview').innerHTML = ''; // 清空預覽區域
+      //       document.getElementById('preview').appendChild(img); // 顯示選擇的圖片
+      //     };
+      //     reader.readAsDataURL(file);
+      //   }
+      // });
 
 
       // 儲存資料
@@ -291,14 +413,21 @@
         const email = $('#email').val();
         const phone = $('#phone').val();
 
+        var img_base64_el = document.querySelector(".preview_img");
+        requestData.avatar = img_base64_el.getAttribute("src");
+
+        sessionStorage.setItem("form_data", JSON.stringify(send_data));
+        location.href = "./confirm.html";
+
         const requestData = {
           userId: user.userId,
           name: name,
           email: email,
-          phone: phone
+          phone: phone,
+          avatar: img_base64_el.getAttribute("src")
         };
 
-        // console.log('更新資料: ', requestData);
+        console.log('更新資料: ', requestData);
 
         fetch('/NGFW/user/user_edit', {
           method: 'PUT',
@@ -321,7 +450,7 @@
               updatedUser = {
                 userId: user.userId,
                 account: data.account,
-                // avatar: data.avatar,
+                avatar: data.avatar,
                 name: data.name,
                 email: data.email,
                 phone: data.phone,
@@ -364,6 +493,6 @@
       $('#cancelBtn').on("click", function () {
         window.location.href = '../user/user_info.html';
       });
-    });
+    // });
   </script>
 </body>
