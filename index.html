@@ -448,7 +448,7 @@
       });
 
       $(document).on('click', '.slide-item-id', function () {
-        let itemId = $(this).attr("data-item-id");
+        let itemId = $(this).attr("data-item-el-id");
         localStorage.setItem("itemId", itemId);
         window.location.href = "./estore/merchandise.html";
       });
@@ -456,7 +456,19 @@
 
     });
 
+    $(document).on("click", ".item", function (e) {
+      e.preventDefault();
+      e.stopPropagation();
 
+      let itemId = $(this).attr("data-item-id");
+      localStorage.setItem("itemId", itemId);
+
+      if (e.ctrlKey || e.metaKey || e.button === 1) {
+        window.open("./merchandise.html", "_blank");
+      } else {
+        window.location.href = "./estore/merchandise.html";
+      }
+    });
   </script>
 
 </body>
