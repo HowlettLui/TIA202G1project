@@ -102,9 +102,9 @@
     let sizes = itemInfos
       .filter(itemInfo => itemInfo.itemColor === color)
       .map(itemInfo =>
-        itemInfo.itemStatus === 1
-          ? `<option value="${itemInfo.itemSize}" class="itemInfo" data-itemInfo-id="${itemInfo.itemInfoId}">${itemInfo.itemSize}</option>`
-          : `<option value="${itemInfo.itemSize}" class="itemInfo" data-itemInfo-id="${itemInfo.itemInfoId}" disabled>${itemInfo.itemSize}</option>`
+          // itemInfo.itemStatus === 1
+          `<option value="${itemInfo.itemSize}" class="itemInfo" data-itemInfo-id="${itemInfo.itemInfoId}">${itemInfo.itemSize}</option>`
+        // : `<option value="${itemInfo.itemSize}" class="itemInfo" data-itemInfo-id="${itemInfo.itemInfoId}" disabled>${itemInfo.itemSize}</option>`
       )
 
     if (sizes.length === 1) {
