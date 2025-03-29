@@ -216,7 +216,7 @@
           });
         }
 
-        fetch('staff_register', {
+        fetch('/NGFW/staff_register', {
           method: 'POST',
           header: {
             'Content-Type': 'application/json',
@@ -239,6 +239,12 @@
               title: "Oops...",
               text: "註冊失敗",
             });
+            if (successfully) {
+              sessionStorage.setItem("staff", JSON.stringify(body));
+              window.location.href = '/NGFW/staff_login.html';
+            } else {
+              sessionStorage.clear();
+            }
           });
       });
     });
