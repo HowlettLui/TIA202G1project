@@ -448,7 +448,7 @@
       });
 
       $(document).on('click', '.slide-item-id', function () {
-        let itemId = $(this).attr("data-item-el-id");
+        let itemId = $(this).attr("data-item-id");
         localStorage.setItem("itemId", itemId);
         window.location.href = "./estore/merchandise.html";
       });
