@@ -172,7 +172,7 @@
         console.log(login_data);  // 看能不能抓到資料 
 
         // 從資料庫查會員資料是否存在
-        fetch(`staff_login/${staffEmail.value}/${staffPassword.value}`, {
+        fetch(`/NGFW/staff_login/${staffEmail.value}/${staffPassword.value}`, {
           method: 'GET',
           header: {
             'Content-Type': 'application/json',
@@ -195,7 +195,7 @@
                   text: "請聯絡管理員",
                 }).then(() => {
                   sessionStorage.clear();
-                  window.location.href = 'staff_login.html';
+                  window.location.href = '/NGFW/staff_login.html';
                 });
               } else {
                 Swal.fire({
@@ -203,7 +203,7 @@
                   title: "成功",
                   text: "您已成功登入",
                 }).then(() => {
-                  window.location.href = 'templateb.html';
+                  window.location.href = '/NGFW/templateb.html';
                 });
               }
             } else {

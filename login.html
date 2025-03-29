@@ -138,7 +138,7 @@
 
   <script>
     $(window).on('load', function () {
-      fetch("profile")
+      fetch("/NGFW/profile")
         .then(response => response.json())
         .then(data => {
           // access_token.textContent = data.access_token;
