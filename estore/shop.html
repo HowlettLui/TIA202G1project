@@ -100,13 +100,13 @@
 
   // 有分頁的寫法 - start
   let currentPage = 0;
-  const pageSize = 9;
+  const pageSize = 6;
   $(document).ready(() => {
     loadItems(currentPage);
   })
 
   function loadItems(page) {
-    fetch(`/NGFW/estore/shop/items?page=${page}&size=${pageSize}`)
+    fetch(`/NGFW/estore/shop/items?page=${page}&pageSize=${pageSize}`)
       .then(response => response.json())
       .then(data => {
         let items = data.content;
