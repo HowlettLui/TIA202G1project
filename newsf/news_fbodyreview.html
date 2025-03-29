@@ -3,7 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>文章/新聞_內容</title>
+    <!-- <title>文章/新聞_內容</title> -->
+    <title>NGFW上班不要看球賽</title>
     <link
       rel="canonical"
       href="https://getbootstrap.com/docs/5.3/examples/headers/"
@@ -20,6 +21,7 @@
 
     <link rel="stylesheet" href="../css/bootstrap.min.css" />
     <link rel="stylesheet" href="../css/headers.css" />
+    <link rel="stylesheet" href="../css/sidebars.css" />
 
     <style>
       /* S Start */
@@ -27,10 +29,10 @@
         width: 85.3%;
       }
 
-      div.newsfbodycontainer {
+      /* div.newsfbodycontainer {
         width: 85.3%;
         margin: 20px auto;
-      }
+      } */
 
       .img-container {
         width: 100%;
@@ -51,6 +53,17 @@
         margin: 0 2px 0 0;
       }
 
+      main {
+        display: flex;
+        flex-wrap: wrap;
+        /* justify-content: center; */
+      }
+      section {
+        width: 80%;
+        /* margin: 0 auto; */
+        margin-top: 5px;
+      }
+
       /* S end */
     </style>
   </head>
@@ -61,38 +74,204 @@
 
     <!-- 開發畫面 -->
     <main>
-      <div class="newsfbodycontainer">
-        <span
-          class="maintitle"
-          id="maintitle_id"
-          style="font-size: 30px"
-        ></span>
-        <hr />
-        <span class="publishDate" id="publishDate_id"></span>
+      <aside>
+        <div class="flex-shrink-0 p-3">
+          <ul class="list-unstyled ps-0">
+            <li class="mb-1">
+              <button
+                class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
+                data-bs-toggle="collapse"
+                data-bs-target="#user-collapse"
+                aria-expanded="false"
+              >
+                會員基本資料
+              </button>
+              <div class="collapse" id="user-collapse">
+                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                  <li>
+                    <a
+                      href="../user/user_info.html"
+                      class="link-body-emphasis d-inline-flex text-decoration-none rounded"
+                      >基本資料</a
+                    >
+                  </li>
+                </ul>
+              </div>
+              <div class="collapse" id="user-collapse">
+                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                  <li>
+                    <a
+                      href="../user/user_psw.html"
+                      class="link-body-emphasis d-inline-flex text-decoration-none rounded"
+                      >修改密碼</a
+                    >
+                  </li>
+                </ul>
+              </div>
+            </li>
+            <li class="mb-1">
+              <button
+                class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
+                data-bs-toggle="collapse"
+                data-bs-target="#article-collapse"
+                aria-expanded="false"
+              >
+                我的文章/新聞列表
+              </button>
+              <div class="collapse" id="article-collapse">
+                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                  <li>
+                    <a
+                      href="../newsf/news_fmgr.html"
+                      class="link-body-emphasis d-inline-flex text-decoration-none rounded"
+                      >文章管理功能</a
+                    >
+                  </li>
+                </ul>
+              </div>
+            </li>
+            <li class="mb-1">
+              <button
+                class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
+                data-bs-toggle="collapse"
+                data-bs-target="#collection-collapse"
+                aria-expanded="false"
+              >
+                我的收藏
+              </button>
+              <div class="collapse" id="collection-collapse">
+                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                  <li>
+                    <a
+                      href="../user/collection/c_article.html"
+                      class="link-body-emphasis d-inline-flex text-decoration-none rounded"
+                      >收藏文章管理</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="../user/collection/c_news.html"
+                      class="link-body-emphasis d-inline-flex text-decoration-none rounded"
+                      >收藏新聞管理</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="../user/collection/c_commodity.html"
+                      class="link-body-emphasis d-inline-flex text-decoration-none rounded"
+                      >收藏商品管理</a
+                    >
+                  </li>
+                </ul>
+              </div>
+            </li>
+            <li class="mb-1">
+              <button
+                class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
+                data-bs-toggle="collapse"
+                data-bs-target="#team-collapse"
+                aria-expanded="false"
+              >
+                關注球隊
+              </button>
+              <div class="collapse" id="team-collapse">
+                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                  <li>
+                    <a
+                      href="../user/team/t_recent_game.html"
+                      class="link-body-emphasis d-inline-flex text-decoration-none rounded"
+                      >近期賽事</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="../user/team/t_historical_inf.html"
+                      class="link-body-emphasis d-inline-flex text-decoration-none rounded"
+                      >歷史資料</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="../user/team/t_player.html"
+                      class="link-body-emphasis d-inline-flex text-decoration-none rounded"
+                      >關注的球員</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="../user/team/t_cheer.html"
+                      class="link-body-emphasis d-inline-flex text-decoration-none rounded"
+                      >關注的啦啦隊</a
+                    >
+                  </li>
+                </ul>
+              </div>
+            </li>
+            <li class="mb-1">
+              <button
+                class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
+                data-bs-toggle="collapse"
+                data-bs-target="#car-collapse"
+                aria-expanded="false"
+              >
+                我的商城
+              </button>
+              <div class="collapse" id="car-collapse">
+                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                  <li>
+                    <a
+                      href="../estore/cart.html"
+                      class="link-body-emphasis d-inline-flex text-decoration-none rounded"
+                      >我的購物車</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="../estore/orders.html"
+                      class="link-body-emphasis d-inline-flex text-decoration-none rounded"
+                      >我的訂單</a
+                    >
+                  </li>
+                </ul>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </aside>
+      <section>
+        <div class="newsfbodycontainer">
+          <span
+            class="maintitle"
+            id="maintitle_id"
+            style="font-size: 30px"
+          ></span>
+          <hr />
+          <span class="publishDate" id="publishDate_id"></span>
 
-        <div class="card mb-3">
-          <div class="img-container">
-            <img
-              class="bd-placeholder-img card-img-top"
-              id="newsphoto_id"
-              src=""
-            />
+          <div class="card mb-3">
+            <div class="img-container">
+              <img
+                class="bd-placeholder-img card-img-top"
+                id="newsphoto_id"
+                src=""
+              />
+            </div>
+            <div class="card-body">
+              <h5 class="subtitle" id="subtitle_id"></h5>
+              <p class="card-text" id="card-text_id"></p>
+            </div>
           </div>
-          <div class="card-body">
-            <h5 class="subtitle" id="subtitle_id"></h5>
-            <p class="card-text" id="card-text_id"></p>
+          <div class="review">
+            <span>審核意見</span>
+            <textarea
+              class="texetarea-inherit"
+              name="reviewContent"
+              id="reviewContent"
+              disabled
+            ></textarea>
           </div>
         </div>
-        <div class="review">
-          <span>審核意見</span>
-          <textarea
-            class="texetarea-inherit"
-            name="reviewContent"
-            id="reviewContent"
-            disabled
-          ></textarea>
-        </div>
-      </div>
+      </section>
     </main>
 
     <!-- 導入共用 footer -->
