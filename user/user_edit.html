@@ -143,7 +143,7 @@
               </ul>
             </div>
           </li>
-          <li class="mb-1">
+          <!-- <li class="mb-1">
             <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
               data-bs-toggle="collapse" data-bs-target="#article-collapse" aria-expanded="false">
               我的文章/新聞列表
@@ -196,7 +196,7 @@
                 </li>
               </ul>
             </div>
-          </li>
+          </li> -->
           <li class="mb-1">
             <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
               data-bs-toggle="collapse" data-bs-target="#car-collapse" aria-expanded="false">
@@ -221,7 +221,7 @@
           <div id="editMode" class="">
             <h4 class="mb-3">個人資料</h4>
             <form class="needs-validation" novalidate>
-              <div class="row g-3">
+              <!-- <div class="row g-3">
                 <div class="col-12 avatar_block">
                   <input type="file" id="input_avatar" class="form-control">
                   <div id="preview" class="user_avatar drop_zone" style="width: 150px; height: 150px;">
@@ -231,7 +231,7 @@
                     Valid first name is required.
                   </div>
                 </div>
-              </div>
+              </div> -->
               <div class="row g-3">
                 <div class="col-12">
                   <label for="name" class="form-label">姓名</label>
@@ -413,14 +413,13 @@
         const email = $('#email').val();
         const phone = $('#phone').val();
 
-        let requestData = {};
         var img_base64_el = document.querySelector(".preview_img");
         requestData.avatar = img_base64_el.getAttribute("src");
 
         sessionStorage.setItem("form_data", JSON.stringify(send_data));
-        // location.href = "./confirm.html";
+        location.href = "./confirm.html";
 
-        requestData = {
+        const requestData = {
           userId: user.userId,
           name: name,
           email: email,
@@ -462,7 +461,7 @@
               }
               sessionStorage.setItem("user", JSON.stringify(updatedUser));
 
-              window.location.href = '/NGFW/user/user_info.html';
+              window.location.href = './user/user_info.html';
             } else {
               alert('更新失敗:', data.message);
             }
@@ -492,7 +491,7 @@
 
       // 取消按鈕
       $('#cancelBtn').on("click", function () {
-        window.location.href = '/NGFW/user/user_info.html';
+        window.location.href = '../user/user_info.html';
       });
     // });
   </script>

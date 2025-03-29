@@ -50,11 +50,11 @@
         <div class="d-flex">
           <img id="avatar" class="rounded-circle" style="height: 30px">
         </div>
-        <li class="nav-item account" style="display: none"><a href="#" class="nav-link link-body-emphasis px-2">會員帳號</a>
+        <li class="nav-item account" style="display: none"><a href="#" class="nav-link link-body-emphasis px-2"></a>
         </li>
         <li class="nav-item usercenter" style="display: none"><a href="/user/user_info.html"
             class="nav-link link-body-emphasis px-2">會員中心</a></li>
-        <li class="nav-item logout" style="display: none"><a class="nav-link link-body-emphasis px-2">登出</a>
+        <li class="nav-item logout" style="display: none"><a href="#" class="nav-link link-body-emphasis px-2">登出</a>
         </li>
       </ul>
     </div>
@@ -73,7 +73,7 @@
       // 這裡可以顯示會員資訊，例如：
       $('.usercenter').show();
       $('.logout').show();
-      $('.account').show();
+      $('.account').text(account).show();
       $('#avatar').attr('src', user.avatar);
       $('.login').hide();
       $('.register').hide();
@@ -92,5 +92,21 @@
       $('.login').show();
       $('.register').show();
     }
+
+    // 登出功能
+    $('.logout').click(function () {
+      Swal.fire({
+        title: '確定要登出嗎？',
+        showCancelButton: true,
+        confirmButtonText: '登出',
+        cancelButtonText: '取消'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          sessionStorage.removeItem("user");
+          fetch(`${getContextPath()}/user/logout`);
+          window.location.href = "./login.html";
+        }
+      });
+    });
   };
 </script>

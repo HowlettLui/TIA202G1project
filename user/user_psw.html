@@ -98,7 +98,7 @@
               </ul>
             </div>
           </li>
-          <li class="mb-1">
+          <!-- <li class="mb-1">
             <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
               data-bs-toggle="collapse" data-bs-target="#collection-collapse" aria-expanded="false">
               我的收藏
@@ -138,7 +138,7 @@
                 </li>
               </ul>
             </div>
-          </li>
+          </li> -->
           <li class="mb-1">
             <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
               data-bs-toggle="collapse" data-bs-target="#car-collapse" aria-expanded="false">
@@ -220,10 +220,16 @@
 
   <script>
     $(document).ready(function () {
+
       generateCaptcha();
 
       const userData = sessionStorage.getItem("user");
       const user = JSON.parse(userData);
+
+      // console.log(user.password);
+      // const oldPassword = user.password;
+      // $("#oldPassword").val(oldPassword);
+
       const oldPassword = $("#oldPassword");
       const newPassword = $('#newPassword');
       const confirmPassword = $('#confirmPassword');
@@ -293,6 +299,8 @@
           });
       }
 
+
+
       // 驗證輸入
       // TODO: 之後要換驗證時機點
       $('#saveBtn').click(function (e) {
@@ -355,7 +363,10 @@
                 text: "",
               });
 
-              window.location.href = '/NGFW//user_info.html';
+
+
+
+              window.location.href = './user_info.html';
 
             } else {
               alert('更新失敗:', data.message);
