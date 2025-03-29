@@ -98,7 +98,7 @@
               </ul>
             </div>
           </li>
-          <li class="mb-1">
+          <!-- <li class="mb-1">
             <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
               data-bs-toggle="collapse" data-bs-target="#collection-collapse" aria-expanded="false">
               我的收藏
@@ -138,7 +138,7 @@
                 </li>
               </ul>
             </div>
-          </li>
+          </li> -->
           <li class="mb-1">
             <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
               data-bs-toggle="collapse" data-bs-target="#car-collapse" aria-expanded="false">
@@ -262,6 +262,12 @@
         $('article-collapse').addClass('d-none');
       }
 
+      // const account = user.account; // 取得物件中的 account 屬性
+      // const name = user.name; // 取得物件中的 name 屬性
+      // const email = user.email; // 取得物件中的 email 屬性
+      // const phone = user.phone; // 取得物件中的 phone 屬性
+      // const userid = user.userid; // 取得物件中的 userid 屬性
+
       // 插入使用者資料
       $("#avatar").attr('src', user.avatar);
       $("#viewUserid").text(user.userId);
@@ -272,8 +278,92 @@
 
       // 編輯模式
       $('#editBtn').click(function () {
-        window.location.href = "/NGFW/user/user_edit.html";
-      });    
+        window.location.href = "./user_edit.html";
+        // $('#viewMode').addClass('d-none');
+        // $('#editMode').removeClass('d-none');
+        // $("#userid").val(user.userId);
+        // $("#accout").val(user.account);
+      });
+
+      // // 顯示模式
+      // $('#cancelBtn').click(function () {
+      //   $('#editMode').addClass('d-none');
+      //   $('#viewMode').removeClass('d-none');
+      // });
+
+      // // 儲存資料並切換回顯示模式
+      // $('#saveBtn').click(function (e) {
+      //   var form = document.querySelector('.needs-validation');
+
+      //   // 檢查表單是否通過驗證
+      //   if (!form.checkValidity()) {
+      //     e.preventDefault();
+      //     e.stopPropagation();
+      //     form.classList.add('was-validated');
+      //     return; // 若驗證失敗，不執行儲存與切換動作
+      //   }
+
+      //   // 獲取輸入框中的值
+      //   const name = $('#name').val();
+      //   // const userid = $('#userid').val();
+      //   // const accout = $('#accout').val();
+      //   const email = $('#email').val();
+      //   const phone = $('#phone').val();
+
+      //   const requestData = {
+      //     name: name,
+      //     email: email,
+      //     phone: phone
+      //   };
+
+      //   fetch('edit', {
+      //     method: 'POST',
+      //     headers: {
+      //       'Content-Type': 'application/json'
+      //     },
+      //     body: JSON.stringify(requestData)
+      //   })
+      //     .then(response => response.json())
+      //     .then(data => {
+      //       if (data.success) {
+      //         console.log('更新成功:', data.message);
+      //       } else {
+      //         console.error('更新失敗:', data.error);
+      //       }
+      //     })
+      //     .catch(error => {
+      //       console.error('發生錯誤:', error);
+      //     });
+
+      //   // 更新顯示模式中的內容
+      //   $('#viewName').text(name);
+      //   // $('#viewUserid').text(userid);
+      //   // $('#viewAccout').text(accout);
+      //   $('#viewEmail').text(email);
+      //   $('#viewPhone').text(phone);
+
+      //   // 切換回顯示模式
+      //   $('#editMode').addClass('d-none');
+      //   $('#viewMode').removeClass('d-none');
+      // });
+
+      // 啟用 Bootstrap 表單驗證
+      // (function () {
+      //     'use strict'
+
+      //     var forms = document.querySelectorAll('.needs-validation');
+
+      //     Array.prototype.slice.call(forms).forEach(function (form) {
+      //         form.addEventListener('submit', function (event) {
+      //             if (!form.checkValidity()) {
+      //                 event.preventDefault();
+      //                 event.stopPropagation();
+      //             }
+
+      //             form.classList.add('was-validated');
+      //         }, false);
+      //     });
+      // })();
     });
   </script>
 </body>

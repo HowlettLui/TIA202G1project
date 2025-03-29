@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title id="title"></title>
+  <title id="title">上班不要看球賽</title>
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
 
@@ -102,9 +102,9 @@
     let sizes = itemInfos
       .filter(itemInfo => itemInfo.itemColor === color)
       .map(itemInfo =>
-        itemInfo.itemStatus === 1
-          ? `<option value="${itemInfo.itemSize}" class="itemInfo" data-itemInfo-id="${itemInfo.itemInfoId}">${itemInfo.itemSize}</option>`
-          : `<option value="${itemInfo.itemSize}" class="itemInfo" data-itemInfo-id="${itemInfo.itemInfoId}" disabled>${itemInfo.itemSize}</option>`
+          // itemInfo.itemStatus === 1
+          `<option value="${itemInfo.itemSize}" class="itemInfo" data-itemInfo-id="${itemInfo.itemInfoId}">${itemInfo.itemSize}</option>`
+        // : `<option value="${itemInfo.itemSize}" class="itemInfo" data-itemInfo-id="${itemInfo.itemInfoId}" disabled>${itemInfo.itemSize}</option>`
       )
 
     if (sizes.length === 1) {
@@ -122,7 +122,7 @@
       $("#itemStock").append(`<option className="default" selected disabled>請選擇數量</option>`)
       let itemStocks = itemInfo.itemStock;
       if (itemStocks <= 0) {
-        $("#itemStock").empty().append(`<option className="default" selected disabled>商品已售完</option>`);
+        $("#itemStock").empty().append(`<option className="default" selected disabled data-itemInfo-stocks="${itemStocks}" data-itemInfo-status="${itemInfo.itemStatus}">商品已售完</option>`);
       } else {
         let max = Math.min(10, itemStocks);
         for (let i = 1; i <= max; i++) {
@@ -130,9 +130,9 @@
         }
       }
     } else if (itemInfo.itemStatus === 0) {
-      $("#itemStock").append(`<option class="default" selected disabled>商品未上架，敬請期待</option>`)
+      $("#itemStock").append(`<option class="default" selected disabled data-itemInfo-stocks="${itemInfo.itemStock}" data-itemInfo-status="${itemInfo.itemStatus}">商品未上架，敬請期待</option>`)
     } else if (itemInfo.itemStatus === -1) {
-      $("#itemStock").append(`<option class="default" selected disabled>商品已下架</option>`)
+      $("#itemStock").append(`<option class="default" selected disabled data-itemInfo-stocks="${itemInfo.itemStock}" data-itemInfo-status="${itemInfo.itemStatus}">商品已下架</option>`)
     }
   }
 
@@ -264,57 +264,77 @@
           window.location.href = "./shop.html";
         })
     } else {
-      let itemInfoId = $("select#itemSizes option:selected").attr("data-itemInfo-id");
-      let detailItemCount = $("select#itemStock option:selected").val();
-
-      if (itemInfoId && (detailItemCount == parseInt(detailItemCount))) {
-        fetch(`/NGFW/estore/cart/addToCart`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({
-            "userId": user.userId,
-            "itemInfoId": itemInfoId,
-            "detailItemCount": detailItemCount
-          })
+      if (parseInt($("select#itemStock option:selected").attr("data-itemInfo-stocks")) < 1) {
+        Swal.fire({
+          icon: 'warning',
+          title: '商品已售完',
+          text: '商品已售完，請選購其他商品'
         })
-          .then(resp => resp.json())
-          .then(cart => {
-            if (cart.result) {
-              Swal.fire({
-                icon: "success",
-                title: "新增成功",
-                text: cart.message,
-              })
-                .then(() => {
-                  window.location.href = "./shop.html";
+      } else if (parseInt($("select#itemStock option:selected").attr("data-itemInfo-status")) === 0) {
+        Swal.fire({
+          icon: 'warning',
+          title: '商品未上架',
+          text: '商品未上架，請選購其他商品'
+        })
+      } else if (parseInt($("select#itemStock option:selected").attr("data-itemInfo-status")) === -1) {
+        Swal.fire({
+          icon: 'warning',
+          title: '商品已下架',
+          text: '商品已下架，請選購其他商品'
+        })
+      } else {
+        let itemInfoId = $("select#itemSizes option:selected").attr("data-itemInfo-id");
+        let detailItemCount = $("select#itemStock option:selected").val();
+
+        if (itemInfoId && (detailItemCount == parseInt(detailItemCount))) {
+          fetch(`/NGFW/estore/cart/addToCart`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+              "userId": user.userId,
+              "itemInfoId": itemInfoId,
+              "detailItemCount": detailItemCount
+            })
+          })
+            .then(resp => resp.json())
+            .then(cart => {
+              if (cart.result) {
+                Swal.fire({
+                  icon: "success",
+                  title: "新增成功",
+                  text: cart.message,
                 })
-            } else {
+                  .then(() => {
+                    window.location.href = "./shop.html";
+                  })
+              } else {
+                Swal.fire({
+                  icon: "error",
+                  title: "Oops...",
+                  text: cart.message,
+                })
+                  .then(() => {
+                    window.location.reload()
+                  })
+              }
+            })
+            .catch(error => {
+              console.error(error)
               Swal.fire({
                 icon: "error",
                 title: "Oops...",
-                text: cart.message,
-              })
-                .then(() => {
-                  window.location.reload()
-                })
-            }
-          })
-          .catch(error => {
-            console.error(error)
-            Swal.fire({
-              icon: "error",
-              title: "Oops...",
-              text: "出了點狀況！請聯絡管理員"
-            });
-          })
-      } else {
-        Swal.fire({
-          icon: "info",
-          title: "尚未選擇商品",
-          text: "請先選擇商品顏色、大小或數量"
-        });
+                text: "出了點狀況！請聯絡管理員"
+              });
+            })
+        } else {
+          Swal.fire({
+            icon: "info",
+            title: "尚未選擇商品",
+            text: "請先選擇商品顏色、大小或數量"
+          });
+        }
       }
     }
   })

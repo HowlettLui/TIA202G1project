@@ -3,7 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>文章/新聞_管理</title>
+    <!-- <title>文章/新聞_管理</title> -->
+    <title>NGFW上班不要看球賽</title>
     <link
       rel="canonical"
       href="https://getbootstrap.com/docs/5.3/examples/headers/"
@@ -20,18 +21,19 @@
 
     <link rel="stylesheet" href="../css/bootstrap.min.css" />
     <link rel="stylesheet" href="../css/headers.css" />
+    <link rel="stylesheet" href="../css/sidebars.css" />
 
     <style>
       /* S Start */
-      div.newsadd {
-        width: 85.3%;
-        margin: 20px auto;
-      }
+      /* div.newsadd { */
+      /* width: 85.3%; */
+      /* margin: 20px auto; */
+      /* } */
 
-      div.newsaddcontainer {
-        width: 85.3%;
-        margin: 20px auto;
-      }
+      /* div.newsaddcontainer { */
+      /* width: 85.3%; */
+      /* margin: 20px auto; */
+      /* } */
       div.newsaddbt button {
         align-items: flex-end;
       }
@@ -46,6 +48,16 @@
         height: 100%;
         object-fit: cover;
       }
+      main {
+        display: flex;
+        flex-wrap: wrap;
+        /* justify-content: center; */
+      }
+      section {
+        width: 80%;
+        /* margin: 0 auto; */
+        margin-top: 5px;
+      }
 
       /* S end */
     </style>
@@ -57,13 +69,221 @@
 
     <!-- 開發畫面 -->
     <main>
-      <div class="newsadd">
-        <span>文章/新聞</span>
-        <br />
-        <button onclick="location.href='news_fadd.html';">新增</button>
-      </div>
+      <!-- <aside class="w-20"> -->
+      <aside>
+        <div class="flex-shrink-0 p-3">
+          <ul class="list-unstyled ps-0">
+            <li class="mb-1">
+              <button
+                class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
+                data-bs-toggle="collapse"
+                data-bs-target="#user-collapse"
+                aria-expanded="false"
+              >
+                會員基本資料
+              </button>
+              <div class="collapse" id="user-collapse">
+                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                  <li>
+                    <a
+                      href="../user/user_info.html"
+                      class="link-body-emphasis d-inline-flex text-decoration-none rounded"
+                      >基本資料</a
+                    >
+                  </li>
+                </ul>
+              </div>
+              <div class="collapse" id="user-collapse">
+                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                  <li>
+                    <a
+                      href="../user/user_psw.html"
+                      class="link-body-emphasis d-inline-flex text-decoration-none rounded"
+                      >修改密碼</a
+                    >
+                  </li>
+                </ul>
+              </div>
+            </li>
+            <li class="mb-1">
+              <button
+                class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
+                data-bs-toggle="collapse"
+                data-bs-target="#article-collapse"
+                aria-expanded="false"
+              >
+                我的文章/新聞列表
+              </button>
+              <div class="collapse" id="article-collapse">
+                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                  <li>
+                    <a
+                      href="../newsf/news_fmgr.html"
+                      class="link-body-emphasis d-inline-flex text-decoration-none rounded"
+                      >文章管理功能</a
+                    >
+                  </li>
+                </ul>
+              </div>
+            </li>
+            <li class="mb-1">
+              <button
+                class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
+                data-bs-toggle="collapse"
+                data-bs-target="#collection-collapse"
+                aria-expanded="false"
+              >
+                我的收藏
+              </button>
+              <div class="collapse" id="collection-collapse">
+                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                  <li>
+                    <a
+                      href="../user/collection/c_article.html"
+                      class="link-body-emphasis d-inline-flex text-decoration-none rounded"
+                      >收藏文章管理</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="../user/collection/c_news.html"
+                      class="link-body-emphasis d-inline-flex text-decoration-none rounded"
+                      >收藏新聞管理</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="../user/collection/c_commodity.html"
+                      class="link-body-emphasis d-inline-flex text-decoration-none rounded"
+                      >收藏商品管理</a
+                    >
+                  </li>
+                </ul>
+              </div>
+            </li>
+            <li class="mb-1">
+              <button
+                class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
+                data-bs-toggle="collapse"
+                data-bs-target="#team-collapse"
+                aria-expanded="false"
+              >
+                關注球隊
+              </button>
+              <div class="collapse" id="team-collapse">
+                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                  <li>
+                    <a
+                      href="../user/team/t_recent_game.html"
+                      class="link-body-emphasis d-inline-flex text-decoration-none rounded"
+                      >近期賽事</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="../user/team/t_historical_inf.html"
+                      class="link-body-emphasis d-inline-flex text-decoration-none rounded"
+                      >歷史資料</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="../user/team/t_player.html"
+                      class="link-body-emphasis d-inline-flex text-decoration-none rounded"
+                      >關注的球員</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="../user/team/t_cheer.html"
+                      class="link-body-emphasis d-inline-flex text-decoration-none rounded"
+                      >關注的啦啦隊</a
+                    >
+                  </li>
+                </ul>
+              </div>
+            </li>
+            <li class="mb-1">
+              <button
+                class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
+                data-bs-toggle="collapse"
+                data-bs-target="#car-collapse"
+                aria-expanded="false"
+              >
+                我的商城
+              </button>
+              <div class="collapse" id="car-collapse">
+                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                  <li>
+                    <a
+                      href="../estore/cart.html"
+                      class="link-body-emphasis d-inline-flex text-decoration-none rounded"
+                      >我的購物車</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="../estore/orders.html"
+                      class="link-body-emphasis d-inline-flex text-decoration-none rounded"
+                      >我的訂單</a
+                    >
+                  </li>
+                </ul>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </aside>
+      <!-- <section class="w-80"> -->
+      <section>
+        <div class="newsadd">
+          <span>文章/新聞</span>
+          <br />
+          <button onclick="location.href='news_fadd.html';">新增</button>
+        </div>
 
-      <div class="newsaddcontainer" id="userarticlelist"></div>
+        <div class="newsaddcontainer" id="userarticlelist">
+          <!-- <div class="col">
+            <div
+              class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative"
+            >
+              <div class="col-auto d-none d-lg-block">
+                <svg
+                  class="bd-placeholder-img"
+                  width="200"
+                  height="250"
+                  xmlns="http://www.w3.org/2000/svg"
+                  role="img"
+                  aria-label="Placeholder: Thumbnail"
+                  preserveAspectRatio="xMidYMid slice"
+                  focusable="false"
+                >
+                  <title>Placeholder</title>
+                  <rect width="100%" height="100%" fill="#55595c" />
+                  <text x="50%" y="50%" fill="#eceeef" dy=".3em">
+                    Thumbnail
+                  </text>
+                </svg>
+              </div>
+              <div class="col p-4 flex-column">
+                <strong class="d-inline-block mb-2 text-primary-emphasis"
+                  >Title A</strong
+                >
+                <p>????/??/?? 發佈</p>
+                <p class="card-text">
+                  This is a wider card with supporting text below as a natural
+                  lead-in to additional content.
+                </p>
+                <div class="newsaddbt" style="position: absolute; bottom: 5px">
+                  <button>編輯</button>
+                  <button>下架申請</button>
+                  <button>狀態</button>
+                </div>
+              </div>
+            </div>
+          </div> -->
+        </div>
+      </section>
     </main>
 
     <!-- 導入共用 footer -->
@@ -81,12 +301,21 @@
     ></script>
     <script>
       $(document).ready(function () {
-        RefeshDaTa();
+        let user = JSON.parse(sessionStorage.getItem("user"));
+        let uId = user.userId;
+        // console.log(uId);
+
+        if (uId == null) {
+          // window.location.href = "/NGFW/login.html";
+          window.location.href = "/login.html";
+        }
+
+        RefeshDaTa(uId);
       });
 
-      function RefeshDaTa() {
+      function RefeshDaTa(uId) {
         $.ajax({
-          url: "/NGFW/articleumgr",
+          url: "/NGFW/articleumgr?uId=" + uId,
           method: "GET",
           dataType: "json",
           success: function (articles) {
@@ -112,6 +341,35 @@
                   break;
               }
 
+              //   let row = `<div class="col">
+              //     <div
+              //       class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative"
+              //     >
+              //       <div class="img-container">
+              //         <img
+              //          src="${article.newsPhoto}"
+              //          onclick="location.href='/NGFW/newsf/news_fbodyreview.html?articleId=${article.articleId}'"
+              //         >
+              //         </img>
+              //       </div>
+              //       <div class="col p-4 flex-column">
+              //         <strong class="d-inline-block mb-2 text-primary-emphasis text-truncate"
+              //           >${article.mainTitle}</strong
+              //         >
+              //         <p>${article.publishDate} 發佈</p>
+              //         <p class="card-text text-truncate">
+              //           ${article.subTitle}
+              //         </p>
+              //         <div class="newsaddbt" style="position: absolute; bottom: 5px">
+              //           <button onclick="location.href='/NGFW/newsf/news_fbodyreview.html?articleId=${article.articleId}'">預覽</button>
+              //           <button ${editdisable} onclick="location.href='/NGFW/newsf/news_fedit.html?articleId=${article.articleId}'">編輯</button>
+              //           <button ${editdisable} onclick="DeleteDaTa('${uId}','${article.articleId}');">刪除</button>
+              //           <div class="status">狀態：${tmpstatus}</div>
+              //         </div>
+              //       </div>
+              //     </div>
+              // </div>`;
+
               let row = `<div class="col">
                 <div
                   class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative"
@@ -119,7 +377,7 @@
                   <div class="img-container">
                     <img
                      src="${article.newsPhoto}"
-                     onclick="location.href='/NGFW/newsf/news_fbodyreview.html?articleId=${article.articleId}'"
+                     onclick="location.href='/newsf/news_fbodyreview.html?articleId=${article.articleId}'"
                     > 
                     </img>
                   </div>
@@ -132,14 +390,14 @@
                       ${article.subTitle}
                     </p>
                     <div class="newsaddbt" style="position: absolute; bottom: 5px">
-                      <button onclick="location.href='/NGFW/newsf/news_fbodyreview.html?articleId=${article.articleId}'">預覽</button>
-                      <button ${editdisable} onclick="location.href='/NGFW/newsf/news_fedit.html?articleId=${article.articleId}'">編輯</button>
-                      <button ${editdisable} onclick="DeleteDaTa('${article.articleId}');">刪除</button>
+                      <button onclick="location.href='/newsf/news_fbodyreview.html?articleId=${article.articleId}'">預覽</button>
+                      <button ${editdisable} onclick="location.href='/newsf/news_fedit.html?articleId=${article.articleId}'">編輯</button>
+                      <button ${editdisable} onclick="DeleteDaTa('${uId}','${article.articleId}');">刪除</button>
                       <div class="status">狀態：${tmpstatus}</div>
                     </div>
                   </div>
                 </div>
-            </div>`;
+              </div>`;
               tableBody.append(row);
             });
           },
@@ -149,13 +407,13 @@
         });
       }
 
-      function DeleteDaTa(articleId) {
+      function DeleteDaTa(uId, articleId) {
         $.ajax({
-          url: "/NGFW/articleumgrdel?articleId=" + articleId,
+          url: "/NGFW/articleumgrdel?uId=" + uId + "&articleId=" + articleId,
           method: "GET",
           dataType: "json",
           success: function (del_result) {
-            RefeshDaTa();
+            RefeshDaTa(uId);
           },
           error: function (xhr, status, error) {
             console.error("Error fetching data:", error);

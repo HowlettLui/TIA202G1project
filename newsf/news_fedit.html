@@ -3,7 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>文章/新聞_編輯</title>
+    <!-- <title>文章/新聞_編輯</title> -->
+    <title>NGFW上班不要看球賽</title>
     <link
       rel="canonical"
       href="https://getbootstrap.com/docs/5.3/examples/headers/"
@@ -20,6 +21,7 @@
 
     <link rel="stylesheet" href="../css/bootstrap.min.css" />
     <link rel="stylesheet" href="../css/headers.css" />
+    <link rel="stylesheet" href="../css/sidebars.css" />
 
     <!-- Datepicker -->
     <!-- jQuery -->
@@ -42,7 +44,7 @@
     <style>
       div.newsfedcontainer {
         border: 1px solid gray;
-        width: 85.3%;
+        /* width: 85.3%; */
         margin: 20px auto;
         padding: 5px;
         border-radius: 5px;
@@ -52,6 +54,16 @@
       }
       div.publishing {
         margin: 8px 0;
+      }
+      main {
+        display: flex;
+        flex-wrap: wrap;
+        /* justify-content: center; */
+      }
+      section {
+        width: 80%;
+        /* margin: 0 auto; */
+        /* margin-top: 5px; */
       }
       /* S end */
     </style>
@@ -63,112 +75,282 @@
 
     <!-- 開發畫面 -->
     <main>
-      <form action="/NGFW/articleedit" method="post" name="articleedit">
-        <input type="text" id="status" name="status" style="display: none" />
-        <div class="newsfedcontainer">
-          <div class="mb-3">
-            <label for="articletype" class="form-label">新增/編輯 類型</label>
-            <br />
-            <select id="articletype" name="articletype">
-              <option value="0">文章</option>
-              <option value="1">新聞</option>
-            </select>
-          </div>
-          <input
-            type="number"
-            style="display: none"
-            id="articleid"
-            name="articleid"
-            placeholder=""
-          />
-          <div class="mb-3">
-            <p>標題圖片</p>
-            <br />
-            <input id="inp" type="file" />
-            <br />
-            <input
-              type="text"
-              id="b64"
-              name="titleimage"
-              style="display: none"
-            />
-            <img id="img" height="300" />
-          </div>
-          <div class="mb-3">
-            <label for="maintitle" class="form-label">主標題</label>
-            <input
-              type="text"
-              class="form-control"
-              id="maintitle"
-              name="maintitle"
-              placeholder=""
-            />
-          </div>
-
-          <div class="mb-3">
-            <label for="subtitle" class="form-label">副標題</label>
-            <input
-              type="text"
-              class="form-control"
-              id="subtitle"
-              name="subtitle"
-              placeholder=""
-            />
-          </div>
-
-          <div class="mb-3">
-            <label for="articlecontent" class="form-label">文章內容</label>
-            <textarea id="summernote" name="summernote"></textarea>
-          </div>
-
-          <div>
-            <label for="publishDate" class="form-label">預計發佈日期</label>
-            <input
-              type="date"
-              class="form-control"
-              id="publishDate"
-              name="publishDate"
-              placeholder=""
-              required
-            />
-
-            <div class="publishing">
-              <button onclick="save('0');" id="btnsv">儲存</button>
-              <button onclick="save('2');" id="btnvf">送審</button>
+      <aside>
+        <div class="flex-shrink-0 p-3">
+          <ul class="list-unstyled ps-0">
+            <li class="mb-1">
               <button
-                type="button"
-                onclick="location.href='/NGFW/newsf/news_fmgr.html'"
+                class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
+                data-bs-toggle="collapse"
+                data-bs-target="#user-collapse"
+                aria-expanded="false"
               >
-                取消
+                會員基本資料
               </button>
+              <div class="collapse" id="user-collapse">
+                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                  <li>
+                    <a
+                      href="../user/user_info.html"
+                      class="link-body-emphasis d-inline-flex text-decoration-none rounded"
+                      >基本資料</a
+                    >
+                  </li>
+                </ul>
+              </div>
+              <div class="collapse" id="user-collapse">
+                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                  <li>
+                    <a
+                      href="../user/user_psw.html"
+                      class="link-body-emphasis d-inline-flex text-decoration-none rounded"
+                      >修改密碼</a
+                    >
+                  </li>
+                </ul>
+              </div>
+            </li>
+            <li class="mb-1">
+              <button
+                class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
+                data-bs-toggle="collapse"
+                data-bs-target="#article-collapse"
+                aria-expanded="false"
+              >
+                我的文章/新聞列表
+              </button>
+              <div class="collapse" id="article-collapse">
+                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                  <li>
+                    <a
+                      href="../newsf/news_fmgr.html"
+                      class="link-body-emphasis d-inline-flex text-decoration-none rounded"
+                      >文章管理功能</a
+                    >
+                  </li>
+                </ul>
+              </div>
+            </li>
+            <li class="mb-1">
+              <button
+                class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
+                data-bs-toggle="collapse"
+                data-bs-target="#collection-collapse"
+                aria-expanded="false"
+              >
+                我的收藏
+              </button>
+              <div class="collapse" id="collection-collapse">
+                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                  <li>
+                    <a
+                      href="../user/collection/c_article.html"
+                      class="link-body-emphasis d-inline-flex text-decoration-none rounded"
+                      >收藏文章管理</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="../user/collection/c_news.html"
+                      class="link-body-emphasis d-inline-flex text-decoration-none rounded"
+                      >收藏新聞管理</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="../user/collection/c_commodity.html"
+                      class="link-body-emphasis d-inline-flex text-decoration-none rounded"
+                      >收藏商品管理</a
+                    >
+                  </li>
+                </ul>
+              </div>
+            </li>
+            <li class="mb-1">
+              <button
+                class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
+                data-bs-toggle="collapse"
+                data-bs-target="#team-collapse"
+                aria-expanded="false"
+              >
+                關注球隊
+              </button>
+              <div class="collapse" id="team-collapse">
+                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                  <li>
+                    <a
+                      href="../user/team/t_recent_game.html"
+                      class="link-body-emphasis d-inline-flex text-decoration-none rounded"
+                      >近期賽事</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="../user/team/t_historical_inf.html"
+                      class="link-body-emphasis d-inline-flex text-decoration-none rounded"
+                      >歷史資料</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="../user/team/t_player.html"
+                      class="link-body-emphasis d-inline-flex text-decoration-none rounded"
+                      >關注的球員</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="../user/team/t_cheer.html"
+                      class="link-body-emphasis d-inline-flex text-decoration-none rounded"
+                      >關注的啦啦隊</a
+                    >
+                  </li>
+                </ul>
+              </div>
+            </li>
+            <li class="mb-1">
+              <button
+                class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
+                data-bs-toggle="collapse"
+                data-bs-target="#car-collapse"
+                aria-expanded="false"
+              >
+                我的商城
+              </button>
+              <div class="collapse" id="car-collapse">
+                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                  <li>
+                    <a
+                      href="../estore/cart.html"
+                      class="link-body-emphasis d-inline-flex text-decoration-none rounded"
+                      >我的購物車</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="../estore/orders.html"
+                      class="link-body-emphasis d-inline-flex text-decoration-none rounded"
+                      >我的訂單</a
+                    >
+                  </li>
+                </ul>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </aside>
+      <section>
+        <form action="/NGFW/articleedit" method="post" name="articleedit">
+          <input type="text" id="status" name="status" style="display: none" />
+          <input type="text" id="uId" name="uId" style="display: none" />
+          <div class="newsfedcontainer">
+            <div class="mb-3">
+              <label for="articletype" class="form-label">新增/編輯 類型</label>
+              <br />
+              <select id="articletype" name="articletype">
+                <option value="0">文章</option>
+                <option value="1">新聞</option>
+              </select>
+            </div>
+            <input
+              type="number"
+              style="display: none"
+              id="articleid"
+              name="articleid"
+              placeholder=""
+            />
+            <div class="mb-3">
+              <p>標題圖片</p>
+              <br />
+              <input id="inp" type="file" />
+              <br />
+              <input
+                type="text"
+                id="b64"
+                name="titleimage"
+                style="display: none"
+              />
+              <img id="img" height="300" />
+            </div>
+            <div class="mb-3">
+              <label for="maintitle" class="form-label">主標題</label>
+              <input
+                type="text"
+                class="form-control"
+                id="maintitle"
+                name="maintitle"
+                placeholder=""
+              />
+            </div>
+
+            <div class="mb-3">
+              <label for="subtitle" class="form-label">副標題</label>
+              <input
+                type="text"
+                class="form-control"
+                id="subtitle"
+                name="subtitle"
+                placeholder=""
+              />
+            </div>
+
+            <div class="mb-3">
+              <label for="articlecontent" class="form-label">文章內容</label>
+              <textarea id="summernote" name="summernote"></textarea>
+            </div>
+
+            <div>
+              <label for="publishDate" class="form-label">預計發佈日期</label>
+              <input
+                type="date"
+                class="form-control"
+                id="publishDate"
+                name="publishDate"
+                placeholder=""
+                required
+              />
+
+              <div class="publishing">
+                <button onclick="save('0');" id="btnsv">儲存</button>
+                <button onclick="save('2');" id="btnvf">送審</button>
+                <!-- <button
+                  type="button"
+                  onclick="location.href='/NGFW/newsf/news_fmgr.html'"
+                >
+                  取消
+                </button> -->
+                <button
+                  type="button"
+                  onclick="location.href='/newsf/news_fmgr.html'"
+                >
+                  取消
+                </button>
+              </div>
             </div>
           </div>
-        </div>
-      </form>
+        </form>
+      </section>
     </main>
-    <section>
-      <script>
-        function save(status) {
-          document.getElementById("status").value = status;
-          document.articleedit.submit();
-        }
 
-        function readFile() {
-          if (!this.files || !this.files[0]) return;
-          const FR = new FileReader();
-          FR.addEventListener("load", function (evt) {
-            document.querySelector("#img").src = evt.target.result;
-            document.querySelector("#b64").value = evt.target.result;
-          });
-          FR.readAsDataURL(this.files[0]);
-          let text = document.getElementById("b64").value;
-          console.log(text);
-        }
-        document.querySelector("#inp").addEventListener("change", readFile);
-      </script>
-    </section>
+    <script>
+      function save(status) {
+        document.getElementById("status").value = status;
+        document.articleedit.submit();
+      }
 
-    <script></script>
+      function readFile() {
+        if (!this.files || !this.files[0]) return;
+        const FR = new FileReader();
+        FR.addEventListener("load", function (evt) {
+          document.querySelector("#img").src = evt.target.result;
+          document.querySelector("#b64").value = evt.target.result;
+        });
+        FR.readAsDataURL(this.files[0]);
+        let text = document.getElementById("b64").value;
+        console.log(text);
+      }
+      document.querySelector("#inp").addEventListener("change", readFile);
+    </script>
 
     <!-- 導入共用 footer -->
     <div class="footerPage"></div>
@@ -196,8 +378,7 @@
             ["para", ["ul", "ol", "paragraph"]],
             ["table", ["table"]],
             ["insert", ["link", "picture", "video"]],
-            // ['view', ['fullscreen', 'codeview', 'help']]
-            ["view", ["codeview", "help"]],
+            ["view", ["fullscreen", "codeview", "help"]],
           ],
         });
 
@@ -209,6 +390,7 @@
           dataType: "json",
           success: function (articles) {
             $("#articleid").val(articleId);
+            $("#uId").val(articles.userId);
             $("#articletype").val(articles.articleType);
             $("#maintitle").val(articles.mainTitle);
             $("#publishDate").val(articles.publishDate.replaceAll("/", "-"));

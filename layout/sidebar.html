@@ -24,7 +24,7 @@
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item user_management">
-              <a href="" class="nav-link">
+              <a href="/staff/staff_list.html" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>使用者角色管理</p>
               </a>
@@ -90,7 +90,7 @@
           </ul>
         </li>
         <li class="nav-item article_management">
-          <a href="/newsb/news_bmgrlist.html" class="nav-link">
+          <a href="" class="nav-link">
             <i class="nav-icon far fa-newspaper"></i>
             <p class="pl-1">
               文章/新聞管理
@@ -194,8 +194,22 @@
     // }
 
     // =======================  sidebar controll  =====================
-    // $(".user_management").click(function () {
-    //   if (staffRole != 1) {
+    $(".user_management").click(function () {
+      if (staffRole != 1) {
+        Swal.fire({
+          icon: "error",
+          title: "權限問題",
+          text: "請聯絡管理員",
+        }).then(() => {
+          window.location.href = "./templateb.html";
+        });
+      } else {
+        window.location.href = "./user/user_manage.html";
+      }
+    });
+
+    // $(".article_management").click(function () {
+    //   if (staffRole != 4) {
     //     Swal.fire({
     //       icon: "error",
     //       title: "權限問題",
@@ -204,7 +218,7 @@
     //       window.location.href = "./templateb.html";
     //     });
     //   } else {
-    //     window.location.href = "./user/user_manage.html";
+    //     window.location.href = "./newsb/news_bmgrlist.html";
     //   }
     // });
   };

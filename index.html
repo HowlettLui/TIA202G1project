@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Home Page</title>
+  <title>上班不要看球賽</title>
   <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/headers/">
   <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/footers/">
 
@@ -162,19 +162,18 @@
 
         <div id="app"></div>
 
-        <div class="live_game_date col-lg-2">
+        <!-- <div class="live_game_date col-lg-2">
           <div class="d-flex align-items-middle flex-column mb-3">
             <div class="fs-2 ">00/00 (一)</div>
             <div class="fs-2">00：00</div>
             <div class="fs-2">XXX球場</div>
           </div>
-        </div>
-        <div class="row col-lg-10">
+        </div> -->
+        <!-- <div class="row col-lg-10">
           <div class="team_match_container feature col">
             <div
               class="team_icon_a d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 mb-3">
               <svg class="team_icon_a_el" width="5em" height="5em">
-                <!-- 球隊icon -->
               </svg>
             </div>
             <h3 class="fs-2 text-body-emphasis">A球隊名稱</h3>
@@ -207,13 +206,12 @@
             <div
               class="team_icon_b d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 mb-3">
               <svg class="team_icon_b_el" width="5em" height="5em">
-                <!-- 球隊icon -->
               </svg>
             </div>
             <h3 class="fs-2 text-body-emphasis">B球隊名稱</h3>
             <p>BTeam Eng name</p>
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
 
@@ -251,6 +249,7 @@
   <script src="./js/bootstrap.bundle.min.js"></script>
   <script src="https://kit.fontawesome.com/799bf36dfe.js" crossorigin="anonymous"></script>
   <script src="./vendors/slick/slick.min.js"></script>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
   <script src="./js/live.js" async></script>
@@ -283,9 +282,6 @@
     }, 5000);
 
     window.ready = function () {
-      // const slickNext = document.querySelector('.slick-next');
-
-
       const userData = sessionStorage.getItem("user");
 
       if (userData) {
@@ -340,14 +336,17 @@
         success: function (articles) {
           let tableBody = $("#articlelist");
           tableBody.empty();
-          articles.forEach((article) => {
+
+          let newArticles = getRandomItems(articles, 9);
+
+          newArticles.forEach((article) => {
             // let row = `${article.articleId},`;
             let row = `<div class="col">
               <div class="card shadow-sm">
                 <div class="img-container">
                   <img
                     src="${article.newsPhoto}"
-                    onclick="location.href='/NGFW/newsf/news_fbody.html?articleId=${article.articleId}'"
+                    onclick="location.href='./newsf/news_fbody.html?articleId=${article.articleId}'"
                     style="max-width: 100%; height: 225px; object-fit: cover;"
                   >
                   </img>
@@ -370,13 +369,26 @@
         },
       });
 
+      function getRandomItems(arr, num) {
+        let copyArr = arr.slice();
+        let randomItems = [];
+
+        for (let i = 0; i < num; i++) {
+          let randomIndex = Math.floor(Math.random() * copyArr.length);
+          randomItems.push(copyArr[randomIndex]);
+          copyArr.splice(randomIndex, 1);
+        }
+
+        return randomItems;
+      }
 
       // 商城區塊start
       $(function () {
         fetch("/NGFW/estore/shop")
           .then(response => response.json())
           .then(items => {
-            for (let item of items) {
+            let newItems = getRandomItems(items, 9);
+            for (let item of newItems) {
               itemPhoto = JSON.parse(item.itemPhoto);
               $("#items").append(
                 `<a class="item" href="./merchandise.html" data-item-id="${item.itemId}" style="text-decoration: none">
@@ -416,17 +428,15 @@
 
         if (items && items.length > 0) {
           // 隨機選擇 6 筆商品
-          let randomItems = [];
-          while (randomItems.length < 6) {
+          let newRandomItems = [];
+          while (newRandomItems.length < 6) {
             let randomIndex = Math.floor(Math.random() * items.length);
-            if (!randomItems.includes(items[randomIndex])) {
-              randomItems.push(items[randomIndex]);
+            if (!newRandomItems.includes(items[randomIndex])) {
+              newRandomItems.push(items[randomIndex]);
             }
           }
 
-          console.log(randomItems);
-
-          randomItems.forEach((item, index) => {
+          newRandomItems.forEach((item, index) => {
             let itemPhoto = JSON.parse(item.itemPhoto);
             let slideItemId = item.itemId;
             let imgSrc = itemPhoto.photos[0];
@@ -444,7 +454,7 @@
       $(document).on('click', '.slide-item-id', function () {
         let itemId = $(this).attr("data-item-el-id");
         localStorage.setItem("itemId", itemId);
-        window.location.href = "NGFW/estore/merchandise.html";
+        window.location.href = "./estore/merchandise.html";
       });
       // 商城區塊end
 

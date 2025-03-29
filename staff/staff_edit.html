@@ -70,7 +70,7 @@
 
 <body class='hold-transition sidebar-mini'>
 
-  <!-- ====================!!此為管理者賦予工作人員角色權限及編輯資料頁面!!======================== -->
+  <!-- =============================!!此為工作人員自行編輯資料頁面!!============================ -->
 
   <!-- Site wrapper -->
   <div class='wrapper'>
@@ -104,12 +104,14 @@
       <section class='content'>
         <div class='card'>
           <!-- card-header -->
-          <div class='card-header box-profile row'>
+          <div class='card-header row'>
             <div class='col-4 left_block'>
-              <div class='text-center'>
-                <img class='profile-user-img img-fluid img-circle'
-                     src='../img/user4-128x128.jpg'
-                     alt='User profile picture'>
+              <div class='inner_left_block'>
+                <div id='preview' class='drop_zone'>
+                  <span class='text'>預覽圖</span>
+                  <img src='' class='preview_avatar'>
+                </div>
+                <input type='file' id='p_file' placeholder='上傳圖片'>
               </div>
             </div>
             <div class='col-8 right_block'>
@@ -126,8 +128,8 @@
                 <div id='viewMode'>
                   <h4 class='mb-3'>工作人員資料</h4>
                   <p><strong>姓名：</strong><span id='viewName'></span></p>
-                  <p><strong>工作人員編號：</strong><span id='viewUserid'></span></p>
-                  <p><strong>工作人員帳號：</strong><span id='viewAccout'></span></p>
+                  <p><strong>工作人員編號：</strong><span id='viewUserId'></span></p>
+                  <p><strong>工作人員帳號：</strong><span id='viewAccount'></span></p>
                   <p><strong>部門：</strong><span id='viewDept'></span></p>
                   <p><strong>權限：</strong><span id='viewPermission'></span></p>
                   <p><strong>Email：</strong><span id='viewEmail'></span></p>
@@ -137,12 +139,12 @@
                 <!-- /.檢視畫面 -->
                 <!-- 編輯畫面 -->
                 <div id='editMode' class='d-none'>
-                  <h4 class='mb-3'>工作人員資料(編輯畫面)</h4>
+                  <h4 class='mb-3'>工作人員資料</h4>
                   <form class='needs-validation' novalidate>
                     <div class='row g-3'>
                       <div class='col-12'>
                         <label for='name' class='form-label'>姓名</label>
-                        <input type='text' class='form-control' id='staff_name' placeholder='' value='' required>
+                        <input type='text' class='form-control' id='name' placeholder='' value='' required>
                         <div class='invalid-feedback'>
                           Valid first name is required.
                         </div>
@@ -150,7 +152,7 @@
                       <div class='col-12'>
                         <label for='userid' class='form-label'>工作人員編號(僅顯示無法更改)</label>
                         <div class='input-group has-validation'>
-                          <input type='text' class='form-control' id='staff_id' placeholder='' required readonly>
+                          <input type='text' class='form-control' id='userid' placeholder='' required readonly>
                           <div class='invalid-feedback'>
                             Your userid is required.
                           </div>
@@ -160,16 +162,16 @@
                       <div class='col-12'>
                         <label for='accout' class='form-label'>工作人員帳號(僅顯示無法更改)</label>
                         <div class='input-group has-validation'>
-                          <input type='text' class='form-control' id='staff_accout' placeholder='' required>
+                          <input type='text' class='form-control' id='accout' placeholder='' required readonly>
                           <div class='invalid-feedback'>
                             Your accout is required.
                           </div>
                         </div>
                       </div>
                       <div class='col-12'>
-                        <label for='dept' class='form-label'>部門</label>
+                        <label for='dept' class='form-label'>部門(僅顯示無法更改)</label>
                         <div class='input-group has-validation'>
-                          <input type='text' class='form-control' id='staff_dept' placeholder='' required>
+                          <input type='text' class='form-control' id='dept' placeholder='' required readonly>
                           <div class='invalid-feedback'>
                             Your accout is required.
                           </div>
@@ -178,7 +180,7 @@
                       <div class='col-12'>
                         <label for='permission' class='form-label'>權限</label>
                         <div class='input-group has-validation'>
-                          <input type='text' class='form-control' id='staff_permission' placeholder='' required>
+                          <input type='text' class='form-control' id='permission' placeholder='' required readonly>
                           <div class='invalid-feedback'>
                             Your accout is required.
                           </div>
@@ -186,14 +188,14 @@
                       </div>
                       <div class='col-12'>
                         <label for='email' class='form-label'>Email</label>
-                        <input type='email' class='form-control' id='staff_email' placeholder='you@example.com' required>
+                        <input type='email' class='form-control' id='email' placeholder='you@example.com' required>
                         <div class='invalid-feedback'>
                           Please enter a valid email address.
                         </div>
                       </div>
                       <div class='col-12'>
                         <label for='phone' class='form-label'>連絡電話</label>
-                        <input type='text' class='form-control' id='staff_phone' placeholder='0987654321' required>
+                        <input type='text' class='form-control' id='phone' placeholder='0987654321' required>
                         <div class='invalid-feedback'>
                           Please enter your phone number.
                         </div>
@@ -233,10 +235,58 @@
     $('.Navbar').load('../layout/navbar.html');
     $('.Sidebar').load('../layout/sidebar.html');
 
+    let preview_el = document.getElementById('preview');
+
+    preview_el.addEventListener('dragover', function (e) {
+      e.preventDefault();
+    });
+
+    preview_el.addEventListener('dragenter', function (e) {
+      e.target.classList.add('-on');
+    });
+
+    preview_el.addEventListener('dragleave', function (e) {
+      e.target.classList.remove('-on');
+    });
+
+    preview_el.addEventListener('drop', function (e) {
+      e.preventDefault();
+
+      e.target.classList.remove('-on');
+      console.log(e.dataTransfer.files);
+      preview_img(e.dataTransfer.files[0]);
+    });
+
+    // 透過 File 物件顯示預覽圖
+    let p_file_el = document.getElementById('p_file');
+
+    var preview_img = function (file) {
+
+      var reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.addEventListener('load', function () {
+        let img_str_el = `<img src='${reader.result}' class='preview_img'>`;
+        preview_el.innerHTML = img_str_el;
+      });
+    };
+
+    preview_el.addEventListener('click', function () {
+      p_file_el.click();
+    });
+
+    p_file_el.addEventListener('change', function (e) {
+      // console.log(this.files);
+
+      if (this.files.length > 0) {
+        preview_img(this.files[0]);
+      } else {
+        preview_el.innerHTML = `<span class='text'>預覽圖</span>`;
+      }
+    });
+
     $(document).ready(function () {
       // 編輯模式
       $('#editBtn').click(function () {
-        console.log('修改按鍵觸發');
         $('#viewMode').addClass('d-none');
         $('#editMode').removeClass('d-none');
       });
@@ -260,22 +310,18 @@
         }
 
         // 獲取輸入框中的值
-        const staff_name = $('#staff_name').val();
-        const staff_id = $('#staff_id').val();
-        const staff_accout = $('#staff_accout').val();
-        const staff_dept = $('#staff_dept').val();
-        const staff_permission = $('#staff_permission').val();
-        const staff_email = $('#staff_email').val();
-        const staff_phone = $('#staff_phone').val();
+        const name = $('#name').val();
+        const userid = $('#userid').val();
+        const accout = $('#accout').val();
+        const email = $('#email').val();
+        const phone = $('#phone').val();
 
         // 更新顯示模式中的內容
-        $('#viewName').text(staff_name);
-        $('#viewUserid').text(staff_id);
-        $('#viewAccout').text(staff_accout);
-        $('#viewDept').text(staff_dept);
-        $('#viewPermission').text(staff_permission);
-        $('#viewEmail').text(staff_email);
-        $('#viewPhone').text(staff_phone);
+        $('#viewName').text(name);
+        $('#viewUserId').text(userid);
+        $('#viewAccount').text(accout);
+        $('#viewEmail').text(email);
+        $('#viewPhone').text(phone);
 
         // 切換回顯示模式
         $('#editMode').addClass('d-none');
