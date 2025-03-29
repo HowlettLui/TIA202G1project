@@ -329,57 +329,57 @@
       // });
 
 
-      let preview_el = document.getElementById("preview");
+      // let preview_el = document.getElementById("preview");
 
-      preview_el.addEventListener("dragover", function (e) {
-        e.preventDefault();
-        console.log("dragover");
-      });
+      // preview_el.addEventListener("dragover", function (e) {
+      //   e.preventDefault();
+      //   console.log("dragover");
+      // });
 
-      preview_el.addEventListener("dragenter", function (e) {
-        e.target.classList.add("-on");
-      });
+      // preview_el.addEventListener("dragenter", function (e) {
+      //   e.target.classList.add("-on");
+      // });
 
-      preview_el.addEventListener("dragleave", function (e) {
-        e.target.classList.remove("-on");
-      });
+      // preview_el.addEventListener("dragleave", function (e) {
+      //   e.target.classList.remove("-on");
+      // });
 
-      preview_el.addEventListener("drop", function (e) {
-        e.preventDefault();
+      // preview_el.addEventListener("drop", function (e) {
+      //   e.preventDefault();
 
-        e.target.classList.remove("-on");
-        console.log(e.dataTransfer.files);
-        preview_img(e.dataTransfer.files[0]);
-      });
+      //   e.target.classList.remove("-on");
+      //   console.log(e.dataTransfer.files);
+      //   preview_img(e.dataTransfer.files[0]);
+      // });
 
-      // 透過 File 物件顯示預覽圖
-      let input_avatar_el = document.getElementById("input_avatar");
+      // // 透過 File 物件顯示預覽圖
+      // let input_avatar_el = document.getElementById("input_avatar");
 
 
-      var preview_img = function (file) {
+      // var preview_img = function (file) {
 
-        var reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.addEventListener("load", function () {
-          let img_str_el = `<img src="${reader.result}" class="preview_img">`;
-          preview_el.innerHTML = img_str_el;
-        });
-      };
+      //   var reader = new FileReader();
+      //   reader.readAsDataURL(file);
+      //   reader.addEventListener("load", function () {
+      //     let img_str_el = `<img src="${reader.result}" class="preview_img">`;
+      //     preview_el.innerHTML = img_str_el;
+      //   });
+      // };
 
-      preview_el.addEventListener("click", function () {
-        input_avatar_el.click();
-        console.log("click");
-      });
+      // preview_el.addEventListener("click", function () {
+      //   input_avatar_el.click();
+      //   console.log("click");
+      // });
 
-      input_avatar_el.addEventListener("change", function (e) {
-        // console.log(this.files);
+      // input_avatar_el.addEventListener("change", function (e) {
+      //   // console.log(this.files);
 
-        if (this.files.length > 0) {
-          preview_img(this.files[0]);
-        } else {
-          input_avatar_el.innerHTML = `<span class="text">預覽圖</span>`;
-        }
-      });
+      //   if (this.files.length > 0) {
+      //     preview_img(this.files[0]);
+      //   } else {
+      //     input_avatar_el.innerHTML = `<span class="text">預覽圖</span>`;
+      //   }
+      // });
 
       // document.getElementById('input_avatar').addEventListener('change', function (event) {
       //   var file = event.target.files[0];
