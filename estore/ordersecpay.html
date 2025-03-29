@@ -108,123 +108,121 @@
   let user;
 
   $(async function () {
-    user = JSON.parse(sessionStorage.getItem("user"));
+    const urlParams = new URLSearchParams(window.location.search);
+    const userId = urlParams.get("userId");
+    try {
+      const resp = await fetch(`/NGFW/estore/orders/${userId}`);
+      const orders = await resp.json();
 
-    if ((!user) || !user.userId) {
-      Swal.fire({
-        icon: 'warning',
-        title: '尚未登入',
-        text: '需先登入才能確認訂單'
-      })
-        .then(() => {
-          window.location.href = "../login.html";
-        })
-    } else if (!user.status) {
-      Swal.fire({
-        icon: 'warning',
-        title: '尚未開通',
-        text: '帳號尚未開通，請先開通帳號'
-      })
-        .then(() => {
-          window.location.href = "./shop.html";
-        })
-    } else {
-      try {
-        const resp = await fetch(`/NGFW/estore/orders/${user.userId}`);
-        const orders = await resp.json();
+      const ecpayCheck = orders.map(async order => {
+        if (order.orderPayment === 0 && (order.orderStatus === 0 || order.orderStatus === 1) && (order.orderStatus !== -2 || order.orderStatus !== -1)) {
+          try {
+            // 從ecpay取得目前訂單狀態
+            const resp = await fetch(`/NGFW/estore/orders/ecpaystatus/${order.orderId}`, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json"
+              }
+            });
+            const data = await resp.text();
 
-        const ecpayCheck = orders.map(async order => {
-          if (order.orderPayment === 0 && (order.orderStatus === 0 || order.orderStatus === 1) && (order.orderStatus !== -2 || order.orderStatus !== -1)) {
+            const formData = new FormData();
+            const pairs = data.split("&");
+            pairs.forEach((pair) => {
+              const [key, value] = pair.split("=");
+              formData.append(key, decodeURIComponent(value));
+            })
+            if (parseInt(formData.get("TradeStatus")) === 1) {
+              order.orderStatus = 3;
+            } else {
+              order.orderStatus = -2;
+            }
             try {
-              // 從ecpay取得目前訂單狀態
-              const resp = await fetch(`/NGFW/estore/orders/ecpaystatus/${order.orderId}`, {
-                method: "POST",
+              // 更新訂單資料
+              const resp = await fetch(`/NGFW/estore/order/edit/${order.orderId}/${order.orderStatus}`, {
+                method: "PUT",
                 headers: {
                   "Content-Type": "application/json"
                 }
               });
-              const data = await resp.text();
-
-              const formData = new FormData();
-              const pairs = data.split("&");
-              pairs.forEach((pair) => {
-                const [key, value] = pair.split("=");
-                formData.append(key, decodeURIComponent(value));
-              })
-              if (parseInt(formData.get("TradeStatus")) === 1) {
-                order.orderStatus = 3;
-              } else {
-                order.orderStatus = -2;
-              }
-              try {
-                // 更新訂單資料
-                const resp = await fetch(`/NGFW/estore/order/edit/${order.orderId}/${order.orderStatus}`, {
-                  method: "PUT",
-                  headers: {
-                    "Content-Type": "application/json"
-                  }
-                });
-                const orderUpdateResult = await resp.json();
-                if (orderUpdateResult.result === true) {
-                  if (order.orderStatus === -2) {
-                    // 付款失敗，將itemInfo的stock加回去
-                    try {
-                      const resp = await fetch(`/NGFW/estore/order/editItemInfo/${order.orderId}`, {
-                        method: "PUT",
-                        headers: {
-                          "Content-Type": "application/json"
-                        }
-                      });
-                      const result = await resp.text();
-                      if (parseInt(result) !== 0) {
-                        throw new Error('更新商品數量失敗，receiptId: ' + result);
+              const orderUpdateResult = await resp.json();
+              if (orderUpdateResult.result === true) {
+                if (order.orderStatus === -2) {
+                  // 付款失敗，將itemInfo的stock加回去
+                  try {
+                    const resp = await fetch(`/NGFW/estore/order/editItemInfo/${order.orderId}`, {
+                      method: "PUT",
+                      headers: {
+                        "Content-Type": "application/json"
                       }
-                    } catch (error) {
-                      console.error('Error:', error);
-                      Swal.fire({
-                        icon: "error",
-                        title: "更新商品數量失敗",
-                        text: "出了點狀況！請聯絡管理員"
-                      });
+                    });
+                    const result = await resp.text();
+                    if (parseInt(result) !== 0) {
+                      throw new Error('更新商品數量失敗，receiptId: ' + result);
                     }
+
+
+                  } catch (error) {
+                    console.error('Error:', error);
+                    Swal.fire({
+                      icon: "error",
+                      title: "更新商品數量失敗",
+                      text: "出了點狀況！請聯絡管理員"
+                    });
                   }
-                } else {
-                  throw new Error('更新訂單資料失敗');
                 }
-              } catch (error) {
-                console.error('Error:', error);
-                Swal.fire({
-                  icon: "error",
-                  title: "更新訂單資料失敗",
-                  text: "出了點狀況！請聯絡管理員"
-                });
+              } else {
+                throw new Error('更新訂單資料失敗');
               }
             } catch (error) {
               console.error('Error:', error);
               Swal.fire({
                 icon: "error",
-                title: "取得訂單狀態失敗",
+                title: "更新訂單資料失敗",
                 text: "出了點狀況！請聯絡管理員"
               });
             }
+          } catch (error) {
+            console.error('Error:', error);
+            Swal.fire({
+              icon: "error",
+              title: "取得訂單狀態失敗",
+              text: "出了點狀況！請聯絡管理員"
+            });
           }
-        });
-        await Promise.all(ecpayCheck)
-          .then(() => {
-            for (let order of orders.slice().reverse()) {
-              orderList(order);
-            }
-          });
-      } catch (error) {
-        console.error('Error:', error);
-        Swal.fire({
-          icon: "error",
-          title: "取得訂單失敗",
-          text: "出了點狀況！請聯絡管理員"
-        });
-      }
+        }
+      });
+      await Promise.all(ecpayCheck)
+        .then(() => {
+          for (let order of orders.slice().reverse()) {
+            orderList(order);
+          }
+        })
+        .then(async () => {
+          try {
+            const resp = await fetch(`/NGFW/user/user_list/${userId}`);
+            const user = await resp.json();
+
+            sessionStorage.setItem('user', JSON.stringify(user));
+
+          } catch (error) {
+            console.error('Error:', error);
+            Swal.fire({
+              icon: "error",
+              title: "取得會員資料失敗",
+              text: "出了點狀況！請聯絡管理員"
+            });
+          }
+        })
+    } catch (error) {
+      console.error('Error:', error);
+      Swal.fire({
+        icon: "error",
+        title: "取得訂單失敗",
+        text: "出了點狀況！請聯絡管理員"
+      });
     }
-  })
+  });
 
   // 點選以展開訂單明細
   $(document).on("click", "td.accordion-toggle", function () {
