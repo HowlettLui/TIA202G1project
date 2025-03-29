@@ -143,13 +143,13 @@
                       <div class="col-8">
                         <div class='col-8'>
                           <label for='name' class='form-label'>姓名</label>
-                          <input type='text' class='form-control' id='staff_name' placeholder='' value='' required>
+                          <input type='text' class='form-control' id='edit_staff_name' placeholder='' value='' required>
                           <div class='invalid-feedback'>
                             Valid first name is required.
                           </div>
                         </div>
                         <div class='col-8'>
-                          <label for='staffid' class='form-label'>工作人員編號(僅顯示無法更改)</label>
+                          <label for='id' class='form-label'>工作人員編號(僅顯示無法更改)</label>
                           <div class='input-group has-validation'>
                             <input type='text' class='form-control' id='edit_staff_id' placeholder='' required readonly>
                             <div class='invalid-feedback'>
@@ -160,18 +160,24 @@
                         <div class='col-8'>
                           <label for='account' class='form-label'>工作人員帳號</label>
                           <div class='input-group has-validation'>
-                            <input type='text' class='form-control' id='edit_staff_accout' placeholder='' required>
+                            <input type='text' class='form-control' id='edit_staff_account' placeholder='' required>
                             <div class='invalid-feedback'>
                               Your accout is required.
                             </div>
                           </div>
                         </div>
-                        <div class="col-8 my-3">
-                          <div class='btn-group'>
+                        <div class='col-8'>
+                          <label for='status' class='form-label'>狀態：</label>
+                          <div class='input-group has-validation'>
+                            <input type='text' class='form-control' id='edit_staff_status' placeholder='' required
+                              readonly>
+                            <div class='invalid-feedback'>
+                              Your accout is required.
+                            </div>
+                          </div>
+                        </div>
+                        <!-- <div class='btn-group'>
                             <div class="row">
-                              <div class="col-6">
-                                <label for='account' class='form-label'>狀態：</label>
-                              </div>
                               <div class="col-6">
                                 <a class="btn btn-secondary dropdown-toggle" href="#" role="button"
                                   id="dropdownMenuLink edit_staff_status" data-bs-toggle="dropdown"
@@ -185,15 +191,18 @@
                                 </ul>
                               </div>
                             </div>
+                          </div> -->
+                        <div class='col-8'>
+                          <label for='role' class='form-label'>部門：</label>
+                          <div class='input-group has-validation'>
+                            <input type='text' class='form-control' id='edit_staff_role' placeholder='' required
+                              readonly>
+                            <div class='invalid-feedback'>
+                              Your accout is required.
+                            </div>
                           </div>
                         </div>
-                        <div class="col-8 my-3">
-                          <div class='btn-group'>
-                            <div class="row">
-                              <div class="col-6">
-                                <label for='account' class='form-label'>部門：</label>
-                              </div>
-                              <div class="col-6">
+                        <!-- <div class="col-6">
                                 <a class="btn btn-secondary dropdown-toggle" href="#" role="button"
                                   id="dropdownMenuLink edit_staff_role" data-bs-toggle="dropdown" aria-expanded="false">
                                   部門
@@ -204,10 +213,7 @@
                                   <li><a class="dropdown-item cs">客服</a></li>
                                   <li><a class="dropdown-item article_reviewer">審稿</a></li>
                                 </ul>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
+                              </div> -->
                         <div class='col-8'>
                           <label for='email' class='form-label'>Email</label>
                           <input type='email' class='form-control' id='edit_staff_email' placeholder='you@example.com'
@@ -263,7 +269,7 @@
 
     $(document).ready(function () {
       // 抓工作人員資料
-      const staff = JSON.parse(sessionStorage.getItem("staff"));
+      let staff = JSON.parse(sessionStorage.getItem("staff"));
       // console.log(staff);
 
       // 插入資料
@@ -309,13 +315,45 @@
         $('#viewMode').addClass('d-none');
         $('#editMode').removeClass('d-none');
 
-        $("#edit_staff_id").text(staff.staffId);
-        $("#edit_staff_name").text(staff.staffName);
-        $("#edit_staff_account").text(staff.staffAccount);
-        $('#edit_staff_role_id').text(staff.staffRole.roleId);
-        $('#edit_staff_role').text(staff.staffRole.roleType);
-        $("#edit_staff_email").text(staff.staffEmail);
-        $("#edit_staff_phone").text(staff.staffPhone);
+        let staff = JSON.parse(sessionStorage.getItem("staff"))
+        let setStaffStatus = staff.staffStatus;
+        let setStaffRole = staff.staffRole.roleType;
+
+        if (staff.staffStatus === 0) {
+          setStaffStatus = "未啟用";
+        } else {
+          if (staff.staffStatus === 1) {
+            setStaffStatus = "已啟用";
+          } else {
+            setStaffStatus = "停用";
+          }
+        }
+
+        if (staff.staffRole.roleId === 1) {
+          setStaffRole = "管理員";
+        } else {
+          if (staff.staffRole.roleId === 2) {
+            setStaffRole = "客服";
+          } else {
+            if (staff.staffRole.roleId === 3) {
+              setStaffRole = "商城";
+            } else if (staff.staffRole.roleId === 5) {
+              setStaffRole = "審稿";
+            } else {
+              setStaffRole = "未啟用工作者"
+            };
+          }
+        }
+
+        $("#edit_staff_id").val(staff.staffId);
+        $("#edit_staff_name").val(staff.staffName);
+        $("#edit_staff_account").val(staff.staffAccount);
+        $('#edit_staff_status').val(setStaffStatus);
+        $('#edit_staff_role_id').val(staff.staffRole.roleId);
+        $('#edit_staff_role').val(setStaffRole);
+        $("#edit_staff_email").val(staff.staffEmail);
+        $("#edit_staff_phone").val(staff.staffPhone);
+
       });
 
       // 顯示模式
@@ -338,21 +376,26 @@
         }
 
         // 獲取輸入框中的值
-        const staff_name = $('#staff_name').val();
-        const staff_accout = $('#staff_account').val();
-        const staff_role_id = $('#staff_role_id').val();
-        const staff_status = $('#staff_status').val();
-        const staff_email = $('#staff_email').val();
-        const staff_phone = $('#staff_phone').val();
+        let staff_id = $('#edit_staff_id').val();
+        let staff_name = $('#edit_staff_name').val();
+        let staff_account = $('#edit_staff_account').val();
+        let staff_role_id = staff.staffRoleId;
+        let staff_status = staff.staffStatus;
+        let staff_email = $('#edit_staff_email').val();
+        let staff_phone = $('#edit_staff_phone').val();
 
         const staffNewData = {
-          staff_name: staff_name,
-          staff_accout: staff_accout,
-          staff_role_id: staff_role_id,
-          staff_status: staff_status,
-          staff_email: staff_email,
-          staff_phone: staff_phone,
-        };
+          "staffId": parseInt(staff_id),
+          "staffName": staff_name,
+          "staffAccount": staff_account,
+          "staffRoleId": parseInt(staff_role_id),
+          "staffStatus": parseInt(staff_status),
+          // "staffRole": staff.staffRole,
+          "staffEmail": staff_email,
+          "staffPhone": staff_phone
+        }
+
+        console.log(staffNewData);
 
         fetch('/NGFW/staff/staff_manage', {
           method: 'PUT',
@@ -371,13 +414,12 @@
               });
               // 更新 sessionStorage 中的資料
               // console.log('更新成功:', data);
-              sessionStorage.setItem("staff", JSON.stringify(staff));
-
               // image.value = image;
               console.log(staff);
 
-              $('#editMode').addClass('d-none');
-              $('#viewMode').removeClass('d-none');
+              // $('#editMode').addClass('d-none');
+              // $('#viewMode').removeClass('d-none');
+              location.href = './staff/staff_list.html';
             } else {
               Swal.fire({
                 icon: "error",
@@ -394,19 +436,19 @@
             });
           });
 
-        sessionStorage.setItem("staffName", JSON.stringify(staff.staffName));
-        sessionStorage.setItem("staffAccount", JSON.stringify(staff.staffAccount));
-        sessionStorage.setItem("staffRoleType", JSON.stringify(staff.staffRole.roleType));
-        sessionStorage.setItem("staffEmail", JSON.stringify(staff.staffEmail));
-        sessionStorage.setItem("staffPhone", JSON.stringify(staff.staffPhone));
+        // sessionStorage.setItem("staffName", JSON.stringify(staff.staffName));
+        // sessionStorage.setItem("staffAccount", JSON.stringify(staff.staffAccount));
+        // sessionStorage.setItem("staffRoleType", JSON.stringify(staff.staffRole.roleType));
+        // sessionStorage.setItem("staffEmail", JSON.stringify(staff.staffEmail));
+        // sessionStorage.setItem("staffPhone", JSON.stringify(staff.staffPhone));
 
-        // 更新顯示模式中的內容
-        $("#view_staff_id").text(staff.staffId);
-        $("#view_staff_name").text(staff.staffName);
-        $("#view_staff_accout").text(staff.staffAccount);
-        $('#view_staff_role').text(staff.staffRole.roleType);
-        $("#view_staff_email").text(staff.staffEmail);
-        $("#view_staff_phone").text(staff.staffPhone);
+        // // 更新顯示模式中的內容
+        // $("#view_staff_id").text(staff.staffId);
+        // $("#view_staff_name").text(staff.staffName);
+        // $("#view_staff_accout").text(staff.staffAccount);
+        // $('#view_staff_role').text(staff.staffRole.roleType);
+        // $("#view_staff_email").text(staff.staffEmail);
+        // $("#view_staff_phone").text(staff.staffPhone);
 
         // 切換回顯示模式
         $('#editMode').addClass('d-none');

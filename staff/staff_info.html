@@ -127,7 +127,8 @@
                   <p><strong>姓名：</strong><span id='viewStaffName'></span></p>
                   <p><strong>工作人員編號：</strong><span id='viewStaffid'></span></p>
                   <p><strong>工作人員帳號：</strong><span id='viewStaffAccout'></span></p>
-                  <p><strong>角色：</strong><span id='viewStaffRole'></span></p>
+                  <p><strong>狀態：</strong><span id='viewStaffStatus'></span></p>
+                  <p><strong>部門：</strong><span id='viewStaffRole'></span></p>
                   <p><strong>Email：</strong><span id='viewStaffEmail'></span></p>
                   <p><strong>連絡電話：</strong><span id='viewStaffPhone'></span></p>
                   <button id='editBtn' class='btn btn-primary'>編輯</button>
@@ -146,7 +147,7 @@
                         </div>
                       </div>
                       <div class='col-12'>
-                        <label for='userid' class='form-label'>工作人員編號(僅顯示無法更改)</label>
+                        <label for='staffid' class='form-label'>工作人員編號(僅顯示無法更改)</label>
                         <div class='input-group has-validation'>
                           <input type='text' class='form-control' id='staff_id' placeholder='' required readonly>
                           <div class='invalid-feedback'>
@@ -164,24 +165,56 @@
                           </div>
                         </div>
                       </div>
-                      <div class='col-12'>
-                        <label for='dept' class='form-label'>部門</label>
+                      <div class="col-8 my-3">
+                        <div class='btn-group'>
+                          <div class="row">
+                            <div class="col-6">
+                              <label for='account' class='form-label'>狀態：</label>
+                            </div>
+                            <div class="col-6">
+                              <a class="btn btn-secondary dropdown-toggle" href="#" role="button"
+                                id="dropdownMenuLink edit_staff_status" data-bs-toggle="dropdown" aria-expanded="false">
+                                狀態
+                              </a>
+                              <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <li><a class="dropdown-item inactivated">未啟用</a></li>
+                                <li><a class="dropdown-item activated">已啟用</a></li>
+                                <li><a class="dropdown-item grounding">停用</a></li>
+                              </ul>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-8 my-3">
+                        <div class='btn-group'>
+                          <div class="row">
+                            <div class="col-6">
+                              <label for='account' class='form-label'>部門：</label>
+                            </div>
+                            <div class="col-6">
+                              <a class="btn btn-secondary dropdown-toggle" href="#" role="button"
+                                id="dropdownMenuLink edit_staff_role" data-bs-toggle="dropdown" aria-expanded="false">
+                                部門
+                              </a>
+                              <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <li><a class="dropdown-item admin">管理員</a></li>
+                                <li><a class="dropdown-item store">商城</a></li>
+                                <li><a class="dropdown-item cs">客服</a></li>
+                                <li><a class="dropdown-item article_reviewer">審稿</a></li>
+                              </ul>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- <div class='col-12'>
+                        <label for='dept' class='form-label'>角色</label>
                         <div class='input-group has-validation'>
-                          <input type='text' class='form-control' id='staff_dept' placeholder='' required>
+                          <input type='text' class='form-control' id='staff_role' placeholder='' required>
                           <div class='invalid-feedback'>
                             Your accout is required.
                           </div>
                         </div>
-                      </div>
-                      <div class='col-12'>
-                        <label for='permission' class='form-label'>權限</label>
-                        <div class='input-group has-validation'>
-                          <input type='text' class='form-control' id='staff_permission' placeholder='' required>
-                          <div class='invalid-feedback'>
-                            Your accout is required.
-                          </div>
-                        </div>
-                      </div>
+                      </div> -->
                       <div class='col-12'>
                         <label for='email' class='form-label'>Email</label>
                         <input type='email' class='form-control' id='staff_email' placeholder='you@example.com'
@@ -233,12 +266,6 @@
     $('.Sidebar').load('../layout/sidebar.html');
 
     $(document).ready(function () {
-      // 編輯模式
-      $('#editBtn').click(function () {
-        console.log('修改按鍵觸發');
-        $('#viewMode').addClass('d-none');
-        $('#editMode').removeClass('d-none');
-      });
 
       // 顯示模式
       $('#cancelBtn').click(function () {
@@ -255,44 +282,88 @@
       $("#viewStaffid").text(staff.staffId);
       $("#viewStaffName").text(staff.staffName);
       $("#viewStaffAccout").text(staff.staffAccount);
-      $('viewStaffRole').text(staff.staffRole.roleType)
+      $('#viewStaffRoleId').text(staff.staffRoleId);
+      // $('#viewStaffRole').text(staff.staffRole.roleType);
       $("#viewStaffEmail").text(staff.staffEmail);
       $("#viewStaffPhone").text(staff.staffPhone);
 
-      // 儲存資料並切換回顯示模式
-      $('#saveBtn').click(function (e) {
-        var form = document.querySelector('.needs-validation');
-
-        // 檢查表單是否通過驗證
-        if (!form.checkValidity()) {
-          e.preventDefault();
-          e.stopPropagation();
-          form.classList.add('was-validated');
-          return; // 若驗證失敗，不執行儲存與切換動作
+      if (staff.staffStatus > 0) {
+        if (staff.staffStatus === 2) {
+          $('#viewStaffStatus').text("停用");
+        } else {
+          $('#viewStaffStatus').text("未啟用");
         }
+      } else {
+        $('#viewStaffStatus').text("已啟用");
+      }
 
-        // 獲取輸入框中的值
-        const staff_name = $('#staff_name').val();
-        const staff_id = $('#staff_id').val();
-        const staff_accout = $('#staff_accout').val();
-        const staff_dept = $('#staff_dept').val();
-        const staff_permission = $('#staff_permission').val();
-        const staff_email = $('#staff_email').val();
-        const staff_phone = $('#staff_phone').val();
+      if (staff.staffRole.roleId === 1) {
+        $('#viewStaffRole').text("管理員");
+      } else {
+        if (staff.staffRole.roleId === 2) {
+          $('#viewStaffRole').text("客服");
+          // staff.staffRole.roleType = "客服";
+        } else {
+          if (staff.staffRole.roleId === 3) {
+            $('#viewStaffRole').text("商城");
+            // staff.staffRole.roleType = "商城";
+          } else if (staff.staffRole.roleId === 5) {
+            $('#viewStaffRole').text("審稿");
+            // staff.staffRole.roleType = "審稿";
+          };
+        }
+      }
 
-        // 更新顯示模式中的內容
-        $('#viewName').text(staff_name);
-        $('#viewUserid').text(staff_id);
-        $('#viewAccout').text(staff_accout);
-        $('#viewDept').text(staff_dept);
-        $('#viewPermission').text(staff_permission);
-        $('#viewEmail').text(staff_email);
-        $('#viewPhone').text(staff_phone);
+      // 編輯模式
+      $('#editBtn').click(function () {
+        window.location.href = 'staff_manage.html';
+        // // console.log('修改按鍵觸發');
+        // $('#viewMode').addClass('d-none');
+        // $('#editMode').removeClass('d-none');
 
-        // 切換回顯示模式
-        $('#editMode').addClass('d-none');
-        $('#viewMode').removeClass('d-none');
+        // $("#staff_id").text(staff.staffId);
+        // $("#staff_name").text(staff.staffName);
+        // $("#staff_account").text(staff.staffAccount);
+        // $('#staff_role_id').text(staff.staffRole.roleId);
+        // $('#staff_role').text(staff.staffRole.roleType);
+        // $("#staff_email").text(staff.staffEmail);
+        // $("#staff_phone").text(staff.staffPhone);
       });
+
+      // 儲存資料並切換回顯示模式
+      // $('#saveBtn').click(function (e) {
+      //   var form = document.querySelector('.needs-validation');
+
+      //   // 檢查表單是否通過驗證
+      //   if (!form.checkValidity()) {
+      //     e.preventDefault();
+      //     e.stopPropagation();
+      //     form.classList.add('was-validated');
+      //     return; // 若驗證失敗，不執行儲存與切換動作
+      //   }
+
+      //   // 獲取輸入框中的值
+      //   const staff_name = $('#staff_name').val();
+      //   const staff_id = $('#staff_id').val();
+      //   const staff_accout = $('#staff_accout').val();
+      //   const staff_role = $('#staff_role').val();
+      //   const staff_permission = $('#staff_permission').val();
+      //   const staff_email = $('#staff_email').val();
+      //   const staff_phone = $('#staff_phone').val();
+
+      //   // 更新顯示模式中的內容
+      //   $('#viewName').text(staff_name);
+      //   $('#viewUserid').text(staff_id);
+      //   $('#viewAccout').text(staff_accout);
+      //   $('#viewDept').text(staff_dept);
+      //   $('#viewPermission').text(staff_permission);
+      //   $('#viewEmail').text(staff_email);
+      //   $('#viewPhone').text(staff_phone);
+
+      //   // 切換回顯示模式
+      //   $('#editMode').addClass('d-none');
+      //   $('#viewMode').removeClass('d-none');
+      // });
     });
 
   </script>
