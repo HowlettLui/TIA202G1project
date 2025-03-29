@@ -114,7 +114,7 @@ const TeamComponent = defineComponent ({
   <div class="card mt-3">
       <div class="row g-0">
         <div class="col-md-3">
-          <img src="..." class="img-fluid rounded-start" alt="...">
+          <img :src="team.teamLogo" class="img-fluid rounded-start" width="300" alt="team.teamName">
         </div>
         <div class="col-md-8">
           <div class="card-body">
@@ -122,19 +122,16 @@ const TeamComponent = defineComponent ({
             <p class="card-text">{{ team.description }}</p>
             <ul>
               <li>
-                <a href="#">官網</a>
+                <a :href="team.teamLink" target="_blank" rel="noopener noreferrer">官網</a>
               </li>
               <li>
-                <a href="#">球隊新聞</a>
+                <a href="newsf/news_fform.html">球隊新聞</a>
               </li>
               <li>
-                <a href="#">球員名單</a>
+                <a href="player.html">球員名單</a>
               </li>
               <li>
-                <a href="#">球隊賽程</a>
-              </li>
-              <li>
-                <a href="#">啦啦隊</a>
+                <a href="schedule.html">球隊賽程</a>
               </li>
             </ul>
           </div>
