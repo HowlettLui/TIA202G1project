@@ -108,42 +108,70 @@ const FooterComponent = defineComponent({
   `
 });
 
+const playerUrl = "/NGFW/player/list";
 const PlayerComponent1 = defineComponent({
+  props: ['players'],
   setup() {
-    return {};
+    const players = ref([]);
+    const fetchPlayerData = async () => {
+      try {
+        const response = await fetch(playerUrl);
+        const data = await response.json();
+        players.value = data;
+      } catch (error) {
+        console.error('Error fetching player data:', error);
+      }
+    };
+    onMounted(fetchPlayerData);
+    return { players };
   },
   template: `
-  <div class="container mt-5">
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-      <div class="col">
-        <div class="card">
-          <img src="https://via.placeholder.com/300" class="card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">Player Name</h5>
-            <p class="card-text">Player Info</p>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="card">
-          <img src="https://via.placeholder.com/300" class="card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">Player Name</h5>
-            <p class="card-text">Player Info</p>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="card">
-          <img src="https://via.placeholder.com/300" class="card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">Player Name</h5>
-            <p class="card-text">Player Info</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <table class="table table-striped mt-5">
+    <thead>
+      <tr>
+        <th scope="col">球員名</th>
+        <th scope="col">出賽時間(分)</th>
+        <th scope="col">得分</th>
+        <th scope="col">2pt命中</th>
+        <th scope="col">2pt出手</th>
+        <th scope="col">2pt%</th>
+        <th scope="col">3pt命中</th>
+        <th scope="col">3pt出手</th>
+        <th scope="col">3pt%</th>
+        <th scope="col">FT命中</th>
+        <th scope="col">FT出手</th>
+        <th scope="col">FT%</th>
+        <th scope="col">REB</th>
+        <th scope="col">AST</th>
+        <th scope="col">STL</th>
+        <th scope="col">BLK</th>
+        <th scope="col">TO</th>
+        <th scope="col">PF</th>
+      </tr>
+    </thead>
+    <tbody v-for="(player, index) in players" :key="index" :player="player">
+      <tr>
+        <td>{{player.playerName}}</td>
+        <td>{{player.totalMin}}</td>
+        <td>{{player.playerGoal}}</td>
+        <td>{{player.playerTwoFgoM}}</td>
+        <td>{{player.playerTwoFga}}</td>
+        <td>{{player.playerTwoFgPct}}%</td>
+        <td>{{player.playerThreeFgm}}</td>
+        <td>{{player.playerThreeFga}}</td>
+        <td>{{player.playerThreeFgPct}}%</td>
+        <td>{{player.playerFtm}}</td>
+        <td>{{player.playerFta}}</td>
+        <td>{{player.playerFtPct}}%</td>
+        <td>{{player.playerReb}}</td>
+        <td>{{player.playerAst}}</td>
+        <td>{{player.playerStl}}</td>
+        <td>{{player.playerBlk}}</td>
+        <td>{{player.playerTo}}</td>
+        <td>{{player.playerPf}}</td>
+      </tr>
+    </tbody>
+  </table>
   `
 });
 

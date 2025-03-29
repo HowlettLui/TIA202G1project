@@ -6,70 +6,57 @@ const HeaderComponent = defineComponent({
   },
   template: `
     <header class="pt-3 border-bottom bg-white">
-  <div class="container d-flex flex-wrap justify-content-center">
-    <a href="/" class="d-flex align-items-center mb-3 mb-lg-0 me-lg-auto link-body-emphasis text-decoration-none">
-      <i class="fa-solid fa-basketball fa-xl" style="margin: 10px;"></i>
-      <span class="fs-4">上班不要看球賽</span>
-    </a>
-    <form class="col-12 col-lg-auto mb-3 mb-lg-0" role="search">
-      <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
-    </form>
-  </div>
-  <nav class="navbar navbar-expand-lg py-2">
-    <div class="container d-flex flex-wrap">
-      <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
-        aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="offcanvas offcanvas-start w-100" tabindex="-1" id="offcanvasNavbar"
-        aria-labelledby="offcanvasNavbarLabel">
-        <div class="offcanvas-header">
+      <div class="container d-flex flex-wrap justify-content-center">
+        <a href="/" class="d-flex align-items-center mb-3 mb-lg-0 me-lg-auto link-body-emphasis text-decoration-none">
           <i class="fa-solid fa-basketball fa-xl" style="margin: 10px;"></i>
-          <h5 class="offcanvas-title" id="offcanvasNavbarLabel">上班不要看球賽</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-        </div>
-        <div class="offcanvas-body">
-          <ul class="navbar-nav justify-content-start flex-grow-1 pe-3">
-            <li class="nav-item mx-4 mx-sm-0"><a href="/index.html" class="nav-link link-body-emphasis px-2 active"
-                aria-current="page">首頁</a></li>
-            <li class="nav-item mx-4 mx-sm-0"><a href="/game.html" class="nav-link link-body-emphasis px-2">即時賽況</a>
+          <span class="fs-4">上班不要看球賽</span>
+        </a>
+        <form class="col-12 col-lg-auto mb-3 mb-lg-0" role="search">
+          <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
+        </form>
+      </div>
+      <nav class="navbar navbar-expand-lg py-2">
+        <div class="container d-flex flex-wrap">
+          <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="offcanvas offcanvas-start w-100" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+            <div class="offcanvas-header">
+              <i class="fa-solid fa-basketball fa-xl" style="margin: 10px;"></i>
+              <h5 class="offcanvas-title" id="offcanvasNavbarLabel">上班不要看球賽</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+              <ul class="navbar-nav justify-content-start flex-grow-1 pe-3">
+                <li class="nav-item mx-4 mx-sm-0"><a href="/index.html" class="nav-link link-body-emphasis px-2 active" aria-current="page">首頁</a></li>
+                <li class="nav-item mx-4 mx-sm-0"><a href="/game.html" class="nav-link link-body-emphasis px-2">即時賽況</a></li>
+                <li class="nav-item mx-4 mx-sm-0"><a href="/schedule.html" class="nav-link link-body-emphasis px-2">歷史球賽</a></li>
+                <li class="nav-item mx-4 mx-sm-0"><a href="/newsf/news_fform.html" class="nav-link link-body-emphasis px-2">文章 / 新聞</a></li>
+                <li class="nav-item mx-4 mx-sm-0"><a href="/team.html" class="nav-link link-body-emphasis px-2">球隊</a></li>
+                <li class="nav-item mx-4 mx-sm-0"><a href="/player.html" class="nav-link link-body-emphasis px-2">球員名單</a></li>
+                <li class="nav-item mx-4 mx-sm-0"><a href="/estore/shop.html" class="nav-link link-body-emphasis px-2">商城</a></li>
+              </ul>
+            </div>
+          </div>
+          <ul class="nav order-last">
+            <li class="nav-item">
+              <a href="/estore/cart.html" class="nav-link link-body-emphasis px-2">
+                <i class="fa-solid fa-cart-shopping"></i>
+              </a>
             </li>
-            <li class="nav-item mx-4 mx-sm-0"><a href="/schedule.html" class="nav-link link-body-emphasis px-2">歷史球賽</a>
+            <li class="nav-item login"><a href="/login.html" class="nav-link link-body-emphasis px-2">登入</a></li>
+            <li class="nav-item register"><a href="/register.html" class="nav-link link-body-emphasis px-2">註冊</a></li>
+            <div class="d-flex">
+              <img id="avatar" class="rounded-circle" style="height: 30px">
+            </div>
+            <li class="nav-item account" style="display: none"><a href="#" class="nav-link link-body-emphasis px-2">會員帳號</a>
             </li>
-            <li class="nav-item mx-4 mx-sm-0"><a href="/newsf/news_fform.html"
-                class="nav-link link-body-emphasis px-2">文章 / 新聞</a>
-            </li>
-            <li class="nav-item mx-4 mx-sm-0"><a href="/team.html" class="nav-link link-body-emphasis px-2">球隊</a>
-            </li>
-            <li class="nav-item mx-4 mx-sm-0"><a href="/player.html" class="nav-link link-body-emphasis px-2">球員名單</a>
-            </li>
-            <li class="nav-item mx-4 mx-sm-0">
-              <a href="/estore/shop.html" class="nav-link link-body-emphasis px-2">商城</a>
-            </li>
+            <li class="nav-item usercenter" style="display: none"><a href="/user/user_info.html" class="nav-link link-body-emphasis px-2">會員中心</a></li>
+            <li class="nav-item logout" style="display: none"><a class="nav-link link-body-emphasis px-2">登出</a></li>
           </ul>
         </div>
-      </div>
-      <ul class="nav order-last">
-        <li class="nav-item">
-          <a href="/estore/cart.html" class="nav-link link-body-emphasis px-2">
-            <i class="fa-solid fa-cart-shopping"></i>
-          </a>
-        </li>
-        <li class="nav-item login"><a href="/login.html" class="nav-link link-body-emphasis px-2">登入</a></li>
-        <li class="nav-item register"><a href="/register.html" class="nav-link link-body-emphasis px-2">註冊</a></li>
-        <div class="d-flex">
-          <img id="avatar" class="rounded-circle" style="height: 30px">
-        </div>
-        <li class="nav-item account" style="display: none"><a href="#" class="nav-link link-body-emphasis px-2">會員帳號</a>
-        </li>
-        <li class="nav-item usercenter" style="display: none"><a href="/user/user_info.html"
-            class="nav-link link-body-emphasis px-2">會員中心</a></li>
-        <li class="nav-item logout" style="display: none"><a class="nav-link link-body-emphasis px-2">登出</a>
-        </li>
-      </ul>
-    </div>
-  </nav>
-</header>
+      </nav>
+    </header>
   `
 });
 
@@ -111,7 +98,9 @@ const FooterComponent = defineComponent({
   `
 });
 
-const url = '/NGFW/game/byId?id=88'
+const urlParams = new URLSearchParams(window.location.search);
+const gameId = urlParams.get("id");
+const url = `/NGFW/game/byId?id=${gameId}`;
 const GameInfoComponent = defineComponent({
   props: ['game'],
   setup() {
@@ -126,7 +115,7 @@ const GameInfoComponent = defineComponent({
       }
     };
     onMounted(fetchGameData);
-    return {game};
+    return { game };
   },
   template: `
     <div v-if="game" class="container mt-5">
@@ -139,13 +128,15 @@ const GameInfoComponent = defineComponent({
       </div>
       <div class="row mt-3">
         <div class="col-5 text-center">
+          <img :src="game.homeTeam.teamLogo" class="img-fluid rounded-start" width="300" alt="game.homeTeam.teamName">
           <h1>{{game.homeTeam.teamName}}</h1>
           <h2>{{game.homeTeamScore}}</h2>
         </div>
-        <div class="col-2 text-center">
+        <div class="col-2 d-flex align-items-center justify-content-center text-center">
           <h1>VS</h1>
         </div>
         <div class="col-5 text-center">
+          <img :src="game.awayTeam.teamLogo" class="img-fluid rounded-start" width="300" alt="game.awayTeam.teamName">
           <h1>{{game.awayTeam.teamName}}</h1>
           <h2>{{game.awayTeamScore}}</h2>
         </div>
@@ -159,64 +150,97 @@ const Tab1Component = defineComponent({
     return {};
   },
   template: `
-  <div class="row text-center mt-5">
-    <div class="col-5">隊伍1</div>
-    <div class="col-2"></div>
-    <div class="col-5">隊伍2</div>
-
-    <div class="w-100"></div>
-    <div class="col-5">40/100</div>
-    <div class="col-2">FG</div>
-    <div class="col-5">40/100</div>
-
-    <div class="w-100"></div>
-    <div class="col-5">40%</div>
-    <div class="col-2">FG%</div>
-    <div class="col-5">40%</div>
-
-    <div class="w-100"></div>
-    <div class="col-5">20/50</div>
-    <div class="col-2">2PFG</div>
-    <div class="col-5">20/50</div>
-
-    <div class="w-100"></div>
-    <div class="col-5">40%</div>
-    <div class="col-2">2PFG%</div>
-    <div class="col-5">40%</div>
-    
-    <div class="w-100"></div>
-    <div class="col-5">20/50</div>
-    <div class="col-2">3PFG</div>
-    <div class="col-5">20/50</div>
-    <div class="w-100"></div>
-    <div class="col-5">40%</div>
-    <div class="col-2">3PFG%</div>
-    <div class="col-5">40%</div>
-    <div class="w-100"></div>
-    <div class="col-5">20/50</div>
-    <div class="col-2">FT</div>
-    <div class="col-5">20/50</div>
-    <div class="w-100"></div>
-    <div class="col-5">40</div>
-    <div class="col-2">REB</div>
-    <div class="col-5">40</div>
-    <div class="w-100"></div>
-    <div class="col-5">40</div>
-    <div class="col-2">AST</div>
-    <div class="col-5">40</div>
-    <div class="w-100"></div>
-    <div class="col-5">40</div>
-    <div class="col-2">STL</div>
-    <div class="col-5">40</div>
-    <div class="w-100"></div>
-    <div class="col-5">40</div>
-    <div class="col-2">BLK</div>
-    <div class="col-5">40</div>
-    <div class="w-100"></div>
-    <div class="col-5">40</div>
-    <div class="col-2">TO</div>
-    <div class="col-5">40</div>
-  </div>
+  <table class="container text-center mt-5">
+    <thead>
+      <tr> 
+        <th>主隊</th>      
+        <th>數據</th>
+        <th>客隊</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="table-primary ">
+        <td>50</td>
+        <td>FG</td>
+        <td>50</td>
+      </tr>
+      <tr class="table-primary ">
+        <td>25</td>
+        <td>2pt命中</td>
+        <td>25</td>
+      </tr>
+      <tr class="table-primary ">
+        <td>25</td>
+        <td>2pt出手</td>
+        <td>25</td>
+      </tr>
+      <tr class="table-primary ">
+        <td>50%</td>
+        <td>2pt%</td>
+        <td>50%</td>
+      </tr>
+      <tr class="table-primary ">
+        <td>25</td>
+        <td>3pt命中</td>
+        <td>25</td>
+      </tr>
+      <tr class="table-primary ">
+        <td>50%</td>
+        <td>3pt出手</td>
+        <td>50%</td>
+      </tr>
+      <tr class="table-primary ">
+        <td>25</td>
+        <td>3pt%</td>
+        <td>25</td>
+      </tr>
+      <tr class="table-primary ">
+        <td>50%</td>
+        <td>FT命中</td>
+        <td>50%</td>
+      </tr>
+      <tr class="table-primary ">
+        <td>50</td>
+        <td>FT出手</td>
+        <td>50</td>
+      </tr>
+      <tr class="table-primary ">
+        <td>50</td>
+        <td>FT%</td>
+        <td>50</td>
+      </tr>
+      <tr class="table-primary ">
+        <td>50</td>
+        <td>REB</td>
+        <td>50</td>
+      </tr>
+      <tr class="table-primary ">
+        <td>50</td>
+        <td>AST</td>
+        <td>50</td>
+      </tr>
+      <tr class="table-primary ">
+        <td>50</td>
+        <td>STL</td>
+        <td>50</td>
+      </tr>
+      <tr class="table-primary ">
+        <td>50</td>
+        <td>BLK</td>
+        <td>50</td>
+      </tr>
+      <tr class="table-primary ">
+        <td>50</td>
+        <td>TO</td>
+        <td>50</td>
+      </tr>
+      <tr class="table-primary ">
+        <td>50</td>
+        <td>PF</td>
+        <td>50</td>
+      </tr>
+    </tbody>
+  </table>
   `
 });
 
@@ -248,7 +272,7 @@ const Tab2Component = defineComponent({
         <th scope="col">PF</th>
       </tr>
     </thead>
-    <tbody>
+    <tbody v-for="n in 10" :key="n">
       <tr>
         <td>Player 1</td>
         <td>30:00</td>
@@ -271,38 +295,35 @@ const Tab2Component = defineComponent({
       </tr>
     </tbody>
   </table>
-
   `
 });
 
+const timelineurl = "/NGFW/game/eventsByGameId?id=88";
 const Tab3Component = defineComponent({
+  props: ['timeline'],
   setup() {
-    return {};
+    const timeline = ref([]);
+    const fetchTimelineData = async () => {
+      try {
+        const response = await fetch(timelineurl);
+        const data = await response.json();
+        timeline.value = data;
+      } catch (error) {
+        console.error('Error fetching timeline data:', error);
+      }
+    };
+    onMounted(fetchTimelineData);
+    return { timeline };
   },
   template: `
-  <div class="row mt-5 text-center">
-    <div class="col-5">隊伍1</div>
-    <div class="col-2"></div>
-    <div class="col-5">隊伍2</div>
-
+  <div v-for="(event, index) in timeline" 
+        :key="index"
+        :event="event"
+        class="row mt-5 text-center">
     <div class="w-100 mt-2"></div>
-    <div class="col">比賽結束</div>
-
-    <div class="w-100 mt-2"></div>
-    <div class="col-5">AAA罰球出手得分</div>
-    <div class="col-2">00:05</div>
-    <div class="col-5"></div>
-    
-    <div class="w-100 mt-2"></div>
-    <div class="col-5">AAA罰球出手得分</div>
-    <div class="col-2">00:05</div>
-    <div class="col-5"></div>
-
-    <div class="w-100 mt-2"></div>
-    <div class="col-5"></div>
-    <div class="col-2">00:05</div>
-    <div class="col-5">BBB防守犯規</div>
-  
+    <div class="col-2">第{{event.quarter}}節 {{event.eventTime}}</div>
+    <div class="col-2">{{event.team}}</div>
+    <div class="col-5">{{event.description}}</div>
   </div>
   `
 });
