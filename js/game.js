@@ -100,7 +100,7 @@ const FooterComponent = defineComponent({
 
 const urlParams = new URLSearchParams(window.location.search);
 const gameId = urlParams.get("id");
-const url = `/NGFW/game/byId?id=${gameId}`;
+const url = `/NGFW/game/byId?id=${gameId ?? 88}`;
 const GameInfoComponent = defineComponent({
   props: ['game'],
   setup() {
