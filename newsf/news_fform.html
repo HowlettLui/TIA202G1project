@@ -3,7 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>文章/新聞</title>
+    <!-- <title>文章/新聞</title> -->
+    <title>NGFW上班不要看球賽</title>
     <link
       rel="canonical"
       href="https://getbootstrap.com/docs/5.3/examples/headers/"
@@ -71,7 +72,7 @@
               id="dropdownmenu_id"
               aria-labelledby="dropdownMenuButton1"
             >
-              <li>
+              <!-- <li>
                 <a class="dropdown-item" href="/NGFW/newsf/news_fform.html"
                   >所有分類</a
                 >
@@ -87,6 +88,25 @@
                 <a
                   class="dropdown-item"
                   href="/NGFW/newsf/news_fform.html?articleType=1"
+                  >新聞</a
+                >
+              </li> -->
+              <li>
+                <a class="dropdown-item" href="/newsf/news_fform.html"
+                  >所有分類</a
+                >
+              </li>
+              <li>
+                <a
+                  class="dropdown-item"
+                  href="/newsf/news_fform.html?articleType=0"
+                  >文章</a
+                >
+              </li>
+              <li>
+                <a
+                  class="dropdown-item"
+                  href="/newsf/news_fform.html?articleType=1"
                   >新聞</a
                 >
               </li>
@@ -134,12 +154,32 @@
             let tableBody = $("#articlelist");
             tableBody.empty();
             articles.forEach((article) => {
+              // let row = `<div class="col">
+              // <div class="card shadow-sm">
+              //   <div class="img-container">
+              //     <img
+              //       src="${article.newsPhoto}"
+              //       onclick="location.href='/NGFW/newsf/news_fbody.html?articleId=${article.articleId}'"
+              //     >
+              //     </img>
+              //   </div>
+              //   <div class="card-body">
+              //     <p class="card-text text-truncate">
+              //       ${article.mainTitle}
+              //     </p>
+              //     <div
+              //       class="d-flex justify-content-between align-items-center"
+              //     >
+              //       <small class="text-body-secondary">${article.publishDate}</small>
+              //     </div>
+              //   </div>`;
+
               let row = `<div class="col">
               <div class="card shadow-sm">
                 <div class="img-container">
                   <img
                     src="${article.newsPhoto}"
-                    onclick="location.href='/NGFW/newsf/news_fbody.html?articleId=${article.articleId}'"
+                    onclick="location.href='/newsf/news_fbody.html?articleId=${article.articleId}'"
                   >
                   </img>
                 </div>
