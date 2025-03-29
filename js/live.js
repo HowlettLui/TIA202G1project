@@ -11,8 +11,19 @@ const LiveComponent = defineComponent({
   `
 });
 
+const url = "/NGFW/game/eventsByGameId?id=88";
 const TimeComponent = defineComponent({
     props: ['timeline'],
+    setup(){
+      const timeline = ref(null);
+      const fetchTimelineData = async () => {
+        try {
+          
+        } catch (error) {
+          console.error('Error fetching timeline data:', error);
+        }
+      }
+    },
     template: `
     <div class="row mt-5 text-center">
         <div class="w-100 mt-2"></div>
@@ -33,7 +44,7 @@ const TimeComponent = defineComponent({
     `
 });
 
-const url = "/NGFW/live/timeline";
+
 const app = createApp({
   components: {
     LiveComponent,
