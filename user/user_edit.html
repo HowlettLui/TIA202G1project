@@ -413,13 +413,14 @@
         const email = $('#email').val();
         const phone = $('#phone').val();
 
+        let requestData = {};
         var img_base64_el = document.querySelector(".preview_img");
         requestData.avatar = img_base64_el.getAttribute("src");
 
         sessionStorage.setItem("form_data", JSON.stringify(send_data));
         // location.href = "./confirm.html";
 
-        const requestData = {
+        requestData = {
           userId: user.userId,
           name: name,
           email: email,
