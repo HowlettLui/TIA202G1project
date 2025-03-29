@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>上班不要看球賽管理系統</title>
+  <title>上班不要看球賽訂單管理頁面</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet"
@@ -172,7 +172,7 @@
         text: '請以正確的帳號登入再進入訂單管理頁面'
       })
         .then(() => {
-          window.location.href = "./staff_login.html";
+          window.location.href = "./templateb.html";
         })
     } else {
       try {
@@ -198,7 +198,7 @@
                 formData.append(key, decodeURIComponent(value));
               })
               if (parseInt(formData.get("TradeStatus")) === 1) {
-                order.orderStatus = 2;
+                order.orderStatus = 3;
               } else {
                 order.orderStatus = -2;
               }
@@ -275,13 +275,13 @@
   // 點選詳細訂單內容按鈕後的動作
   $(document).on("click", "button.accordion-toggle", function () {
 
-    if ($(this).hasClass("collapsed")) {
-      $(this).closest("div").next().find("i.arrow").removeClass("fa-angle-down");
-      $(this).closest("div").next().find("i.arrow").addClass("fa-angle-left");
-    } else {
-      $(this).closest("div").next().find("i.arrow").removeClass("fa-angle-left");
-      $(this).closest("div").next().find("i.arrow").addClass("fa-angle-down");
-    }
+    // if ($(this).hasClass("collapsed")) {
+    //   $(this).closest("div").next().find("i.arrow").removeClass("fa-angle-down");
+    //   $(this).closest("div").next().find("i.arrow").addClass("fa-angle-left");
+    // } else {
+    //   $(this).closest("div").next().find("i.arrow").removeClass("fa-angle-left");
+    //   $(this).closest("div").next().find("i.arrow").addClass("fa-angle-down");
+    // }
 
     let orderId = $(this).attr("data-bs-target").slice(1);
 
@@ -385,10 +385,10 @@
         <td>
           <div class="row justify-content-around expandIndicator">
             <div class="col-auto">
-              <button class="btn btn-sm btn-light accordion-toggle editOrder" type="button" data-order-id=${order.orderId} data-bs-toggle="collapse" data-bs-target=#${order.orderId}>詳細訂單內容</button>
+<!--              <i class="fas fa-angle-left arrow ml-2"></i>-->
             </div>
             <div class="col-auto">
-              <i class="fas fa-angle-left arrow ml-2"></i>
+              <button class="btn btn-sm btn-light accordion-toggle editOrder" type="button" data-order-id=${order.orderId} data-bs-toggle="collapse" data-bs-target=#${order.orderId}>詳細訂單內容</button>
             </div>
           </div>
         </td>
