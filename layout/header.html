@@ -103,8 +103,8 @@
       }).then((result) => {
         if (result.isConfirmed) {
           sessionStorage.removeItem("user");
-          fetch(`${getContextPath()}/user/logout`);
-          window.location.href = "./login.html";
+          fetch("logout");
+          window.location.href = "./index.html";
         }
       });
     });

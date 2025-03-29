@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My orders</title>
+  <title>上班不要看球賽我的訂單</title>
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
 
@@ -53,7 +53,8 @@
                   <th class="col-2">運送地址</th>
                   <th class="col-1">訂單總價</th>
                   <th class="col-3">訂單內容</th>
-                  <th class="col-2"></th>
+                  <th class="col-1"></th>
+                  <th class="col-1"></th>
                 </tr>
                 </thead>
                 <tbody id="orders">
@@ -378,13 +379,17 @@
         <td data-bs-toggle="collapse" data-bs-target=#${order.orderId} class="accordion-toggle">${order.orderAddress}</td>
         <td data-bs-toggle="collapse" data-bs-target=#${order.orderId} class="accordion-toggle">${order.orderTotalPrice} 元</td>
         <td data-bs-toggle="collapse" data-bs-target=#${order.orderId} class="accordion-toggle">${order.orderDescription}</td>
+        <td data-bs-toggle="collapse" data-bs-target=#${order.orderId} class="accordion-toggle">
+          <div class="row justify-content-around expandIndicator">
+            <div class="col-auto">
+              <i class="fas fa-angle-left arrow ml-2"></i>
+            </div>
+          </div>
+        </td>
         <td>
           <div class="row justify-content-around expandIndicator">
             <div class="col-auto">
               <button class="btn btn-sm btn-light editOrder" type="button" data-order-id=${order.orderId} ${[5, -1, -2].includes(order.orderStatus) ? "disabled" : ""}>取消訂單</button>
-            </div>
-            <div class="col-auto">
-              <i class="fas fa-angle-left arrow ml-2"></i>
             </div>
           </div>
         </td>

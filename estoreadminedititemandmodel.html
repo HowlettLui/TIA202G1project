@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>上班不要看球賽管理系統</title>
+  <title>上班不要看球賽編輯商品頁面</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet"
@@ -202,7 +202,7 @@
         text: '請以正確的帳號登入再進入商品編輯頁面'
       })
         .then(() => {
-          window.location.href = "./staff_login.html";
+          window.location.href = "./templateb.html";
         })
     } else {
       fetch(`/NGFW/estoreadmin/item/getitem/${sessionStorage.getItem("itemId")}`)
