@@ -112,6 +112,52 @@
           },
         });
       });
+
+      window.onload = function () {
+        const userData = sessionStorage.getItem("user");
+
+        if (userData) {
+          const user = JSON.parse(userData);
+          const account = user.account;
+          // 這裡可以顯示會員資訊，例如：
+          $(".usercenter").show();
+          $(".logout").show();
+          $(".account").text(account).show();
+          $("#avatar").attr("src", user.avatar);
+          $(".login").hide();
+          $(".register").hide();
+          // Swal.fire({
+          //   icon: "success",
+          //   title: "歡迎回來",
+          //   text: "",
+          // });
+        } else {
+          // 若未登入，可導向登入頁
+          // window.location.href = "login.html";
+          $(".usercenter").hide();
+          $(".logout").hide();
+          $(".account").hide();
+          $("#avatar").hide;
+          $(".login").show();
+          $(".register").show();
+        }
+
+        // 登出功能
+        $(".logout").click(function () {
+          Swal.fire({
+            title: "確定要登出嗎？",
+            showCancelButton: true,
+            confirmButtonText: "登出",
+            cancelButtonText: "取消",
+          }).then((result) => {
+            if (result.isConfirmed) {
+              sessionStorage.removeItem("user");
+              fetch("logout");
+              window.location.href = "/index.html";
+            }
+          });
+        });
+      };
     </script>
   </body>
 </html>
