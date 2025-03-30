@@ -216,6 +216,10 @@
         .then(response => response.json())
         .then(lists => {
           for (let list of lists) {
+            if (list.name === 0 || !list.name || list.name == "SYSTEM") {
+              list.name = "無使用者名稱";
+            } 
+
             if (list.status === 0) {
               list.status = "未啟用";
             } else {
@@ -232,10 +236,14 @@
               if (list.role.roleId === 6) {
                 list.role.roleType = "一般使用者";
               } else {
-                if (list.role.roleId === 13) {
+                if (list.role.roleId === 8) { // 正式環境為8
                   list.role.roleType = "未啟用使用者";
                 };
               }
+            }
+
+            if (list.phone === 0 || !list.phone || list.phone == "SYSTEM") {
+              list.phone = "無使用者電話";
             }
 
             $(".user_lists").append(
