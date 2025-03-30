@@ -64,11 +64,11 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
-  window.onload = function () {
-    const userData = sessionStorage.getItem("user");
+  $(document).ready(function () {
+    const userHeaderData = sessionStorage.getItem("user");
 
-    if (userData) {
-      const user = JSON.parse(userData);
+    if (userHeaderData) {
+      const user = JSON.parse(userHeaderData);
       const account = user.account;
       // 這裡可以顯示會員資訊，例如：
       $('.usercenter').show();
@@ -116,5 +116,5 @@
         }
       });
     });
-  };
+  });
 </script>
