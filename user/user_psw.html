@@ -56,329 +56,391 @@
 </head>
 
 <body>
-  <!-- 導入共用 header -->
-  <div class="headerPage"></div>
+<!-- 導入共用 header -->
+<div class="headerPage"></div>
 
-  <!-- 開發畫面 -->
-  <div class="asidePage"></div>
-  <main>
-    <aside>
-      <div class="flex-shrink-0 p-3">
-        <ul class="list-unstyled ps-0">
-          <li class="mb-1">
-            <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
-              data-bs-toggle="collapse" data-bs-target="#user-collapse" aria-expanded="false">
-              會員基本資料
-            </button>
-            <div class="collapse" id="user-collapse">
-              <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                <li><a href="../user/user_info.html"
-                    class="link-body-emphasis d-inline-flex text-decoration-none rounded">基本資料</a>
-                </li>
-              </ul>
-            </div>
-            <div class="collapse" id="user-collapse">
-              <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                <li><a href="../user/user_psw.html"
-                    class="link-body-emphasis d-inline-flex text-decoration-none rounded">修改密碼</a>
-                </li>
-              </ul>
-            </div>
-          </li>
-          <li class="mb-1">
-            <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
-              data-bs-toggle="collapse" data-bs-target="#article-collapse" aria-expanded="false">
-              我的文章/新聞列表
-            </button>
-            <div class="collapse" id="article-collapse">
-              <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                <li><a href="../newsf/news_fmgr.html"
-                    class="link-body-emphasis d-inline-flex text-decoration-none rounded">文章管理功能</a>
-                </li>
-              </ul>
-            </div>
-          </li>
-          <!-- <li class="mb-1">
-            <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
-              data-bs-toggle="collapse" data-bs-target="#collection-collapse" aria-expanded="false">
-              我的收藏
-            </button>
-            <div class="collapse" id="collection-collapse">
-              <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                <li><a href="../user/collection/c_article.html"
-                    class="link-body-emphasis d-inline-flex text-decoration-none rounded">收藏文章管理</a>
-                </li>
-                <li><a href="../user/collection/c_news.html"
-                    class="link-body-emphasis d-inline-flex text-decoration-none rounded">收藏新聞管理</a>
-                </li>
-                <li><a href="../user/collection/c_commodity.html"
-                    class="link-body-emphasis d-inline-flex text-decoration-none rounded">收藏商品管理</a>
-                </li>
-              </ul>
-            </div>
-          </li>
-          <li class="mb-1">
-            <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
-              data-bs-toggle="collapse" data-bs-target="#team-collapse" aria-expanded="false">
-              關注球隊
-            </button>
-            <div class="collapse" id="team-collapse">
-              <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                <li><a href="../user/team/t_recent_game.html"
-                    class="link-body-emphasis d-inline-flex text-decoration-none rounded">近期賽事</a>
-                </li>
-                <li><a href="../user/team/t_historical_inf.html"
-                    class="link-body-emphasis d-inline-flex text-decoration-none rounded">歷史資料</a>
-                </li>
-                <li><a href="../user/team/t_player.html"
-                    class="link-body-emphasis d-inline-flex text-decoration-none rounded">關注的球員</a>
-                </li>
-                <li><a href="../user/team/t_cheer.html"
-                    class="link-body-emphasis d-inline-flex text-decoration-none rounded">關注的啦啦隊</a>
-                </li>
-              </ul>
-            </div>
-          </li> -->
-          <li class="mb-1">
-            <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
-              data-bs-toggle="collapse" data-bs-target="#car-collapse" aria-expanded="false">
-              我的購物車
-            </button>
-            <div class="collapse" id="car-collapse">
-              <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                <li><a href="../estore/cart.html"
-                    class="link-body-emphasis d-inline-flex text-decoration-none rounded">我的購物車</a>
-                </li>
-              </ul>
-            </div>
-          </li>
-        </ul>
-      </div>
-    </aside>
+<!-- 開發畫面 -->
+<div class="asidePage"></div>
+<main>
+  <aside>
+    <div class="flex-shrink-0 p-3">
+      <ul class="list-unstyled ps-0">
+        <li class="mb-1">
+          <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
+                  data-bs-toggle="collapse" data-bs-target="#user-collapse" aria-expanded="false">
+            會員基本資料
+          </button>
+          <div class="collapse" id="user-collapse">
+            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+              <li><a href="../user/user_info.html"
+                     class="link-body-emphasis d-inline-flex text-decoration-none rounded">基本資料</a>
+              </li>
+            </ul>
+          </div>
+          <div class="collapse" id="user-collapse">
+            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+              <li><a href="../user/user_psw.html"
+                     class="link-body-emphasis d-inline-flex text-decoration-none rounded">修改密碼</a>
+              </li>
+            </ul>
+          </div>
+        </li>
+        <li class="mb-1">
+          <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
+                  data-bs-toggle="collapse" data-bs-target="#article-collapse" aria-expanded="false">
+            我的文章/新聞列表
+          </button>
+          <div class="collapse" id="article-collapse">
+            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+              <li><a href="../newsf/news_fmgr.html"
+                     class="link-body-emphasis d-inline-flex text-decoration-none rounded">文章管理功能</a>
+              </li>
+            </ul>
+          </div>
+        </li>
+        <!-- <li class="mb-1">
+          <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
+            data-bs-toggle="collapse" data-bs-target="#collection-collapse" aria-expanded="false">
+            我的收藏
+          </button>
+          <div class="collapse" id="collection-collapse">
+            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+              <li><a href="../user/collection/c_article.html"
+                  class="link-body-emphasis d-inline-flex text-decoration-none rounded">收藏文章管理</a>
+              </li>
+              <li><a href="../user/collection/c_news.html"
+                  class="link-body-emphasis d-inline-flex text-decoration-none rounded">收藏新聞管理</a>
+              </li>
+              <li><a href="../user/collection/c_commodity.html"
+                  class="link-body-emphasis d-inline-flex text-decoration-none rounded">收藏商品管理</a>
+              </li>
+            </ul>
+          </div>
+        </li>
+        <li class="mb-1">
+          <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
+            data-bs-toggle="collapse" data-bs-target="#team-collapse" aria-expanded="false">
+            關注球隊
+          </button>
+          <div class="collapse" id="team-collapse">
+            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+              <li><a href="../user/team/t_recent_game.html"
+                  class="link-body-emphasis d-inline-flex text-decoration-none rounded">近期賽事</a>
+              </li>
+              <li><a href="../user/team/t_historical_inf.html"
+                  class="link-body-emphasis d-inline-flex text-decoration-none rounded">歷史資料</a>
+              </li>
+              <li><a href="../user/team/t_player.html"
+                  class="link-body-emphasis d-inline-flex text-decoration-none rounded">關注的球員</a>
+              </li>
+              <li><a href="../user/team/t_cheer.html"
+                  class="link-body-emphasis d-inline-flex text-decoration-none rounded">關注的啦啦隊</a>
+              </li>
+            </ul>
+          </div>
+        </li> -->
+        <li class="mb-1">
+          <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
+                  data-bs-toggle="collapse" data-bs-target="#car-collapse" aria-expanded="false">
+            我的購物車
+          </button>
+          <div class="collapse" id="car-collapse">
+            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+              <li><a href="../estore/cart.html"
+                     class="link-body-emphasis d-inline-flex text-decoration-none rounded">我的購物車</a>
+              </li>
+            </ul>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </aside>
 
-    <div class="container">
-      <div class="row g-5 p-3">
-        <div class="col-md-7 col-lg-11">
-          <h4 class="mb-3">修改密碼</h4>
-          <form class="needs-validation" novalidate>
-            <div class="row g-3">
-              <div class="col-12">
-                <label for="oldPassword" class="form-label">舊密碼</label>
-                <input type="password" class="form-control" id="oldPassword" placeholder="請輸入舊密碼" value="" required>
-                <div class="invalid-feedback">
-                  Please enter your old password.
-                </div>
-              </div>
-              <div class="col-12">
-                <label for="newPassword" class="form-label">新密碼</label>
-                <input type="password" class="form-control" id="newPassword" placeholder="請輸入新密碼" required>
-                <div class="invalid-feedback">
-                  Please enter your new password.
-                </div>
-              </div>
-              <div class="col-12">
-                <label for="confirmPassword" class="form-label">確認密碼</label>
-                <input type="password" class="form-control" id="confirmPassword" placeholder="請再次輸入新密碼" required>
-                <div class="invalid-feedback">
-                  Please enter your new password again.
-                </div>
-              </div>
-              <div class="col-12">
-                <label for="captchaInput">驗證碼(點圖片可更新)</label>
-                <input type="text" class="form-control" id="captchaInput" placeholder="請輸入驗證碼" required>
-                <br>
-                <canvas id="captchaCanvas" width="150" height="50"></canvas>
-                <!-- <button id="checkCaptcha">驗證</button> -->
-
-                <div id="result"></div>
-
-              </div>
-              <div class="d-flex justify-content-end">
-                <button type="button" id="cancelBtn" class="btn btn-secondary me-2">取消</button>
-                <button type="button" id="saveBtn" class="btn btn-primary">確認</button>
+  <div class="container">
+    <div class="row g-5 p-3">
+      <div class="col-md-7 col-lg-11">
+        <h4 class="mb-3">修改密碼</h4>
+        <form class="needs-validation" novalidate>
+          <div class="row g-3">
+            <div class="col-12">
+              <label for="oldPassword" class="form-label">舊密碼</label>
+              <input type="password" class="form-control" id="oldPassword" placeholder="請輸入舊密碼" value="" required>
+              <div class="invalid-feedback">
+                Please enter your old password.
               </div>
             </div>
-          </form>
-        </div>
+            <div class="col-12">
+              <label for="newPassword" class="form-label">新密碼</label>
+              <input type="password" class="form-control" id="newPassword" placeholder="請輸入新密碼" required>
+              <div class="invalid-feedback">
+                Please enter your new password.
+              </div>
+            </div>
+            <div class="col-12">
+              <label for="confirmPassword" class="form-label">確認密碼</label>
+              <input type="password" class="form-control" id="confirmPassword" placeholder="請再次輸入新密碼" required>
+              <div class="invalid-feedback">
+                Please enter your new password again.
+              </div>
+            </div>
+            <div class="col-12">
+              <label for="captchaInput">驗證碼(點圖片可更新)</label>
+              <input type="text" class="form-control" id="captchaInput" placeholder="請輸入驗證碼" required>
+              <br>
+              <canvas id="captchaCanvas" width="150" height="50"></canvas>
+              <!-- <button id="checkCaptcha">驗證</button> -->
+
+              <div id="result"></div>
+
+            </div>
+            <div class="d-flex justify-content-end">
+              <button type="button" id="cancelBtn" class="btn btn-secondary me-2">取消</button>
+              <button type="button" id="saveBtn" class="btn btn-primary">確認</button>
+            </div>
+          </div>
+        </form>
       </div>
     </div>
+  </div>
 
-  </main>
+</main>
 
 
-  <!-- 導入共用 footer -->
-  <div class="footerPage"></div>
+<!-- 導入共用 footer -->
+<div class="footerPage"></div>
 
-  <script>
-    $(".headerPage").load("../layout/header.html");
-    $(".footerPage").load("../layout/footer.html");
-    // $(".asidePage").load("./aside.html");
-  </script>
-  <script src="../js/bootstrap.bundle.min.js"></script>
-  <script src="https://kit.fontawesome.com/799bf36dfe.js" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+  $(".headerPage").load("../layout/header.html");
+  $(".footerPage").load("../layout/footer.html");
+  // $(".asidePage").load("./aside.html");
+</script>
+<script src="../js/bootstrap.bundle.min.js"></script>
+<script src="https://kit.fontawesome.com/799bf36dfe.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-  <script>
-    $(document).ready(function () {
+<script>
+  $(document).ready(function () {
 
+    generateCaptcha();
+
+    const userData = sessionStorage.getItem("user");
+    const user = JSON.parse(userData);
+
+    // console.log(user.password);
+    // const oldPassword = user.password;
+    // $("#oldPassword").val(oldPassword);
+
+    const oldPassword = $("#oldPassword");
+    const newPassword = $('#newPassword');
+    const confirmPassword = $("#confirmPassword");
+    const saveBtn = $('#saveBtn');
+    const captchaInput = $('#captchaInput');
+    var captchaText;
+
+    function generateCaptcha() {
+      const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+      let code = '';
+      for (let i = 0; i < 6; i++) {
+        code += chars.charAt(Math.floor(Math.random() * chars.length));
+      }
+
+      // let captchaText = '';
+      captchaText = code.toUpperCase(); // 驗證碼轉為大寫
+
+      let canvas = document.getElementById('captchaCanvas');
+      let ctx = canvas.getContext('2d');
+
+      // 清除畫布
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // 設定背景
+      ctx.fillStyle = '#f0f0f0';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      // 設定字體樣式
+      ctx.font = '30px Arial';
+      ctx.fillStyle = '#333';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+
+      // 繪製驗證碼
+      ctx.fillText(captchaText, canvas.width / 2, canvas.height / 2);
+
+      // 添加干擾線條
+      for (let i = 0; i < 5; i++) {
+        ctx.beginPath();
+        ctx.moveTo(Math.random() * canvas.width, Math.random() * canvas.height);
+        ctx.lineTo(Math.random() * canvas.width, Math.random() * canvas.height);
+        ctx.strokeStyle = 'rgba(0, 0, 0, 0.3)';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+      }
+    }
+
+    $('#captchaCanvas').click(function (e) {
       generateCaptcha();
-
-      const userData = sessionStorage.getItem("user");
-      const user = JSON.parse(userData);
-
-      // console.log(user.password);
-      // const oldPassword = user.password;
-      // $("#oldPassword").val(oldPassword);
-
-      const oldPassword = $("#oldPassword");
-      const newPassword = $('#newPassword');
-      const confirmPassword = $('#confirmPassword');
-      const saveBtn = $('#saveBtn');
-      const captchaInput = $('#captchaInput');
-
-      function generateCaptcha() {
-        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-        let code = '';
-        for (let i = 0; i < 6; i++) {
-          code += chars.charAt(Math.floor(Math.random() * chars.length));
-        }
-
-        let captchaText = '';
-        captchaText = code.toUpperCase(); // 驗證碼轉為大寫
-
-        let canvas = document.getElementById('captchaCanvas');
-        let ctx = canvas.getContext('2d');
-
-        // 清除畫布
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-        // 設定背景
-        ctx.fillStyle = '#f0f0f0';
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-        // 設定字體樣式
-        ctx.font = '30px Arial';
-        ctx.fillStyle = '#333';
-        ctx.textAlign = 'center';
-        ctx.textBaseline = 'middle';
-
-        // 繪製驗證碼
-        ctx.fillText(captchaText, canvas.width / 2, canvas.height / 2);
-
-        // 添加干擾線條
-        for (let i = 0; i < 5; i++) {
-          ctx.beginPath();
-          ctx.moveTo(Math.random() * canvas.width, Math.random() * canvas.height);
-          ctx.lineTo(Math.random() * canvas.width, Math.random() * canvas.height);
-          ctx.strokeStyle = 'rgba(0, 0, 0, 0.3)';
-          ctx.lineWidth = 2;
-          ctx.stroke();
-        }
-      }
-
-      $('#captchaCanvas').click(function (e) {
-        generateCaptcha();
-        e.preventDefault();
-      });
-
-      function checkOldPassword() {
-        fetch(`/NGFW/user/user_pwd/${(oldPassword.val())}`, {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json'
-          }
-        })
-          .then(resp => resp.json())
-          .then(body => {
-              saveBtn.disabled = !body['successfully'];
-              Swal.fire({
-                icon: "error",
-                title: "Oops...",
-                text: "舊密碼錯誤",
-              });
-          });
-      }
-
-
-
-      // 驗證輸入
-      // TODO: 之後要換驗證時機點
-      $('#saveBtn').click(function (e) {
-        // e.preventDefault();
-        // 新密碼與確認密碼不符
-        checkOldPassword();
-
-        if (newPassword != confirmPassword) {
-          $('#result').text('驗證失敗 ❌，新密碼與驗證密不符，請再試一次').css('color', 'red');
-          // generateCaptcha();
-        }
-
-        // 新密碼長度須介於6~12字元
-        if (newPassword.length < 6 || newPassword.length > 12) {
-          $('#result').text('驗證失敗 ❌，新密碼長度須介於6~12字元，請再試一次').css('color', 'red');
-          // generateCaptcha();
-        }
-
-
-        // 驗證碼輸入錯誤
-        // if (captchaInput.toUpperCase() != captchaText) {
-        //   $('#result').text('驗證失敗 ❌，請再試一次').css('color', 'red');
-        //   generateCaptcha();
-        // }
-        // if (captchaInput.toUpperCase() === captchaText) {
-        //   $('#result').text('驗證成功 ✅').css('color', 'green');
-        //   // e.preventDefault();
-        // } else {
-        //   $('#result').text('驗證失敗 ❌，請再試一次').css('color', 'red');
-        //   generateCaptcha();
-        //   // e.preventDefault();
-        // }
-        // TODO: 舊密碼不正確，串候補加上
-        // console.log("captchaInput= " + captchaInput.toUpperCase() + ", captchaText= " + captchaText)
-
-        const npwdData = {
-          userId: user.userId,
-          password: newPassword.val(),
-        };
-
-        // console.log(npwdData);
-
-        fetch('/NGFW/user/user_pwd', {
-          method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(npwdData)
-        })
-          .then(response => response.json())
-          .then(data => {
-            if (data.successfully) {
-              alert('更新成功:', data.message);
-              sessionStorage.setItem("user.password", JSON.stringify(data.password));
-              console.log(user);
-              
-              Swal.fire({
-                icon: "success",
-                title: "更新成功",
-                text: "",
-              });
-
-
-
-
-              window.location.href = './user_info.html';
-
-            } else {
-              alert('更新失敗:', data.message);
-            }
-          })
-          .catch(error => {
-            alert('發生錯誤:', error);
-          });
-      });
+      e.preventDefault();
     });
 
-    // 取消按鈕
 
-  </script>
+    // async function checkOldPassword() {
+    //   fetch(`/NGFW/user/user_pwd/${(oldPassword.val())}`, {
+    //     method: 'POST',
+    //     headers: {
+    //       'Content-Type': 'application/json'
+    //     },
+    //     body: JSON.stringify({user})
+    //   })
+    //     .then(resp => resp.json())
+    //     .then(body => {
+    //       if (!body.success) {
+    //         Swal.fire({
+    //           icon: "error",
+    //           title: "Oops...",
+    //           text: "舊密碼錯誤",
+    //         });
+    //       }
+    //     });
+    // }
+
+
+    // 驗證輸入
+    // TODO: 之後要換驗證時機點
+    $('#saveBtn').click(async function (e) {
+      // e.preventDefault();
+      // 新密碼與確認密碼不符
+
+      fetch(`/NGFW/user/user_pwd/${(oldPassword.val())}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(user)
+      })
+        .then(resp => resp.json())
+        .then(body => {
+          if (!body.successfully) {
+            Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: "舊密碼錯誤",
+            });
+          } else {
+            if (newPassword.val() !== confirmPassword.val()) {
+              $('#result').text('驗證失敗 ❌，新密碼與驗證密碼不符，請再試一次').css('color', 'red');
+              Swal.fire({
+                icon: "warning",
+                title: "Oops...",
+                text: "新密碼與驗證密碼不符，請再試一次",
+              })
+                .then((result) => {
+                  if (result.isConfirmed) {
+                    generateCaptcha();
+                  }
+                })
+              // 新密碼長度須介於6~12字元
+            } else if (newPassword.val().length < 6 || newPassword.val().length > 12) {
+              $('#result').text('驗證失敗 ❌，新密碼長度須介於6~12字元，請再試一次').css('color', 'red');
+              Swal.fire({
+                icon: "warning",
+                title: "Oops...",
+                text: "新密碼長度須介於6~12字元，請再試一次",
+              })
+                .then((result) => {
+                  if (result.isConfirmed) {
+                    generateCaptcha();
+                  }
+                })
+            } else if (captchaInput.val().toUpperCase() !== captchaText) {
+              $('#result').text('驗證失敗 ❌，請再試一次').css('color', 'red');
+              Swal.fire({
+                icon: "warning",
+                title: "Oops...",
+                text: "驗證碼不符，請再試一次",
+              })
+                .then((result) => {
+                  if (result.isConfirmed) {
+                    generateCaptcha();
+                  }
+                })
+            } else {
+              $('#result').text('驗證成功 ✅').css('color', 'green');
+              fetch(`/NGFW/user/user_pwd/${newPassword.val()}`, {
+                method: 'PUT',
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(user)
+              })
+                .then(response => response.json())
+                .then(data => {
+                  if (data.successfully) {
+                    sessionStorage.setItem("user.password", JSON.stringify(data.password));
+                    console.log(user);
+                    Swal.fire({
+                      icon: "success",
+                      title: "更新成功",
+                      text: "",
+                    })
+                      .then((result) => {
+                        if (result.isConfirmed) {
+                          window.location.href = './user_info.html';
+                        }
+                      })
+                  } else {
+                    Swal.fire({
+                      icon: "error",
+                      title: "Oops...",
+                      text: '更新失敗:' + data.message,
+                    });
+                  }
+                })
+                .catch(error => {
+                  Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: '發生錯誤:' + error,
+                  });
+                });
+            }
+
+            // 驗證碼輸入錯誤
+            // if (captchaInput.toUpperCase() != captchaText) {
+            //   $('#result').text('驗證失敗 ❌，請再試一次').css('color', 'red');
+            //   generateCaptcha();
+            // }
+            // if (captchaInput.toUpperCase() === captchaText) {
+            //   $('#result').text('驗證成功 ✅').css('color', 'green');
+            //   // e.preventDefault();
+            // } else {
+            //   $('#result').text('驗證失敗 ❌，請再試一次').css('color', 'red');
+            //   generateCaptcha();
+            //   // e.preventDefault();
+            // }
+            // TODO: 舊密碼不正確，串候補加上
+            // console.log("captchaInput= " + captchaInput.toUpperCase() + ", captchaText= " + captchaText)
+
+            // const npwdData = {
+            //   userId: user.userId,
+            //   password: newPassword.val(),
+            // };
+
+            // console.log(npwdData);
+
+          }
+        })
+        .catch(error => {
+          console.log('Error: ' + error);
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "出了點狀況！請聯絡管理員"
+          })
+        })
+    });
+  })
+
+  // 取消按鈕
+
+</script>
 </body>
