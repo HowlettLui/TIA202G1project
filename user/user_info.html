@@ -86,7 +86,7 @@
             </div>
           </li>
           <li class="mb-1">
-            <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
+            <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 articles collapsed"
               data-bs-toggle="collapse" data-bs-target="#article-collapse" aria-expanded="false">
               我的文章/新聞列表
             </button>
@@ -256,11 +256,10 @@
     $(document).ready(function () {
       const userData = sessionStorage.getItem("user");
       const user = JSON.parse(userData);
-      console.log(user.roleId);
 
-      if(user.roleId != 4){
-        $('article-collapse').addClass('d-none');
-      }
+      // if(user.roleId != 4){
+      //   $('#article-collapse').addClass('d-none');
+      // }
 
       // const account = user.account; // 取得物件中的 account 屬性
       // const name = user.name; // 取得物件中的 name 屬性

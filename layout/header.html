@@ -82,6 +82,14 @@
       //   title: "歡迎回來",
       //   text: "",
       // });
+      // if(user.roleId != 4){
+      //   $('#article-collapse').addClass('d-none');
+      // }
+
+      if(user.roleId != 4) {
+        $('.articles').addClass('d-none');
+      }
+
     } else {
       // 若未登入，可導向登入頁
       // window.location.href = "login.html";
