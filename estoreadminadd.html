@@ -275,13 +275,7 @@
         title: "請再確認",
         text: "請輸入完整資料！"
       });
-    } else if (!itemPhotosPath && !itemAndModelExist) {
-      Swal.fire({
-        icon: "warning",
-        title: "請再確認",
-        text: "請先上傳照片"
-      });
-    } else if (JSON.parse(itemPhotosPath).photos.length === 0 && !itemAndModelExist) {
+    } else if ((!itemPhotosPath || JSON.parse(itemPhotosPath).photos.length === 0) && !itemAndModelExist) {
       Swal.fire({
         icon: "warning",
         title: "請再確認",
