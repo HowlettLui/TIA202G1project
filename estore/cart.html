@@ -367,7 +367,7 @@
       })
     })
       .then(response => response.json())
-      .then(cart => {
+      .then(async cart => {
         // 如果更新失敗，區分原因，庫存數量小於input數量、庫存數量為0、商品已下架
         if (!cart.result) {
           console.log(`${cart.message}`)
@@ -376,19 +376,22 @@
             title: "Oops...",
             text: cart.message
           })
-            .then(() => {
-              if (cart.detailItemCount > 0) {
-                // 庫存數量小於input數量
-                $(`div[data-itemInfo-id=${itemInfoId}]`).next().find("input.itemCountsInCart").val(cart.detailItemCount);
-                adjustmentForCheckout();
-              } else {
-                // 因為商品庫存為0或因為商品已下架，所以刪除該筆cart_detail，打刪除的API
-                deleteItemInfoInCart(itemInfoId)
-                  .then(
-                    $(`div[data-itemInfo-id=${itemInfoId}]`).closest("li").remove(),
-                    adjustmentForCheckout(),
-                    updateCheckAllState()
-                  )
+            .then(async (result) => {
+              if (result.isConfirmed) {
+                if (cart.message.includes("架")) {
+                  // 因為商品庫存為0或因為商品已下架，所以刪除該筆cart_detail，打刪除的API
+                  deleteItemInfoInCart(itemInfoId)
+                    .then(() => {
+                        $(`div[data-itemInfo-id=${itemInfoId}]`).closest("li").remove()
+                        adjustmentForCheckout()
+                        updateCheckAllState()
+                      }
+                    )
+                } else if (cart.detailItemCount > 0) {
+                  // 庫存數量小於input數量
+                  $(`div[data-itemInfo-id=${itemInfoId}]`).next().find("input.itemCountsInCart").val(cart.detailItemCount);
+                  adjustmentForCheckout();
+                }
               }
             })
         } else if (parseInt(cart.detailItemCount) === 0) {
