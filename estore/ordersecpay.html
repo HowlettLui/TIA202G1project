@@ -132,10 +132,15 @@
               const [key, value] = pair.split("=");
               formData.append(key, decodeURIComponent(value));
             })
-            if (parseInt(formData.get("TradeStatus")) === 1) {
-              order.orderStatus = 3;
+
+            if (!formData.get("PaymentDate")) {
+              order.orderStatus = 1;
             } else {
-              order.orderStatus = -2;
+              if (parseInt(formData.get("TradeStatus")) === 1) {
+                order.orderStatus = 3;
+              } else if (parseInt(formData.get("TradeStatus")) === 0) {
+                order.orderStatus = -2;
+              }
             }
             try {
               // 更新訂單資料
